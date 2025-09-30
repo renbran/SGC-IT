@@ -850,7 +850,7 @@
 
         <!-- Action Buttons -->
         <div class="button-grid">
-            <button class="btn btn-primary" onclick="updateCard()">
+            <button class="btn btn-primary" onclick="window.updateTimeout = 'manual'; updateCard();">
                 🔄 Update Card
             </button>
             <button class="btn btn-primary" onclick="printCards()">
@@ -899,12 +899,23 @@
         // Generate QR Code for the front card
         function generateQR() {
             const canvas = document.getElementById('qrcode-front');
-            const name = document.getElementById('input-name').value;
-            const title = document.getElementById('input-title').value;
-            const email = document.getElementById('input-email').value;
-            const phone = document.getElementById('input-phone').value;
-            const website = document.getElementById('input-website').value;
-            const company = document.getElementById('input-company').value;
+            
+            if (!canvas) {
+                console.error('QR code canvas not found');
+                return '';
+            }
+
+            if (typeof QRCode === 'undefined') {
+                console.error('QRCode library not loaded');
+                return '';
+            }
+            
+            const name = document.getElementById('input-name')?.value || '';
+            const title = document.getElementById('input-title')?.value || '';
+            const email = document.getElementById('input-email')?.value || '';
+            const phone = document.getElementById('input-phone')?.value || '';
+            const website = document.getElementById('input-website')?.value || '';
+            const company = document.getElementById('input-company')?.value || '';
             
             // vCard data
             const vCardData = `BEGIN:VCARD
@@ -917,47 +928,76 @@ EMAIL:${email}
 URL:${website}
 END:VCARD`;
             
-            // Generate QR code
-            QRCode.toCanvas(canvas, vCardData, {
-                width: 130,
-                height: 130,
-                margin: 1,
-                color: {
-                    dark: '#0f2847',
-                    light: '#ffffff'
-                }
-            }, function (error) {
-                if (error) console.error(error);
-            });
+            try {
+                // Generate QR code
+                QRCode.toCanvas(canvas, vCardData, {
+                    width: 130,
+                    height: 130,
+                    margin: 1,
+                    color: {
+                        dark: '#0f2847',
+                        light: '#ffffff'
+                    }
+                }, function (error) {
+                    if (error) {
+                        console.error('QR Code generation error:', error);
+                        // Create fallback text in canvas
+                        const ctx = canvas.getContext('2d');
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        ctx.fillStyle = '#0f2847';
+                        ctx.font = 'bold 16px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.fillText('QR Error', canvas.width/2, canvas.height/2);
+                    }
+                });
+            } catch (error) {
+                console.error('Error in QR generation:', error);
+            }
 
             return vCardData;
         }
 
         // Update card with form data
         function updateCard() {
-            const name = document.getElementById('input-name').value;
-            const title = document.getElementById('input-title').value;
-            const email = document.getElementById('input-email').value;
-            const phone = document.getElementById('input-phone').value;
-            const website = document.getElementById('input-website').value;
-            const company = document.getElementById('input-company').value;
+            try {
+                const name = document.getElementById('input-name')?.value || '';
+                const title = document.getElementById('input-title')?.value || '';
+                const email = document.getElementById('input-email')?.value || '';
+                const phone = document.getElementById('input-phone')?.value || '';
+                const website = document.getElementById('input-website')?.value || '';
+                const company = document.getElementById('input-company')?.value || '';
 
-            // Update front card
-            document.getElementById('person-name').textContent = name;
-            document.getElementById('person-title').textContent = title;
-            document.getElementById('person-email').textContent = email;
-            document.getElementById('person-phone').textContent = phone;
-            document.getElementById('person-website').textContent = website;
-            document.getElementById('company-name').textContent = company;
+                // Update front card elements
+                const personName = document.getElementById('person-name');
+                const personTitle = document.getElementById('person-title');
+                const personEmail = document.getElementById('person-email');
+                const personPhone = document.getElementById('person-phone');
+                const personWebsite = document.getElementById('person-website');
+                const companyName = document.getElementById('company-name');
 
-            // Update back card
-            document.getElementById('back-company').textContent = company;
+                if (personName) personName.textContent = name;
+                if (personTitle) personTitle.textContent = title;
+                if (personEmail) personEmail.textContent = email;
+                if (personPhone) personPhone.textContent = phone;
+                if (personWebsite) personWebsite.textContent = website;
+                if (companyName) companyName.textContent = company;
 
-            // Regenerate QR code
-            generateQR();
+                // Update back card
+                const backCompany = document.getElementById('back-company');
+                if (backCompany) backCompany.textContent = company;
 
-            // Show success message
-            alert('✅ Business card updated successfully!');
+                // Regenerate QR code
+                generateQR();
+
+                // Show success message only if not auto-updating
+                if (!window.updateTimeout || window.updateTimeout === 'manual') {
+                    alert('✅ Business card updated successfully!');
+                }
+            } catch (error) {
+                console.error('Error updating card:', error);
+                alert('❌ Error updating card. Please try again.');
+            }
         }
 
         // Print cards
@@ -969,37 +1009,72 @@ END:VCARD`;
         async function downloadAsImage(side) {
             const element = side === 'front' ? document.getElementById('card-front') : document.getElementById('card-back');
             
+            if (!element) {
+                alert('❌ Card element not found. Please refresh the page and try again.');
+                return;
+            }
+
+            if (typeof html2canvas === 'undefined') {
+                alert('❌ Image generation library not loaded. Please refresh the page and try again.');
+                return;
+            }
+            
             try {
                 const canvas = await html2canvas(element, {
                     scale: 2,
                     backgroundColor: null,
-                    logging: false
+                    logging: false,
+                    useCORS: true,
+                    allowTaint: true
                 });
                 
                 const link = document.createElement('a');
                 link.download = `scholarix-business-card-${side}.png`;
-                link.href = canvas.toDataURL();
+                link.href = canvas.toDataURL('image/png');
+                document.body.appendChild(link);
                 link.click();
+                document.body.removeChild(link);
+                alert('✅ Image downloaded successfully!');
             } catch (error) {
                 console.error('Error generating image:', error);
-                alert('Error generating image. Please try again.');
+                alert('❌ Error generating image. Please try again or use a different browser.');
             }
         }
 
         // Download as PDF
         async function downloadAsPDF() {
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF({
-                orientation: 'landscape',
-                unit: 'mm',
-                format: [89, 51] // Standard business card size
-            });
+            if (typeof window.jspdf === 'undefined') {
+                alert('❌ PDF generation library not loaded. Please refresh the page and try again.');
+                return;
+            }
+
+            if (typeof html2canvas === 'undefined') {
+                alert('❌ Image generation library not loaded. Please refresh the page and try again.');
+                return;
+            }
+
+            const frontElement = document.getElementById('card-front');
+            const backElement = document.getElementById('card-back');
+
+            if (!frontElement || !backElement) {
+                alert('❌ Card elements not found. Please refresh the page and try again.');
+                return;
+            }
 
             try {
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({
+                    orientation: 'landscape',
+                    unit: 'mm',
+                    format: [89, 51] // Standard business card size
+                });
+
                 // Capture front card
-                const frontCanvas = await html2canvas(document.getElementById('card-front'), {
+                const frontCanvas = await html2canvas(frontElement, {
                     scale: 2,
-                    backgroundColor: null
+                    backgroundColor: null,
+                    useCORS: true,
+                    allowTaint: true
                 });
                 const frontImgData = frontCanvas.toDataURL('image/png');
                 pdf.addImage(frontImgData, 'PNG', 0, 0, 89, 51);
@@ -1008,38 +1083,63 @@ END:VCARD`;
                 pdf.addPage();
                 
                 // Capture back card
-                const backCanvas = await html2canvas(document.getElementById('card-back'), {
+                const backCanvas = await html2canvas(backElement, {
                     scale: 2,
-                    backgroundColor: null
+                    backgroundColor: null,
+                    useCORS: true,
+                    allowTaint: true
                 });
                 const backImgData = backCanvas.toDataURL('image/png');
                 pdf.addImage(backImgData, 'PNG', 0, 0, 89, 51);
                 
                 // Save PDF
                 pdf.save('scholarix-business-card.pdf');
+                alert('✅ PDF downloaded successfully!');
             } catch (error) {
                 console.error('Error generating PDF:', error);
-                alert('Error generating PDF. Please try again.');
+                alert('❌ Error generating PDF. Please try again or use a different browser.');
             }
         }
 
         // Generate digital business card
         function generateDigitalCard() {
             const modal = document.getElementById('digitalModal');
-            modal.style.display = 'block';
-            
             const canvas = document.getElementById('digital-qr');
-            const vCardData = generateQR();
             
-            QRCode.toCanvas(canvas, vCardData, {
-                width: 300,
-                height: 300,
-                margin: 2,
-                color: {
-                    dark: '#0f2847',
-                    light: '#ffffff'
-                }
-            });
+            if (!modal || !canvas) {
+                alert('❌ Modal elements not found. Please refresh the page and try again.');
+                return;
+            }
+
+            if (typeof QRCode === 'undefined') {
+                alert('❌ QR Code library not loaded. Please refresh the page and try again.');
+                return;
+            }
+            
+            try {
+                modal.style.display = 'block';
+                const vCardData = generateQR();
+                
+                QRCode.toCanvas(canvas, vCardData, {
+                    width: 300,
+                    height: 300,
+                    margin: 2,
+                    color: {
+                        dark: '#0f2847',
+                        light: '#ffffff'
+                    }
+                }, function (error) {
+                    if (error) {
+                        console.error('Error generating QR code:', error);
+                        alert('❌ Error generating QR code. Please try again.');
+                        closeModal();
+                    }
+                });
+            } catch (error) {
+                console.error('Error generating digital card:', error);
+                alert('❌ Error generating digital card. Please try again.');
+                closeModal();
+            }
         }
 
         // Close modal
@@ -1049,73 +1149,190 @@ END:VCARD`;
 
         // Download digital QR code
         function downloadDigitalQR() {
-            const canvas = document.getElementById('digital-qr');
-            const link = document.createElement('a');
-            link.download = 'scholarix-digital-card-qr.png';
-            link.href = canvas.toDataURL();
-            link.click();
+            try {
+                const canvas = document.getElementById('digital-qr');
+                
+                if (!canvas) {
+                    alert('❌ QR code not found. Please generate the digital card first.');
+                    return;
+                }
+
+                const link = document.createElement('a');
+                link.download = 'scholarix-digital-card-qr.png';
+                link.href = canvas.toDataURL('image/png');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                alert('✅ QR code downloaded successfully!');
+            } catch (error) {
+                console.error('Error downloading QR code:', error);
+                alert('❌ Error downloading QR code. Please try again.');
+            }
         }
 
         // Copy vCard data to clipboard
         function copyVCard() {
-            const vCardData = generateQR();
-            navigator.clipboard.writeText(vCardData).then(() => {
-                alert('✅ vCard data copied to clipboard!');
-            });
+            try {
+                const vCardData = generateQR();
+                
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(vCardData).then(() => {
+                        alert('✅ vCard data copied to clipboard!');
+                    }).catch((error) => {
+                        console.error('Error copying to clipboard:', error);
+                        fallbackCopyTextToClipboard(vCardData);
+                    });
+                } else {
+                    fallbackCopyTextToClipboard(vCardData);
+                }
+            } catch (error) {
+                console.error('Error copying vCard data:', error);
+                alert('❌ Error copying vCard data. Please try again.');
+            }
+        }
+
+        // Fallback function for copying to clipboard
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.top = "-1000px";
+            textArea.style.left = "-1000px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    alert('✅ vCard data copied to clipboard!');
+                } else {
+                    alert('❌ Unable to copy to clipboard. Please copy manually.');
+                }
+            } catch (err) {
+                console.error('Fallback copy failed:', err);
+                alert('❌ Unable to copy to clipboard. Please copy manually.');
+            }
+            
+            document.body.removeChild(textArea);
         }
 
         // Share card
         function shareCard() {
-            const name = document.getElementById('input-name').value;
-            const title = document.getElementById('input-title').value;
-            const company = document.getElementById('input-company').value;
+            try {
+                const name = document.getElementById('input-name').value;
+                const title = document.getElementById('input-title').value;
+                const company = document.getElementById('input-company').value;
+                
+                const shareData = {
+                    title: `${name} - ${title}`,
+                    text: `Contact ${name}, ${title} at ${company}`,
+                    url: window.location.href
+                };
+                
+                if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+                    navigator.share(shareData).catch((error) => {
+                        console.error('Error sharing:', error);
+                        fallbackShareCard();
+                    });
+                } else {
+                    fallbackShareCard();
+                }
+            } catch (error) {
+                console.error('Error in shareCard:', error);
+                fallbackShareCard();
+            }
+        }
+
+        // Fallback share function
+        function fallbackShareCard() {
+            const url = window.location.href;
             
-            const shareData = {
-                title: `${name} - ${title}`,
-                text: `Contact ${name}, ${title} at ${company}`,
-                url: window.location.href
-            };
-            
-            if (navigator.share) {
-                navigator.share(shareData);
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('✅ Link copied to clipboard!');
+                }).catch(() => {
+                    fallbackCopyTextToClipboard(url);
+                });
             } else {
-                // Fallback - copy link
-                navigator.clipboard.writeText(window.location.href);
-                alert('✅ Link copied to clipboard!');
+                fallbackCopyTextToClipboard(url);
             }
         }
 
         // Reset to default
         function resetCard() {
-            document.getElementById('input-name').value = 'John Anderson';
-            document.getElementById('input-title').value = 'Senior AI Consultant';
-            document.getElementById('input-email').value = 'john.anderson@scholarix.com';
-            document.getElementById('input-phone').value = '+1 (555) 123-4567';
-            document.getElementById('input-website').value = 'www.scholarix.com';
-            document.getElementById('input-company').value = 'Scholarix';
-            
-            updateCard();
+            try {
+                const fields = [
+                    { id: 'input-name', value: 'John Anderson' },
+                    { id: 'input-title', value: 'Senior AI Consultant' },
+                    { id: 'input-email', value: 'john.anderson@scholarix.com' },
+                    { id: 'input-phone', value: '+1 (555) 123-4567' },
+                    { id: 'input-website', value: 'www.scholarix.com' },
+                    { id: 'input-company', value: 'Scholarix' }
+                ];
+
+                fields.forEach(field => {
+                    const element = document.getElementById(field.id);
+                    if (element) {
+                        element.value = field.value;
+                    }
+                });
+                
+                // Mark as manual update to show success message
+                window.updateTimeout = 'manual';
+                updateCard();
+            } catch (error) {
+                console.error('Error resetting card:', error);
+                alert('❌ Error resetting card. Please refresh the page.');
+            }
         }
 
         // Auto-update on input change
-        document.querySelectorAll('.customization-form input').forEach(input => {
-            input.addEventListener('input', () => {
-                clearTimeout(window.updateTimeout);
-                window.updateTimeout = setTimeout(updateCard, 500);
-            });
-        });
+        function setupAutoUpdate() {
+            try {
+                const inputs = document.querySelectorAll('.customization-form input');
+                inputs.forEach(input => {
+                    if (input) {
+                        input.addEventListener('input', () => {
+                            if (window.updateTimeout) {
+                                clearTimeout(window.updateTimeout);
+                            }
+                            window.updateTimeout = setTimeout(() => {
+                                try {
+                                    updateCard();
+                                } catch (error) {
+                                    console.error('Error in auto-update:', error);
+                                }
+                            }, 500);
+                        });
+                    }
+                });
+            } catch (error) {
+                console.error('Error setting up auto-update:', error);
+            }
+        }
 
         // Close modal when clicking outside
         window.onclick = function(event) {
-            const modal = document.getElementById('digitalModal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
+            try {
+                const modal = document.getElementById('digitalModal');
+                if (modal && event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error handling modal click:', error);
             }
         }
 
         // Initialize on load
         window.onload = function() {
-            generateQR();
+            try {
+                generateQR();
+                setupAutoUpdate();
+            } catch (error) {
+                console.error('Error during initialization:', error);
+                alert('❌ Page initialization error. Please refresh the page.');
+            }
         };
     </script>
 </body>
