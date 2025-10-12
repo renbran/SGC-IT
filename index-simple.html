@@ -166,15 +166,17 @@
         }
 
         .business-card-front {
-            background: linear-gradient(135deg, #0f2847, #1a3a5c, #0f2847);
+            background: linear-gradient(135deg, #1a2b4d, #2d4a73, #1a2b4d);
             color: white;
-            padding: 35px;
+            padding: 30px;
             display: flex;
             justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
         }
 
         .business-card-back {
-            background: linear-gradient(135deg, #1a3a5c, #0f2847, #1a3a5c);
+            background: linear-gradient(135deg, #2d4a73, #1a2b4d, #2d4a73);
             color: white;
             display: flex;
             flex-direction: column;
@@ -182,32 +184,88 @@
             align-items: center;
             text-align: center;
             padding: 40px;
+            position: relative;
+        }
+        .back-tagline {
+            font-size: 18px;
+            font-style: italic;
+            color: #a0c4ff;
+            margin-bottom: 30px;
+            font-weight: 300;
         }
 
         .company-name { 
-            font-size: 28px; 
+            font-size: 32px; 
             font-weight: 700; 
-            margin-bottom: 8px;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+        .company-subtitle {
+            font-size: 14px;
+            color: #a0c4ff;
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 1px;
         }
         .person-name { 
-            font-size: 24px; 
-            font-weight: 600; 
-            margin-bottom: 15px;
+            font-size: 26px; 
+            font-weight: 700; 
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .person-title {
+            font-size: 16px;
+            color: #a0c4ff;
+            margin-bottom: 25px;
+            font-weight: 400;
         }
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            font-size: 13px;
+            gap: 10px;
+            font-size: 14px;
+            margin-top: 15px;
         }
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
         }
         .contact-item i {
-            width: 16px;
+            width: 18px;
             color: #4a9eff;
+            font-size: 16px;
+        }
+        .tags-section {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .tag {
+            background: rgba(74, 158, 255, 0.2);
+            border: 1px solid #4a9eff;
+            color: #4a9eff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .qr-section {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            text-align: center;
+        }
+        .qr-label {
+            font-size: 12px;
+            color: #a0c4ff;
+            margin-top: 8px;
+            font-weight: 500;
         }
         .social-icons {
             display: flex;
@@ -335,9 +393,11 @@
         <div class="card-preview">
             <div class="business-card-front" id="card-front">
                 <div class="front-left">
-                    <div class="company-name" id="company-name">Scholarix</div>
-                    <div class="person-name" id="person-name">John Anderson</div>
-                    <div class="person-title" id="person-title">Senior AI Consultant</div>
+                    <div class="company-name" id="company-name">SCHOLARIX IT</div>
+                    <div class="company-subtitle">GLOBAL CONSULTANTS</div>
+                    
+                    <div class="person-name" id="person-name">RENBRAN ANTHONY MADELO</div>
+                    <div class="person-title" id="person-title">CO-FOUNDER</div>
                     
                     <div class="contact-info">
                         <div class="contact-item">
@@ -361,16 +421,28 @@
                         <a href="#" id="instagram-link" target="_blank" title="Instagram Profile"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                <div class="front-right">
+                
+                <!-- Tags Section -->
+                <div class="tags-section">
+                    <div class="tag">AI Partner</div>
+                    <div class="tag">Certified</div>
+                    <div class="tag">Automation</div>
+                    <div class="tag">Global</div>
+                </div>
+                
+                <!-- QR Code Section -->
+                <div class="qr-section">
                     <canvas id="qrcode-front"></canvas>
+                    <div class="qr-label">SCAN TO CONNECT</div>
                 </div>
             </div>
         </div>
 
         <div class="card-preview">
             <div class="business-card-back" id="card-back">
-                <div class="back-company" id="back-company">Scholarix</div>
-                <p>Global Consultants</p>
+                <div class="back-company" id="back-company">SCHOLARIX IT</div>
+                <div class="company-subtitle">GLOBAL CONSULTANTS</div>
+                <div class="back-tagline">Transforming Business Through AI Innovation</div>
             </div>
         </div>
     </div>
@@ -381,15 +453,15 @@
         <div class="customization-form">
             <div class="form-group">
                 <label for="input-name">Name</label>
-                <input type="text" id="input-name" value="John Anderson">
+                <input type="text" id="input-name" value="RENBRAN ANTHONY MADELO">
             </div>
             <div class="form-group">
                 <label for="input-title">Title</label>
-                <input type="text" id="input-title" value="Senior AI Consultant">
+                <input type="text" id="input-title" value="CO-FOUNDER">
             </div>
             <div class="form-group">
                 <label for="input-email">Email</label>
-                <input type="email" id="input-email" value="john.anderson@scholarix.com">
+                <input type="email" id="input-email" value="renbran@scholarix.com">
             </div>
             <div class="form-group">
                 <label for="input-mobile">Mobile Number</label>
@@ -401,7 +473,7 @@
             </div>
             <div class="form-group">
                 <label for="input-company">Company</label>
-                <input type="text" id="input-company" value="Scholarix">
+                <input type="text" id="input-company" value="SCHOLARIX IT">
             </div>
             <div class="form-group">
                 <label for="input-linkedin">LinkedIn URL</label>
@@ -455,9 +527,10 @@ X-SOCIALPROFILE;TYPE=instagram:${instagram}
 END:VCARD`;
             
             QRCode.toCanvas(canvas, vCardData, {
-                width: 130,
-                height: 130,
-                color: { dark: '#0f2847', light: '#ffffff' }
+                width: 120,
+                height: 120,
+                color: { dark: '#1a2b4d', light: '#ffffff' },
+                margin: 2
             });
         }
 
