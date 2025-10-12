@@ -1,20 +1,36 @@
-# Scholarix Global Documents í³‡
+# SGC-IT Document Hub ğŸš€
 
-Professional business card designer and document templates for Scholarix Global Consultants.
+Professional document templates and tools for SGC-IT. A comprehensive suite of business documents including business card designer, SLA templates, and editable documents.
+
+## ğŸŒ Live Site
+
+**ğŸ”— Visit: [https://renbran.github.io/SGC-IT/](https://renbran.github.io/SGC-IT/)**
 
 ## âœ¨ Features
 
-- **Interactive Business Card Designer**: Customize professional business cards with real-time preview
-- **QR Code Integration**: Generate vCard QR codes for easy contact sharing
-- **Multiple Export Formats**: Download as PNG, PDF, or print directly
-- **Responsive Design**: Works on desktop, tablet, and mobile devices
-- **Professional Templates**: Pre-designed layouts with modern styling
+### ğŸ’³ Business Card Designer
+- **Interactive Customization**: Real-time preview with live editing
+- **QR Code Integration**: Comprehensive vCard with all contact details
+- **Social Media Integration**: LinkedIn, Twitter, Facebook, Instagram links
+- **Professional Design**: Modern gradient styling with responsive layout
+- **Export Options**: PDF download functionality
 
-## íº€ Live Demo
+### ğŸ“„ Document Templates
+- **SLA Template**: Professional Service Level Agreement template
+- **Editable Documents**: Customizable document templates
+- **Test Environment**: Development and testing tools
 
-Visit the live application: [scholarix-global-documents.github.io](https://your-username.github.io/scholarix-global-documents)
+### ğŸ¨ Modern Interface
+- **Responsive Navigation**: Professional navigation bar with mobile support
+- **Modern Design**: Gradient backgrounds and smooth animations
+- **Mobile-First**: Optimized for all device sizes
+- **Accessibility**: Screen reader friendly with proper ARIA labels
 
-## í¾¯ Usage
+## ğŸŒŸ Live Demo
+
+**Access all tools at: [https://renbran.github.io/SGC-IT/](https://renbran.github.io/SGC-IT/)**
+
+## ï¿½ï¿½ï¿½ Usage
 
 1. **Open the Application**: Visit the GitHub Pages site
 2. **Customize Your Card**: Fill in your personal information in the form
@@ -25,7 +41,7 @@ Visit the live application: [scholarix-global-documents.github.io](https://your-
    - Print directly from browser
    - Create digital QR code for sharing
 
-## í» ï¸ Technical Stack
+## ï¿½ï¿½ï¿½ï¸ Technical Stack
 
 - **Frontend**: HTML5, CSS3, JavaScript
 - **Libraries**: 
@@ -35,7 +51,7 @@ Visit the live application: [scholarix-global-documents.github.io](https://your-
 - **Styling**: Modern CSS Grid and Flexbox
 - **Hosting**: GitHub Pages
 
-## í³‹ Business Card Fields
+## ï¿½ï¿½ï¿½ Business Card Fields
 
 - Name
 - Title/Position
@@ -44,7 +60,7 @@ Visit the live application: [scholarix-global-documents.github.io](https://your-
 - Website
 - Company Name
 
-## í¾¨ Design Features
+## ï¿½ï¿½ï¿½ Design Features
 
 - **Professional Color Scheme**: Blue gradient with corporate styling
 - **Logo Integration**: Scholarix branding with fallback options
@@ -52,7 +68,7 @@ Visit the live application: [scholarix-global-documents.github.io](https://your-
 - **Print Optimization**: Proper sizing for standard business cards (3.5" x 2")
 - **Mobile Responsive**: Optimized for all screen sizes
 
-## í´§ Development
+## ï¿½ï¿½ï¿½ Development
 
 To run locally:
 ```bash
@@ -68,11 +84,11 @@ python -m http.server 8000
 npx serve .
 ```
 
-## í³„ License
+## ï¿½ï¿½ï¿½ License
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
-## í´ Contributing
+## ï¿½ï¿½ï¿½ Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -80,7 +96,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## í³ Support
+## ï¿½ï¿½ï¿½ Support
 
 For support, email contact@scholarix.com or create an issue in this repository.
 
