@@ -1,0 +1,2884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Level Agreement - Scholarix IT Global Consultants</title>
+    <style>
+        :root {
+            /* Ocean Deep Color Palette */
+            --ocean-deep-darkest: #001B2A;    /* Deep ocean midnight */
+            --ocean-deep-dark: #0A2B3D;       /* Deep water */
+            --ocean-primary: #1B365D;         /* Ocean primary */
+            --ocean-medium: #2C5282;          /* Ocean medium */
+            --ocean-bright: #00A8E8;          /* Ocean bright cyan */
+            --ocean-light: #4A90E2;           /* Ocean light blue */
+            --ocean-surface: #E8F4FD;         /* Ocean surface */
+            --ocean-foam: #C0E7FF;            /* Ocean foam */
+            --ocean-accent: #0077B6;          /* Deep ocean accent */
+            --ocean-gradient: linear-gradient(135deg, var(--ocean-deep-darkest) 0%, var(--ocean-primary) 50%, var(--ocean-medium) 100%);
+            --ocean-gradient-reverse: linear-gradient(135deg, var(--ocean-medium) 0%, var(--ocean-primary) 50%, var(--ocean-deep-darkest) 100%);
+            --ocean-text-light: #C0E7FF;
+            --ocean-text-medium: #4A90E2;
+            --ocean-text-dark: #1B365D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--ocean-text-dark);
+            background: linear-gradient(135deg, var(--ocean-surface) 0%, #f8fbff 100%);
+            padding: 20px 10px;
+            position: relative;
+        }
+
+        /* Watermark */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://scholarixglobal.com/web/image/967-5c76a51b/photo_2025-09-22_21-08-08-removebg-preview.webp') no-repeat center center;
+            background-size: 300px;
+            opacity: 0.03;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            position: sticky;
+            top: 0;
+            background: var(--ocean-gradient);
+            padding: 12px 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 168, 232, 0.4);
+            border-radius: 8px 8px 0 0;
+            margin: 0 auto;
+            max-width: 210mm;
+        }
+
+        .toolbar-group {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .toolbar button {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            min-width: 40px;
+            justify-content: center;
+        }
+
+        .toolbar button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .toolbar button:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .print-btn {
+            background: var(--ocean-bright) !important;
+            border-color: var(--ocean-accent) !important;
+            color: white !important;
+            padding: 8px 16px !important;
+            font-weight: bold !important;
+        }
+
+        .print-btn:hover {
+            background: var(--ocean-accent) !important;
+        }
+
+        .save-btn {
+            background: var(--ocean-medium) !important;
+            border-color: var(--ocean-primary) !important;
+        }
+
+        .save-btn:hover {
+            background: var(--ocean-primary) !important;
+        }
+
+        .toolbar-separator {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 18px;
+            margin: 0 5px;
+        }
+
+        .container {
+            max-width: 210mm;
+            margin: 20px auto;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .page {
+            padding: 25mm 20mm;
+            min-height: 297mm;
+            page-break-after: always;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+        }
+
+        .header {
+            background: var(--ocean-gradient);
+            color: white;
+            padding: 20px 20mm;
+            margin: -25mm -20mm 20px -20mm;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid var(--ocean-bright);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://scholarixglobal.com/web/image/967-5c76a51b/photo_2025-09-22_21-08-08-removebg-preview.webp') no-repeat center center;
+            background-size: 200px;
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+            .header-content {
+                display: table;
+                width: 100%;
+                table-layout: fixed;
+                position: relative;
+                z-index: 1;
+            }
+
+            .header-content .logo-section,
+            .header-content .header-info {
+                display: table-cell;
+                vertical-align: top;
+            }
+
+            .header-content .logo-section {
+                width: 60%;
+            }
+
+            .header-content .header-info {
+                width: 40%;
+                text-align: right;
+            }        .logo-section {
+            display: block;
+            vertical-align: middle;
+        }
+        
+        .logo-section .logo {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .logo-section .brand-text {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 15px;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 15px;
+            background: var(--ocean-bright);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        
+        /* Fallback logo design when image fails to load */
+        .logo::before {
+            content: 'S';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            z-index: -1;
+        }
+        
+        .brand-text h1 {
+            color: white;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+        
+        .brand-text p {
+            color: #C0C5CE;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .header-info {
+            text-align: right;
+            font-size: 11px;
+            line-height: 1.4;
+            color: #E2E8F0;
+        }
+
+        .header-info div {
+            margin-bottom: 3px;
+        }
+
+        .header-info div:last-child {
+            margin-bottom: 0;
+        }
+
+        .document-title {
+            background: linear-gradient(135deg, var(--ocean-bright), var(--ocean-accent));
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin: 20px -20mm 30px -20mm;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 168, 232, 0.4);
+            border-top: 2px solid var(--ocean-deep-darkest);
+            border-bottom: 2px solid var(--ocean-deep-darkest);
+        }
+
+        .document-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .section-divider {
+            border-top: 2px solid var(--ocean-primary);
+            margin: 25px 0 20px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--ocean-primary);
+            background: linear-gradient(135deg, var(--ocean-surface), white);
+            padding: 8px 15px;
+            position: relative;
+            top: -12px;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 15px;
+            border: 1px solid var(--ocean-bright);
+            box-shadow: 0 2px 8px rgba(0, 168, 232, 0.2);
+        }
+
+        /* Page Break Classes */
+        .page-break {
+            page-break-before: always;
+            break-before: page;
+        }
+
+        .page-break-after {
+            page-break-after: always;
+            break-after: page;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--ocean-gradient-reverse);
+            padding: 15px 20mm;
+            color: var(--ocean-text-light);
+            font-size: 10px;
+            border-top: 4px solid var(--ocean-bright);
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            margin: 20px -20mm -25mm -20mm;
+            box-sizing: border-box;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: 15px;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .footer-left,
+        .footer-center,
+        .footer-right {
+            color: white;
+            font-weight: 500;
+            outline: none;
+            border: 1px solid transparent;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: text;
+            min-height: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-left[contenteditable="true"]:hover,
+        .footer-center[contenteditable="true"]:hover,
+        .footer-right[contenteditable="true"]:hover {
+            border-color: rgba(192, 231, 255, 0.5);
+            background: rgba(0, 168, 232, 0.1);
+            box-shadow: 0 0 5px rgba(0, 168, 232, 0.3);
+        }
+
+        .footer-left[contenteditable="true"]:focus,
+        .footer-center[contenteditable="true"]:focus,
+        .footer-right[contenteditable="true"]:focus {
+            border-color: var(--ocean-bright);
+            background: rgba(0, 168, 232, 0.15);
+            box-shadow: 0 0 8px rgba(0, 168, 232, 0.4);
+        }
+
+        .footer-left {
+            flex: 2;
+            text-align: left;
+        }
+
+        .footer-center {
+            flex: 1;
+            text-align: center;
+            font-weight: 600;
+            justify-content: center;
+        }
+
+        .footer-right {
+            flex: 1;
+            text-align: right;
+            justify-content: flex-end;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .info-block {
+            background: linear-gradient(135deg, var(--ocean-surface), #f8fbff);
+            padding: 15px;
+            border-left: 4px solid var(--ocean-bright);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 168, 232, 0.1);
+        }
+
+        .info-block h3 {
+            font-size: 14px;
+            color: var(--ocean-primary);
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .info-item {
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            display: inline-block;
+            min-width: 120px;
+        }
+
+        .subsection {
+            margin-bottom: 20px;
+        }
+
+        .subsection-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .checkbox-list {
+            margin-left: 20px;
+        }
+
+        .checkbox-item {
+            margin-bottom: 8px;
+            font-size: 13px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+
+        .phase-box {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #27ae60;
+        }
+
+        .phase-title {
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .phase-detail {
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .phase-label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .responsibility-list {
+            margin-left: 20px;
+        }
+
+        .responsibility-item {
+            margin-bottom: 8px;
+            font-size: 13px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .responsibility-item::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .payment-option {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .payment-title {
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .highlight-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .warning-box {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .info-box {
+            background-color: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .signature-section {
+            margin-top: 40px;
+        }
+
+        .signature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .signature-block {
+            border: 2px solid #ddd;
+            padding: 20px;
+            min-height: 200px;
+        }
+
+        .signature-block h4 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .signature-line {
+            border-bottom: 1px solid #333;
+            margin: 25px 0 5px 0;
+            height: 40px;
+        }
+
+        .signature-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+            font-size: 11px;
+            color: #666;
+        }
+
+        .footer-info {
+            margin-bottom: 5px;
+        }
+
+        .editable-field {
+            background: linear-gradient(135deg, var(--ocean-surface), rgba(192, 231, 255, 0.3));
+            padding: 3px 8px;
+            border: 2px dashed var(--ocean-light);
+            display: inline-block;
+            min-width: 120px;
+            min-height: 20px;
+            border-radius: 4px;
+            cursor: text;
+            transition: all 0.3s ease;
+            word-wrap: break-word;
+            max-width: 100%;
+            color: var(--ocean-text-dark);
+        }
+
+        .editable-field:hover {
+            background: linear-gradient(135deg, rgba(192, 231, 255, 0.4), var(--ocean-surface));
+            border-color: var(--ocean-bright);
+            box-shadow: 0 0 8px rgba(0, 168, 232, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .editable-field:focus {
+            outline: none;
+            background: linear-gradient(135deg, white, var(--ocean-surface));
+            border-color: var(--ocean-bright);
+            border-style: solid;
+            box-shadow: 0 0 12px rgba(0, 168, 232, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .editable-field[contenteditable="true"]:empty::before {
+            content: "Click to edit";
+            color: #999;
+            font-style: italic;
+        }
+
+        .tier-box {
+            background: linear-gradient(135deg, var(--ocean-surface), rgba(224, 247, 255, 0.5));
+            border-left: 4px solid var(--ocean-bright);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 168, 232, 0.15);
+        }
+
+        .discount-clause {
+            background: linear-gradient(135deg, #FFF8E1, rgba(255, 183, 77, 0.1));
+            border-left: 4px solid var(--ocean-accent);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 119, 182, 0.15);
+        }
+
+        .step-process {
+            counter-reset: step-counter;
+            margin-left: 20px;
+        }
+
+        .step-item {
+            counter-increment: step-counter;
+            margin-bottom: 10px;
+            padding-left: 30px;
+            position: relative;
+            font-size: 13px;
+        }
+
+        .step-item::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: #3498db;
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .summary-box h3 {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .summary-item {
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        @media print {
+            @page {
+                size: A4;
+                margin: 20mm 15mm;
+            }
+
+            /* Hide URLs and paths in print */
+            a[href]:after {
+                content: none !important;
+            }
+
+            abbr[title]:after {
+                content: none !important;
+            }
+
+            body {
+                background-color: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                font-size: 11px !important;
+                line-height: 1.4 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact !important;
+            }
+
+            body::before {
+                opacity: 0.02 !important;
+            }
+
+            .toolbar {
+                display: none !important;
+            }
+            
+            .container {
+                box-shadow: none !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+                background: white !important;
+                padding: 0 !important;
+            }
+            
+            .page {
+                page-break-after: always;
+                min-height: auto;
+                padding: 0 !important;
+                margin: 0 !important;
+                background: white !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                position: relative;
+            }
+            
+            .page:last-child {
+                page-break-after: auto;
+            }
+
+            .editable-field {
+                border: 1px solid #333 !important;
+                background: white !important;
+                color: #000 !important;
+                padding: 2px 4px !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+                word-break: break-word !important;
+            }
+
+            .header {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact !important;
+                margin: 0 -15mm 10mm -15mm !important;
+                padding: 10mm 15mm !important;
+                position: relative;
+                page-break-inside: avoid;
+                width: calc(100% + 30mm);
+                box-sizing: border-box;
+                overflow: visible;
+            }
+
+            .document-title {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact !important;
+                margin: 0 0 15mm 0 !important;
+                padding: 8mm 0 !important;
+                page-break-inside: avoid;
+            }
+
+            .logo {
+                width: 40px !important;
+                height: 40px !important;
+                background: var(--ocean-bright) !important;
+                border-radius: 6px !important;
+                margin-right: 10px !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact !important;
+            }
+
+            .logo img {
+                max-width: 100% !important;
+                max-height: 100% !important;
+                width: auto !important;
+                height: auto !important;
+            }
+
+            .logo::before {
+                font-size: 18px !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact !important;
+            }
+
+            .brand-text h1 {
+                font-size: 18px !important;
+                line-height: 1.2 !important;
+                margin-bottom: 2px !important;
+            }
+
+            .brand-text p {
+                font-size: 8px !important;
+                line-height: 1.2 !important;
+            }
+
+            .footer {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact !important;
+                margin: 10mm -15mm 0 -15mm !important;
+                padding: 6mm 15mm !important;
+                position: relative;
+                page-break-inside: avoid;
+                width: calc(100% + 30mm);
+                box-sizing: border-box;
+            }
+
+            .footer-content {
+                gap: 10px !important;
+                font-size: 9px !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+            }
+
+            .footer-left,
+            .footer-center,
+            .footer-right {
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+            }
+
+            .footer-left {
+                flex: 2 !important;
+                max-width: 50% !important;
+            }
+
+            .footer-center,
+            .footer-right {
+                flex: 1 !important;
+                max-width: 25% !important;
+            }
+
+            .section-title {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact !important;
+            }
+
+            .section-divider {
+                border-top: 1px solid var(--ocean-primary) !important;
+            }
+
+            /* Content area margins for A4 printing */
+            .info-grid,
+            .signature-grid {
+                margin: 10mm 0 !important;
+                break-inside: avoid;
+            }
+
+            .section-divider {
+                margin: 15mm 0 8mm 0 !important;
+                break-inside: avoid;
+            }
+
+            .section-title {
+                margin: 0 !important;
+                font-size: 14px !important;
+            }
+
+            .info-block {
+                border-left: 3px solid var(--ocean-bright) !important;
+                background: var(--ocean-surface) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact !important;
+                margin: 8mm 0 !important;
+                padding: 8mm 6mm !important;
+                break-inside: avoid;
+            }
+
+            .tier-box, .discount-clause, .highlight-box, .warning-box, .info-box {
+                border-left: 3px solid var(--ocean-bright) !important;
+                background: var(--ocean-surface) !important;
+                break-inside: avoid !important;
+                margin: 8mm 0 !important;
+                padding: 6mm !important;
+            }
+
+            table {
+                border-collapse: collapse !important;
+                width: 100% !important;
+                break-inside: avoid !important;
+            }
+
+            th, td {
+                border: 1px solid #000 !important;
+                padding: 6px !important;
+            }
+
+            th {
+                background: #f0f0f0 !important;
+                color: #000 !important;
+            }
+
+            /* Ensure colors print correctly */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+            }
+
+            /* Avoid page breaks inside important elements */
+            .subsection, .phase-box, .payment-option, .signature-block {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+
+            /* Ensure checkboxes are visible */
+            input[type="checkbox"] {
+                -webkit-appearance: checkbox !important;
+                appearance: checkbox !important;
+                width: 12px !important;
+                height: 12px !important;
+            }
+
+            /* Enhanced text formatting for better print layout */
+            p, li {
+                font-size: 11px !important;
+                line-height: 1.4 !important;
+                margin: 3mm 0 !important;
+                orphans: 3;
+                widows: 3;
+                word-wrap: break-word !important;
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+                page-break-after: avoid;
+                margin: 8mm 0 4mm 0 !important;
+                color: var(--ocean-primary) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            ul, ol {
+                margin: 4mm 0 !important;
+                padding-left: 8mm !important;
+            }
+
+            li {
+                margin: 2mm 0 !important;
+                break-inside: avoid;
+            }
+
+            /* Signature area formatting */
+            .signature-grid {
+                display: flex !important;
+                justify-content: space-between !important;
+                align-items: flex-end !important;
+                margin: 15mm 0 !important;
+                break-inside: avoid;
+            }
+
+            .signature-block {
+                width: 45% !important;
+                min-height: 15mm !important;
+                border-bottom: 1px solid var(--ocean-primary) !important;
+                padding-bottom: 2mm !important;
+            }
+
+            /* Prevent text overflow and ensure proper spacing */
+            * {
+                overflow: visible !important;
+                box-sizing: border-box !important;
+                max-width: 100% !important;
+            }
+
+            /* Remove any shadows for clean print */
+            .box-shadow, 
+            [style*="box-shadow"] {
+                box-shadow: none !important;
+            }
+
+            /* Optimize editable fields for printing */
+            .editable-field {
+                border: 1px solid var(--ocean-primary) !important;
+                background: rgba(232, 248, 253, 0.3) !important;
+                color: var(--ocean-text-dark) !important;
+                padding: 2mm 3mm !important;
+                border-radius: 2px !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .editable-field:empty::before {
+                content: "[TO BE FILLED]" !important;
+                color: var(--ocean-medium) !important;
+                font-style: italic !important;
+            }
+        }
+
+        /* Print-ready state adjustments */
+        body.print-ready {
+            background: white !important;
+        }
+
+        body.print-ready .editable-field {
+            color: #000 !important;
+            border-color: #333 !important;
+        }
+
+        @media screen and (max-width: 1024px) {
+            .container {
+                max-width: 95%;
+                margin: 15px auto;
+            }
+
+            .page {
+                padding: 25mm 20mm;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px 5px;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 10px auto;
+                border-radius: 0;
+            }
+
+            .toolbar {
+                padding: 12px 15px;
+                border-radius: 0;
+                max-width: 100%;
+            }
+
+            .toolbar button {
+                padding: 8px 12px;
+                font-size: 11px;
+                flex: 1;
+                min-width: 0;
+            }
+
+            .info-grid,
+            .signature-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .page {
+                padding: 20px 15px;
+                min-height: auto;
+            }
+
+            .company-name {
+                font-size: 20px;
+                line-height: 1.2;
+            }
+
+            .document-title {
+                font-size: 16px;
+                line-height: 1.3;
+            }
+
+            .section-title {
+                font-size: 14px;
+            }
+
+            .header {
+                margin: -20px -15px 20px -15px;
+                padding: 15px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .logo-section {
+                justify-content: center;
+            }
+
+            .header-info {
+                text-align: center;
+                font-size: 10px;
+            }
+
+            .document-title {
+                margin: 15px -15px 20px -15px;
+                font-size: 18px;
+                padding: 12px;
+            }
+
+            .brand-text h1 {
+                font-size: 18px;
+            }
+
+            .brand-text p {
+                font-size: 8px;
+            }
+
+            .editable-field {
+                min-width: 100px;
+                display: block;
+                margin: 5px 0;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .info-item {
+                display: block;
+                margin-bottom: 12px;
+            }
+
+            .info-label {
+                display: block;
+                margin-bottom: 5px;
+                min-width: auto;
+            }
+
+            .checkbox-list {
+                margin-left: 10px;
+            }
+
+            table {
+                font-size: 11px;
+                overflow-x: auto;
+                display: block;
+                white-space: nowrap;
+            }
+
+            th, td {
+                padding: 6px 4px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .page {
+                padding: 15px 10px;
+            }
+
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+                position: sticky;
+                top: 0;
+            }
+
+            .toolbar button {
+                margin: 2px 0;
+                padding: 12px 16px;
+                font-size: 14px;
+                min-height: 44px; /* Touch-friendly minimum */
+            }
+
+            .info-item {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                margin-bottom: 15px;
+            }
+
+            .info-label {
+                min-width: auto;
+                font-weight: bold;
+                font-size: 12px;
+            }
+
+            .header-content {
+                gap: 10px;
+            }
+
+            .logo-section {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .logo {
+                width: 40px;
+                height: 40px;
+            }
+
+            .brand-text h1 {
+                font-size: 16px;
+            }
+
+            .document-title {
+                font-size: 16px;
+                letter-spacing: 1px;
+            }
+
+            .header-info {
+                font-size: 9px;
+            }
+
+            .footer {
+                margin: 15px -15px -20px -15px;
+                padding: 8px 10px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 6px;
+                text-align: center;
+            }
+
+            .footer-left,
+            .footer-center,
+            .footer-right {
+                text-align: center;
+                font-size: 8px;
+            }
+
+            /* Ensure proper content flow on mobile */
+            .page {
+                padding: 15px 10px !important;
+                margin: 0 !important;
+            }
+
+            .header {
+                margin: -15px -10px 15px -10px !important;
+                padding: 12px 10px !important;
+            }
+
+            .document-title {
+                margin: 10px -10px 15px -10px !important;
+                padding: 8px 10px !important;
+            }
+
+            .editable-field {
+                font-size: 14px;
+                padding: 8px 10px;
+                min-height: 40px; /* Touch-friendly */
+                line-height: 1.4;
+            }
+
+            .checkbox-item {
+                margin-bottom: 12px;
+                line-height: 1.5;
+            }
+
+            .checkbox-item input[type="checkbox"] {
+                margin-right: 12px;
+                transform: scale(1.2); /* Larger checkboxes for touch */
+            }
+
+            .section-title {
+                font-size: 13px;
+                line-height: 1.3;
+            }
+
+            .subsection-title {
+                font-size: 12px;
+                line-height: 1.4;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <button onclick="document.execCommand('bold')" title="Bold">
+            <strong>B</strong>
+        </button>
+        <button onclick="document.execCommand('italic')" title="Italic">
+            <em>I</em>
+        </button>
+        <button onclick="document.execCommand('underline')" title="Underline">
+            <u>U</u>
+        </button>
+        <span class="toolbar-separator">|</span>
+        <button onclick="saveDocument()" class="save-btn" title="Save Document">
+            💾 Save
+        </button>
+        <button onclick="printToPDF()" class="print-btn" title="Print / Save as PDF">
+            🖨️ Print PDF
+        </button>
+        <button onclick="exportDocument()" title="Export Document">
+            📄 Export
+        </button>
+        <span class="toolbar-separator">|</span>
+        <button onclick="clearDocument()" title="Clear All Content">
+            🗑️ Clear
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- PAGE 1 -->
+        <div class="page">
+            <div class="header">
+                <div class="header-content">
+                    <div class="logo-section">
+                        <div class="logo">
+                            <img src="https://scholarixglobal.com/web/image/967-5c76a51b/photo_2025-09-22_21-08-08-removebg-preview.webp" alt="Scholarix Global Logo">
+                        </div>
+                        <div class="brand-text">
+                            <h1>SCHOLARIX</h1>
+                            <p>IT GLOBAL CONSULTANTS</p>
+                        </div>
+                    </div>
+                    <div class="header-info">
+                        <div>Connaught Palace Hotel Dubai</div>
+                        <div>Abu Baker Al Siddique St, Entrance 1, 5th level #501 - Deira - Dubai, UAE</div>
+                        <div>📧 info@scholarixglobal.com | 📱 +971 54 342 3029 | 🌐 www.scholarixglobal.com</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="document-title">SERVICE LEVEL AGREEMENT</div>
+
+            <!-- Customer and Provider Information -->
+            <div class="info-grid">
+                <div class="info-block">
+                    <h3>CUSTOMER INFORMATION</h3>
+                    <div class="info-item">
+                        <span class="info-label">Company Name:</span>
+                        <span class="editable-field" contenteditable="true" placeholder="[CLIENT_COMPANY_NAME]"></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Contact Person:</span>
+                        <span class="editable-field" contenteditable="true" placeholder="[CLIENT_CONTACT_NAME]"></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Position:</span>
+                        <span class="editable-field" contenteditable="true" placeholder="[CLIENT_POSITION]"></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Address:</span>
+                        <span class="editable-field" contenteditable="true" placeholder="[CLIENT_ADDRESS]"></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Email:</span>
+                        <span class="editable-field" contenteditable="true" placeholder="[CLIENT_EMAIL]"></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Phone:</span>
+                        <span class="editable-field" contenteditable="true" placeholder="[CLIENT_PHONE]"></span>
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <h3>SERVICE PROVIDER</h3>
+                    <div class="info-item">
+                        <span class="info-label">Company:</span>
+                        Scholarix Global Consultants
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Contact Person:</span>
+                        <span class="editable-field" contenteditable="true" placeholder="[PROVIDER_CONTACT_NAME]"></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Position:</span>
+                        <span class="editable-field" contenteditable="true" placeholder="[PROVIDER_POSITION]"></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Address:</span>
+                        <span class="editable-field" contenteditable="true" placeholder="[PROVIDER_ADDRESS]"></span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Email:</span>
+                        info@scholarixglobal.com
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Phone:</span>
+                        +971 54 342 3029
+                    </div>
+                </div>
+            </div>
+
+            <!-- Date of Engagement -->
+            <div class="subsection">
+                <div class="subsection-title">DATE OF ENGAGEMENT</div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Agreement Date:</span>
+                        <span class="editable-field">[AGREEMENT_DATE]</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Effective Date:</span>
+                        <span class="editable-field">[EFFECTIVE_DATE]</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Project Duration:</span>
+                        <span class="editable-field">[PROJECT_DURATION]</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Expected Completion:</span>
+                        <span class="editable-field">[COMPLETION_DATE]</span>
+                    </div>
+                </div>
+                <div class="info-item" style="margin-top: 10px;">
+                    <span class="info-label">Agreement ID:</span>
+                    <span class="editable-field">SLA/[PROJECT_CODE]/[YEAR]</span>
+                </div>
+            </div>
+
+            <!-- Scope of Work -->
+            <div class="section-divider">
+                <span class="section-title">Scope of Work & Service Tiers</span>
+            </div>
+
+            <div class="discount-clause">
+                <div class="subsection-title">PRICING TIERS & DISCOUNT ADJUSTMENT POLICY</div>
+                <p style="margin-bottom: 10px; font-size: 13px;"><strong>Service levels and deliverables are directly tied to investment level:</strong></p>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li><strong>Premium Tier (90-100% of quoted price):</strong> Full scope, priority support, extended warranty</li>
+                    <li><strong>Standard Tier (70-89% of quoted price):</strong> Core deliverables, standard timeline, basic warranty</li>
+                    <li><strong>Essential Tier (50-69% of quoted price):</strong> Minimum viable scope, extended timeline, limited support</li>
+                    <li><strong>Below 50%:</strong> Separate negotiation required with significant scope reduction</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">PROJECT TYPE</div>
+                <div class="checkbox-list">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="odoo">
+                        <label for="odoo">Odoo ERP Implementation (Complete)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="software">
+                        <label for="software">Software Implementation & Integration</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="ai">
+                        <label for="ai">AI Automation Solutions</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="custom">
+                        <label for="custom">Custom Software Development</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="consulting">
+                        <label for="consulting">IT Consulting & Advisory</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="other">
+                        <label for="other">Other: <span class="editable-field">[SPECIFY]</span></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tier-box">
+                <div class="subsection-title">PREMIUM TIER SERVICES (90-100% Investment)</div>
+                <div class="checkbox-list">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="analysis_premium">
+                        <label for="analysis_premium">Comprehensive system analysis and requirements gathering</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="installation_premium">
+                        <label for="installation_premium">Software installation, configuration, and optimization</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="migration_premium">
+                        <label for="migration_premium">Complete data migration with validation and backup</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="training_premium">
+                        <label for="training_premium">Comprehensive user training (<span class="editable-field" contenteditable="true">40</span> hours for <span class="editable-field" contenteditable="true">20</span> users)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="testing_premium">
+                        <label for="testing_premium">Extensive testing, quality assurance, and performance optimization</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="golive_premium">
+                        <label for="golive_premium">24/7 go-live support (<span class="editable-field" contenteditable="true">7</span> days)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="postsupport_premium">
+                        <label for="postsupport_premium">Extended post-implementation support (<span class="editable-field" contenteditable="true">90</span> days)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="documentation_premium">
+                        <label for="documentation_premium">Complete documentation, knowledge transfer, and training materials</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="reports_premium">
+                        <label for="reports_premium">Custom reports, dashboards, and advanced analytics</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="workflow_premium">
+                        <label for="workflow_premium">Advanced workflow configuration and automation</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">STANDARD TIER SERVICES (70-89% Investment)</div>
+                <div class="checkbox-list">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="analysis_standard">
+                        <label for="analysis_standard">System analysis and basic requirements gathering</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="installation_standard">
+                        <label for="installation_standard">Software installation and configuration</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="migration_standard">
+                        <label for="migration_standard">Data migration from existing systems</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="training_standard">
+                        <label for="training_standard">User training (<span class="editable-field" contenteditable="true">24</span> hours for <span class="editable-field" contenteditable="true">15</span> users)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="testing_standard">
+                        <label for="testing_standard">Testing and quality assurance</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="golive_standard">
+                        <label for="golive_standard">Go-live support (<span class="editable-field" contenteditable="true">3</span> days)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="postsupport_standard">
+                        <label for="postsupport_standard">Post-implementation support (<span class="editable-field" contenteditable="true">30</span> days)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="documentation_standard">
+                        <label for="documentation_standard">Basic documentation and knowledge transfer</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="reports_standard">
+                        <label for="reports_standard">Standard reports and dashboards</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="workflow_standard">
+                        <label for="workflow_standard">Basic workflow configuration</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">ESSENTIAL TIER SERVICES (50-69% Investment)</div>
+                <div class="checkbox-list">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="analysis_essential">
+                        <label for="analysis_essential">Basic system analysis (client provides detailed requirements)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="installation_essential">
+                        <label for="installation_essential">Software installation (standard configuration only)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="migration_essential">
+                        <label for="migration_essential">Basic data migration (client prepares clean data)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="training_essential">
+                        <label for="training_essential">Limited training (<span class="editable-field" contenteditable="true">12</span> hours for <span class="editable-field" contenteditable="true">8</span> users)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="testing_essential">
+                        <label for="testing_essential">Basic testing (client conducts UAT)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="golive_essential">
+                        <label for="golive_essential">Remote go-live support (<span class="editable-field" contenteditable="true">1</span> day)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="postsupport_essential">
+                        <label for="postsupport_essential">Limited post-implementation support (<span class="editable-field" contenteditable="true">7</span> days)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="documentation_essential">
+                        <label for="documentation_essential">Basic system documentation only</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">EXCLUDED SERVICES (Require Separate Agreement)</div>
+                <div class="checkbox-list">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="customdev">
+                        <label for="customdev">Custom module development beyond standard features</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="integration">
+                        <label for="integration">Third-party system integrations not in original scope</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="hardware">
+                        <label for="hardware">Hardware procurement and installation</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="network">
+                        <label for="network">Network infrastructure setup</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="cleanup">
+                        <label for="cleanup">Data cleanup and preparation services</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="addtraining">
+                        <label for="addtraining">Additional training beyond included hours</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="customreports">
+                        <label for="customreports">Custom reports beyond standard templates</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="modifications">
+                        <label for="modifications">Modifications to core software functionality</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="maintenance">
+                        <label for="maintenance">Ongoing maintenance after support period</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <div class="subsection-title">DISCOUNT POLICY & SCOPE ADJUSTMENT</div>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li><strong>Service tier automatically adjusts based on final agreed price</strong></li>
+                    <li>All customizations quoted separately at hourly rates regardless of tier</li>
+                    <li>Written approval required before any additional work begins</li>
+                    <li>Minimum billing: 4 hours for development, 2 hours for consulting</li>
+                    <li>Custom work and tier downgrades may extend project timeline by 20-50%</li>
+                    <li>Additional costs payable before work commencement</li>
+                    <li><strong>Timeline extensions due to budget constraints are non-negotiable</strong></li>
+                </ul>
+            </div>
+
+            <!-- Footer - Page 1 -->
+            <div class="footer">
+                <div class="footer-content">
+                    <div class="footer-left" contenteditable="true">Scholarix IT Global Consultants | info@scholarixglobal.com | +971 54 342 3029</div>
+                    <div class="footer-center page-number" contenteditable="true">Page 1 of 5</div>
+                    <div class="footer-right" contenteditable="true">SLA/2025</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 2 -->
+        <div class="page page-break">
+            <div class="section-divider">
+                <span class="section-title">Project Timeline</span>
+            </div>
+
+            <div class="phase-box">
+                <div class="phase-title">PHASE 1: DISCOVERY & ANALYSIS</div>
+                <div class="phase-detail">
+                    <span class="phase-label">Duration:</span> <span class="editable-field">[X]</span> weeks
+                </div>
+                <div class="phase-detail">
+                    <span class="phase-label">Deliverables:</span> Requirements document, project plan, system design
+                </div>
+                <div class="phase-detail">
+                    <span class="phase-label">Client Dependencies:</span> Stakeholder availability, data access, requirements approval
+                </div>
+            </div>
+
+            <div class="phase-box">
+                <div class="phase-title">PHASE 2: SYSTEM CONFIGURATION</div>
+                <div class="phase-detail">
+                    <span class="phase-label">Duration:</span> <span class="editable-field">[X]</span> weeks
+                </div>
+                <div class="phase-detail">
+                    <span class="phase-label">Deliverables:</span> Configured system, test environment setup
+                </div>
+                <div class="phase-detail">
+                    <span class="phase-label">Client Dependencies:</span> Regular feedback, test data provision, design approvals
+                </div>
+            </div>
+
+            <div class="phase-box">
+                <div class="phase-title">PHASE 3: DATA MIGRATION & TESTING</div>
+                <div class="phase-detail">
+                    <span class="phase-label">Duration:</span> <span class="editable-field">[X]</span> weeks
+                </div>
+                <div class="phase-detail">
+                    <span class="phase-label">Deliverables:</span> Migrated data, tested system, user acceptance testing
+                </div>
+                <div class="phase-detail">
+                    <span class="phase-label">Client Dependencies:</span> Data validation, testing participation, issue feedback
+                </div>
+            </div>
+
+            <div class="phase-box">
+                <div class="phase-title">PHASE 4: TRAINING & GO-LIVE</div>
+                <div class="phase-detail">
+                    <span class="phase-label">Duration:</span> <span class="editable-field">[X]</span> weeks
+                </div>
+                <div class="phase-detail">
+                    <span class="phase-label">Deliverables:</span> Trained users, live system, operational procedures
+                </div>
+                <div class="phase-detail">
+                    <span class="phase-label">Client Dependencies:</span> User participation, change management, system adoption
+                </div>
+            </div>
+
+            <div class="phase-box">
+                <div class="phase-title">PHASE 5: POST-IMPLEMENTATION SUPPORT</div>
+                <div class="phase-detail">
+                    <span class="phase-label">Duration:</span> <span class="editable-field">[X]</span> weeks
+                </div>
+                <div class="phase-detail">
+                    <span class="phase-label">Deliverables:</span> Stabilized system, resolved issues, final documentation
+                </div>
+                <div class="phase-detail">
+                    <span class="phase-label">Client Dependencies:</span> Issue reporting, user feedback, operational data
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <div class="subsection-title">TIMELINE CONDITIONS & BUDGET IMPACT</div>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li>Timeline assumes client dependencies are met as scheduled</li>
+                    <li>Delays caused by client actions may extend project duration</li>
+                    <li>Scope changes will impact timeline and require written approval</li>
+                    <li><strong>Discounted projects automatically receive extended timelines (20-50% longer)</strong></li>
+                    <li><strong>Essential tier projects are deprioritized during peak periods</strong></li>
+                    <li>Force majeure events may necessitate timeline adjustments</li>
+                    <li>Weekly progress reports provided to track milestone completion</li>
+                </ul>
+            </div>
+
+            <div class="discount-clause">
+                <div class="subsection-title">RESOURCE ALLOCATION BY TIER</div>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li><strong>Premium Tier:</strong> Senior team members, priority scheduling, dedicated resources</li>
+                    <li><strong>Standard Tier:</strong> Mixed team experience, standard scheduling, shared resources</li>
+                    <li><strong>Essential Tier:</strong> Junior team members, flexible scheduling, shared resources</li>
+                    <li>Team composition directly impacts deliverable quality and timeline</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">CLIENT RESPONSIBILITIES (Critical for Timeline)</div>
+                <div class="responsibility-list">
+                    <div class="responsibility-item">Assign dedicated project manager with decision-making authority</div>
+                    <div class="responsibility-item">Provide timely approvals and feedback (within 3-5 business days)</div>
+                    <div class="responsibility-item">Ensure stakeholder availability for meetings and reviews</div>
+                    <div class="responsibility-item">Provide clean, complete data in agreed formats on schedule</div>
+                    <div class="responsibility-item">Grant necessary system access and security permissions</div>
+                    <div class="responsibility-item">Participate actively in testing and training sessions</div>
+                    <div class="responsibility-item">Communicate changes or issues promptly</div>
+                    <div class="responsibility-item">Complete user acceptance testing according to provided scripts</div>
+                </div>
+            </div>
+
+            <div class="section-divider">
+                <span class="section-title">Confidentiality & Data Protection</span>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">MUTUAL NON-DISCLOSURE AGREEMENT</div>
+                <p style="margin-bottom: 10px; font-size: 13px;">Both parties agree to maintain strict confidentiality regarding:</p>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li>Business strategies, processes, and proprietary information</li>
+                    <li>Technical data, system configurations, and implementations</li>
+                    <li>Financial information, pricing, and commercial terms</li>
+                    <li>Customer data, user information, and business records</li>
+                    <li>Any information marked or reasonably considered confidential</li>
+                </ul>
+            </div>
+
+            <div class="info-grid">
+                <div class="subsection">
+                    <div class="subsection-title">PROVIDER COMMITMENTS</div>
+                    <div class="responsibility-list">
+                        <div class="responsibility-item">Implement appropriate technical and administrative safeguards</div>
+                        <div class="responsibility-item">Limit access to authorized personnel with signed confidentiality agreements</div>
+                        <div class="responsibility-item">Use client data solely for agreed service delivery purposes</div>
+                        <div class="responsibility-item">Return or securely destroy confidential information upon project completion</div>
+                        <div class="responsibility-item">Comply with UAE data protection laws and international standards</div>
+                        <div class="responsibility-item">Maintain encrypted data transmission and secure storage protocols</div>
+                        <div class="responsibility-item">Provide immediate notification of any suspected data breaches</div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">CLIENT COMMITMENTS</div>
+                    <div class="responsibility-list">
+                        <div class="responsibility-item">Protect Provider's methodologies, tools, and proprietary processes</div>
+                        <div class="responsibility-item">Not disclose Provider's pricing, techniques, or business information</div>
+                        <div class="responsibility-item">Ensure internal team members sign confidentiality agreements</div>
+                        <div class="responsibility-item">Maintain appropriate security measures for shared information</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">INTELLECTUAL PROPERTY RIGHTS</div>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li>Provider retains rights to pre-existing IP, methodologies, and standard tools</li>
+                    <li>Client retains rights to their data, business processes, and custom configurations</li>
+                    <li><strong>Custom developments become client property upon FULL payment only</strong></li>
+                    <li><strong>Discounted projects: Provider retains rights to reusable components</strong></li>
+                    <li><strong>Essential tier: Provider may reuse all custom configurations for other clients</strong></li>
+                    <li>Both parties may use general knowledge gained for future projects</li>
+                    <li>Provider may reference project in marketing materials and case studies</li>
+                    <li>Neither party may use the other's trademarks without written permission</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <div class="subsection-title">DATA SECURITY MEASURES</div>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li>256-bit SSL encryption for data transmission</li>
+                    <li>AES-256 encryption for data storage</li>
+                    <li>Regular security assessments and updates</li>
+                    <li>Secure development and testing environments</li>
+                    <li>Staff background checks and confidentiality training</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box">
+                <strong>CONFIDENTIALITY TERM:</strong> These obligations survive for 5 years after project completion or agreement termination.
+            </div>
+
+            <!-- Footer - Page 2 -->
+            <div class="footer">
+                <div class="footer-content">
+                    <div class="footer-left" contenteditable="true">Scholarix IT Global Consultants | info@scholarixglobal.com | +971 54 342 3029</div>
+                    <div class="footer-center page-number" contenteditable="true">Page 2 of 5</div>
+                    <div class="footer-right" contenteditable="true">SLA/2025</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 3 -->
+        <div class="page page-break">
+            <div class="section-divider">
+                <span class="section-title">Financial Terms & Payment</span>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">PROJECT INVESTMENT</div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Base Quote Value:</span>
+                        <span class="editable-field" contenteditable="true">[BASE_AMOUNT]</span> AED
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Final Agreed Value:</span>
+                        <span class="editable-field" contenteditable="true">[FINAL_AMOUNT]</span> AED
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Service Tier:</span>
+                        <span class="editable-field" contenteditable="true">[PREMIUM/STANDARD/ESSENTIAL]</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Currency:</span>
+                        <span class="editable-field" contenteditable="true">UAE Dirhams (AED)</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">VAT:</span>
+                        5% (if applicable under UAE VAT law)
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Discount Percentage:</span>
+                        <span class="editable-field" contenteditable="true">[X]%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">PAYMENT STRUCTURE</div>
+                
+                <div class="payment-option">
+                    <div class="payment-title">OPTION A - MILESTONE PAYMENTS</div>
+                    <div class="checkbox-list">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="payment1">
+                            <label for="payment1">Down Payment: <span class="editable-field">[X]%</span> upon agreement signing = <span class="editable-field">[AMOUNT]</span> AED</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="payment2">
+                            <label for="payment2">Phase 1 Completion: <span class="editable-field">[X]%</span> = <span class="editable-field">[AMOUNT]</span> AED</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="payment3">
+                            <label for="payment3">Phase 2 Completion: <span class="editable-field">[X]%</span> = <span class="editable-field">[AMOUNT]</span> AED</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="payment4">
+                            <label for="payment4">Go-Live: <span class="editable-field">[X]%</span> = <span class="editable-field">[AMOUNT]</span> AED</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="payment5">
+                            <label for="payment5">Final Payment: <span class="editable-field">[X]%</span> upon project completion = <span class="editable-field">[AMOUNT]</span> AED</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-option">
+                    <div class="payment-title">OPTION B - UPFRONT + BALANCE</div>
+                    <div class="checkbox-list">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="paymentb1">
+                            <label for="paymentb1">Down Payment: <span class="editable-field">[X]%</span> upon signing = <span class="editable-field">[AMOUNT]</span> AED</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="paymentb2">
+                            <label for="paymentb2">Final Payment: <span class="editable-field">[X]%</span> upon completion = <span class="editable-field">[AMOUNT]</span> AED</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payment-option">
+                    <div class="payment-title">OPTION C - MONTHLY INSTALLMENTS</div>
+                    <div class="checkbox-list">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="paymentc1">
+                            <label for="paymentc1">Down Payment: <span class="editable-field">[X]%</span> upon signing = <span class="editable-field">[AMOUNT]</span> AED</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="paymentc2">
+                            <label for="paymentc2">Monthly Payments: <span class="editable-field">[X]</span> payments of <span class="editable-field">[AMOUNT]</span> AED each</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">CUSTOMIZATION RATES (Separate Billing)</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Role</th>
+                            <th>Rate per Hour</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Senior Consultant</td>
+                            <td><span class="editable-field">[RATE]</span> AED</td>
+                        </tr>
+                        <tr>
+                            <td>Technical Developer</td>
+                            <td><span class="editable-field">[RATE]</span> AED</td>
+                        </tr>
+                        <tr>
+                            <td>Project Manager</td>
+                            <td><span class="editable-field">[RATE]</span> AED</td>
+                        </tr>
+                        <tr>
+                            <td>Training Specialist</td>
+                            <td><span class="editable-field">[RATE]</span> AED</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 10px; font-size: 13px;"><strong>Minimum billing:</strong> 4 hours for development, 2 hours for consulting</p>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">PAYMENT TERMS</div>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li>Payment Due: 15 days from invoice date</li>
+                    <li>Late Payment: 1.5% per month after 30 days</li>
+                    <li>Accepted Methods: Bank transfer, company check, credit card</li>
+                    <li>Bank Details: <span class="editable-field">[TO BE PROVIDED UPON AGREEMENT]</span></li>
+                    <li>All payments in agreed currency</li>
+                    <li>Client responsible for bank transfer fees</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">CHANGE ORDER PROCESS</div>
+                <div class="step-process">
+                    <div class="step-item">Client requests additional work in writing</div>
+                    <div class="step-item">Provider provides written estimate within 2 business days</div>
+                    <div class="step-item">Client approves estimate and timeline impact</div>
+                    <div class="step-item">Formal change order issued and signed</div>
+                    <div class="step-item">Payment terms agreed before work begins</div>
+                    <div class="step-item">No additional work without written approval</div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <div class="subsection-title">REFUND & TERMINATION POLICY</div>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li>Down payments non-refundable after work commences</li>
+                    <li>Refunds calculated based on work completed if terminated early</li>
+                    <li>No refunds for client-caused project cancellation</li>
+                    <li><strong>Discounted projects: 30-day notice required for termination</strong></li>
+                    <li><strong>Essential tier projects: No refunds after 50% completion</strong></li>
+                    <li>Early termination fee: 15% of remaining contract value</li>
+                    <li>All work products remain property of Provider until full payment</li>
+                    <li>Dispute resolution through agreed procedures</li>
+                </ul>
+            </div>
+
+            <div class="section-divider">
+                <span class="section-title">Performance Standards</span>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">SERVICE LEVEL COMMITMENTS</div>
+                
+                <div class="tier-box" style="margin-bottom: 15px;">
+                    <h3>PREMIUM TIER PERFORMANCE STANDARDS</h3>
+                    <div class="responsibility-list">
+                        <div class="responsibility-item">On-time milestone delivery: ≥95% (excluding client delays)</div>
+                        <div class="responsibility-item">User acceptance test pass rate: ≥98%</div>
+                        <div class="responsibility-item">System uptime post go-live: ≥99.5% during business hours</div>
+                        <div class="responsibility-item">User training satisfaction: ≥4.5/5.0 rating</div>
+                        <div class="responsibility-item">Issue resolution within agreed timeframes</div>
+                        <div class="responsibility-item">Dedicated project manager and senior consultants</div>
+                    </div>
+                </div>
+
+                <div class="info-block" style="margin-bottom: 15px;">
+                    <h3>STANDARD TIER PERFORMANCE STANDARDS</h3>
+                    <div class="responsibility-list">
+                        <div class="responsibility-item">On-time milestone delivery: ≥85% (excluding client delays)</div>
+                        <div class="responsibility-item">User acceptance test pass rate: ≥95%</div>
+                        <div class="responsibility-item">System uptime post go-live: ≥99% during business hours</div>
+                        <div class="responsibility-item">User training satisfaction: ≥4.0/5.0 rating</div>
+                        <div class="responsibility-item">Issue resolution within standard timeframes</div>
+                    </div>
+                </div>
+
+                <div class="subsection" style="margin-bottom: 15px;">
+                    <h3>ESSENTIAL TIER PERFORMANCE STANDARDS</h3>
+                    <div class="responsibility-list">
+                        <div class="responsibility-item">On-time milestone delivery: ≥75% (excluding client delays)</div>
+                        <div class="responsibility-item">User acceptance test pass rate: ≥90%</div>
+                        <div class="responsibility-item">System uptime post go-live: ≥97% during business hours</div>
+                        <div class="responsibility-item">User training satisfaction: ≥3.5/5.0 rating</div>
+                        <div class="responsibility-item">Best-effort issue resolution</div>
+                    </div>
+                </div>
+
+                <div class="subsection-title">TIER-BASED SUPPORT RESPONSE TIMES</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Priority Level</th>
+                            <th>Premium Tier</th>
+                            <th>Standard Tier</th>
+                            <th>Essential Tier</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Critical (System Down)</td>
+                            <td>1 hour / 4 hours</td>
+                            <td>2 hours / 8 hours</td>
+                            <td>4 hours / 24 hours</td>
+                        </tr>
+                        <tr>
+                            <td>High (Major Function)</td>
+                            <td>2 hours / 12 hours</td>
+                            <td>4 hours / 24 hours</td>
+                            <td>8 hours / 3 days</td>
+                        </tr>
+                        <tr>
+                            <td>Medium (Minor Issues)</td>
+                            <td>4 hours / 1 day</td>
+                            <td>8 hours / 3 days</td>
+                            <td>24 hours / 5 days</td>
+                        </tr>
+                        <tr>
+                            <td>Low (General Inquiries)</td>
+                            <td>8 hours / 2 days</td>
+                            <td>24 hours / 5 days</td>
+                            <td>48 hours / 10 days</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size: 12px; margin-top: 10px;"><em>Format: Response Time / Resolution Time</em></p>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">COMMUNICATION STANDARDS</div>
+                <div class="responsibility-list">
+                    <div class="responsibility-item">Weekly progress reports during implementation</div>
+                    <div class="responsibility-item">Immediate notification of any project risks or delays</div>
+                    <div class="responsibility-item">Regular stakeholder meetings as agreed</div>
+                    <div class="responsibility-item">48-hour response to client communications</div>
+                    <div class="responsibility-item">Dedicated project manager throughout engagement</div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <div class="subsection-title">WARRANTY PERIOD</div>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li>90 days post go-live for implementation defects</li>
+                    <li>Free bug fixes and system stabilization included</li>
+                    <li>Additional support available under separate agreement</li>
+                    <li>Training support for 30 days post go-live</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">PERFORMANCE REMEDIES</div>
+                <p style="margin-bottom: 10px; font-size: 13px;">If service levels not met due to Provider fault:</p>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li>Service credits applied to final invoice</li>
+                    <li>Extended warranty period at no cost</li>
+                    <li>Additional support hours at no charge</li>
+                    <li>Remediation plan with timeline for resolution</li>
+                </ul>
+            </div>
+
+            <!-- Footer - Page 3 -->
+            <div class="footer">
+                <div class="footer-content">
+                    <div class="footer-left" contenteditable="true">Scholarix IT Global Consultants | info@scholarixglobal.com | +971 54 342 3029</div>
+                    <div class="footer-center page-number" contenteditable="true">Page 3 of 5</div>
+                    <div class="footer-right" contenteditable="true">SLA/2025</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 4 -->
+        <div class="page page-break">
+            <div class="section-divider">
+                <span class="section-title">Risk Allocation</span>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-block">
+                    <h3>PROVIDER RESPONSIBILITIES & RISKS</h3>
+                    <div class="responsibility-list">
+                        <div class="responsibility-item">Technical implementation according to specifications</div>
+                        <div class="responsibility-item">Professional service delivery by qualified staff</div>
+                        <div class="responsibility-item">Project management and timeline coordination</div>
+                        <div class="responsibility-item">Quality assurance and testing procedures</div>
+                        <div class="responsibility-item">Knowledge transfer and documentation</div>
+                        <div class="responsibility-item">Compliance with agreed service levels</div>
+                        <div class="responsibility-item">Data security during project execution</div>
+                    </div>
+                </div>
+
+                <div class="info-block">
+                    <h3>CLIENT RESPONSIBILITIES & RISKS</h3>
+                    <div class="responsibility-list">
+                        <div class="responsibility-item">Business process decisions and change management</div>
+                        <div class="responsibility-item">Data accuracy, completeness, and preparation</div>
+                        <div class="responsibility-item">User adoption and organizational change</div>
+                        <div class="responsibility-item">Infrastructure readiness and system access</div>
+                        <div class="responsibility-item">Timely decision making and approvals</div>
+                        <div class="responsibility-item">Testing participation and feedback provision</div>
+                        <div class="responsibility-item">Post-implementation system administration</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">SHARED RISKS</div>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li>External system integration complexities</li>
+                    <li>Third-party software limitations or changes</li>
+                    <li>Unforeseen technical discoveries during implementation</li>
+                    <li>Force majeure events affecting project execution</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <div class="subsection-title">LIABILITY LIMITATIONS (UAE Law Compliant)</div>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li>Total liability limited to total contract value</li>
+                    <li>No liability for indirect, consequential, or punitive damages</li>
+                    <li>Exceptions for gross negligence, willful misconduct, or IP infringement</li>
+                    <li>Both parties maintain appropriate professional insurance</li>
+                    <li>Liability limitations don't affect indemnification obligations</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">FORCE MAJEURE</div>
+                <p style="margin-bottom: 10px; font-size: 13px;">Neither party liable for delays due to circumstances beyond reasonable control:</p>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li>Natural disasters, pandemics, government actions</li>
+                    <li>Infrastructure failures, cyber attacks, utility outages</li>
+                    <li>Strikes, labor disputes, or material shortages</li>
+                    <li>Changes in applicable laws or regulations</li>
+                </ul>
+            </div>
+
+            <div class="section-divider">
+                <span class="section-title">Dispute Resolution</span>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">DISPUTE RESOLUTION PROCESS (UAE Jurisdiction)</div>
+                
+                <div class="phase-box">
+                    <div class="phase-title">STEP 1: DIRECT NEGOTIATION (30 Days)</div>
+                    <ul style="margin-left: 20px; font-size: 13px;">
+                        <li>Good faith discussions between project managers</li>
+                        <li>Escalation to senior management if needed</li>
+                        <li>Documentation of issues and proposed solutions</li>
+                        <li>Attempt to reach mutually acceptable resolution</li>
+                    </ul>
+                </div>
+
+                <div class="phase-box">
+                    <div class="phase-title">STEP 2: MEDIATION (30 Days)</div>
+                    <ul style="margin-left: 20px; font-size: 13px;">
+                        <li>Non-binding mediation through Dubai International Arbitration Centre (DIAC)</li>
+                        <li>Mutually agreed mediator or DIAC appointment</li>
+                        <li>Shared mediation costs</li>
+                        <li>Confidential proceedings</li>
+                    </ul>
+                </div>
+
+                <div class="phase-box">
+                    <div class="phase-title">STEP 3: ARBITRATION (Final Resolution)</div>
+                    <ul style="margin-left: 20px; font-size: 13px;">
+                        <li>Binding arbitration under DIAC Arbitration Rules</li>
+                        <li>Single arbitrator unless parties agree otherwise</li>
+                        <li>Proceedings in English language</li>
+                        <li>Seat of arbitration: Dubai, UAE</li>
+                        <li>Applicable law: UAE Federal Law and Dubai Local Law</li>
+                        <li>Arbitrator's decision final and enforceable</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <div class="subsection-title">LEGAL FRAMEWORK</div>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li>Governed by UAE Federal Law No. 5 of 1985 (Civil Code)</li>
+                    <li>Dubai Courts jurisdiction for enforcement</li>
+                    <li>UAE Commercial Companies Law applicable</li>
+                    <li>International arbitration treaties honored</li>
+                    <li>No class action participation</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <div class="subsection-title">INTERIM RELIEF</div>
+                <p style="margin-bottom: 10px; font-size: 13px;">Either party may seek urgent interim relief from Dubai Courts for:</p>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li>Intellectual property protection</li>
+                    <li>Confidentiality enforcement</li>
+                    <li>Payment collection</li>
+                    <li>Prevention of irreparable harm</li>
+                </ul>
+            </div>
+
+            <div class="section-divider">
+                <span class="section-title">Summary</span>
+            </div>
+
+            <div class="summary-box">
+                <h3>PROJECT OVERVIEW</h3>
+                <div class="summary-item"><strong>Client:</strong> <span class="editable-field">[CLIENT_NAME]</span></div>
+                <div class="summary-item"><strong>Service:</strong> <span class="editable-field">[PROJECT_TYPE]</span></div>
+                <div class="summary-item"><strong>Duration:</strong> <span class="editable-field">[PROJECT_DURATION]</span></div>
+                <div class="summary-item"><strong>Investment:</strong> <span class="editable-field">[TOTAL_AMOUNT]</span> AED</div>
+                <div class="summary-item"><strong>Payment:</strong> <span class="editable-field">[PAYMENT_STRUCTURE]</span></div>
+            </div>
+
+            <div class="info-grid">
+                <div class="subsection">
+                    <div class="subsection-title">PROVIDER COMMITMENTS</div>
+                    <div class="responsibility-list">
+                        <div class="responsibility-item">Professional implementation according to specifications</div>
+                        <div class="responsibility-item">Qualified team with appropriate expertise</div>
+                        <div class="responsibility-item">Regular communication and progress reporting</div>
+                        <div class="responsibility-item">Quality assurance and testing procedures</div>
+                        <div class="responsibility-item">90-day warranty on implementation</div>
+                        <div class="responsibility-item">Confidentiality and data security compliance</div>
+                        <div class="responsibility-item">UAE law compliance in all activities</div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">CLIENT COMMITMENTS</div>
+                    <div class="responsibility-list">
+                        <div class="responsibility-item">Timely payments according to agreed schedule</div>
+                        <div class="responsibility-item">Dedicated project stakeholder with authority</div>
+                        <div class="responsibility-item">Prompt feedback and decision making</div>
+                        <div class="responsibility-item">Active participation in testing and training</div>
+                        <div class="responsibility-item">Data provision and system access as needed</div>
+                        <div class="responsibility-item">Change management and user adoption support</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <div class="subsection-title">MUTUAL UNDERSTANDING</div>
+                <p style="font-size: 13px; margin-bottom: 10px;">Both parties acknowledge:</p>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li>Project success depends on mutual cooperation</li>
+                    <li>Timeline assumes client dependencies are met</li>
+                    <li>Scope changes require written approval and may affect cost/timeline</li>
+                    <li>This agreement represents complete understanding between parties</li>
+                    <li>Disputes will be resolved through UAE legal framework</li>
+                    <li>Confidentiality obligations survive agreement termination</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <div class="subsection-title">RISK MITIGATION</div>
+                <ul style="margin-left: 20px; font-size: 13px;">
+                    <li>Clear scope definition prevents misunderstandings</li>
+                    <li>Defined payment structure protects both parties</li>
+                    <li>Regular communication ensures alignment</li>
+                    <li>Warranty period provides implementation assurance</li>
+                    <li>Dispute resolution process offers fair conflict resolution</li>
+                </ul>
+            </div>
+
+            <!-- Footer - Page 4 -->
+            <div class="footer">
+                <div class="footer-content">
+                    <div class="footer-left" contenteditable="true">Scholarix IT Global Consultants | info@scholarixglobal.com | +971 54 342 3029</div>
+                    <div class="footer-center page-number" contenteditable="true">Page 4 of 5</div>
+                    <div class="footer-right" contenteditable="true">SLA/2025</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 5 - SIGNATURES -->
+        <div class="page page-break">
+            <div class="section-divider">
+                <span class="section-title">Signatures</span>
+            </div>
+
+            <p style="text-align: center; margin-bottom: 30px; font-size: 14px;">
+                By signing below, both parties acknowledge they have read, understood, and agree to be bound by all terms and conditions of this Service Level Agreement.
+            </p>
+
+            <div class="signature-grid">
+                <div class="signature-block">
+                    <h4>CLIENT ACCEPTANCE</h4>
+                    <div style="margin-top: 20px;">
+                        <div class="signature-label" style="font-weight: bold; margin-bottom: 5px;">
+                            <span class="editable-field">[CLIENT_COMPANY_NAME]</span>
+                        </div>
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Signature</div>
+                        
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Print Name</div>
+                        
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Title</div>
+                        
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Date</div>
+                        
+                        <div style="margin-top: 20px; text-align: center;">
+                            <div class="signature-label">Company Seal:</div>
+                            <div style="border: 2px dashed #ccc; height: 80px; margin-top: 10px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="signature-block">
+                    <h4>SERVICE PROVIDER</h4>
+                    <div style="margin-top: 20px;">
+                        <div class="signature-label" style="font-weight: bold; margin-bottom: 5px;">
+                            SCHOLARIX GLOBAL CONSULTANTS
+                        </div>
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Signature</div>
+                        
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Print Name</div>
+                        
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Title</div>
+                        
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Date</div>
+                        
+                        <div style="margin-top: 20px; text-align: center;">
+                            <div class="signature-label">Company Seal:</div>
+                            <div style="border: 2px dashed #ccc; height: 80px; margin-top: 10px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection" style="margin-top: 40px;">
+                <div class="subsection-title">WITNESS (Optional)</div>
+                <div class="signature-grid">
+                    <div style="border: 1px solid #ddd; padding: 15px;">
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Signature</div>
+                        
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Print Name</div>
+                        
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Date</div>
+                    </div>
+
+                    <div style="border: 1px solid #ddd; padding: 15px;">
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Signature</div>
+                        
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Print Name</div>
+                        
+                        <div class="signature-line"></div>
+                        <div class="signature-label">Date</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-divider" style="margin-top: 50px;">
+                <span class="section-title">Document Control</span>
+            </div>
+
+            <table style="margin-top: 20px;">
+                <tbody>
+                    <tr>
+                        <td style="font-weight: bold; width: 40%;">Document Title:</td>
+                        <td>Service Level Agreement Template</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Version:</td>
+                        <td>1.0</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Created By:</td>
+                        <td>Scholarix Global Consultants</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Date:</td>
+                        <td><span class="editable-field">[CURRENT_DATE]</span></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Review Date:</td>
+                        <td><span class="editable-field">[REVIEW_DATE]</span></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Approved By:</td>
+                        <td><span class="editable-field">[APPROVER_NAME]</span></td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Classification:</td>
+                        <td style="color: #dc3545; font-weight: bold;">CONFIDENTIAL</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="warning-box" style="margin-top: 20px;">
+                <p style="text-align: center; font-size: 13px;">
+                    <strong>This document contains proprietary and confidential information.</strong><br>
+                    Unauthorized reproduction or distribution is prohibited.
+                </p>
+            </div>
+
+            <div class="footer">
+                <div class="footer-info" style="font-weight: bold; font-size: 13px; margin-bottom: 10px;">
+                    © 2025 SCHOLARIX GLOBAL CONSULTANTS. All rights reserved.
+                </div>
+                <div class="footer-info">
+                    <strong>Contact:</strong> info@scholarixglobal.com | +971 54 342 3029
+                </div>
+                <div class="footer-info">
+                    <strong>Website:</strong> www.scholarixglobal.com
+                </div>
+            </div>
+
+            <!-- Footer - Page 5 -->
+            <div class="footer">
+                <div class="footer-content">
+                    <div class="footer-left" contenteditable="true">Scholarix IT Global Consultants | info@scholarixglobal.com | +971 54 342 3029</div>
+                    <div class="footer-center page-number" contenteditable="true">Page 5 of 5</div>
+                    <div class="footer-right" contenteditable="true">SLA/2025</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced interactive functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('SLA Document loaded successfully');
+            
+            // Load saved data
+            loadDocument();
+            
+            // Make editable fields more user-friendly
+            const editableFields = document.querySelectorAll('.editable-field[contenteditable="true"]');
+            
+            editableFields.forEach(field => {
+                // Clear placeholder text on focus
+                field.addEventListener('focus', function() {
+                    if (this.textContent === 'Click to edit') {
+                        this.textContent = '';
+                        this.style.color = '#333';
+                    }
+                    this.style.borderColor = '#007acc';
+                    this.style.boxShadow = '0 0 5px rgba(0, 122, 204, 0.3)';
+                });
+                
+                // Restore placeholder if empty on blur
+                field.addEventListener('blur', function() {
+                    if (this.textContent.trim() === '') {
+                        this.textContent = 'Click to edit';
+                        this.style.color = '#999';
+                    }
+                    this.style.borderColor = '#ffa500';
+                    this.style.boxShadow = 'none';
+                });
+                
+                // Auto-save on input
+                field.addEventListener('input', function() {
+                    saveDocument();
+                });
+            });
+            
+            // Auto-calculate tier based on discount percentage
+            const discountFields = document.querySelectorAll('.editable-field[contenteditable="true"]');
+            discountFields.forEach(field => {
+                field.addEventListener('input', function() {
+                    if (this.textContent.includes('%')) {
+                        const discount = parseFloat(this.textContent.replace('%', ''));
+                        const tierField = document.querySelector('.editable-field[contenteditable="true"][placeholder*="PREMIUM"]');
+                        
+                        if (tierField && !isNaN(discount)) {
+                            if (discount <= 10) tierField.textContent = 'PREMIUM TIER';
+                            else if (discount <= 30) tierField.textContent = 'STANDARD TIER';
+                            else tierField.textContent = 'ESSENTIAL TIER';
+                        }
+                    }
+                });
+            });
+
+            // Add keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey || e.metaKey) {
+                    switch(e.key) {
+                        case 's':
+                            e.preventDefault();
+                            saveDocument();
+                            showNotification('Document saved successfully!', 'success');
+                            break;
+                        case 'p':
+                            e.preventDefault();
+                            printToPDF();
+                            break;
+                    }
+                }
+            });
+        });
+
+        // Save document to localStorage
+        function saveDocument() {
+            const editableFields = document.querySelectorAll('.editable-field[contenteditable="true"]');
+            const documentData = {};
+            
+            editableFields.forEach((field, index) => {
+                documentData[`field_${index}`] = field.textContent;
+            });
+            
+            localStorage.setItem('sla_document_data', JSON.stringify(documentData));
+            localStorage.setItem('sla_document_timestamp', new Date().toISOString());
+        }
+
+        // Load document from localStorage
+        function loadDocument() {
+            const savedData = localStorage.getItem('sla_document_data');
+            if (savedData) {
+                try {
+                    const documentData = JSON.parse(savedData);
+                    const editableFields = document.querySelectorAll('.editable-field[contenteditable="true"]');
+                    
+                    editableFields.forEach((field, index) => {
+                        if (documentData[`field_${index}`] && documentData[`field_${index}`] !== 'Click to edit') {
+                            field.textContent = documentData[`field_${index}`];
+                            field.style.color = '#333';
+                        }
+                    });
+                    
+                    const timestamp = localStorage.getItem('sla_document_timestamp');
+                    if (timestamp) {
+                        console.log('Document loaded from:', new Date(timestamp).toLocaleString());
+                    }
+                } catch (e) {
+                    console.error('Error loading saved document:', e);
+                }
+            }
+        }
+
+        // Print to PDF functionality
+        function printToPDF() {
+            // Prepare document for printing
+            preparePrintView();
+            
+            // Trigger print dialog
+            window.print();
+            
+            // Restore normal view after print dialog
+            setTimeout(() => {
+                restoreNormalView();
+            }, 1000);
+            
+            showNotification('Print dialog opened. Choose "Save as PDF" to save as PDF file.', 'info');
+        }
+
+        // Prepare document for optimal printing
+        function preparePrintView() {
+            // Hide toolbar
+            const toolbar = document.querySelector('.toolbar');
+            if (toolbar) {
+                toolbar.style.display = 'none';
+            }
+
+            // Ensure all editable fields show their content properly
+            const editableFields = document.querySelectorAll('.editable-field[contenteditable="true"]');
+            editableFields.forEach(field => {
+                if (field.textContent.trim() === '' || field.textContent === 'Click to edit') {
+                    field.textContent = '_______________';
+                    field.setAttribute('data-was-empty', 'true');
+                }
+                // Ensure field is visible in print
+                field.style.display = 'inline-block';
+                field.style.minHeight = '18px';
+            });
+
+            // Add print-ready class to body
+            document.body.classList.add('print-ready');
+        }
+
+        // Restore normal view after printing
+        function restoreNormalView() {
+            // Show toolbar
+            const toolbar = document.querySelector('.toolbar');
+            if (toolbar) {
+                toolbar.style.display = 'flex';
+            }
+
+            // Restore empty fields
+            const editableFields = document.querySelectorAll('.editable-field[data-was-empty="true"]');
+            editableFields.forEach(field => {
+                field.textContent = 'Click to edit';
+                field.style.color = '#999';
+                field.removeAttribute('data-was-empty');
+            });
+
+            // Remove print-ready class
+            document.body.classList.remove('print-ready');
+        }
+
+        // Export document
+        function exportDocument() {
+            const timestamp = new Date().toISOString().split('T')[0];
+            const documentTitle = 'SLA_Document_' + timestamp;
+            
+            // Create a clean version for export
+            const container = document.querySelector('.container').cloneNode(true);
+            const exportContent = `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <title>${documentTitle}</title>
+                    <style>${document.querySelector('style').textContent}</style>
+                </head>
+                <body style="padding: 0; margin: 0;">
+                    ${container.outerHTML}
+                </body>
+                </html>
+            `;
+            
+            const blob = new Blob([exportContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = documentTitle + '.html';
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showNotification('Document exported successfully!', 'success');
+        }
+
+        // Clear document
+        function clearDocument() {
+            if (confirm('Are you sure you want to clear all content? This action cannot be undone.')) {
+                const editableFields = document.querySelectorAll('.editable-field[contenteditable="true"]');
+                editableFields.forEach(field => {
+                    field.textContent = 'Click to edit';
+                    field.style.color = '#999';
+                });
+                
+                localStorage.removeItem('sla_document_data');
+                localStorage.removeItem('sla_document_timestamp');
+                
+                showNotification('Document cleared successfully!', 'success');
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 15px 20px;
+                border-radius: 5px;
+                color: white;
+                font-weight: bold;
+                z-index: 10000;
+                opacity: 0;
+                transform: translateY(-20px);
+                transition: all 0.3s ease;
+                max-width: 300px;
+                word-wrap: break-word;
+            `;
+            
+            switch(type) {
+                case 'success':
+                    notification.style.background = '#27ae60';
+                    break;
+                case 'error':
+                    notification.style.background = '#e74c3c';
+                    break;
+                case 'warning':
+                    notification.style.background = '#f39c12';
+                    break;
+                default:
+                    notification.style.background = '#3498db';
+            }
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateY(0)';
+            }, 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateY(-20px)';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Test responsiveness and print functionality
+        function testResponsiveness() {
+            const tests = [];
+            
+            // Test viewport meta tag
+            const viewport = document.querySelector('meta[name="viewport"]');
+            tests.push({
+                name: 'Viewport Meta Tag',
+                passed: viewport && viewport.content.includes('width=device-width'),
+                message: viewport ? 'Viewport meta tag found' : 'Viewport meta tag missing'
+            });
+            
+            // Test responsive breakpoints
+            const container = document.querySelector('.container');
+            tests.push({
+                name: 'Container Responsiveness',
+                passed: window.getComputedStyle(container).maxWidth !== 'none',
+                message: 'Container has responsive max-width'
+            });
+            
+            // Test editable fields
+            const editableFields = document.querySelectorAll('.editable-field[contenteditable="true"]');
+            tests.push({
+                name: 'Editable Fields',
+                passed: editableFields.length > 0,
+                message: `Found ${editableFields.length} editable fields`
+            });
+            
+            // Test print functionality
+            tests.push({
+                name: 'Print Function',
+                passed: typeof printToPDF === 'function',
+                message: 'Print function is available'
+            });
+            
+            // Display results
+            let results = 'Responsiveness & Print Test Results:\n\n';
+            tests.forEach(test => {
+                results += `${test.passed ? '✅' : '❌'} ${test.name}: ${test.message}\n`;
+            });
+            
+            console.log(results);
+            showNotification('Test completed. Check console for details.', 'info');
+        }
+
+        // Add test button (for development)
+        function addTestButton() {
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                const testBtn = document.createElement('button');
+                testBtn.textContent = '🧪 Test';
+                testBtn.onclick = testResponsiveness;
+                testBtn.title = 'Test Responsiveness';
+                testBtn.style.cssText = 'background: #9b59b6; color: white; border: none; padding: 10px 16px; border-radius: 5px; cursor: pointer; font-size: 12px; font-weight: 600;';
+                document.querySelector('.toolbar').appendChild(testBtn);
+            }
+        }
+
+        // Enhanced window resize handler for responsive testing
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(function() {
+                const width = window.innerWidth;
+                let breakpoint = 'Desktop';
+                if (width <= 480) breakpoint = 'Mobile Small';
+                else if (width <= 768) breakpoint = 'Mobile';
+                else if (width <= 1024) breakpoint = 'Tablet';
+                
+                console.log(`Screen size: ${width}px - Breakpoint: ${breakpoint}`);
+            }, 250);
+        });
+
+        // Legacy functions for backward compatibility
+        function printDocument() {
+            printToPDF();
+        }
+        
+        function exportToPDF() {
+            printToPDF();
+        }
+
+        // Initialize test functionality on load
+        document.addEventListener('DOMContentLoaded', function() {
+            addTestButton();
+        });
+    </script>
+</body>
+</html>

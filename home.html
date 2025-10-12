@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGC-IT - Document Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        /* Navigation Bar Styles */
+        .navbar {
+            background: rgba(15, 40, 71, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-brand {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: rgba(74, 158, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+            color: white;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #a0c4ff;
+            margin-bottom: 50px;
+        }
+
+        /* Document Cards */
+        .document-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .doc-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(74, 158, 255, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .doc-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(74, 158, 255, 0.3);
+            background: rgba(74, 158, 255, 0.1);
+            border-color: #4a9eff;
+        }
+
+        .doc-card i {
+            font-size: 60px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .doc-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .doc-card p {
+            color: #a0c4ff;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #a0c4ff;
+            border-top: 1px solid rgba(74, 158, 255, 0.2);
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-briefcase"></i>
+                <span>SGC-IT</span>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link active">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="index-simple.html" class="nav-link">
+                        <i class="fas fa-id-card"></i>
+                        <span>Business Card</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="editable-document.html" class="nav-link">
+                        <i class="fas fa-file-edit"></i>
+                        <span>Editable Document</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="SLA TEMPLATE.html" class="nav-link">
+                        <i class="fas fa-file-contract"></i>
+                        <span>SLA Template</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="test.html" class="nav-link">
+                        <i class="fas fa-flask"></i>
+                        <span>Test Page</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Welcome to SGC-IT Document Hub</h1>
+        <p>Professional Document Templates & Tools</p>
+    </div>
+
+    <!-- Document Grid -->
+    <div class="document-grid">
+        <a href="index-simple.html" class="doc-card">
+            <i class="fas fa-id-card"></i>
+            <h3>Business Card Designer</h3>
+            <p>Create professional business cards with QR codes and social media integration</p>
+        </a>
+
+        <a href="editable-document.html" class="doc-card">
+            <i class="fas fa-file-edit"></i>
+            <h3>Editable Document</h3>
+            <p>Create and edit custom documents with real-time preview</p>
+        </a>
+
+        <a href="SLA TEMPLATE.html" class="doc-card">
+            <i class="fas fa-file-contract"></i>
+            <h3>SLA Template</h3>
+            <p>Service Level Agreement template for professional contracts</p>
+        </a>
+
+        <a href="test.html" class="doc-card">
+            <i class="fas fa-flask"></i>
+            <h3>Test Page</h3>
+            <p>Testing and development environment</p>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 SGC-IT. All rights reserved.</p>
+        <p>Professional Document Solutions</p>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

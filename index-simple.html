@@ -15,6 +15,113 @@
             font-family: 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
             min-height: 100vh;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigation Bar Styles */
+        .navbar {
+            background: rgba(15, 40, 71, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-brand {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: rgba(74, 158, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+            color: white;
+        }
+
+        .nav-link i {
+            font-size: 16px;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-link {
+                width: 100%;
+            }
+        }
+
+        .main-content {
+            flex: 1;
             padding: 40px 20px;
             display: flex;
             flex-direction: column;
@@ -31,6 +138,7 @@
             font-size: 36px;
             background: linear-gradient(135deg, #4a9eff, #00d4ff);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -115,6 +223,11 @@
             color: #00d4ff;
             transform: scale(1.2);
         }
+        .person-title {
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #b8d4f1;
+        }
         .back-company { font-size: 38px; font-weight: 700; }
 
         .control-panel {
@@ -167,18 +280,64 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Scholarix Business Card Designer</h1>
-        <p>Professional Business Card Template</p>
-    </div>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-briefcase"></i> SGC-IT
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="index-simple.html" class="nav-link active">
+                        <i class="fas fa-id-card"></i>
+                        <span>Business Card</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="editable-document.html" class="nav-link">
+                        <i class="fas fa-file-edit"></i>
+                        <span>Editable Document</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="SLA TEMPLATE.html" class="nav-link">
+                        <i class="fas fa-file-contract"></i>
+                        <span>SLA Template</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="test.html" class="nav-link">
+                        <i class="fas fa-flask"></i>
+                        <span>Test Page</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-    <div class="cards-wrapper">
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <h1>Scholarix Business Card Designer</h1>
+            <p>Professional Business Card Template</p>
+        </div>
+
+        <div class="cards-wrapper">
         <div class="card-preview">
             <div class="business-card-front" id="card-front">
                 <div class="front-left">
                     <div class="company-name" id="company-name">Scholarix</div>
                     <div class="person-name" id="person-name">John Anderson</div>
-                    <div id="person-title" style="margin-bottom: 15px;">Senior AI Consultant</div>
+                    <div class="person-title" id="person-title">Senior AI Consultant</div>
                     
                     <div class="contact-info">
                         <div class="contact-item">
@@ -196,10 +355,10 @@
                     </div>
                     
                     <div class="social-icons">
-                        <a href="#" id="linkedin-link" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" id="twitter-link" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="#" id="facebook-link" target="_blank"><i class="fab fa-facebook"></i></a>
-                        <a href="#" id="instagram-link" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#" id="linkedin-link" target="_blank" title="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" id="twitter-link" target="_blank" title="Twitter Profile"><i class="fab fa-twitter"></i></a>
+                        <a href="#" id="facebook-link" target="_blank" title="Facebook Profile"><i class="fab fa-facebook"></i></a>
+                        <a href="#" id="instagram-link" target="_blank" title="Instagram Profile"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="front-right">
@@ -327,7 +486,13 @@ END:VCARD`;
             pdf.save('scholarix-business-card.pdf');
         }
 
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
         window.onload = generateQR;
     </script>
+    </div>
 </body>
 </html>
