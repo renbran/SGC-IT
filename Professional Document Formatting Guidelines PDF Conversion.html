@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" style=""><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Level Agreement - Scholarix IT Global Consultants</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Times+New+Roman:wght@400;700&amp;family=Arial:wght@400;700&amp;display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --ocean-deep-darkest: #001b2a;
+        --ocean-deep-dark: #0a2b3d;
+        --ocean-primary: #1b365d;
+        --ocean-medium: #2c5282;
+        --ocean-bright: #00a8e8;
+        --ocean-light: #4a90e2;
+        --ocean-surface: #e8f4fd;
+        --ocean-foam: #c0e7ff;
+        --ocean-accent: #0077b6;
+      }
+
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 32px 80px;
+        position: relative;
+        box-sizing: border-box;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 12pt;
+        line-height: 1.5;
+        color: #000;
+        background: #fff;
+      }
+
+      .header {
+        text-align: center;
+        border-bottom: 3px solid var(--ocean-primary);
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        background: linear-gradient(135deg, var(--ocean-surface), #f8fbff);
+        padding: 20px;
+        border-radius: 8px;
+      }
+
+      .company-logo {
+        font-size: 24pt;
+        font-weight: bold;
+        color: var(--ocean-primary);
+        margin-bottom: 10px;
+      }
+
+      .company-info {
+        font-size: 10pt;
+        color: var(--ocean-medium);
+        margin-bottom: 20px;
+      }
+
+      .document-title {
+        font-size: 20pt;
+        font-weight: bold;
+        text-align: center;
+        margin: 30px 0;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--ocean-primary);
+        background: var(--ocean-surface);
+        padding: 15px;
+        border: 2px solid var(--ocean-bright);
+      }
+
+      .section-header {
+        font-size: 16pt;
+        font-weight: bold;
+        color: var(--ocean-primary);
+        margin-top: 35px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        border-bottom: 2px solid var(--ocean-bright);
+        padding-bottom: 8px;
+      }
+
+      .subsection-header {
+        font-size: 14pt;
+        font-weight: bold;
+        color: var(--ocean-medium);
+        margin-top: 25px;
+        margin-bottom: 15px;
+        border-left: 4px solid var(--ocean-bright);
+        padding-left: 12px;
+      }
+
+      .info-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 25px;
+      }
+
+      .info-table td,
+      .info-table th {
+        border: 1px solid var(--ocean-light);
+        padding: 12px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .info-table th {
+        background-color: var(--ocean-surface);
+        font-weight: bold;
+        color: var(--ocean-primary);
+      }
+
+      .tier-box {
+        border: 2px solid var(--ocean-bright);
+        padding: 20px;
+        margin: 15px 0;
+        background-color: var(--ocean-surface);
+        border-radius: 8px;
+      }
+
+      .tier-title {
+        font-weight: bold;
+        color: var(--ocean-primary);
+        margin-bottom: 10px;
+        font-size: 14pt;
+      }
+
+      .phase-box {
+        border-left: 4px solid var(--ocean-bright);
+        padding-left: 20px;
+        margin: 20px 0;
+        background: var(--ocean-surface);
+        padding: 15px 15px 15px 25px;
+        border-radius: 0 8px 8px 0;
+      }
+
+      .phase-title {
+        font-weight: bold;
+        color: var(--ocean-primary);
+        margin-bottom: 10px;
+        font-size: 14pt;
+      }
+
+      .warning-box {
+        background-color: #fff3cd;
+        border: 2px solid #ffc107;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+      }
+
+      .info-box {
+        background-color: var(--ocean-surface);
+        border: 2px solid var(--ocean-bright);
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+      }
+
+      .highlight-box {
+        background-color: #f8f9fa;
+        border: 2px solid var(--ocean-medium);
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 8px;
+      }
+
+      .two-column {
+        display: flex;
+        gap: 30px;
+        margin: 20px 0;
+      }
+
+      .column {
+        flex: 1;
+      }
+
+      .signature-block {
+        border: 2px solid var(--ocean-primary);
+        padding: 30px;
+        margin: 20px 0;
+        background: var(--ocean-surface);
+        text-align: center;
+      }
+
+      .signature-line {
+        border-bottom: 2px solid #000;
+        margin: 30px 0 10px 0;
+        height: 40px;
+      }
+
+      .editable-field {
+        background: #fff;
+        border: 1px solid var(--ocean-light);
+        padding: 4px 8px;
+        display: inline-block;
+        min-width: 150px;
+        margin: 2px;
+      }
+
+      .checkbox-item {
+        margin: 8px 0;
+        font-size: 13pt;
+      }
+
+      .payment-table,
+      .rates-table,
+      .response-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+
+      .payment-table th,
+      .payment-table td,
+      .rates-table th,
+      .rates-table td,
+      .response-table th,
+      .response-table td {
+        border: 1px solid var(--ocean-light);
+        padding: 12px;
+        text-align: left;
+      }
+
+      .payment-table th,
+      .rates-table th,
+      .response-table th {
+        background-color: var(--ocean-primary);
+        color: white;
+        font-weight: bold;
+      }
+
+      .step-box {
+        background: var(--ocean-surface);
+        border-left: 4px solid var(--ocean-bright);
+        padding: 15px;
+        margin: 15px 0;
+      }
+
+      .step-title {
+        font-weight: bold;
+        color: var(--ocean-primary);
+        margin-bottom: 10px;
+      }
+
+      .footer {
+        margin-top: 50px;
+        text-align: center;
+        border-top: 2px solid var(--ocean-primary);
+        padding-top: 20px;
+        font-size: 10pt;
+        color: var(--ocean-medium);
+        background: var(--ocean-surface);
+        padding: 20px;
+      }
+
+      .page-break {
+        page-break-before: always;
+        margin-top: 50px;
+        padding-top: 20px;
+      }
+
+      p {
+        text-align: justify;
+        margin-bottom: 12px;
+      }
+
+      ul,
+      ol {
+        margin-bottom: 15px;
+        padding-left: 25px;
+      }
+
+      li {
+        margin-bottom: 8px;
+        line-height: 1.4;
+      }
+
+      .toolbar {
+        position: sticky;
+        top: 0;
+        background: var(--ocean-primary);
+        color: white;
+        padding: 10px 20px;
+        margin: -32px -80px 20px -80px;
+        z-index: 1000;
+        text-align: center;
+        font-size: 14pt;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body style="">
+    <div class="toolbar">SCHOLARIX IT GLOBAL CONSULTANTS - SERVICE LEVEL AGREEMENT TEMPLATE</div>
+
+    <div class="header">
+      <div class="company-logo">SCHOLARIX</div>
+      <div style="font-size: 14pt; color: var(--ocean-medium); margin-bottom: 10px">IT GLOBAL CONSULTANTS</div>
+      <div class="company-info">
+        Connaught Palace Hotel Dubai<br>
+        Abu Baker Al Siddique St, Entrance 1, 5th level #501 - Deira - Dubai, UAE<br>
+        📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="31585f575e714252595e5d50435849565d5e53505d1f525e5c">[email&#160;protected]</a> | 📱 +971 54 342 3029 | 🌐 www.scholarixglobal.com
+      </div>
+    </div>
+
+    <h1 class="document-title">SERVICE LEVEL AGREEMENT</h1>
+
+    <div class="two-column">
+      <div class="column">
+        <h2 class="section-header">Customer Information</h2>
+        <table class="info-table">
+          <tbody><tr>
+            <th>Company Name:</th>
+            <td><span class="editable-field">[CLIENT_COMPANY_NAME]</span></td>
+          </tr>
+          <tr>
+            <th>Contact Person:</th>
+            <td><span class="editable-field">[CLIENT_CONTACT_NAME]</span></td>
+          </tr>
+          <tr>
+            <th>Position:</th>
+            <td><span class="editable-field">[CLIENT_POSITION]</span></td>
+          </tr>
+          <tr>
+            <th>Address:</th>
+            <td><span class="editable-field">[CLIENT_ADDRESS]</span></td>
+          </tr>
+          <tr>
+            <th>Email:</th>
+            <td><span class="editable-field">[CLIENT_EMAIL]</span></td>
+          </tr>
+          <tr>
+            <th>Phone:</th>
+            <td><span class="editable-field">[CLIENT_PHONE]</span></td>
+          </tr>
+        </tbody></table>
+      </div>
+
+      <div class="column">
+        <h2 class="section-header">Service Provider</h2>
+        <table class="info-table">
+          <tbody><tr>
+            <th>Company:</th>
+            <td>Scholarix Global Consultants</td>
+          </tr>
+          <tr>
+            <th>Contact Person:</th>
+            <td><span class="editable-field">[PROVIDER_CONTACT_NAME]</span></td>
+          </tr>
+          <tr>
+            <th>Position:</th>
+            <td><span class="editable-field">[PROVIDER_POSITION]</span></td>
+          </tr>
+          <tr>
+            <th>Address:</th>
+            <td>
+              Connaught Palace Hotel Dubai<br>Abu Baker Al Siddique St, Entrance 1, 5th level #501 - Deira - Dubai,
+              UAE
+            </td>
+          </tr>
+          <tr>
+            <th>Email:</th>
+            <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="177e7971785764747f787b76657e6f707b7875767b3974787a">[email&#160;protected]</a></td>
+          </tr>
+          <tr>
+            <th>Phone:</th>
+            <td>+971 54 342 3029</td>
+          </tr>
+        </tbody></table>
+      </div>
+    </div>
+
+    <h2 class="section-header">Date of Engagement</h2>
+    <table class="info-table">
+      <tbody><tr>
+        <th>Agreement Date:</th>
+        <td><span class="editable-field">[AGREEMENT_DATE]</span></td>
+        <th>Effective Date:</th>
+        <td><span class="editable-field">[EFFECTIVE_DATE]</span></td>
+      </tr>
+      <tr>
+        <th>Project Duration:</th>
+        <td><span class="editable-field">[PROJECT_DURATION]</span></td>
+        <th>Expected Completion:</th>
+        <td><span class="editable-field">[COMPLETION_DATE]</span></td>
+      </tr>
+      <tr>
+        <th>Agreement ID:</th>
+        <td colspan="3"><span class="editable-field">SLA/[PROJECT_CODE]/[YEAR]</span></td>
+      </tr>
+    </tbody></table>
+
+    <h2 class="section-header">Scope of Work &amp; Service Tiers</h2>
+
+    <h3 class="subsection-header">Pricing Tiers &amp; Discount Adjustment Policy</h3>
+    <p><strong>Service levels and deliverables are directly tied to investment level:</strong></p>
+
+    <div class="tier-box">
+      <div class="tier-title">Premium Tier (90-100% of quoted price):</div>
+      Full scope, priority support, extended warranty
+    </div>
+
+    <div class="tier-box">
+      <div class="tier-title">Standard Tier (70-89% of quoted price):</div>
+      Core deliverables, standard timeline, basic warranty
+    </div>
+
+    <div class="tier-box">
+      <div class="tier-title">Essential Tier (50-69% of quoted price):</div>
+      Minimum viable scope, extended timeline, limited support
+    </div>
+
+    <div class="tier-box">
+      <div class="tier-title">Below 50%:</div>
+      Separate negotiation required with significant scope reduction
+    </div>
+
+    <h3 class="subsection-header">Project Type</h3>
+    <div class="checkbox-item">☐ Odoo ERP Implementation (Complete)</div>
+    <div class="checkbox-item">☐ Software Implementation &amp; Integration</div>
+    <div class="checkbox-item">☐ AI Automation Solutions</div>
+    <div class="checkbox-item">☐ Custom Software Development</div>
+    <div class="checkbox-item">☐ IT Consulting &amp; Advisory</div>
+    <div class="checkbox-item">☐ Other: <span class="editable-field">[SPECIFY]</span></div>
+
+    <h3 class="subsection-header">Premium Tier Services (90-100% Investment)</h3>
+    <ul>
+      <li>Comprehensive system analysis and requirements gathering</li>
+      <li>Software installation, configuration, and optimization</li>
+      <li>Complete data migration with validation and backup</li>
+      <li>
+        Comprehensive user training (<span class="editable-field">[X]</span> hours for
+        <span class="editable-field">[X]</span> users)
+      </li>
+      <li>Extensive testing, quality assurance, and performance optimization</li>
+      <li>24/7 go-live support (<span class="editable-field">[X]</span> days)</li>
+      <li>Extended post-implementation support (<span class="editable-field">[X]</span> days)</li>
+      <li>Complete documentation, knowledge transfer, and training materials</li>
+      <li>Custom reports, dashboards, and advanced analytics</li>
+      <li>Advanced workflow configuration and automation</li>
+    </ul>
+
+    <h3 class="subsection-header">Standard Tier Services (70-89% Investment)</h3>
+    <ul>
+      <li>System analysis and basic requirements gathering</li>
+      <li>Software installation and configuration</li>
+      <li>Data migration from existing systems</li>
+      <li>
+        User training (<span class="editable-field">[X]</span> hours for <span class="editable-field">[X]</span> users)
+      </li>
+      <li>Testing and quality assurance</li>
+      <li>Go-live support (<span class="editable-field">[X]</span> days)</li>
+      <li>Post-implementation support (<span class="editable-field">[X]</span> days)</li>
+      <li>Basic documentation and knowledge transfer</li>
+      <li>Standard reports and dashboards</li>
+      <li>Basic workflow configuration</li>
+    </ul>
+
+    <h3 class="subsection-header">Essential Tier Services (50-69% Investment)</h3>
+    <ul>
+      <li>Basic system analysis (client provides detailed requirements)</li>
+      <li>Software installation (standard configuration only)</li>
+      <li>Basic data migration (client prepares clean data)</li>
+      <li>
+        Limited training (<span class="editable-field">[X]</span> hours for
+        <span class="editable-field">[X]</span> users)
+      </li>
+      <li>Basic testing (client conducts UAT)</li>
+      <li>Remote go-live support (<span class="editable-field">[X]</span> day)</li>
+      <li>Limited post-implementation support (<span class="editable-field">[X]</span> days)</li>
+      <li>Basic system documentation only</li>
+    </ul>
+
+    <h3 class="subsection-header">Excluded Services (Require Separate Agreement)</h3>
+    <ul>
+      <li>Custom module development beyond standard features</li>
+      <li>Third-party system integrations not in original scope</li>
+      <li>Hardware procurement and installation</li>
+      <li>Network infrastructure setup</li>
+      <li>Data cleanup and preparation services</li>
+      <li>Additional training beyond included hours</li>
+      <li>Custom reports beyond standard templates</li>
+      <li>Modifications to core software functionality</li>
+      <li>Ongoing maintenance after support period</li>
+    </ul>
+
+    <h3 class="subsection-header">Discount Policy &amp; Scope Adjustment</h3>
+    <div class="warning-box">
+      <ul>
+        <li><strong>Service tier automatically adjusts based on final agreed price</strong></li>
+        <li>All customizations quoted separately at hourly rates regardless of tier</li>
+        <li>Written approval required before any additional work begins</li>
+        <li>Minimum billing: 4 hours for development, 2 hours for consulting</li>
+        <li>Custom work and tier downgrades may extend project timeline by 20-50%</li>
+        <li>Additional costs payable before work commencement</li>
+        <li><strong>Timeline extensions due to budget constraints are non-negotiable</strong></li>
+      </ul>
+    </div>
+
+    <div class="page-break">
+      <h2 class="section-header">Project Timeline</h2>
+
+      <div class="phase-box">
+        <div class="phase-title">PHASE 1: DISCOVERY &amp; ANALYSIS</div>
+        <strong>Duration:</strong> <span class="editable-field">[X]</span> weeks<br>
+        <strong>Deliverables:</strong> Requirements document, project plan, system design<br>
+        <strong>Client Dependencies:</strong> Stakeholder availability, data access, requirements approval
+      </div>
+
+      <div class="phase-box">
+        <div class="phase-title">PHASE 2: SYSTEM CONFIGURATION</div>
+        <strong>Duration:</strong> <span class="editable-field">[X]</span> weeks<br>
+        <strong>Deliverables:</strong> Configured system, test environment setup<br>
+        <strong>Client Dependencies:</strong> Regular feedback, test data provision, design approvals
+      </div>
+
+      <div class="phase-box">
+        <div class="phase-title">PHASE 3: DATA MIGRATION &amp; TESTING</div>
+        <strong>Duration:</strong> <span class="editable-field">[X]</span> weeks<br>
+        <strong>Deliverables:</strong> Migrated data, tested system, user acceptance testing<br>
+        <strong>Client Dependencies:</strong> Data validation, testing participation, issue feedback
+      </div>
+
+      <div class="phase-box">
+        <div class="phase-title">PHASE 4: TRAINING &amp; GO-LIVE</div>
+        <strong>Duration:</strong> <span class="editable-field">[X]</span> weeks<br>
+        <strong>Deliverables:</strong> Trained users, live system, operational procedures<br>
+        <strong>Client Dependencies:</strong> User participation, change management, system adoption
+      </div>
+
+      <div class="phase-box">
+        <div class="phase-title">PHASE 5: POST-IMPLEMENTATION SUPPORT</div>
+        <strong>Duration:</strong> <span class="editable-field">[X]</span> weeks<br>
+        <strong>Deliverables:</strong> Stabilized system, resolved issues, final documentation<br>
+        <strong>Client Dependencies:</strong> Issue reporting, user feedback, operational data
+      </div>
+
+      <h3 class="subsection-header">Timeline Conditions &amp; Budget Impact</h3>
+      <div class="warning-box">
+        <ul>
+          <li>Timeline assumes client dependencies are met as scheduled</li>
+          <li>Delays caused by client actions may extend project duration</li>
+          <li>Scope changes will impact timeline and require written approval</li>
+          <li><strong>Discounted projects automatically receive extended timelines (20-50% longer)</strong></li>
+          <li><strong>Essential tier projects are deprioritized during peak periods</strong></li>
+          <li>Force majeure events may necessitate timeline adjustments</li>
+          <li>Weekly progress reports provided to track milestone completion</li>
+        </ul>
+      </div>
+
+      <h3 class="subsection-header">Resource Allocation by Tier</h3>
+      <div class="tier-box">
+        <ul>
+          <li><strong>Premium Tier:</strong> Senior team members, priority scheduling, dedicated resources</li>
+          <li><strong>Standard Tier:</strong> Mixed team experience, standard scheduling, shared resources</li>
+          <li><strong>Essential Tier:</strong> Junior team members, flexible scheduling, shared resources</li>
+        </ul>
+        <p>Team composition directly impacts deliverable quality and timeline.</p>
+      </div>
+
+      <h3 class="subsection-header">Client Responsibilities (Critical for Timeline)</h3>
+      <div class="info-box">
+        <ul>
+          <li>✓ Assign dedicated project manager with decision-making authority</li>
+          <li>✓ Provide timely approvals and feedback (within 3-5 business days)</li>
+          <li>✓ Ensure stakeholder availability for meetings and reviews</li>
+          <li>✓ Provide clean, complete data in agreed formats on schedule</li>
+          <li>✓ Grant necessary system access and security permissions</li>
+          <li>✓ Participate actively in testing and training sessions</li>
+          <li>✓ Communicate changes or issues promptly</li>
+          <li>✓ Complete user acceptance testing according to provided scripts</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="page-break">
+      <h2 class="section-header">Confidentiality &amp; Data Protection</h2>
+
+      <h3 class="subsection-header">Mutual Non-Disclosure Agreement</h3>
+      <p>Both parties agree to maintain strict confidentiality regarding:</p>
+      <ul>
+        <li>Business strategies, processes, and proprietary information</li>
+        <li>Technical data, system configurations, and implementations</li>
+        <li>Financial information, pricing, and commercial terms</li>
+        <li>Customer data, user information, and business records</li>
+        <li>Any information marked or reasonably considered confidential</li>
+      </ul>
+
+      <div class="two-column">
+        <div class="column">
+          <h4 class="subsection-header">Provider Commitments</h4>
+          <div class="info-box">
+            <ul>
+              <li>✓ Implement appropriate technical and administrative safeguards</li>
+              <li>✓ Limit access to authorized personnel with signed confidentiality agreements</li>
+              <li>✓ Use client data solely for agreed service delivery purposes</li>
+              <li>✓ Return or securely destroy confidential information upon project completion</li>
+              <li>✓ Comply with UAE data protection laws and international standards</li>
+              <li>✓ Maintain encrypted data transmission and secure storage protocols</li>
+              <li>✓ Provide immediate notification of any suspected data breaches</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="column">
+          <h4 class="subsection-header">Client Commitments</h4>
+          <div class="info-box">
+            <ul>
+              <li>✓ Protect Provider's methodologies, tools, and proprietary processes</li>
+              <li>✓ Not disclose Provider's pricing, techniques, or business information</li>
+              <li>✓ Ensure internal team members sign confidentiality agreements</li>
+              <li>✓ Maintain appropriate security measures for shared information</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection-header">Intellectual Property Rights</h3>
+      <div class="highlight-box">
+        <ul>
+          <li>Provider retains rights to pre-existing IP, methodologies, and standard tools</li>
+          <li>Client retains rights to their data, business processes, and custom configurations</li>
+          <li><strong>Custom developments become client property upon FULL payment only</strong></li>
+          <li><strong>Discounted projects: Provider retains rights to reusable components</strong></li>
+          <li><strong>Essential tier: Provider may reuse all custom configurations for other clients</strong></li>
+          <li>Both parties may use general knowledge gained for future projects</li>
+          <li>Provider may reference project in marketing materials and case studies</li>
+          <li>Neither party may use the other's trademarks without written permission</li>
+        </ul>
+      </div>
+
+      <h3 class="subsection-header">Data Security Measures</h3>
+      <div class="info-box">
+        <ul>
+          <li>256-bit SSL encryption for data transmission</li>
+          <li>AES-256 encryption for data storage</li>
+          <li>Regular security assessments and updates</li>
+          <li>Secure development and testing environments</li>
+          <li>Staff background checks and confidentiality training</li>
+        </ul>
+      </div>
+
+      <div class="warning-box">
+        <p>
+          <strong>CONFIDENTIALITY TERM:</strong> These obligations survive for 5 years after project completion or
+          agreement termination.
+        </p>
+      </div>
+    </div>
+
+    <div class="page-break">
+      <h2 class="section-header">Financial Terms &amp; Payment</h2>
+
+      <h3 class="subsection-header">Project Investment</h3>
+      <table class="payment-table">
+        <tbody><tr>
+          <th>Base Quote Value:</th>
+          <td><span class="editable-field">[BASE_AMOUNT]</span> AED</td>
+          <th>Final Agreed Value:</th>
+          <td><span class="editable-field">[FINAL_AMOUNT]</span> AED</td>
+        </tr>
+        <tr>
+          <th>Service Tier:</th>
+          <td><span class="editable-field">[PREMIUM/STANDARD/ESSENTIAL]</span></td>
+          <th>Currency:</th>
+          <td>UAE Dirhams (AED)</td>
+        </tr>
+        <tr>
+          <th>VAT:</th>
+          <td>5% (if applicable under UAE VAT law)</td>
+          <th>Discount Percentage:</th>
+          <td><span class="editable-field">[X]%</span></td>
+        </tr>
+      </tbody></table>
+
+      <h3 class="subsection-header">Payment Structure Options</h3>
+
+      <div class="tier-box">
+        <div class="tier-title">OPTION A - MILESTONE PAYMENTS</div>
+        <div class="checkbox-item">
+          ☐ Down Payment: <span class="editable-field">[X]%</span> upon agreement signing =
+          <span class="editable-field">[AMOUNT]</span> AED
+        </div>
+        <div class="checkbox-item">
+          ☐ Phase 1 Completion: <span class="editable-field">[X]%</span> =
+          <span class="editable-field">[AMOUNT]</span> AED
+        </div>
+        <div class="checkbox-item">
+          ☐ Phase 2 Completion: <span class="editable-field">[X]%</span> =
+          <span class="editable-field">[AMOUNT]</span> AED
+        </div>
+        <div class="checkbox-item">
+          ☐ Go-Live: <span class="editable-field">[X]%</span> = <span class="editable-field">[AMOUNT]</span> AED
+        </div>
+        <div class="checkbox-item">
+          ☐ Final Payment: <span class="editable-field">[X]%</span> upon project completion =
+          <span class="editable-field">[AMOUNT]</span> AED
+        </div>
+      </div>
+
+      <div class="tier-box">
+        <div class="tier-title">OPTION B - UPFRONT + BALANCE</div>
+        <div class="checkbox-item">
+          ☐ Down Payment: <span class="editable-field">[X]%</span> upon signing =
+          <span class="editable-field">[AMOUNT]</span> AED
+        </div>
+        <div class="checkbox-item">
+          ☐ Final Payment: <span class="editable-field">[X]%</span> upon completion =
+          <span class="editable-field">[AMOUNT]</span> AED
+        </div>
+      </div>
+
+      <div class="tier-box">
+        <div class="tier-title">OPTION C - MONTHLY INSTALLMENTS</div>
+        <div class="checkbox-item">
+          ☐ Down Payment: <span class="editable-field">[X]%</span> upon signing =
+          <span class="editable-field">[AMOUNT]</span> AED
+        </div>
+        <div class="checkbox-item">
+          ☐ Monthly Payments: <span class="editable-field">[X]</span> payments of
+          <span class="editable-field">[AMOUNT]</span> AED each
+        </div>
+      </div>
+
+      <h3 class="subsection-header">Customization Rates (Separate Billing)</h3>
+      <table class="rates-table">
+        <tbody><tr>
+          <th>Role</th>
+          <th>Rate per Hour</th>
+        </tr>
+        <tr>
+          <td>Senior Consultant</td>
+          <td><span class="editable-field">[RATE]</span> AED</td>
+        </tr>
+        <tr>
+          <td>Technical Developer</td>
+          <td><span class="editable-field">[RATE]</span> AED</td>
+        </tr>
+        <tr>
+          <td>Project Manager</td>
+          <td><span class="editable-field">[RATE]</span> AED</td>
+        </tr>
+        <tr>
+          <td>Training Specialist</td>
+          <td><span class="editable-field">[RATE]</span> AED</td>
+        </tr>
+      </tbody></table>
+      <p><strong>Minimum billing:</strong> 4 hours for development, 2 hours for consulting</p>
+
+      <h3 class="subsection-header">Payment Terms</h3>
+      <div class="info-box">
+        <ul>
+          <li>Payment Due: 15 days from invoice date</li>
+          <li>Late Payment: 1.5% per month after 30 days</li>
+          <li>Accepted Methods: Bank transfer, company check, credit card</li>
+          <li>Bank Details: <span class="editable-field">[TO BE PROVIDED UPON AGREEMENT]</span></li>
+          <li>All payments in agreed currency</li>
+          <li>Client responsible for bank transfer fees</li>
+        </ul>
+      </div>
+
+      <h3 class="subsection-header">Change Order Process</h3>
+      <div class="step-box">
+        <div class="step-title">Step 1:</div>
+        Client requests additional work in writing
+      </div>
+      <div class="step-box">
+        <div class="step-title">Step 2:</div>
+        Provider provides written estimate within 2 business days
+      </div>
+      <div class="step-box">
+        <div class="step-title">Step 3:</div>
+        Client approves estimate and timeline impact
+      </div>
+      <div class="step-box">
+        <div class="step-title">Step 4:</div>
+        Formal change order issued and signed
+      </div>
+      <div class="step-box">
+        <div class="step-title">Step 5:</div>
+        Payment terms agreed before work begins
+      </div>
+      <div class="step-box">
+        <div class="step-title">Step 6:</div>
+        No additional work without written approval
+      </div>
+
+      <h3 class="subsection-header">Refund &amp; Termination Policy</h3>
+      <div class="warning-box">
+        <ul>
+          <li>Down payments non-refundable after work commences</li>
+          <li>Refunds calculated based on work completed if terminated early</li>
+          <li>No refunds for client-caused project cancellation</li>
+          <li><strong>Discounted projects: 30-day notice required for termination</strong></li>
+          <li><strong>Essential tier projects: No refunds after 50% completion</strong></li>
+          <li>Early termination fee: 15% of remaining contract value</li>
+          <li>All work products remain property of Provider until full payment</li>
+          <li>Dispute resolution through agreed procedures</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="page-break">
+      <h2 class="section-header">Performance Standards</h2>
+
+      <h3 class="subsection-header">Service Level Commitments</h3>
+
+      <div class="tier-box">
+        <div class="tier-title">PREMIUM TIER PERFORMANCE STANDARDS</div>
+        <ul>
+          <li>✓ On-time milestone delivery: 95% (excluding client delays)</li>
+          <li>✓ User acceptance test pass rate: 98%</li>
+          <li>✓ System uptime post go-live: 99.5% during business hours</li>
+          <li>✓ User training satisfaction: 4.5/5.0 rating</li>
+          <li>✓ Issue resolution within agreed timeframes</li>
+          <li>✓ Dedicated project manager and senior consultants</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <div class="tier-title">STANDARD TIER PERFORMANCE STANDARDS</div>
+        <ul>
+          <li>✓ On-time milestone delivery: 85% (excluding client delays)</li>
+          <li>✓ User acceptance test pass rate: 95%</li>
+          <li>✓ System uptime post go-live: 99% during business hours</li>
+          <li>✓ User training satisfaction: 4.0/5.0 rating</li>
+          <li>✓ Issue resolution within standard timeframes</li>
+        </ul>
+      </div>
+
+      <div class="highlight-box">
+        <div class="tier-title">ESSENTIAL TIER PERFORMANCE STANDARDS</div>
+        <ul>
+          <li>✓ On-time milestone delivery: 75% (excluding client delays)</li>
+          <li>✓ User acceptance test pass rate: 90%</li>
+          <li>✓ System uptime post go-live: 97% during business hours</li>
+          <li>✓ User training satisfaction: 3.5/5.0 rating</li>
+          <li>✓ Best-effort issue resolution</li>
+        </ul>
+      </div>
+
+      <h3 class="subsection-header">Tier-Based Support Response Times</h3>
+      <table class="response-table">
+        <tbody><tr>
+          <th>Priority Level</th>
+          <th>Premium Tier</th>
+          <th>Standard Tier</th>
+          <th>Essential Tier</th>
+        </tr>
+        <tr>
+          <td>Critical (System Down)</td>
+          <td>1 hour / 4 hours</td>
+          <td>2 hours / 8 hours</td>
+          <td>4 hours / 24 hours</td>
+        </tr>
+        <tr>
+          <td>High (Major Function)</td>
+          <td>2 hours / 12 hours</td>
+          <td>4 hours / 24 hours</td>
+          <td>8 hours / 3 days</td>
+        </tr>
+        <tr>
+          <td>Medium (Minor Issues)</td>
+          <td>4 hours / 1 day</td>
+          <td>8 hours / 3 days</td>
+          <td>24 hours / 5 days</td>
+        </tr>
+        <tr>
+          <td>Low (General Inquiries)</td>
+          <td>8 hours / 2 days</td>
+          <td>24 hours / 5 days</td>
+          <td>48 hours / 10 days</td>
+        </tr>
+      </tbody></table>
+      <p><em>Format: Response Time / Resolution Time</em></p>
+
+      <h3 class="subsection-header">Communication Standards</h3>
+      <div class="info-box">
+        <ul>
+          <li>✓ Weekly progress reports during implementation</li>
+          <li>✓ Immediate notification of any project risks or delays</li>
+          <li>✓ Regular stakeholder meetings as agreed</li>
+          <li>✓ 48-hour response to client communications</li>
+          <li>✓ Dedicated project manager throughout engagement</li>
+        </ul>
+      </div>
+
+      <h3 class="subsection-header">Warranty Period</h3>
+      <div class="highlight-box">
+        <ul>
+          <li>90 days post go-live for implementation defects</li>
+          <li>Free bug fixes and system stabilization included</li>
+          <li>Additional support available under separate agreement</li>
+          <li>Training support for 30 days post go-live</li>
+        </ul>
+      </div>
+
+      <h3 class="subsection-header">Performance Remedies</h3>
+      <p>If service levels not met due to Provider fault:</p>
+      <ul>
+        <li>Service credits applied to final invoice</li>
+        <li>Extended warranty period at no cost</li>
+        <li>Additional support hours at no charge</li>
+        <li>Remediation plan with timeline for resolution</li>
+      </ul>
+    </div>
+
+    <div class="page-break">
+      <h2 class="section-header">Risk Allocation</h2>
+
+      <div class="two-column">
+        <div class="column">
+          <h3 class="subsection-header">Provider Responsibilities &amp; Risks</h3>
+          <div class="info-box">
+            <ul>
+              <li>✓ Technical implementation according to specifications</li>
+              <li>✓ Professional service delivery by qualified staff</li>
+              <li>✓ Project management and timeline coordination</li>
+              <li>✓ Quality assurance and testing procedures</li>
+              <li>✓ Knowledge transfer and documentation</li>
+              <li>✓ Compliance with agreed service levels</li>
+              <li>✓ Data security during project execution</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="column">
+          <h3 class="subsection-header">Client Responsibilities &amp; Risks</h3>
+          <div class="info-box">
+            <ul>
+              <li>✓ Business process decisions and change management</li>
+              <li>✓ Data accuracy, completeness, and preparation</li>
+              <li>✓ User adoption and organizational change</li>
+              <li>✓ Infrastructure readiness and system access</li>
+              <li>✓ Timely decision making and approvals</li>
+              <li>✓ Testing participation and feedback provision</li>
+              <li>✓ Post-implementation system administration</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection-header">Shared Risks</h3>
+      <div class="highlight-box">
+        <ul>
+          <li>External system integration complexities</li>
+          <li>Third-party software limitations or changes</li>
+          <li>Unforeseen technical discoveries during implementation</li>
+          <li>Force majeure events affecting project execution</li>
+        </ul>
+      </div>
+
+      <h3 class="subsection-header">Liability Limitations (UAE Law Compliant)</h3>
+      <div class="warning-box">
+        <ul>
+          <li>Total liability limited to total contract value</li>
+          <li>No liability for indirect, consequential, or punitive damages</li>
+          <li>Exceptions for gross negligence, willful misconduct, or IP infringement</li>
+          <li>Both parties maintain appropriate professional insurance</li>
+          <li>Liability limitations don't affect indemnification obligations</li>
+        </ul>
+      </div>
+
+      <h3 class="subsection-header">Force Majeure</h3>
+      <p>Neither party liable for delays due to circumstances beyond reasonable control:</p>
+      <div class="info-box">
+        <ul>
+          <li>Natural disasters, pandemics, government actions</li>
+          <li>Infrastructure failures, cyber attacks, utility outages</li>
+          <li>Strikes, labor disputes, or material shortages</li>
+          <li>Changes in applicable laws or regulations</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="page-break">
+      <h2 class="section-header">Dispute Resolution</h2>
+
+      <h3 class="subsection-header">Dispute Resolution Process (UAE Jurisdiction)</h3>
+
+      <div class="step-box">
+        <div class="step-title">STEP 1: DIRECT NEGOTIATION (30 Days)</div>
+        <ul>
+          <li>Good faith discussions between project managers</li>
+          <li>Escalation to senior management if needed</li>
+          <li>Documentation of issues and proposed solutions</li>
+          <li>Attempt to reach mutually acceptable resolution</li>
+        </ul>
+      </div>
+
+      <div class="step-box">
+        <div class="step-title">STEP 2: MEDIATION (30 Days)</div>
+        <ul>
+          <li>Non-binding mediation through Dubai International Arbitration Centre (DIAC)</li>
+          <li>Mutually agreed mediator or DIAC appointment</li>
+          <li>Shared mediation costs</li>
+          <li>Confidential proceedings</li>
+        </ul>
+      </div>
+
+      <div class="step-box">
+        <div class="step-title">STEP 3: ARBITRATION (Final Resolution)</div>
+        <ul>
+          <li>Binding arbitration under DIAC Arbitration Rules</li>
+          <li>Single arbitrator unless parties agree otherwise</li>
+          <li>Proceedings in English language</li>
+          <li>Seat of arbitration: Dubai, UAE</li>
+          <li>Applicable law: UAE Federal Law and Dubai Local Law</li>
+          <li>Arbitrator's decision final and enforceable</li>
+        </ul>
+      </div>
+
+      <h3 class="subsection-header">Legal Framework</h3>
+      <div class="info-box">
+        <ul>
+          <li>Governed by UAE Federal Law No. 5 of 1985 (Civil Code)</li>
+          <li>Dubai Courts jurisdiction for enforcement</li>
+          <li>UAE Commercial Companies Law applicable</li>
+          <li>International arbitration treaties honored</li>
+          <li>No class action participation</li>
+        </ul>
+      </div>
+
+      <h3 class="subsection-header">Interim Relief</h3>
+      <p>Either party may seek urgent interim relief from Dubai Courts for:</p>
+      <div class="info-box">
+        <ul>
+          <li>Intellectual property protection</li>
+          <li>Confidentiality enforcement</li>
+          <li>Payment collection</li>
+          <li>Prevention of irreparable harm</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="page-break">
+      <h2 class="section-header">Summary</h2>
+
+      <div class="tier-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white">
+        <h3 style="color: white; margin-bottom: 15px">PROJECT OVERVIEW</h3>
+        <div style="margin-bottom: 8px"><strong>Client:</strong> <span class="editable-field">[CLIENT_NAME]</span></div>
+        <div style="margin-bottom: 8px">
+          <strong>Service:</strong> <span class="editable-field">[PROJECT_TYPE]</span>
+        </div>
+        <div style="margin-bottom: 8px">
+          <strong>Duration:</strong> <span class="editable-field">[PROJECT_DURATION]</span>
+        </div>
+        <div style="margin-bottom: 8px">
+          <strong>Investment:</strong> <span class="editable-field">[TOTAL_AMOUNT]</span> AED
+        </div>
+        <div style="margin-bottom: 8px">
+          <strong>Payment:</strong> <span class="editable-field">[PAYMENT_STRUCTURE]</span>
+        </div>
+      </div>
+
+      <div class="two-column">
+        <div class="column">
+          <h3 class="subsection-header">Provider Commitments</h3>
+          <div class="info-box">
+            <ul>
+              <li>✓ Professional implementation according to specifications</li>
+              <li>✓ Qualified team with appropriate expertise</li>
+              <li>✓ Regular communication and progress reporting</li>
+              <li>✓ Quality assurance and testing procedures</li>
+              <li>✓ 90-day warranty on implementation</li>
+              <li>✓ Confidentiality and data security compliance</li>
+              <li>✓ UAE law compliance in all activities</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="column">
+          <h3 class="subsection-header">Client Commitments</h3>
+          <div class="info-box">
+            <ul>
+              <li>✓ Timely payments according to agreed schedule</li>
+              <li>✓ Dedicated project stakeholder with authority</li>
+              <li>✓ Prompt feedback and decision making</li>
+              <li>✓ Active participation in testing and training</li>
+              <li>✓ Data provision and system access as needed</li>
+              <li>✓ Change management and user adoption support</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection-header">Mutual Understanding</h3>
+      <div class="highlight-box">
+        <p>Both parties acknowledge:</p>
+        <ul>
+          <li>Project success depends on mutual cooperation</li>
+          <li>Timeline assumes client dependencies are met</li>
+          <li>Scope changes require written approval and may affect cost/timeline</li>
+          <li>This agreement represents complete understanding between parties</li>
+          <li>Disputes will be resolved through UAE legal framework</li>
+          <li>Confidentiality obligations survive agreement termination</li>
+        </ul>
+      </div>
+
+      <h3 class="subsection-header">Risk Mitigation</h3>
+      <div class="info-box">
+        <ul>
+          <li>Clear scope definition prevents misunderstandings</li>
+          <li>Defined payment structure protects both parties</li>
+          <li>Regular communication ensures alignment</li>
+          <li>Warranty period provides implementation assurance</li>
+          <li>Dispute resolution process offers fair conflict resolution</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="page-break">
+      <h2 class="section-header">Signatures</h2>
+
+      <p style="text-align: center; margin-bottom: 30px; font-size: 14pt">
+        By signing below, both parties acknowledge they have read, understood, and agree to be bound by all terms and
+        conditions of this Service Level Agreement.
+      </p>
+
+      <div class="two-column">
+        <div class="column">
+          <div class="signature-block">
+            <h4>CLIENT ACCEPTANCE</h4>
+            <div style="margin-top: 20px">
+              <div style="font-weight: bold; margin-bottom: 5px">
+                <span class="editable-field">[CLIENT_COMPANY_NAME]</span>
+              </div>
+              <div class="signature-line"></div>
+              <div style="font-size: 12px; color: #666; margin-bottom: 15px">Signature</div>
+
+              <div class="signature-line"></div>
+              <div style="font-size: 12px; color: #666; margin-bottom: 15px">Print Name</div>
+
+              <div class="signature-line"></div>
+              <div style="font-size: 12px; color: #666; margin-bottom: 15px">Title</div>
+
+              <div class="signature-line"></div>
+              <div style="font-size: 12px; color: #666; margin-bottom: 15px">Date</div>
+
+              <div style="margin-top: 20px; text-align: center">
+                <div style="font-size: 12px; color: #666">Company Seal:</div>
+                <div style="border: 2px dashed #ccc; height: 80px; margin-top: 10px"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class="signature-block">
+            <h4>SERVICE PROVIDER</h4>
+            <div style="margin-top: 20px">
+              <div style="font-weight: bold; margin-bottom: 5px">SCHOLARIX GLOBAL CONSULTANTS</div>
+              <div class="signature-line"></div>
+              <div style="font-size: 12px; color: #666; margin-bottom: 15px">Signature</div>
+
+              <div class="signature-line"></div>
+              <div style="font-size: 12px; color: #666; margin-bottom: 15px">Print Name</div>
+
+              <div class="signature-line"></div>
+              <div style="font-size: 12px; color: #666; margin-bottom: 15px">Title</div>
+
+              <div class="signature-line"></div>
+              <div style="font-size: 12px; color: #666; margin-bottom: 15px">Date</div>
+
+              <div style="margin-top: 20px; text-align: center">
+                <div style="font-size: 12px; color: #666">Company Seal:</div>
+                <div style="border: 2px dashed #ccc; height: 80px; margin-top: 10px"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="subsection-header">Witness (Optional)</h3>
+      <div class="two-column">
+        <div class="column">
+          <div style="border: 1px solid #ddd; padding: 15px">
+            <div class="signature-line"></div>
+            <div style="font-size: 12px; color: #666; margin-bottom: 15px">Signature</div>
+
+            <div class="signature-line"></div>
+            <div style="font-size: 12px; color: #666; margin-bottom: 15px">Print Name</div>
+
+            <div class="signature-line"></div>
+            <div style="font-size: 12px; color: #666; margin-bottom: 15px">Date</div>
+          </div>
+        </div>
+
+        <div class="column">
+          <div style="border: 1px solid #ddd; padding: 15px">
+            <div class="signature-line"></div>
+            <div style="font-size: 12px; color: #666; margin-bottom: 15px">Signature</div>
+
+            <div class="signature-line"></div>
+            <div style="font-size: 12px; color: #666; margin-bottom: 15px">Print Name</div>
+
+            <div class="signature-line"></div>
+            <div style="font-size: 12px; color: #666; margin-bottom: 15px">Date</div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-header">Document Control</h2>
+
+      <table class="info-table">
+        <tbody><tr>
+          <th style="width: 40%">Document Title:</th>
+          <td>Service Level Agreement Template</td>
+        </tr>
+        <tr>
+          <th>Version:</th>
+          <td>1.0</td>
+        </tr>
+        <tr>
+          <th>Created By:</th>
+          <td>Scholarix Global Consultants</td>
+        </tr>
+        <tr>
+          <th>Date:</th>
+          <td><span class="editable-field">[CURRENT_DATE]</span></td>
+        </tr>
+        <tr>
+          <th>Review Date:</th>
+          <td><span class="editable-field">[REVIEW_DATE]</span></td>
+        </tr>
+        <tr>
+          <th>Approved By:</th>
+          <td><span class="editable-field">[APPROVER_NAME]</span></td>
+        </tr>
+        <tr>
+          <th>Classification:</th>
+          <td style="color: #dc3545; font-weight: bold">CONFIDENTIAL</td>
+        </tr>
+      </tbody></table>
+
+      <div class="warning-box">
+        <p style="text-align: center; font-size: 13pt">
+          <strong>This document contains proprietary and confidential information.</strong><br>
+          Unauthorized reproduction or distribution is prohibited.
+        </p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div style="margin-bottom: 15px; font-weight: bold; font-size: 13pt">
+        ©️ 2025 SCHOLARIX GLOBAL CONSULTANTS. All rights reserved.
+      </div>
+      <div style="margin-bottom: 10px"><strong>Contact:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="731a1d151c3300101b1c1f12011a0b141f1c11121f5d101c1e">[email&#160;protected]</a> | +971 54 342 3029</div>
+      <div style="margin-bottom: 10px"><strong>Website:</strong> www.scholarixglobal.com</div>
+      <div>
+        <strong>Delivering Excellence in Technology Solutions | Your Trusted Technology Partner</strong>
+      </div>
+    </div>
+  
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body></html>

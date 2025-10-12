@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Service Level Agreement - Scholarix IT Global Consultants</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             /* Ocean Deep Color Palette */
@@ -1308,9 +1309,145 @@
                 line-height: 1.4;
             }
         }
+
+        /* Navigation Bar Styles */
+        .navbar {
+            background: rgba(15, 40, 71, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+            margin-bottom: 20px;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-brand {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: rgba(74, 158, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+            color: white;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-briefcase"></i>
+                <span>SGC-IT</span>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="index-simple.html" class="nav-link">
+                        <i class="fas fa-id-card"></i>
+                        <span>Business Card</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="editable-document.html" class="nav-link">
+                        <i class="fas fa-file-edit"></i>
+                        <span>Editable Document</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="SLA TEMPLATE.html" class="nav-link active">
+                        <i class="fas fa-file-contract"></i>
+                        <span>SLA Template</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="test.html" class="nav-link">
+                        <i class="fas fa-flask"></i>
+                        <span>Test Page</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
     <!-- Toolbar -->
     <div class="toolbar">
         <button onclick="document.execCommand('bold')" title="Bold">
@@ -2873,6 +3010,12 @@
         
         function exportToPDF() {
             printToPDF();
+        }
+
+        // Navigation toggle function
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
         }
 
         // Initialize test functionality on load

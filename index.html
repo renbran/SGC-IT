@@ -182,6 +182,33 @@
             font-size: 14px;
         }
 
+        .doc-card.featured {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            border: 2px solid #60a5fa;
+            position: relative;
+            animation: pulse 2s infinite;
+        }
+
+        .doc-card.featured::before {
+            content: "★ NEW";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #f59e0b;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            transform: rotate(15deg);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
+
         /* Footer */
         .footer {
             text-align: center;
@@ -229,6 +256,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="sla-form-builder.html" class="nav-link">
+                        <i class="fas fa-magic"></i>
+                        <span>SLA Builder</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="test.html" class="nav-link">
                         <i class="fas fa-flask"></i>
                         <span>Test Page</span>
@@ -252,16 +285,22 @@
             <p>Create professional business cards with QR codes and social media integration</p>
         </a>
 
-        <a href="editable-document.html" class="doc-card">
-            <i class="fas fa-file-edit"></i>
-            <h3>Editable Document</h3>
-            <p>Create and edit custom documents with real-time preview</p>
+        <a href="sla-form-builder.html" class="doc-card featured">
+            <i class="fas fa-magic"></i>
+            <h3>SLA Form Builder</h3>
+            <p>Interactive form builder with real-time preview and PDF export - RECOMMENDED</p>
         </a>
 
         <a href="SLA TEMPLATE.html" class="doc-card">
             <i class="fas fa-file-contract"></i>
             <h3>SLA Template</h3>
-            <p>Service Level Agreement template for professional contracts</p>
+            <p>Editable Service Level Agreement template for manual editing</p>
+        </a>
+
+        <a href="editable-document.html" class="doc-card">
+            <i class="fas fa-file-edit"></i>
+            <h3>Editable Document</h3>
+            <p>Create and edit custom documents with real-time preview</p>
         </a>
 
         <a href="test.html" class="doc-card">

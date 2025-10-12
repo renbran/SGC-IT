@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLA Form Builder - SGC-IT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            min-height: 100vh;
+            color: white;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: rgba(15, 40, 71, 0.95);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-brand {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            list-style: none;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: rgba(74, 158, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+            color: white;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-menu { display: none; width: 100%; flex-direction: column; }
+            .nav-menu.active { display: flex; }
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #a0c4ff;
+            margin-bottom: 30px;
+        }
+
+        /* Form Builder */
+        .form-builder {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .form-panel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(74, 158, 255, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+        }
+
+        .form-panel h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #4a9eff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #a0c4ff;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid rgba(74, 158, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4a9eff;
+            box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Preview Panel */
+        .preview-panel {
+            background: white;
+            color: #333;
+            border-radius: 15px;
+            padding: 40px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .preview-panel h3 {
+            color: #1a2b4d;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 28px;
+            border-bottom: 3px solid #4a9eff;
+            padding-bottom: 15px;
+        }
+
+        /* SLA Document Styles */
+        .sla-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: linear-gradient(135deg, #1a2b4d, #2d4a73);
+            color: white;
+            border-radius: 10px;
+        }
+
+        .sla-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-left: 4px solid #4a9eff;
+            background: #f8f9fa;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .sla-section h4 {
+            color: #1a2b4d;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            margin-bottom: 10px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            display: inline-block;
+            min-width: 120px;
+        }
+
+        .service-tier {
+            background: #e8f4fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            border: 1px solid #4a9eff;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: rgba(74, 158, 255, 0.2);
+            color: #4a9eff;
+            border: 2px solid #4a9eff;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(74, 158, 255, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .form-builder {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+        }
+
+        /* Service Levels Table */
+        .service-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .service-table th,
+        .service-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .service-table th {
+            background: #4a9eff;
+            color: white;
+            font-weight: 600;
+        }
+
+        .service-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <i class="fas fa-briefcase"></i>
+                <span>SGC-IT</span>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="index-simple.html" class="nav-link">
+                        <i class="fas fa-id-card"></i>
+                        <span>Business Card</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="editable-document.html" class="nav-link">
+                        <i class="fas fa-file-edit"></i>
+                        <span>Editable Document</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="SLA TEMPLATE.html" class="nav-link">
+                        <i class="fas fa-file-contract"></i>
+                        <span>SLA Template</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="sla-form-builder.html" class="nav-link active">
+                        <i class="fas fa-magic"></i>
+                        <span>SLA Builder</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="test.html" class="nav-link">
+                        <i class="fas fa-flask"></i>
+                        <span>Test Page</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="hero">
+            <h1>SLA Form Builder</h1>
+            <p>Create Professional Service Level Agreements with Real-Time Preview</p>
+        </div>
+
+        <div class="form-builder">
+            <!-- Form Panel -->
+            <div class="form-panel">
+                <h3><i class="fas fa-edit"></i> SLA Configuration</h3>
+                
+                <div class="form-group">
+                    <label for="clientCompany">Client Company Name</label>
+                    <input type="text" id="clientCompany" placeholder="Enter client company name">
+                </div>
+
+                <div class="form-group">
+                    <label for="clientContact">Client Contact Person</label>
+                    <input type="text" id="clientContact" placeholder="Enter contact person name">
+                </div>
+
+                <div class="form-group">
+                    <label for="clientEmail">Client Email</label>
+                    <input type="email" id="clientEmail" placeholder="client@company.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="clientPhone">Client Phone</label>
+                    <input type="tel" id="clientPhone" placeholder="+1 234 567 8900">
+                </div>
+
+                <div class="form-group">
+                    <label for="projectTitle">Project/Service Title</label>
+                    <input type="text" id="projectTitle" placeholder="Enter project or service name">
+                </div>
+
+                <div class="form-group">
+                    <label for="serviceTier">Service Tier</label>
+                    <select id="serviceTier">
+                        <option value="">Select Service Tier</option>
+                        <option value="basic">Basic Support (9x5)</option>
+                        <option value="standard">Standard Support (24x5)</option>
+                        <option value="premium">Premium Support (24x7)</option>
+                        <option value="enterprise">Enterprise Support (24x7 + Dedicated)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="projectDuration">Project Duration</label>
+                    <input type="text" id="projectDuration" placeholder="e.g., 6 months, ongoing">
+                </div>
+
+                <div class="form-group">
+                    <label for="contractValue">Contract Value (USD)</label>
+                    <input type="number" id="contractValue" placeholder="50000">
+                </div>
+
+                <div class="form-group">
+                    <label for="specialRequirements">Special Requirements</label>
+                    <textarea id="specialRequirements" placeholder="Any specific requirements or customizations..."></textarea>
+                </div>
+
+                <button class="btn btn-primary" onclick="updatePreview()">
+                    <i class="fas fa-refresh"></i> Update Preview
+                </button>
+            </div>
+
+            <!-- Preview Panel -->
+            <div class="preview-panel" id="slaPreview">
+                <h3>SERVICE LEVEL AGREEMENT</h3>
+                
+                <div class="sla-header">
+                    <h2 id="previewTitle">Professional IT Services Agreement</h2>
+                    <p>Between <span id="previewClient">Client Company</span> and Scholarix IT Global Consultants</p>
+                </div>
+
+                <div class="sla-section">
+                    <h4>1. PARTIES INFORMATION</h4>
+                    <div class="info-grid">
+                        <div>
+                            <h5>CLIENT</h5>
+                            <div class="info-item">
+                                <span class="info-label">Company:</span>
+                                <span id="previewCompany">Client Company Name</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Contact:</span>
+                                <span id="previewContact">Contact Person</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Email:</span>
+                                <span id="previewEmail">client@company.com</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Phone:</span>
+                                <span id="previewPhone">+1 234 567 8900</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h5>SERVICE PROVIDER</h5>
+                            <div class="info-item">
+                                <span class="info-label">Company:</span>
+                                Scholarix IT Global Consultants
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Contact:</span>
+                                Renbran Anthony Madelo
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Email:</span>
+                                info@scholarixglobal.com
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Phone:</span>
+                                +971 54 342 3029
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sla-section">
+                    <h4>2. SERVICE DETAILS</h4>
+                    <div class="service-tier" id="previewServiceTier">
+                        <strong>Service Tier:</strong> Please select a service tier
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Duration:</span>
+                        <span id="previewDuration">Project Duration</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Contract Value:</span>
+                        $<span id="previewValue">0</span> USD
+                    </div>
+                </div>
+
+                <div class="sla-section">
+                    <h4>3. SERVICE LEVEL COMMITMENTS</h4>
+                    <table class="service-table" id="serviceLevelTable">
+                        <thead>
+                            <tr>
+                                <th>Priority Level</th>
+                                <th>Response Time</th>
+                                <th>Resolution Time</th>
+                                <th>Availability</th>
+                            </tr>
+                        </thead>
+                        <tbody id="serviceLevelBody">
+                            <tr>
+                                <td colspan="4" style="text-align: center; color: #666;">Please select a service tier to view commitments</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="sla-section" id="specialReqSection" style="display: none;">
+                    <h4>4. SPECIAL REQUIREMENTS</h4>
+                    <p id="previewRequirements"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn btn-primary" onclick="generatePDF()">
+                <i class="fas fa-file-pdf"></i> Generate PDF
+            </button>
+            <button class="btn btn-secondary" onclick="saveTemplate()">
+                <i class="fas fa-save"></i> Save Template
+            </button>
+            <a href="SLA TEMPLATE.html" class="btn btn-secondary">
+                <i class="fas fa-file-contract"></i> View Full Template
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Service tier configurations
+        const serviceTierData = {
+            basic: {
+                name: "Basic Support (Business Hours)",
+                availability: "9 AM - 5 PM, Monday-Friday",
+                levels: [
+                    { priority: "Critical", response: "4 hours", resolution: "24 hours", availability: "99.5%" },
+                    { priority: "High", response: "8 hours", resolution: "72 hours", availability: "99.0%" },
+                    { priority: "Medium", response: "24 hours", resolution: "5 business days", availability: "98.5%" },
+                    { priority: "Low", response: "48 hours", resolution: "10 business days", availability: "98.0%" }
+                ]
+            },
+            standard: {
+                name: "Standard Support (24x5)",
+                availability: "24 hours, Monday-Friday",
+                levels: [
+                    { priority: "Critical", response: "2 hours", resolution: "12 hours", availability: "99.7%" },
+                    { priority: "High", response: "4 hours", resolution: "48 hours", availability: "99.5%" },
+                    { priority: "Medium", response: "12 hours", resolution: "3 business days", availability: "99.0%" },
+                    { priority: "Low", response: "24 hours", resolution: "7 business days", availability: "98.5%" }
+                ]
+            },
+            premium: {
+                name: "Premium Support (24x7)",
+                availability: "24 hours, 7 days a week",
+                levels: [
+                    { priority: "Critical", response: "1 hour", resolution: "8 hours", availability: "99.9%" },
+                    { priority: "High", response: "2 hours", resolution: "24 hours", availability: "99.7%" },
+                    { priority: "Medium", response: "6 hours", resolution: "48 hours", availability: "99.5%" },
+                    { priority: "Low", response: "12 hours", resolution: "5 business days", availability: "99.0%" }
+                ]
+            },
+            enterprise: {
+                name: "Enterprise Support (24x7 + Dedicated)",
+                availability: "24 hours, 7 days a week + Dedicated Account Manager",
+                levels: [
+                    { priority: "Critical", response: "30 minutes", resolution: "4 hours", availability: "99.95%" },
+                    { priority: "High", response: "1 hour", resolution: "12 hours", availability: "99.9%" },
+                    { priority: "Medium", response: "3 hours", resolution: "24 hours", availability: "99.7%" },
+                    { priority: "Low", response: "6 hours", resolution: "3 business days", availability: "99.5%" }
+                ]
+            }
+        };
+
+        function updatePreview() {
+            // Update basic information
+            document.getElementById('previewClient').textContent = 
+                document.getElementById('clientCompany').value || 'Client Company';
+            document.getElementById('previewCompany').textContent = 
+                document.getElementById('clientCompany').value || 'Client Company Name';
+            document.getElementById('previewContact').textContent = 
+                document.getElementById('clientContact').value || 'Contact Person';
+            document.getElementById('previewEmail').textContent = 
+                document.getElementById('clientEmail').value || 'client@company.com';
+            document.getElementById('previewPhone').textContent = 
+                document.getElementById('clientPhone').value || '+1 234 567 8900';
+            document.getElementById('previewTitle').textContent = 
+                document.getElementById('projectTitle').value || 'Professional IT Services Agreement';
+            document.getElementById('previewDuration').textContent = 
+                document.getElementById('projectDuration').value || 'Project Duration';
+            document.getElementById('previewValue').textContent = 
+                parseInt(document.getElementById('contractValue').value || 0).toLocaleString();
+
+            // Update service tier
+            const selectedTier = document.getElementById('serviceTier').value;
+            const tierElement = document.getElementById('previewServiceTier');
+            const serviceLevelBody = document.getElementById('serviceLevelBody');
+
+            if (selectedTier && serviceTierData[selectedTier]) {
+                const tierData = serviceTierData[selectedTier];
+                tierElement.innerHTML = `<strong>Service Tier:</strong> ${tierData.name}<br>
+                                       <strong>Availability:</strong> ${tierData.availability}`;
+
+                // Update service level table
+                serviceLevelBody.innerHTML = '';
+                tierData.levels.forEach(level => {
+                    const row = serviceLevelBody.insertRow();
+                    row.innerHTML = `
+                        <td><strong>${level.priority}</strong></td>
+                        <td>${level.response}</td>
+                        <td>${level.resolution}</td>
+                        <td>${level.availability}</td>
+                    `;
+                });
+            } else {
+                tierElement.innerHTML = '<strong>Service Tier:</strong> Please select a service tier';
+                serviceLevelBody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #666;">Please select a service tier to view commitments</td></tr>';
+            }
+
+            // Update special requirements
+            const specialReq = document.getElementById('specialRequirements').value;
+            const specialReqSection = document.getElementById('specialReqSection');
+            if (specialReq.trim()) {
+                document.getElementById('previewRequirements').textContent = specialReq;
+                specialReqSection.style.display = 'block';
+            } else {
+                specialReqSection.style.display = 'none';
+            }
+        }
+
+        function generatePDF() {
+            // Create a new window with the SLA content for printing
+            const previewContent = document.getElementById('slaPreview').innerHTML;
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Service Level Agreement</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; color: #333; }
+                        .sla-header { text-align: center; margin-bottom: 40px; padding: 20px; background: #f0f8ff; border-radius: 10px; }
+                        .sla-section { margin-bottom: 30px; padding: 20px; border-left: 4px solid #4a9eff; background: #f8f9fa; border-radius: 0 8px 8px 0; }
+                        .sla-section h4 { color: #1a2b4d; margin-bottom: 15px; font-size: 18px; }
+                        .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+                        .info-item { margin-bottom: 10px; }
+                        .info-label { font-weight: 600; color: #555; display: inline-block; min-width: 120px; }
+                        .service-tier { background: #e8f4fd; padding: 15px; border-radius: 8px; margin: 10px 0; border: 1px solid #4a9eff; }
+                        .service-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+                        .service-table th, .service-table td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+                        .service-table th { background: #4a9eff; color: white; font-weight: 600; }
+                        .service-table tr:nth-child(even) { background: #f9f9f9; }
+                        @media print { body { margin: 20px; } }
+                    </style>
+                </head>
+                <body>
+                    ${previewContent}
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        function saveTemplate() {
+            const formData = {
+                clientCompany: document.getElementById('clientCompany').value,
+                clientContact: document.getElementById('clientContact').value,
+                clientEmail: document.getElementById('clientEmail').value,
+                clientPhone: document.getElementById('clientPhone').value,
+                projectTitle: document.getElementById('projectTitle').value,
+                serviceTier: document.getElementById('serviceTier').value,
+                projectDuration: document.getElementById('projectDuration').value,
+                contractValue: document.getElementById('contractValue').value,
+                specialRequirements: document.getElementById('specialRequirements').value
+            };
+
+            const jsonData = JSON.stringify(formData, null, 2);
+            const blob = new Blob([jsonData], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'sla-template.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            alert('Template saved successfully!');
+        }
+
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Auto-update preview when form fields change
+        document.addEventListener('DOMContentLoaded', function() {
+            const formInputs = document.querySelectorAll('input, select, textarea');
+            formInputs.forEach(input => {
+                input.addEventListener('input', updatePreview);
+                input.addEventListener('change', updatePreview);
+            });
+            
+            // Initial preview update
+            updatePreview();
+        });
+    </script>
+</body>
+</html>
