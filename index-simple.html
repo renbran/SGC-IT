@@ -547,12 +547,17 @@
             print-color-adjust: exact;
             -webkit-filter: none;
             filter: none;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            transform: translateZ(0);
         }
 
         /* Ensure animations don't interfere with capture */
         .business-card-front.capturing, .business-card-back.capturing {
             animation: none !important;
             transition: none !important;
+            -webkit-transform: none !important;
+            transform: none !important;
         }
 
         .business-card-front.capturing::before, 
@@ -560,6 +565,18 @@
         .business-card-back.capturing::before, 
         .business-card-back.capturing::after {
             animation: none !important;
+            -webkit-transform: none !important;
+            transform: none !important;
+            opacity: 0.8 !important;
+        }
+
+        /* Force gradient rendering for PDF capture */
+        .business-card-back.capturing {
+            background: linear-gradient(135deg, #0f1a35 0%, #1a2a4a 40%, #101e38 100%) !important;
+        }
+
+        .business-card-front.capturing {
+            background: linear-gradient(135deg, #0f1a35 0%, #1a2a4a 50%, #0f1a35 100%) !important;
         }
     </style>
 </head>
@@ -825,16 +842,19 @@ END:VCARD`;
                     downloadButton.disabled = false;
                 };
 
-                // Wait a moment for animations to stop
+                // Wait longer for animations to stop and CSS to stabilize
                 setTimeout(() => {
                     // Capture front of card
                     html2canvas(cardFront, {
-                        scale: 3, // High quality
+                        scale: 4, // Higher quality for better gradient rendering
                         useCORS: true,
                         allowTaint: true,
                         backgroundColor: null,
                         width: cardFront.offsetWidth,
-                        height: cardFront.offsetHeight
+                        height: cardFront.offsetHeight,
+                        logging: false,
+                        letterRendering: true,
+                        foreignObjectRendering: true
                     }).then(frontCanvas => {
                         // Add front side to PDF
                         const frontImgData = frontCanvas.toDataURL('image/png');
@@ -845,12 +865,15 @@ END:VCARD`;
                         
                         // Capture back of card
                         html2canvas(cardBack, {
-                            scale: 3,
+                            scale: 4, // Higher quality for better gradient rendering
                             useCORS: true,
                             allowTaint: true,
                             backgroundColor: null,
                             width: cardBack.offsetWidth,
-                            height: cardBack.offsetHeight
+                            height: cardBack.offsetHeight,
+                            logging: false,
+                            letterRendering: true,
+                            foreignObjectRendering: true
                         }).then(backCanvas => {
                             // Add back side to PDF
                             const backImgData = backCanvas.toDataURL('image/png');
@@ -874,7 +897,7 @@ END:VCARD`;
                         alert('Error generating PDF. Please try again.');
                         resetButton();
                     });
-                }, 100); // Short delay to let animations stop
+                }, 300); // Longer delay to let CSS gradients stabilize
                 
             } catch (error) {
                 console.error('PDF generation error:', error);
