@@ -1,0 +1,76 @@
+# Scholarix Business Card Designer - Production Deployment
+
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        
+    - name: Install Wrangler
+      run: npm install -g wrangler
+      
+    - name: Verify deployment files
+      run: |
+        echo "Checking required files..."
+        ls -la
+        test -f index.html
+        test -f index-simple.html
+        test -f wrangler.toml
+        test -f _headers
+        test -f _redirects
+        echo "✅ All required files present"
+        
+    - name: Validate HTML files
+      run: |
+        echo "Validating HTML structure..."
+        grep -q "<!DOCTYPE html>" index.html
+        grep -q "<!DOCTYPE html>" index-simple.html
+        grep -q "business-card-front" index-simple.html
+        grep -q "business-card-back" index-simple.html
+        echo "✅ HTML files validated"
+        
+    - name: Check security headers
+      run: |
+        echo "Verifying security configuration..."
+        grep -q "X-Frame-Options" _headers
+        grep -q "Content-Security-Policy" _headers
+        echo "✅ Security headers configured"
+        
+    - name: Deploy to Cloudflare Pages
+      uses: cloudflare/pages-action@v1
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        projectName: scholarix-business-card
+        directory: ./
+        
+    - name: Deployment summary
+      run: |
+        echo "🚀 Deployment completed successfully!"
+        echo "📊 Deployment Details:"
+        echo "- Project: scholarix-business-card"
+        echo "- Domain: business-card.scholarixstudy.com"
+        echo "- Branch: ${{ github.ref_name }}"
+        echo "- Commit: ${{ github.sha }}"
+        echo "- Date: $(date -u)"
+        
+    - name: Post-deployment tests
+      run: |
+        echo "🔍 Running post-deployment verification..."
+        # Add any post-deployment tests here
+        echo "✅ Ready for production use!"

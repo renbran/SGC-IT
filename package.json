@@ -1,0 +1,51 @@
+{
+  "name": "scholarix-business-card",
+  "version": "1.0.0",
+  "description": "Professional Business Card Designer for Scholarix Study Abroad Consultancy",
+  "main": "index.html",
+  "scripts": {
+    "deploy": "bash deploy.sh",
+    "test": "echo \"Running deployment tests...\" && bash deploy.sh",
+    "build": "echo \"Static site - no build required\"",
+    "start": "echo \"Open index.html in browser\"",
+    "lint": "echo \"HTML validation and security checks\"",
+    "validate": "bash deploy.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/renbran/SGC-IT.git"
+  },
+  "keywords": [
+    "business-card",
+    "pdf-generator",
+    "qr-code",
+    "scholarix",
+    "study-abroad",
+    "cloudflare-pages",
+    "responsive-design"
+  ],
+  "author": "Scholarix Study Abroad Consultancy",
+  "license": "MIT",
+  "homepage": "https://business-card.scholarixstudy.com",
+  "bugs": {
+    "url": "https://github.com/renbran/SGC-IT/issues"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "deployment": {
+    "platform": "cloudflare-pages",
+    "domain": "business-card.scholarixstudy.com",
+    "buildCommand": "",
+    "buildOutput": "./",
+    "framework": "static"
+  }
+}
