@@ -280,9 +280,9 @@
         }
 
         .business-card-front {
-            background: linear-gradient(135deg, #1a2b4d, #2d4a73, #1a2b4d);
+            background: linear-gradient(135deg, #1a2951 0%, #2d4a6b 50%, #1a2951 100%);
             color: white;
-            padding: 30px;
+            padding: 40px;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
@@ -290,7 +290,7 @@
         }
 
         .business-card-back {
-            background: linear-gradient(135deg, #2d4a73, #1a2b4d, #2d4a73);
+            background: linear-gradient(135deg, #1a2951 0%, #2d4a6b 50%, #1a2951 100%);
             color: white;
             display: flex;
             flex-direction: column;
@@ -309,47 +309,59 @@
         }
 
         .company-name { 
-            font-size: 32px; 
+            font-size: 36px; 
             font-weight: 700; 
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             letter-spacing: 2px;
+            color: #ffffff;
         }
         .company-subtitle {
-            font-size: 14px;
-            color: #a0c4ff;
-            margin-bottom: 20px;
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
-        .person-name { 
-            font-size: 26px; 
-            font-weight: 700; 
-            margin-bottom: 5px;
+            font-size: 15px;
+            color: #4a9eff;
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
-        .person-title {
+        .company-tagline {
             font-size: 16px;
             color: #a0c4ff;
             margin-bottom: 25px;
             font-weight: 400;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+        .person-name { 
+            font-size: 24px; 
+            font-weight: 700; 
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+        .person-title {
+            font-size: 15px;
+            color: #4a9eff;
+            margin-bottom: 25px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
         }
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
             font-size: 14px;
             margin-top: 15px;
         }
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
+            color: #ffffff;
         }
         .contact-item i {
-            width: 18px;
+            width: 20px;
             color: #4a9eff;
-            font-size: 16px;
+            font-size: 14px;
         }
         .tags-section {
             position: absolute;
@@ -520,11 +532,12 @@
         <div class="card-preview">
             <div class="business-card-front" id="card-front">
                 <div class="front-left">
-                    <div class="company-name" id="company-name">SCHOLARIX IT</div>
+                    <div class="company-name" id="company-name">Scholarix</div>
                     <div class="company-subtitle">GLOBAL CONSULTANTS</div>
+                    <div class="company-tagline" id="company-tagline">Vision. Innovation. Execution.</div>
                     
-                    <div class="person-name" id="person-name">RENBRAN ANTHONY MADELO</div>
-                    <div class="person-title" id="person-title">CO-FOUNDER</div>
+                    <div class="person-name" id="person-name">John Anderson</div>
+                    <div class="person-title" id="person-title">Senior AI Consultant</div>
                     
                     <div class="contact-info">
                         <div class="contact-item">
@@ -567,7 +580,7 @@
 
         <div class="card-preview">
             <div class="business-card-back" id="card-back">
-                <div class="back-company" id="back-company">SCHOLARIX IT</div>
+                <div class="back-company" id="back-company">Scholarix</div>
                 <div class="company-subtitle">GLOBAL CONSULTANTS</div>
                 <div class="back-tagline">Transforming Business Through AI Innovation</div>
             </div>
@@ -580,19 +593,19 @@
         <div class="customization-form">
             <div class="form-group">
                 <label for="input-name">Name</label>
-                <input type="text" id="input-name" value="RENBRAN ANTHONY MADELO">
+                <input type="text" id="input-name" value="John Anderson">
             </div>
             <div class="form-group">
                 <label for="input-title">Title</label>
-                <input type="text" id="input-title" value="CO-FOUNDER">
+                <input type="text" id="input-title" value="Senior AI Consultant">
             </div>
             <div class="form-group">
                 <label for="input-email">Email</label>
-                <input type="email" id="input-email" value="renbran@scholarix.com">
+                <input type="email" id="input-email" value="john.anderson@scholarix.com">
             </div>
             <div class="form-group">
                 <label for="input-mobile">Mobile Number</label>
-                <input type="tel" id="input-mobile" value="+1 234 567 8900">
+                <input type="tel" id="input-mobile" value="+1 (555) 123-4567">
             </div>
             <div class="form-group">
                 <label for="input-website">Website</label>
@@ -600,7 +613,7 @@
             </div>
             <div class="form-group">
                 <label for="input-company">Company</label>
-                <input type="text" id="input-company" value="SCHOLARIX IT">
+                <input type="text" id="input-company" value="Scholarix">
             </div>
             <div class="form-group">
                 <label for="input-linkedin">LinkedIn URL</label>
