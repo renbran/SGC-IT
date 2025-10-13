@@ -299,6 +299,64 @@
             text-align: center;
             padding: 40px;
             position: relative;
+            border: 2px solid transparent;
+            background-clip: padding-box;
+        }
+
+        .business-card-back::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 15px;
+            padding: 2px;
+            background: linear-gradient(45deg, 
+                rgba(74, 158, 255, 0.8) 0%,
+                rgba(0, 212, 255, 0.6) 25%,
+                rgba(255, 255, 255, 0.4) 50%,
+                rgba(0, 212, 255, 0.6) 75%,
+                rgba(74, 158, 255, 0.8) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            animation: crystal-glow 3s ease-in-out infinite alternate;
+        }
+
+        .business-card-back::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            pointer-events: none;
+            box-shadow: 
+                inset 0 0 20px rgba(74, 158, 255, 0.1),
+                inset 0 0 40px rgba(0, 212, 255, 0.05);
+        }
+
+        @keyframes crystal-glow {
+            0% {
+                background: linear-gradient(45deg, 
+                    rgba(74, 158, 255, 0.6) 0%,
+                    rgba(0, 212, 255, 0.4) 25%,
+                    rgba(255, 255, 255, 0.3) 50%,
+                    rgba(0, 212, 255, 0.4) 75%,
+                    rgba(74, 158, 255, 0.6) 100%);
+            }
+            100% {
+                background: linear-gradient(45deg, 
+                    rgba(74, 158, 255, 1) 0%,
+                    rgba(0, 212, 255, 0.8) 25%,
+                    rgba(255, 255, 255, 0.6) 50%,
+                    rgba(0, 212, 255, 0.8) 75%,
+                    rgba(74, 158, 255, 1) 100%);
+            }
         }
         .back-tagline {
             font-size: 18px;
