@@ -295,7 +295,7 @@
             color: white;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             text-align: center;
             padding: 35px;
@@ -498,6 +498,21 @@
             opacity: 1;
         }
 
+        .back-content-top {
+            flex: 0 0 auto;
+        }
+        
+        .back-content-center {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .back-content-bottom {
+            flex: 0 0 auto;
+        }
+        
         .back-company { 
             font-size: 36px; 
             font-weight: 700;
@@ -505,6 +520,44 @@
             margin-bottom: 6px;
             letter-spacing: 1.5px;
             line-height: 1.1;
+        }
+        
+        .back-social-icons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        
+        .back-social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(74, 158, 255, 0.15);
+            border: 2px solid rgba(74, 158, 255, 0.3);
+            border-radius: 50%;
+            color: #4a9eff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+        
+        .back-social-link:hover {
+            background: rgba(74, 158, 255, 0.25);
+            border-color: rgba(74, 158, 255, 0.5);
+            color: #5ba8ff;
+            transform: translateY(-2px);
+        }
+        
+        .back-connect-text {
+            font-size: 12px;
+            color: #8bb8ff;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            opacity: 0.8;
         }
 
         .control-panel {
@@ -591,6 +644,13 @@
 
         .business-card-front.capturing {
             background: linear-gradient(135deg, #0a1426 0%, #162238 50%, #0a1426 100%) !important;
+        }
+        
+        /* Ensure back card social icons are visible in PDF */
+        .business-card-back.capturing .back-social-link {
+            background: rgba(74, 158, 255, 0.2) !important;
+            border: 2px solid rgba(74, 158, 255, 0.4) !important;
+            color: #4a9eff !important;
         }
 
         /* ============================================
@@ -1318,10 +1378,33 @@
 
         <div class="card-preview">
             <div class="business-card-back" id="card-back">
-                <div class="back-company" id="back-company">Scholarix</div>
-                <div class="company-subtitle">GLOBAL CONSULTANTS</div>
-                <div class="back-company-tagline" id="back-company-tagline">Vision. Innovation. Execution.</div>
-                <div class="back-tagline">Transforming Business Through AI Innovation</div>
+                <div class="back-content-top">
+                    <div class="back-company" id="back-company">Scholarix</div>
+                    <div class="company-subtitle">GLOBAL CONSULTANTS</div>
+                    <div class="back-company-tagline" id="back-company-tagline">Vision. Innovation. Execution.</div>
+                </div>
+                
+                <div class="back-content-center">
+                    <div class="back-tagline">Transforming Business Through AI Innovation</div>
+                </div>
+                
+                <div class="back-content-bottom">
+                    <div class="back-social-icons">
+                        <a href="#" id="back-linkedin-link" target="_blank" title="LinkedIn Profile" class="back-social-link">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" id="back-twitter-link" target="_blank" title="Twitter Profile" class="back-social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" id="back-facebook-link" target="_blank" title="Facebook Profile" class="back-social-link">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" id="back-instagram-link" target="_blank" title="Instagram Profile" class="back-social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                    <div class="back-connect-text">Connect with us</div>
+                </div>
             </div>
         </div>
     </div>
@@ -1491,11 +1574,22 @@ END:VCARD`;
             document.getElementById('company-name').textContent = document.getElementById('input-company').value;
             document.getElementById('back-company').textContent = document.getElementById('input-company').value;
             
-            // Update social media links
-            document.getElementById('linkedin-link').href = document.getElementById('input-linkedin').value || '#';
-            document.getElementById('twitter-link').href = document.getElementById('input-twitter').value || '#';
-            document.getElementById('facebook-link').href = document.getElementById('input-facebook').value || '#';
-            document.getElementById('instagram-link').href = document.getElementById('input-instagram').value || '#';
+            // Update social media links (front and back)
+            const linkedinUrl = document.getElementById('input-linkedin').value || '#';
+            const twitterUrl = document.getElementById('input-twitter').value || '#';
+            const facebookUrl = document.getElementById('input-facebook').value || '#';
+            const instagramUrl = document.getElementById('input-instagram').value || '#';
+            
+            document.getElementById('linkedin-link').href = linkedinUrl;
+            document.getElementById('twitter-link').href = twitterUrl;
+            document.getElementById('facebook-link').href = facebookUrl;
+            document.getElementById('instagram-link').href = instagramUrl;
+            
+            // Update back card social links
+            document.getElementById('back-linkedin-link').href = linkedinUrl;
+            document.getElementById('back-twitter-link').href = twitterUrl;
+            document.getElementById('back-facebook-link').href = facebookUrl;
+            document.getElementById('back-instagram-link').href = instagramUrl;
             
             // Generate QR code
             generateQR();
