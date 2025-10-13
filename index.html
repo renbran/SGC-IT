@@ -1,244 +1,952 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGC-IT - Document Hub</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<!DOCTYPE html><!DOCTYPE html>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+<html lang="en"><html lang="en">
+
+<head><head>
+
+    <meta charset="UTF-8">    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SGC-IT - Professional Document Hub</title>    <title>SGC-IT - Professional Document Hub</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>    <style>
+
+        * {        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+            margin: 0;        
+
+            padding: 0;        body {
+
+            box-sizing: border-box;            font-family: 'Segoe UI', sans-serif;
+
+        }            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+
             min-height: 100vh;
-            color: white;
-        }
 
-        /* Navigation Bar Styles */
-        .navbar {
-            background: rgba(15, 40, 71, 0.95);
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            padding: 15px 40px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+        body {            padding: 0;
 
-        .nav-container {
-            max-width: 1400px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;            display: flex;
+
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);            flex-direction: column;
+
+            min-height: 100vh;            overflow-x: hidden;
+
+            color: white;        }
+
+            overflow-x: hidden;
+
+        }        /* Loading Screen Styles */
+
+        .loading-screen {
+
+        /* Navigation Bar Styles */            position: fixed;
+
+        .navbar {            top: 0;
+
+            background: rgba(15, 40, 71, 0.95);            left: 0;
+
+            backdrop-filter: blur(10px);            width: 100%;
+
+            padding: 15px 40px;            height: 100%;
+
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+
+            position: sticky;            display: flex;
+
+            top: 0;            flex-direction: column;
+
+            z-index: 1000;            justify-content: center;
+
+        }            align-items: center;
+
+            z-index: 9999;
+
+        .nav-container {            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+
+            max-width: 1400px;        }
+
             margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
+
+            display: flex;        .loading-screen.hidden {
+
+            justify-content: space-between;            opacity: 0;
+
+            align-items: center;            visibility: hidden;
+
+            flex-wrap: wrap;        }
+
             gap: 20px;
+
+        }        .loading-logo {
+
+            font-size: 48px;
+
+        .nav-brand {            font-weight: 700;
+
+            font-size: 28px;            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+
+            font-weight: 700;            -webkit-background-clip: text;
+
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);            background-clip: text;
+
+            -webkit-background-clip: text;            -webkit-text-fill-color: transparent;
+
+            background-clip: text;            margin-bottom: 30px;
+
+            -webkit-text-fill-color: transparent;            animation: logoFadeIn 1s ease-in-out;
+
+            text-decoration: none;        }
+
+            display: flex;
+
+            align-items: center;        .loading-subtitle {
+
+            gap: 12px;            font-size: 18px;
+
+        }            color: #a0c4ff;
+
+            margin-bottom: 40px;
+
+        .nav-brand i {            animation: subtitleFadeIn 1s ease-in-out 0.3s both;
+
+            font-size: 32px;        }
+
+            color: #4a9eff;
+
+        }        .loading-spinner {
+
+            width: 60px;
+
+        /* Hero Section */            height: 60px;
+
+        .hero {            border: 3px solid rgba(74, 158, 255, 0.2);
+
+            text-align: center;            border-top: 3px solid #4a9eff;
+
+            padding: 80px 20px;            border-radius: 50%;
+
+            max-width: 1200px;            animation: spin 1s linear infinite;
+
+            margin: 0 auto;        }
+
         }
 
-        .nav-brand {
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #4a9eff, #00d4ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .loading-progress {
 
-        .nav-menu {
-            display: flex;
-            gap: 5px;
-            flex-wrap: wrap;
-            list-style: none;
-        }
+        .hero h1 {            width: 300px;
 
-        .nav-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
+            font-size: 48px;            height: 4px;
+
+            font-weight: 700;            background: rgba(74, 158, 255, 0.2);
+
+            margin-bottom: 20px;            border-radius: 2px;
+
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);            margin-top: 30px;
+
+            -webkit-background-clip: text;            overflow: hidden;
+
+            background-clip: text;            position: relative;
+
+            -webkit-text-fill-color: transparent;        }
+
+            animation: fadeInUp 1s ease-out;
+
+        }        .loading-progress-bar {
+
+            height: 100%;
+
+        .hero p {            background: linear-gradient(90deg, #4a9eff, #00d4ff);
+
+            font-size: 20px;            border-radius: 2px;
+
+            color: #a0c4ff;            width: 0%;
+
+            margin-bottom: 40px;            animation: progressFill 2s ease-in-out;
+
+            opacity: 0;        }
+
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+
+        }        .loading-text {
+
+            color: #a0c4ff;
+
+        .hero-subtitle {            font-size: 14px;
+
+            font-size: 16px;            margin-top: 20px;
+
+            color: #ffffff;            animation: textFadeIn 1s ease-in-out 0.5s both;
+
+            margin-bottom: 60px;        }
+
+            opacity: 0;
+
+            animation: fadeInUp 1s ease-out 0.6s forwards;        /* Loading Animations */
+
+        }        @keyframes logoFadeIn {
+
+            0% { opacity: 0; transform: translateY(-20px); }
+
+        /* Document Grid */            100% { opacity: 1; transform: translateY(0); }
+
+        .document-grid {        }
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));        @keyframes subtitleFadeIn {
+
+            gap: 30px;            0% { opacity: 0; transform: translateY(-10px); }
+
+            padding: 0 20px;            100% { opacity: 1; transform: translateY(0); }
+
+            max-width: 1400px;        }
+
+            margin: 0 auto 80px;
+
+        }        @keyframes textFadeIn {
+
+            0% { opacity: 0; }
+
+        .doc-card {            100% { opacity: 1; }
+
+            background: rgba(255, 255, 255, 0.05);        }
+
+            backdrop-filter: blur(10px);
+
+            border: 1px solid rgba(74, 158, 255, 0.2);        @keyframes spin {
+
+            border-radius: 20px;            0% { transform: rotate(0deg); }
+
+            padding: 40px 30px;            100% { transform: rotate(360deg); }
+
+            text-decoration: none;        }
+
             color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            font-size: 14px;
-            font-weight: 500;
+
+            transition: all 0.4s ease;        @keyframes progressFill {
+
+            position: relative;            0% { width: 0%; }
+
+            overflow: hidden;            20% { width: 15%; }
+
+            opacity: 0;            40% { width: 40%; }
+
+            transform: translateY(30px);            60% { width: 70%; }
+
+            animation: fadeInUp 0.8s ease-out forwards;            80% { width: 85%; }
+
+        }            100% { width: 100%; }
+
         }
 
-        .nav-link:hover {
-            background: rgba(74, 158, 255, 0.2);
-            transform: translateY(-2px);
+        .doc-card:nth-child(1) { animation-delay: 0.2s; }
+
+        .doc-card:nth-child(2) { animation-delay: 0.4s; }        /* Hide main content during loading */
+
+        .doc-card:nth-child(3) { animation-delay: 0.6s; }        .main-wrapper {
+
+        .doc-card:nth-child(4) { animation-delay: 0.8s; }            opacity: 0;
+
+        .doc-card:nth-child(5) { animation-delay: 1.0s; }            transition: opacity 0.5s ease-in;
+
+        }
+
+        .doc-card::before {
+
+            content: '';        .main-wrapper.loaded {
+
+            position: absolute;            opacity: 1;
+
+            top: 0;        }
+
+            left: -100%;
+
+            width: 100%;        /* Navigation Bar Styles */
+
+            height: 100%;        .navbar {
+
+            background: linear-gradient(90deg, transparent, rgba(74, 158, 255, 0.1), transparent);            background: rgba(15, 40, 71, 0.95);
+
+            transition: left 0.6s ease;            -webkit-backdrop-filter: blur(10px);
+
+        }            backdrop-filter: blur(10px);
+
+            padding: 15px 40px;
+
+        .doc-card:hover::before {            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+            left: 100%;            position: sticky;
+
+        }            top: 0;
+
+            z-index: 1000;
+
+        .doc-card:hover {        }
+
+            transform: translateY(-10px);
+
+            border-color: #4a9eff;        .nav-container {
+
+            box-shadow: 0 20px 40px rgba(74, 158, 255, 0.2);            max-width: 1400px;
+
+            background: rgba(255, 255, 255, 0.08);            margin: 0 auto;
+
+        }            display: flex;
+
+            justify-content: space-between;
+
+        .doc-card i {            align-items: center;
+
+            font-size: 48px;            flex-wrap: wrap;
+
+            color: #4a9eff;            gap: 20px;
+
+            margin-bottom: 20px;        }
+
+            display: block;
+
+            transition: all 0.3s ease;        .nav-brand {
+
+        }            font-size: 24px;
+
+            font-weight: 700;
+
+        .doc-card:hover i {            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+
+            color: #00d4ff;            -webkit-background-clip: text;
+
+            transform: scale(1.1);            background-clip: text;
+
+        }            -webkit-text-fill-color: transparent;
+
+            text-decoration: none;
+
+        .doc-card h3 {        }
+
+            font-size: 24px;
+
+            margin-bottom: 15px;        .nav-menu {
+
+            font-weight: 600;            display: flex;
+
+            color: #ffffff;            gap: 5px;
+
+        }            flex-wrap: wrap;
+
+            list-style: none;
+
+        .doc-card p {        }
+
+            color: #a0c4ff;
+
+            line-height: 1.6;        .nav-item {
+
+            font-size: 16px;            position: relative;
+
+        }        }
+
+
+
+        .featured-card {        .nav-link {
+
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.1), rgba(0, 212, 255, 0.05));            display: flex;
+
+            border: 2px solid #4a9eff;            align-items: center;
+
+            position: relative;            gap: 8px;
+
+        }            padding: 10px 20px;
+
+            color: white;
+
+        .featured-badge {            text-decoration: none;
+
+            position: absolute;            border-radius: 8px;
+
+            top: 15px;            transition: all 0.3s ease;
+
+            right: 15px;            font-size: 14px;
+
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);            font-weight: 500;
+
+            color: white;        }
+
+            padding: 5px 12px;
+
+            border-radius: 20px;        .nav-link:hover {
+
+            font-size: 12px;            background: rgba(74, 158, 255, 0.2);
+
+            font-weight: 600;            transform: translateY(-2px);
+
+            text-transform: uppercase;        }
+
         }
 
         .nav-link.active {
-            background: linear-gradient(135deg, #4a9eff, #00d4ff);
-            color: white;
-        }
 
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
+        /* Footer */            background: linear-gradient(135deg, #4a9eff, #00d4ff);
 
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
+        .footer {            color: white;
 
-            .nav-menu {
-                display: none;
-                width: 100%;
-                flex-direction: column;
-            }
+            text-align: center;        }
 
-            .nav-menu.active {
-                display: flex;
-            }
-        }
-
-        /* Hero Section */
-        .hero {
-            text-align: center;
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #4a9eff, #00d4ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 20px;
-            color: #a0c4ff;
-            margin-bottom: 50px;
-        }
-
-        /* Document Cards */
-        .document-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
             padding: 40px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+
+            border-top: 1px solid rgba(74, 158, 255, 0.2);        .nav-link i {
+
+            margin-top: 60px;            font-size: 16px;
+
+            background: rgba(15, 40, 71, 0.3);        }
+
         }
 
-        .doc-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(74, 158, 255, 0.2);
-            border-radius: 15px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            text-decoration: none;
+        /* Mobile Menu Toggle */
+
+        .footer p {        .menu-toggle {
+
+            color: #a0c4ff;            display: none;
+
+            margin-bottom: 10px;            background: none;
+
+        }            border: none;
+
             color: white;
+
+        /* Animations */            font-size: 24px;
+
+        @keyframes fadeInUp {            cursor: pointer;
+
+            0% {        }
+
+                opacity: 0;
+
+                transform: translateY(30px);        @media (max-width: 768px) {
+
+            }            .menu-toggle {
+
+            100% {                display: block;
+
+                opacity: 1;            }
+
+                transform: translateY(0);
+
+            }            .nav-menu {
+
+        }                display: none;
+
+                width: 100%;
+
+        /* Responsive Design */                flex-direction: column;
+
+        @media (max-width: 768px) {            }
+
+            .hero h1 {
+
+                font-size: 36px;            .nav-menu.active {
+
+            }                display: flex;
+
+            }
+
+            .hero p {
+
+                font-size: 18px;            .nav-link {
+
+            }                width: 100%;
+
+            }
+
+            .document-grid {        }
+
+                grid-template-columns: 1fr;
+
+                gap: 20px;        .main-content {
+
+            }            flex: 1;
+
+            padding: 40px 20px;
+
+            .doc-card {            display: flex;
+
+                padding: 30px 20px;            flex-direction: column;
+
+            }            align-items: center;
+
+        }
+
+            .nav-brand {
+
+                font-size: 24px;        .header {
+
+            }            text-align: center;
+
+        }            color: white;
+
+            margin-bottom: 40px;
+
+        /* Floating particles background effect */        }
+
+        .particles {
+
+            position: fixed;        .header h1 {
+
+            top: 0;            font-size: 36px;
+
+            left: 0;            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+
+            width: 100%;            -webkit-background-clip: text;
+
+            height: 100%;            background-clip: text;
+
+            pointer-events: none;            -webkit-text-fill-color: transparent;
+
+            z-index: -1;        }
+
+        }
+
+        .cards-wrapper {
+
+        .particle {            display: flex;
+
+            position: absolute;            gap: 40px;
+
+            width: 4px;            flex-wrap: wrap;
+
+            height: 4px;            justify-content: center;
+
+            background: rgba(74, 158, 255, 0.3);            max-width: 1400px;
+
+            border-radius: 50%;        }
+
+            animation: float 20s infinite linear;
+
+        }        .card-preview {
+
+            flex: 1;
+
+        @keyframes float {            min-width: 600px;
+
+            0% {            max-width: 650px;
+
+                transform: translateY(100vh) rotate(0deg);        }
+
+                opacity: 0;
+
+            }        .business-card-front, .business-card-back {
+
+            10% {            width: 100%;
+
+                opacity: 1;            height: 350px;
+
+            }            border-radius: 15px;
+
+            90% {            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+
+                opacity: 1;            position: relative;
+
+            }            overflow: hidden;
+
+            100% {        }
+
+                transform: translateY(-100px) rotate(360deg);
+
+                opacity: 0;        .business-card-front {
+
+            }            background: linear-gradient(135deg, #1a2951 0%, #2d4a6b 50%, #1a2951 100%);
+
+        }            color: white;
+
+    </style>            padding: 40px;
+
+</head>            display: flex;
+
+<body>            justify-content: space-between;
+
+    <!-- Floating Particles Background -->            align-items: flex-start;
+
+    <div class="particles" id="particles"></div>            position: relative;
+
+        }
+
+    <!-- Navigation Bar -->
+
+    <nav class="navbar">        .business-card-back {
+
+        <div class="nav-container">            background: linear-gradient(135deg, #1a2951 0%, #2d4a6b 50%, #1a2951 100%);
+
+            <a href="index.html" class="nav-brand">            color: white;
+
+                <i class="fas fa-briefcase"></i>            display: flex;
+
+                SGC-IT            flex-direction: column;
+
+            </a>            justify-content: center;
+
+        </div>            align-items: center;
+
+    </nav>            text-align: center;
+
+            padding: 40px;
+
+    <!-- Hero Section -->            position: relative;
+
+    <div class="hero">            border: 1px solid rgba(74, 158, 255, 0.3);
+
+        <h1>Professional Document Hub</h1>        }
+
+        <p>Your Gateway to Business Excellence</p>
+
+        <div class="hero-subtitle">Choose from our collection of professional tools and templates</div>        .business-card-back::before {
+
+    </div>            content: '';
+
+            position: absolute;
+
+    <!-- Document Grid -->            top: -1px;
+
+    <div class="document-grid">            left: -1px;
+
+        <a href="index-simple.html" class="doc-card featured-card">            right: -1px;
+
+            <div class="featured-badge">Featured</div>            bottom: -1px;
+
+            <i class="fas fa-id-card"></i>            border-radius: 15px;
+
+            <h3>Business Card Designer</h3>            background: linear-gradient(45deg, 
+
+            <p>Create professional business cards with QR codes, elegant design, and the tagline "Vision. Innovation. Execution." Perfect for modern professionals.</p>                rgba(74, 158, 255, 0.4) 0%,
+
+        </a>                rgba(0, 212, 255, 0.6) 25%,
+
+                rgba(255, 255, 255, 0.3) 50%,
+
+        <a href="editable-document.html" class="doc-card">                rgba(0, 212, 255, 0.6) 75%,
+
+            <i class="fas fa-file-edit"></i>                rgba(74, 158, 255, 0.4) 100%);
+
+            <h3>Editable Document</h3>            z-index: -1;
+
+            <p>Create and edit custom documents with real-time preview and professional formatting options.</p>            animation: elegant-border-glow 4s ease-in-out infinite;
+
+        </a>        }
+
+
+
+        <a href="SLA TEMPLATE.html" class="doc-card">        .business-card-back::after {
+
+            <i class="fas fa-file-contract"></i>            content: '';
+
+            <h3>SLA Template</h3>            position: absolute;
+
+            <p>Professional Service Level Agreement template for defining service standards and expectations.</p>            top: 12px;
+
+        </a>            left: 12px;
+
+            right: 12px;
+
+        <a href="sla-form-builder.html" class="doc-card">            bottom: 12px;
+
+            <i class="fas fa-tools"></i>            border-radius: 8px;
+
+            <h3>SLA Form Builder</h3>            border: 1px solid rgba(255, 255, 255, 0.15);
+
+            <p>Interactive form builder for creating customized Service Level Agreements with dynamic fields.</p>            pointer-events: none;
+
+        </a>        }
+
+
+
+        <a href="test.html" class="doc-card">        @keyframes elegant-border-glow {
+
+            <i class="fas fa-flask"></i>            0% {
+
+            <h3>Development Tools</h3>                background: linear-gradient(45deg, 
+
+            <p>Testing and development environment for exploring new features and functionality.</p>                    rgba(74, 158, 255, 0.3) 0%,
+
+        </a>                    rgba(0, 212, 255, 0.5) 25%,
+
+    </div>                    rgba(255, 255, 255, 0.2) 50%,
+
+                    rgba(0, 212, 255, 0.5) 75%,
+
+    <!-- Footer -->                    rgba(74, 158, 255, 0.3) 100%);
+
+    <div class="footer">                transform: rotate(0deg);
+
+        <p>&copy; 2025 SGC-IT. All rights reserved.</p>            }
+
+        <p>Professional Document Solutions & Business Tools</p>            50% {
+
+    </div>                background: linear-gradient(45deg, 
+
+                    rgba(74, 158, 255, 0.6) 0%,
+
+    <script>                    rgba(0, 212, 255, 0.8) 25%,
+
+        // Create floating particles                    rgba(255, 255, 255, 0.4) 50%,
+
+        function createParticles() {                    rgba(0, 212, 255, 0.8) 75%,
+
+            const particlesContainer = document.getElementById('particles');                    rgba(74, 158, 255, 0.6) 100%);
+
+            const particleCount = 15;                transform: rotate(2deg);
+
+            }
+
+            for (let i = 0; i < particleCount; i++) {            100% {
+
+                const particle = document.createElement('div');                background: linear-gradient(45deg, 
+
+                particle.className = 'particle';                    rgba(74, 158, 255, 0.3) 0%,
+
+                particle.style.left = Math.random() * 100 + '%';                    rgba(0, 212, 255, 0.5) 25%,
+
+                particle.style.animationDelay = Math.random() * 20 + 's';                    rgba(255, 255, 255, 0.2) 50%,
+
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';                    rgba(0, 212, 255, 0.5) 75%,
+
+                particlesContainer.appendChild(particle);                    rgba(74, 158, 255, 0.3) 100%);
+
+            }                transform: rotate(0deg);
+
+        }            }
+
+        }
+
+        // Initialize particles when page loads        .back-company-tagline {
+
+        window.addEventListener('load', createParticles);            font-size: 16px;
+
+            color: #a0c4ff;
+
+        // Add smooth scrolling and entrance animations            margin-bottom: 15px;
+
+        document.addEventListener('DOMContentLoaded', function() {            font-weight: 400;
+
+            // Add hover sound effect (optional)            font-style: italic;
+
+            const cards = document.querySelectorAll('.doc-card');            letter-spacing: 1px;
+
+            cards.forEach(card => {        }
+
+                card.addEventListener('mouseenter', function() {        
+
+                    this.style.transform = 'translateY(-10px) scale(1.02)';        .back-tagline {
+
+                });            font-size: 18px;
+
+                            font-style: italic;
+
+                card.addEventListener('mouseleave', function() {            color: #a0c4ff;
+
+                    this.style.transform = 'translateY(0) scale(1)';            margin-bottom: 30px;
+
+                });            font-weight: 300;
+
+            });        }
+
+        });
+
+    </script>        .company-name { 
+
+</body>            font-size: 36px; 
+
+</html>            font-weight: 700; 
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+            color: #ffffff;
+        }
+        .company-subtitle {
+            font-size: 15px;
+            color: #4a9eff;
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+        .company-tagline {
+            font-size: 16px;
+            color: #a0c4ff;
+            margin-bottom: 25px;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+        .person-name { 
+            font-size: 24px; 
+            font-weight: 700; 
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+        .person-title {
+            font-size: 15px;
+            color: #4a9eff;
+            margin-bottom: 25px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        .contact-info {
             display: flex;
             flex-direction: column;
+            gap: 8px;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        .contact-item {
+            display: flex;
             align-items: center;
+            gap: 15px;
+            color: #ffffff;
+        }
+        .contact-item i {
+            width: 20px;
+            color: #4a9eff;
+            font-size: 14px;
+        }
+        .tags-section {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+        .tag {
+            background: rgba(74, 158, 255, 0.2);
+            border: 1px solid #4a9eff;
+            color: #4a9eff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .qr-section {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
             text-align: center;
         }
-
-        .doc-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(74, 158, 255, 0.3);
-            background: rgba(74, 158, 255, 0.1);
-            border-color: #4a9eff;
-        }
-
-        .doc-card i {
-            font-size: 60px;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #4a9eff, #00d4ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .doc-card h3 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .doc-card p {
+        .qr-label {
+            font-size: 12px;
             color: #a0c4ff;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        .social-icons {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .social-icons a {
+            color: #4a9eff;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: #00d4ff;
+            transform: scale(1.2);
+        }
+        .person-title {
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #b8d4f1;
+        }
+        .back-company { 
+            font-size: 38px; 
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
+
+        .control-panel {
+            background: rgba(255,255,255,0.95);
+            padding: 30px;
+            border-radius: 20px;
+            margin-top: 40px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .customization-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            background: rgba(74,158,255,0.05);
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-group { display: flex; flex-direction: column; }
+        .form-group input {
+            padding: 10px 15px;
+            border: 2px solid #e0f2ff;
+            border-radius: 10px;
             font-size: 14px;
         }
 
-        .doc-card.featured {
-            background: linear-gradient(135deg, #2563eb, #3b82f6);
-            border: 2px solid #60a5fa;
-            position: relative;
-            animation: pulse 2s infinite;
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
         }
 
-        .doc-card.featured::before {
-            content: "★ NEW";
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: #f59e0b;
+        .btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
             color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            transform: rotate(15deg);
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: #a0c4ff;
-            border-top: 1px solid rgba(74, 158, 255, 0.2);
-            margin-top: 60px;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo">SCHOLARIX IT</div>
+        <div class="loading-subtitle">Professional Business Card Designer</div>
+        <div class="loading-spinner"></div>
+        <div class="loading-progress">
+            <div class="loading-progress-bar"></div>
+        </div>
+        <div class="loading-text">Loading your professional tools...</div>
+    </div>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper" id="mainWrapper">
+        <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="nav-brand">
-                <i class="fas fa-briefcase"></i>
-                <span>SGC-IT</span>
+                <i class="fas fa-briefcase"></i> SGC-IT
             </a>
             <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-menu" id="navMenu">
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link active">
+                    <a href="index.html" class="nav-link">
                         <i class="fas fa-home"></i>
                         <span>Home</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="index-simple.html" class="nav-link">
+                    <a href="index-simple.html" class="nav-link active">
                         <i class="fas fa-id-card"></i>
                         <span>Business Card</span>
                     </a>
@@ -256,12 +964,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="sla-form-builder.html" class="nav-link">
-                        <i class="fas fa-magic"></i>
-                        <span>SLA Builder</span>
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="test.html" class="nav-link">
                         <i class="fas fa-flask"></i>
                         <span>Test Page</span>
@@ -271,56 +973,213 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="hero">
-        <h1>Welcome to SGC-IT Document Hub</h1>
-        <p>Professional Document Templates & Tools</p>
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <h1>Scholarix Business Card Designer</h1>
+            <p>Professional Business Card Template</p>
+        </div>
+
+        <div class="cards-wrapper">
+        <div class="card-preview">
+            <div class="business-card-front" id="card-front">
+                <div class="front-left">
+                    <div class="company-name" id="company-name">Scholarix</div>
+                    <div class="company-subtitle">GLOBAL CONSULTANTS</div>
+                    <div class="company-tagline" id="company-tagline">Vision. Innovation. Execution.</div>
+                    
+                    <div class="person-name" id="person-name">John Anderson</div>
+                    <div class="person-title" id="person-title">Senior AI Consultant</div>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span id="person-email">john.anderson@scholarix.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span id="person-mobile">+1 234 567 8900</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-globe"></i>
+                            <span id="person-website">www.scholarix.com</span>
+                        </div>
+                    </div>
+                    
+                    <div class="social-icons">
+                        <a href="#" id="linkedin-link" target="_blank" title="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" id="twitter-link" target="_blank" title="Twitter Profile"><i class="fab fa-twitter"></i></a>
+                        <a href="#" id="facebook-link" target="_blank" title="Facebook Profile"><i class="fab fa-facebook"></i></a>
+                        <a href="#" id="instagram-link" target="_blank" title="Instagram Profile"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Tags Section -->
+                <div class="tags-section">
+                    <div class="tag">AI Partner</div>
+                    <div class="tag">Certified</div>
+                    <div class="tag">Automation</div>
+                    <div class="tag">Global</div>
+                </div>
+                
+                <!-- QR Code Section -->
+                <div class="qr-section">
+                    <canvas id="qrcode-front"></canvas>
+                    <div class="qr-label">SCAN TO CONNECT</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-preview">
+            <div class="business-card-back" id="card-back">
+                <div class="back-company" id="back-company">Scholarix</div>
+                <div class="company-subtitle">GLOBAL CONSULTANTS</div>
+                <div class="back-company-tagline" id="back-company-tagline">Vision. Innovation. Execution.</div>
+                <div class="back-tagline">Transforming Business Through AI Innovation</div>
+            </div>
+        </div>
     </div>
 
-    <!-- Document Grid -->
-    <div class="document-grid">
-        <a href="index-simple.html" class="doc-card">
-            <i class="fas fa-id-card"></i>
-            <h3>Business Card Designer</h3>
-            <p>Create professional business cards with QR codes and social media integration</p>
-        </a>
+    <div class="control-panel">
+        <h2>Business Card Controls</h2>
+        
+        <div class="customization-form">
+            <div class="form-group">
+                <label for="input-name">Name</label>
+                <input type="text" id="input-name" value="John Anderson">
+            </div>
+            <div class="form-group">
+                <label for="input-title">Title</label>
+                <input type="text" id="input-title" value="Senior AI Consultant">
+            </div>
+            <div class="form-group">
+                <label for="input-email">Email</label>
+                <input type="email" id="input-email" value="john.anderson@scholarix.com">
+            </div>
+            <div class="form-group">
+                <label for="input-mobile">Mobile Number</label>
+                <input type="tel" id="input-mobile" value="+1 (555) 123-4567">
+            </div>
+            <div class="form-group">
+                <label for="input-website">Website</label>
+                <input type="text" id="input-website" value="www.scholarix.com">
+            </div>
+            <div class="form-group">
+                <label for="input-company">Company</label>
+                <input type="text" id="input-company" value="Scholarix">
+            </div>
+            <div class="form-group">
+                <label for="input-linkedin">LinkedIn URL</label>
+                <input type="text" id="input-linkedin" value="https://linkedin.com/in/johnanderson">
+            </div>
+            <div class="form-group">
+                <label for="input-twitter">Twitter URL</label>
+                <input type="text" id="input-twitter" value="https://twitter.com/johnanderson">
+            </div>
+            <div class="form-group">
+                <label for="input-facebook">Facebook URL</label>
+                <input type="text" id="input-facebook" value="https://facebook.com/johnanderson">
+            </div>
+            <div class="form-group">
+                <label for="input-instagram">Instagram URL</label>
+                <input type="text" id="input-instagram" value="https://instagram.com/johnanderson">
+            </div>
+        </div>
 
-        <a href="sla-form-builder.html" class="doc-card featured">
-            <i class="fas fa-magic"></i>
-            <h3>SLA Form Builder</h3>
-            <p>Interactive form builder with real-time preview and PDF export - RECOMMENDED</p>
-        </a>
-
-        <a href="SLA TEMPLATE.html" class="doc-card">
-            <i class="fas fa-file-contract"></i>
-            <h3>SLA Template</h3>
-            <p>Editable Service Level Agreement template for manual editing</p>
-        </a>
-
-        <a href="editable-document.html" class="doc-card">
-            <i class="fas fa-file-edit"></i>
-            <h3>Editable Document</h3>
-            <p>Create and edit custom documents with real-time preview</p>
-        </a>
-
-        <a href="test.html" class="doc-card">
-            <i class="fas fa-flask"></i>
-            <h3>Test Page</h3>
-            <p>Testing and development environment</p>
-        </a>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <p>&copy; 2025 SGC-IT. All rights reserved.</p>
-        <p>Professional Document Solutions</p>
+        <div class="button-grid">
+            <button class="btn btn-primary" onclick="updateCard()">Update Card</button>
+            <button class="btn btn-primary" onclick="downloadPDF()">Download PDF</button>
+        </div>
     </div>
 
     <script>
+        function generateQR() {
+            const canvas = document.getElementById('qrcode-front');
+            const name = document.getElementById('input-name').value;
+            const email = document.getElementById('input-email').value;
+            const mobile = document.getElementById('input-mobile').value;
+            const website = document.getElementById('input-website').value;
+            const company = document.getElementById('input-company').value;
+            const linkedin = document.getElementById('input-linkedin').value;
+            const twitter = document.getElementById('input-twitter').value;
+            const facebook = document.getElementById('input-facebook').value;
+            const instagram = document.getElementById('input-instagram').value;
+            
+            // Create comprehensive vCard data with all contact information
+            const vCardData = `BEGIN:VCARD
+VERSION:3.0
+FN:${name}
+ORG:${company}
+EMAIL:${email}
+TEL:${mobile}
+URL:${website}
+X-SOCIALPROFILE;TYPE=linkedin:${linkedin}
+X-SOCIALPROFILE;TYPE=twitter:${twitter}
+X-SOCIALPROFILE;TYPE=facebook:${facebook}
+X-SOCIALPROFILE;TYPE=instagram:${instagram}
+END:VCARD`;
+            
+            QRCode.toCanvas(canvas, vCardData, {
+                width: 120,
+                height: 120,
+                color: { dark: '#1a2b4d', light: '#ffffff' },
+                margin: 2
+            });
+        }
+
+        function updateCard() {
+            document.getElementById('person-name').textContent = document.getElementById('input-name').value;
+            document.getElementById('person-title').textContent = document.getElementById('input-title').value;
+            document.getElementById('person-email').textContent = document.getElementById('input-email').value;
+            document.getElementById('person-mobile').textContent = document.getElementById('input-mobile').value;
+            document.getElementById('person-website').textContent = document.getElementById('input-website').value;
+            document.getElementById('company-name').textContent = document.getElementById('input-company').value;
+            document.getElementById('back-company').textContent = document.getElementById('input-company').value;
+            
+            // Update social media links
+            document.getElementById('linkedin-link').href = document.getElementById('input-linkedin').value;
+            document.getElementById('twitter-link').href = document.getElementById('input-twitter').value;
+            document.getElementById('facebook-link').href = document.getElementById('input-facebook').value;
+            document.getElementById('instagram-link').href = document.getElementById('input-instagram').value;
+            
+            generateQR();
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+            pdf.text('Scholarix Business Card', 10, 10);
+            pdf.save('scholarix-business-card.pdf');
+        }
+
         function toggleMenu() {
             const navMenu = document.getElementById('navMenu');
             navMenu.classList.toggle('active');
         }
+
+        // Loading Screen Management
+        function initializeApp() {
+            // Generate QR code
+            generateQR();
+            
+            // Hide loading screen after animation completes
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loadingScreen');
+                const mainWrapper = document.getElementById('mainWrapper');
+                
+                loadingScreen.classList.add('hidden');
+                mainWrapper.classList.add('loaded');
+                
+                // Remove loading screen from DOM after transition
+                setTimeout(() => {
+                    loadingScreen.remove();
+                }, 500);
+            }, 2500); // 2.5 seconds total loading time
+        }
+
+        // Initialize when page loads
+        window.onload = initializeApp;
     </script>
+    </div>
 </body>
 </html>
