@@ -1,0 +1,14 @@
+# Redirects for Cloudflare Pages
+# Format: /old-path /new-path [status-code]
+
+# Redirect common paths to business card designer
+/card /index-simple.html 301
+/business-card /index-simple.html 301
+/designer /index-simple.html 301
+
+# Redirect root to main page
+# / /index.html 200
+
+# Redirect old business card paths
+/business-card-designer /index-simple.html 301
+/card-designer /index-simple.html 301

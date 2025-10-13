@@ -1,0 +1,29 @@
+name = "scholarix-business-card"
+compatibility_date = "2023-10-30"
+
+[env.production]
+name = "scholarix-business-card-production"
+route = "scholarixstudy.com/business-card/*"
+
+[env.staging]
+name = "scholarix-business-card-staging"
+route = "staging.scholarixstudy.com/business-card/*"
+
+# Custom domain configuration
+[[env.production.routes]]
+pattern = "scholarixstudy.com/business-card/*"
+custom_domain = true
+
+[[env.staging.routes]]
+pattern = "staging.scholarixstudy.com/business-card/*"
+custom_domain = true
+
+# Build configuration
+[build]
+command = ""
+cwd = ""
+watch_dir = ""
+
+# Environment variables
+[vars]
+ENVIRONMENT = "production"
