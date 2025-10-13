@@ -537,6 +537,27 @@
             background: linear-gradient(135deg, #4a9eff, #00d4ff);
             color: white;
         }
+
+        /* PDF Capture Optimization */
+        .business-card-front, .business-card-back {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            -webkit-filter: none;
+            filter: none;
+        }
+
+        /* Ensure animations don't interfere with capture */
+        .business-card-front.capturing, .business-card-back.capturing {
+            animation: none !important;
+            transition: none !important;
+        }
+
+        .business-card-front.capturing::before, 
+        .business-card-front.capturing::after,
+        .business-card-back.capturing::before, 
+        .business-card-back.capturing::after {
+            animation: none !important;
+        }
     </style>
 </head>
 <body>
@@ -770,10 +791,98 @@ END:VCARD`;
         }
 
         function downloadPDF() {
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF();
-            pdf.text('Scholarix Business Card', 10, 10);
-            pdf.save('scholarix-business-card.pdf');
+            try {
+                const { jsPDF } = window.jspdf;
+                const cardFront = document.getElementById('card-front');
+                const cardBack = document.getElementById('card-back');
+                
+                if (!cardFront || !cardBack) {
+                    alert('Business card elements not found. Please try again.');
+                    return;
+                }
+
+                // Create PDF in business card size (3.5" x 2" = 89mm x 51mm)
+                const pdf = new jsPDF('l', 'mm', [89, 51]); // landscape orientation
+                
+                // Show loading message
+                const downloadButton = document.querySelector('button[onclick="downloadPDF()"]');
+                const originalText = downloadButton.textContent;
+                downloadButton.textContent = 'Generating PDF...';
+                downloadButton.disabled = true;
+
+                // Add capturing class to disable animations
+                cardFront.classList.add('capturing');
+                cardBack.classList.add('capturing');
+
+                // Reset function for cleanup
+                const resetButton = () => {
+                    cardFront.classList.remove('capturing');
+                    cardBack.classList.remove('capturing');
+                    downloadButton.textContent = originalText;
+                    downloadButton.disabled = false;
+                };
+
+                // Wait a moment for animations to stop
+                setTimeout(() => {
+                    // Capture front of card
+                    html2canvas(cardFront, {
+                        scale: 3, // High quality
+                        useCORS: true,
+                        allowTaint: true,
+                        backgroundColor: null,
+                        width: cardFront.offsetWidth,
+                        height: cardFront.offsetHeight
+                    }).then(frontCanvas => {
+                        // Add front side to PDF
+                        const frontImgData = frontCanvas.toDataURL('image/png');
+                        pdf.addImage(frontImgData, 'PNG', 0, 0, 89, 51);
+                        
+                        // Add new page for back side
+                        pdf.addPage([89, 51], 'l');
+                        
+                        // Capture back of card
+                        html2canvas(cardBack, {
+                            scale: 3,
+                            useCORS: true,
+                            allowTaint: true,
+                            backgroundColor: null,
+                            width: cardBack.offsetWidth,
+                            height: cardBack.offsetHeight
+                        }).then(backCanvas => {
+                            // Add back side to PDF
+                            const backImgData = backCanvas.toDataURL('image/png');
+                            pdf.addImage(backImgData, 'PNG', 0, 0, 89, 51);
+                            
+                            // Save the PDF
+                            pdf.save('scholarix-business-card.pdf');
+                            
+                            // Reset button and cleanup
+                            resetButton();
+                            
+                            // Show success message
+                            alert('Business card PDF downloaded successfully!');
+                        }).catch(error => {
+                            console.error('Error capturing back card:', error);
+                            alert('Error generating PDF. Please try again.');
+                            resetButton();
+                        });
+                    }).catch(error => {
+                        console.error('Error capturing front card:', error);
+                        alert('Error generating PDF. Please try again.');
+                        resetButton();
+                    });
+                }, 100); // Short delay to let animations stop
+                
+            } catch (error) {
+                console.error('PDF generation error:', error);
+                alert('Error generating PDF. Please ensure all libraries are loaded and try again.');
+                // Reset button if there's an error
+                const downloadButton = document.querySelector('button[onclick="downloadPDF()"]');
+                if (downloadButton) {
+                    downloadButton.textContent = 'Download PDF';
+                    downloadButton.disabled = false;
+                }
+            }
         }
 
         function toggleMenu() {
