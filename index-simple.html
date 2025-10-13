@@ -280,7 +280,7 @@
         }
 
         .business-card-front {
-            background: linear-gradient(135deg, #0a1426 0%, #162238 50%, #0a1426 100%);
+            background: #1a2744;
             color: white;
             padding: 35px;
             display: flex;
@@ -291,7 +291,7 @@
         }
 
         .business-card-back {
-            background: linear-gradient(135deg, #0a1426 0%, #162238 50%, #0a1426 100%);
+            background: #1a2744;
             color: white;
             display: flex;
             flex-direction: column;
@@ -456,17 +456,15 @@
             align-items: center;
         }
         .tag {
-            background: rgba(74, 158, 255, 0.12);
-            border: 1px solid rgba(74, 158, 255, 0.5);
-            color: #5ba8ff;
+            background: rgba(74, 158, 255, 0.25);
+            border: 1px solid #4a9eff;
+            color: #ffffff;
             padding: 5px 8px;
             border-radius: 15px;
             font-size: 10px;
-            font-weight: 500;
+            font-weight: 600;
             text-align: center;
             white-space: nowrap;
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
         }
         .qr-section {
             position: absolute;
@@ -487,10 +485,10 @@
             margin-top: 10px;
         }
         .social-icons a {
-            color: #4a9eff;
+            color: #5ba8ff;
             font-size: 16px;
             transition: all 0.3s ease;
-            opacity: 0.9;
+            opacity: 1;
         }
         .social-icons a:hover {
             color: #5ba8ff;
@@ -535,10 +533,10 @@
             justify-content: center;
             width: 44px;
             height: 44px;
-            background: rgba(74, 158, 255, 0.15);
-            border: 2px solid rgba(74, 158, 255, 0.3);
+            background: rgba(74, 158, 255, 0.2);
+            border: 2px solid #4a9eff;
             border-radius: 50%;
-            color: #4a9eff;
+            color: #5ba8ff;
             text-decoration: none;
             transition: all 0.3s ease;
             font-size: 18px;
@@ -637,20 +635,30 @@
             opacity: 0.8 !important;
         }
 
-        /* Force gradient rendering for PDF capture */
+        /* Force solid colors for PDF capture - ensures perfect print consistency */
         .business-card-back.capturing {
-            background: linear-gradient(135deg, #0a1426 0%, #162238 50%, #0a1426 100%) !important;
+            background: #1a2744 !important;
         }
 
         .business-card-front.capturing {
-            background: linear-gradient(135deg, #0a1426 0%, #162238 50%, #0a1426 100%) !important;
+            background: #1a2744 !important;
         }
         
-        /* Ensure back card social icons are visible in PDF */
+        /* Ensure all elements are optimized for PDF capture and print */
         .business-card-back.capturing .back-social-link {
-            background: rgba(74, 158, 255, 0.2) !important;
-            border: 2px solid rgba(74, 158, 255, 0.4) !important;
-            color: #4a9eff !important;
+            background: rgba(74, 158, 255, 0.3) !important;
+            border: 2px solid #4a9eff !important;
+            color: #ffffff !important;
+        }
+        
+        .business-card-front.capturing .tag {
+            background: rgba(74, 158, 255, 0.3) !important;
+            border: 1px solid #4a9eff !important;
+            color: #ffffff !important;
+        }
+        
+        .business-card-front.capturing .social-icons a {
+            color: #5ba8ff !important;
         }
 
         /* ============================================
@@ -977,6 +985,28 @@
 
         .footer-legal a:hover {
             color: #FFFFFF;
+        }
+
+        /* Print Media Query for Perfect Print Output */
+        @media print {
+            .business-card-front, .business-card-back {
+                background: #1a2744 !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+
+            }
+            
+            .tag {
+                background: rgba(74, 158, 255, 0.4) !important;
+                border: 1px solid #4a9eff !important;
+                color: #ffffff !important;
+            }
+            
+            .back-social-link {
+                background: rgba(74, 158, 255, 0.4) !important;
+                border: 2px solid #4a9eff !important;
+                color: #ffffff !important;
+            }
         }
 
         /* Mobile Specific Adjustments */
