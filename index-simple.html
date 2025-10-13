@@ -299,65 +299,77 @@
             text-align: center;
             padding: 40px;
             position: relative;
-            border: 2px solid transparent;
-            background-clip: padding-box;
+            border: 1px solid rgba(74, 158, 255, 0.3);
         }
 
         .business-card-back::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
             border-radius: 15px;
-            padding: 2px;
             background: linear-gradient(45deg, 
-                rgba(74, 158, 255, 0.8) 0%,
+                rgba(74, 158, 255, 0.4) 0%,
                 rgba(0, 212, 255, 0.6) 25%,
-                rgba(255, 255, 255, 0.4) 50%,
+                rgba(255, 255, 255, 0.3) 50%,
                 rgba(0, 212, 255, 0.6) 75%,
-                rgba(74, 158, 255, 0.8) 100%);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: xor;
-            animation: crystal-glow 3s ease-in-out infinite alternate;
+                rgba(74, 158, 255, 0.4) 100%);
+            z-index: -1;
+            animation: elegant-border-glow 4s ease-in-out infinite;
         }
 
         .business-card-back::after {
             content: '';
             position: absolute;
-            top: 15px;
-            left: 15px;
-            right: 15px;
-            bottom: 15px;
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            top: 12px;
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
             pointer-events: none;
-            box-shadow: 
-                inset 0 0 20px rgba(74, 158, 255, 0.1),
-                inset 0 0 40px rgba(0, 212, 255, 0.05);
         }
 
-        @keyframes crystal-glow {
+        @keyframes elegant-border-glow {
             0% {
                 background: linear-gradient(45deg, 
+                    rgba(74, 158, 255, 0.3) 0%,
+                    rgba(0, 212, 255, 0.5) 25%,
+                    rgba(255, 255, 255, 0.2) 50%,
+                    rgba(0, 212, 255, 0.5) 75%,
+                    rgba(74, 158, 255, 0.3) 100%);
+                transform: rotate(0deg);
+            }
+            50% {
+                background: linear-gradient(45deg, 
                     rgba(74, 158, 255, 0.6) 0%,
-                    rgba(0, 212, 255, 0.4) 25%,
-                    rgba(255, 255, 255, 0.3) 50%,
-                    rgba(0, 212, 255, 0.4) 75%,
+                    rgba(0, 212, 255, 0.8) 25%,
+                    rgba(255, 255, 255, 0.4) 50%,
+                    rgba(0, 212, 255, 0.8) 75%,
                     rgba(74, 158, 255, 0.6) 100%);
+                transform: rotate(2deg);
             }
             100% {
                 background: linear-gradient(45deg, 
-                    rgba(74, 158, 255, 1) 0%,
-                    rgba(0, 212, 255, 0.8) 25%,
-                    rgba(255, 255, 255, 0.6) 50%,
-                    rgba(0, 212, 255, 0.8) 75%,
-                    rgba(74, 158, 255, 1) 100%);
+                    rgba(74, 158, 255, 0.3) 0%,
+                    rgba(0, 212, 255, 0.5) 25%,
+                    rgba(255, 255, 255, 0.2) 50%,
+                    rgba(0, 212, 255, 0.5) 75%,
+                    rgba(74, 158, 255, 0.3) 100%);
+                transform: rotate(0deg);
             }
         }
+        .back-company-tagline {
+            font-size: 16px;
+            color: #a0c4ff;
+            margin-bottom: 15px;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+        
         .back-tagline {
             font-size: 18px;
             font-style: italic;
@@ -470,7 +482,13 @@
             font-size: 15px;
             color: #b8d4f1;
         }
-        .back-company { font-size: 38px; font-weight: 700; }
+        .back-company { 
+            font-size: 38px; 
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+            letter-spacing: 2px;
+        }
 
         .control-panel {
             background: rgba(255,255,255,0.95);
@@ -640,6 +658,7 @@
             <div class="business-card-back" id="card-back">
                 <div class="back-company" id="back-company">Scholarix</div>
                 <div class="company-subtitle">GLOBAL CONSULTANTS</div>
+                <div class="back-company-tagline" id="back-company-tagline">Vision. Innovation. Execution.</div>
                 <div class="back-tagline">Transforming Business Through AI Innovation</div>
             </div>
         </div>
