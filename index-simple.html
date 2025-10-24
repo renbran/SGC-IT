@@ -19,75 +19,78 @@
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
-        }
-
-        /* Loading Screen Styles */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+        .card-content {
+            flex: 1;
+            padding: 20px 28px 24px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            gap: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 24px;
+        }
+
+        .info-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            min-width: 0;
+            max-width: 350px;
+        }
+
+        .badge-column {
+            width: 220px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 16px;
+        }
+
+        .badge-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            width: 100%;
+            justify-items: end;
+        }
+
+        .badge-pill {
+            display: inline-flex;
             align-items: center;
-            z-index: 9999;
-            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+            justify-content: center;
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1.5px solid rgba(212, 165, 116, 0.45);
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: rgba(212, 165, 116, 0.85);
+            background: rgba(212, 165, 116, 0.08);
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
-        .loading-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
+        .qr-showcase {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 8px;
+            margin-top: 0;
         }
 
-        .loading-logo {
-            font-size: 48px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #4a9eff, #00d4ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 30px;
-            animation: logoFadeIn 1s ease-in-out;
-        }
-
-        .loading-subtitle {
-            font-size: 18px;
-            color: #a0c4ff;
-            margin-bottom: 40px;
-            animation: subtitleFadeIn 1s ease-in-out 0.3s both;
-        }
-
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 3px solid rgba(74, 158, 255, 0.2);
-            border-top: 3px solid #4a9eff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        .loading-progress {
-            width: 300px;
-            height: 4px;
-            background: rgba(74, 158, 255, 0.2);
-            border-radius: 2px;
-            margin-top: 30px;
-            overflow: hidden;
+        .qr-wrapper {
             position: relative;
+            width: 180px;
+            height: 190px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
-        .loading-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #4a9eff, #00d4ff);
-            border-radius: 2px;
-            width: 0%;
-            animation: progressFill 2s ease-in-out;
-        }
-
-        .loading-text {
             color: #a0c4ff;
             font-size: 14px;
             margin-top: 20px;
@@ -452,6 +455,7 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+            align-items: stretch;
             gap: 32px;
         }
 
@@ -459,29 +463,41 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            min-height: 0;
+            padding-bottom: 8px;
+        }
+
+        .card-left-top {
+            display: flex;
+            flex-direction: column;
             gap: 18px;
+            padding-right: 12px;
         }
 
         .card-right {
-            width: 220px;
+            width: 240px;
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
+            align-items: center;
+            justify-content: space-between;
             gap: 20px;
+            padding-top: 6px;
         }
 
         .badge-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 10px;
+            gap: 12px;
             width: 100%;
+            justify-items: center;
         }
 
         .badge-pill {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 6px 12px;
+            padding: 6px 16px;
             border-radius: 999px;
             border: 1.5px solid rgba(212, 165, 116, 0.45);
             font-size: 11px;
@@ -491,6 +507,7 @@
             background: rgba(212, 165, 116, 0.08);
             font-weight: 600;
             transition: all 0.3s ease;
+            min-width: 105px;
         }
 
         .badge-pill:hover {
@@ -502,7 +519,7 @@
         .qr-wrapper {
             position: relative;
             width: 180px;
-            height: 200px;
+            height: 190px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -544,8 +561,8 @@
         .person-section {
             display: flex;
             flex-direction: column;
-            gap: 3px;
-            margin: 4px 0;
+            gap: 4px;
+            margin: 0;
         }
 
         .qr-card canvas {
@@ -555,10 +572,18 @@
 
         .qr-label {
             font-size: 11px;
-            color: rgba(26, 58, 107, 0.85);
+            color: #1a3a6b;
             text-transform: uppercase;
             letter-spacing: 1.4px;
             font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .qr-label::before {
+            content: "📱";
+            font-size: 14px;
         }
 
         .business-card-back .qr-section {
@@ -577,6 +602,11 @@
             border-radius: 14px;
             padding: 8px;
             box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(212, 165, 116, 0.25);
+        }
+        
+        .business-card-back .qr-label::before {
+            content: "📱";
+            font-size: 16px;
         }
 
         .company-name { 
@@ -619,15 +649,15 @@
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 9px;
+            gap: 8px;
             font-size: 12px;
-            margin-top: 6px;
+            margin-top: 4px;
         }
         .contact-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255, 255, 255, 0.9);
             transition: all 0.2s ease;
         }
         .contact-item:hover {
@@ -637,7 +667,7 @@
             width: 16px;
             height: 16px;
             text-align: center;
-            color: rgba(74, 158, 255, 0.8);
+            color: #4a9eff;
             font-size: 14px;
             flex-shrink: 0;
         }
@@ -702,40 +732,130 @@
             display: flex;
             gap: 10px;
             align-items: center;
+            flex-wrap: wrap;
         }
         .social-icons a {
-            color: rgba(74, 158, 255, 0.9);
-            font-size: 18px;
+            font-size: 20px;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: rgba(74, 158, 255, 0.12);
-            border: 1.5px solid rgba(212, 165, 116, 0.4);
+            text-decoration: none;
         }
+        
+        .social-icons a[title*="LinkedIn"] {
+            background: #0077B5;
+            color: white;
+        }
+        
+        .social-icons a[title*="Twitter"] {
+            background: #1DA1F2;
+            color: white;
+        }
+        
+        .social-icons a[title*="Facebook"] {
+            background: #1877F2;
+            color: white;
+        }
+        
+        .social-icons a[title*="Instagram"] {
+            background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4);
+            color: white;
+        }
+        
         .social-icons a:hover {
-            color: #ffffff;
-            background: rgba(212, 165, 116, 0.25);
             transform: scale(1.15) translateY(-3px);
-            border-color: rgba(212, 165, 116, 0.8);
-            box-shadow: 0 6px 16px rgba(212, 165, 116, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            filter: brightness(1.1);
         }
 
         .social-group {
-            margin-top: auto;
             display: flex;
             flex-direction: column;
             gap: 10px;
+            align-items: flex-start;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 900px) {
+            .card-preview {
+                min-width: 100%;
+            }
+
+            .info-row {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .badge-column {
+                width: 100%;
+                align-items: flex-start;
+            }
+
+            .badge-grid {
+                justify-items: start;
+            }
+
+            .qr-wrapper {
+                height: 180px;
+            }
+        }
+
+        @media print {
+            body {
+                background: #ffffff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .navbar,
+            .header,
+            .control-panel,
+            .loading-screen {
+                display: none !important;
+            }
+
+            .main-content {
+                padding: 20px;
+            }
+
+            .cards-wrapper {
+                flex-direction: column;
+                gap: 40px;
+                align-items: center;
+            }
+
+            .card-preview {
+                min-width: unset;
+                max-width: none;
+                width: 100%;
+            }
+
+            .business-card-front,
+            .business-card-back {
+                box-shadow: none;
+                border: 1px solid rgba(0, 0, 0, 0.08);
+                page-break-inside: avoid;
+            }
         }
 
         .social-caption {
             font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: rgba(160, 196, 255, 0.7);
+            color: #a0c4ff;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .social-caption::before {
+            content: "🌐";
+            font-size: 14px;
         }
         .person-title {
             margin-bottom: 15px;
@@ -883,48 +1003,52 @@
 
                 <!-- Main Content Section -->
                 <div class="card-content">
-                    <div class="card-left">
-                        <div class="tagline">Navigate.Innovate.Transform</div>
+                    <div class="info-row">
+                        <div class="info-left">
+                            <div class="tagline">Navigate.Innovate.Transform</div>
 
-                        <div class="person-section">
-                            <div class="person-name" id="person-name">RENBRAN ANTHONY MADELO</div>
-                            <div class="person-title" id="person-title">CO-FOUNDER</div>
+                            <div class="person-section">
+                                <div class="person-name" id="person-name">RENBRAN ANTHONY MADELO</div>
+                                <div class="person-title" id="person-title">CO-FOUNDER</div>
+                            </div>
+
+                            <div class="contact-info">
+                                <div class="contact-item">
+                                    <i class="fas fa-envelope"></i>
+                                    <span id="person-email">john.anderson@scholarix.com</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-phone"></i>
+                                    <span id="person-mobile">+1 234 567 8900</span>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="fas fa-globe"></i>
+                                    <span id="person-website">www.scholarix.com</span>
+                                </div>
+                            </div>
+
+                            <div class="social-group">
+                                <div class="social-caption">Connect</div>
+                                <div class="social-icons">
+                                    <a href="#" id="linkedin-link" target="_blank" title="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                                    <a href="#" id="twitter-link" target="_blank" title="Twitter Profile"><i class="fab fa-twitter"></i></a>
+                                    <a href="#" id="facebook-link" target="_blank" title="Facebook Profile"><i class="fab fa-facebook"></i></a>
+                                    <a href="#" id="instagram-link" target="_blank" title="Instagram Profile"><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="contact-info">
-                            <div class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <span id="person-email">john.anderson@scholarix.com</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-phone"></i>
-                                <span id="person-mobile">+1 234 567 8900</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-globe"></i>
-                                <span id="person-website">www.scholarix.com</span>
-                            </div>
-                        </div>
-
-                        <div class="social-group">
-                            <div class="social-caption">Connect</div>
-                            <div class="social-icons">
-                                <a href="#" id="linkedin-link" target="_blank" title="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
-                                <a href="#" id="twitter-link" target="_blank" title="Twitter Profile"><i class="fab fa-twitter"></i></a>
-                                <a href="#" id="facebook-link" target="_blank" title="Facebook Profile"><i class="fab fa-facebook"></i></a>
-                                <a href="#" id="instagram-link" target="_blank" title="Instagram Profile"><i class="fab fa-instagram"></i></a>
+                        <div class="badge-column">
+                            <div class="badge-grid">
+                                <span class="badge-pill">AI Partner</span>
+                                <span class="badge-pill">Certified</span>
+                                <span class="badge-pill">Automation</span>
+                                <span class="badge-pill">Global</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="card-right">
-                        <div class="badge-grid">
-                            <span class="badge-pill">AI Partner</span>
-                            <span class="badge-pill">Certified</span>
-                            <span class="badge-pill">Automation</span>
-                            <span class="badge-pill">Global</span>
-                        </div>
-
+                    <div class="qr-showcase">
                         <div class="qr-wrapper">
                             <span class="qr-shape"></span>
                             <div class="qr-card">
