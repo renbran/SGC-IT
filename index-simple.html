@@ -287,9 +287,7 @@
             flex-direction: column;
         }
         
-        /* Decorative Corner Borders - All 4 Corners */
-        .business-card-front::before,
-        .business-card-front::after,
+        /* Decorative Corner Borders - Back Side Only - Single Line Style */
         .business-card-back::before,
         .business-card-back::after {
             content: '';
@@ -300,28 +298,24 @@
         }
         
         /* Top-left corner */
-        .business-card-front::before,
         .business-card-back::before {
             top: 15px;
             left: 15px;
-            border-top: 4px solid #d4a574;
-            border-left: 4px solid #d4a574;
-            box-shadow: 0 0 8px rgba(212, 165, 116, 0.3);
+            border-top: 1px solid #d4a574;
+            border-left: 1px solid #d4a574;
         }
         
         /* Top-right corner */
-        .business-card-front::after,
         .business-card-back::after {
             top: 15px;
             right: 15px;
-            border-top: 4px solid #e8c77f;
-            border-right: 4px solid #e8c77f;
-            box-shadow: 0 0 8px rgba(232, 199, 127, 0.3);
+            border-top: 1px solid #e8c77f;
+            border-right: 1px solid #e8c77f;
         }
         
-        /* Bottom corners using card-content pseudo-elements */
-        .card-content::before,
-        .card-content::after {
+        /* Bottom corners using back-content pseudo-elements */
+        .business-card-back .card-content::before,
+        .business-card-back .card-content::after {
             content: '';
             position: absolute;
             width: 60px;
@@ -330,21 +324,19 @@
         }
         
         /* Bottom-left corner */
-        .card-content::before {
+        .business-card-back .card-content::before {
             bottom: 15px;
             left: 15px;
-            border-bottom: 4px solid #d4a574;
-            border-left: 4px solid #d4a574;
-            box-shadow: 0 0 8px rgba(212, 165, 116, 0.3);
+            border-bottom: 1px solid #d4a574;
+            border-left: 1px solid #d4a574;
         }
         
         /* Bottom-right corner */
-        .card-content::after {
+        .business-card-back .card-content::after {
             bottom: 15px;
             right: 15px;
-            border-bottom: 4px solid #e8c77f;
-            border-right: 4px solid #e8c77f;
-            box-shadow: 0 0 8px rgba(232, 199, 127, 0.3);
+            border-bottom: 1px solid #e8c77f;
+            border-right: 1px solid #e8c77f;
         }
 
         .business-card-front {
