@@ -448,45 +448,96 @@
         /* Main Content Section */
         .card-content {
             flex: 1;
-            padding: 16px 28px;
+            padding: 24px 30px 26px 30px;
             display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            gap: 10px;
-            position: relative;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 32px;
         }
 
-        /* Front Card Partner Badges - Top Right */
-        .front-partners {
-            position: absolute;
-            top: 16px;
-            right: 28px;
+        .card-left {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 18px;
+        }
+
+        .card-right {
+            width: 220px;
+            display: flex;
+            flex-direction: column;
             align-items: flex-end;
+            gap: 20px;
         }
 
-        .front-partner-badge {
+        .badge-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            width: 100%;
+        }
+
+        .badge-pill {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: transparent;
-            border: 1.5px solid rgba(212, 165, 116, 0.4);
-            border-radius: 18px;
-            padding: 5px 12px;
-            font-size: 10px;
-            color: rgba(212, 165, 116, 0.75);
-            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: 1.5px solid rgba(212, 165, 116, 0.45);
+            font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
+            color: rgba(212, 165, 116, 0.85);
+            background: rgba(212, 165, 116, 0.08);
+            font-weight: 600;
             transition: all 0.3s ease;
         }
 
-        .front-partner-badge:hover {
-            background: rgba(212, 165, 116, 0.12);
-            border-color: rgba(212, 165, 116, 0.6);
-            color: rgba(212, 165, 116, 0.95);
+        .badge-pill:hover {
+            background: rgba(212, 165, 116, 0.18);
+            border-color: rgba(212, 165, 116, 0.7);
+            color: rgba(212, 165, 116, 1);
+        }
+
+        .qr-wrapper {
+            position: relative;
+            width: 180px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-shape {
+            position: absolute;
+            display: block;
+            width: 150px;
+            height: 150px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.55), rgba(0, 212, 255, 0.35));
+            transform: rotate(35deg);
+            filter: blur(0.2px);
+        }
+
+        .qr-shape::after {
+            content: "";
+            position: absolute;
+            inset: 12px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.25), rgba(26, 58, 107, 0.15));
+        }
+
+        .qr-card {
+            position: relative;
+            z-index: 2;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            padding: 16px 16px 18px;
+            box-shadow: 0 16px 35px rgba(0, 0, 0, 0.3), 0 10px 18px rgba(0, 64, 128, 0.25);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
 
         /* Person Section */
@@ -497,35 +548,35 @@
             margin: 4px 0;
         }
 
-        /* Footer Section */
-        .card-footer {
-            padding: 14px 28px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            border-top: 2px solid rgba(212, 165, 116, 0.4);
-            background: rgba(0, 0, 0, 0.08);
-            box-shadow: inset 0 1px 2px rgba(212, 165, 116, 0.2);
+        .qr-card canvas {
+            width: 120px;
+            height: 120px;
         }
 
-        /* QR Section - Now visible in footer */
-        .qr-section {
+        .qr-label {
+            font-size: 11px;
+            color: rgba(26, 58, 107, 0.85);
+            text-transform: uppercase;
+            letter-spacing: 1.4px;
+            font-weight: 700;
+        }
+
+        .business-card-back .qr-section {
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 4px;
+            gap: 6px;
         }
 
-        .qr-section canvas {
-            width: 100px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 12px;
-            padding: 6px;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 12px rgba(212, 165, 116, 0.2);
+        .business-card-back .qr-section canvas {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 14px;
+            padding: 8px;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(212, 165, 116, 0.25);
         }
 
         .company-name { 
@@ -650,9 +701,7 @@
         .social-icons {
             display: flex;
             gap: 10px;
-            margin-top: 0;
             align-items: center;
-            flex-wrap: wrap;
         }
         .social-icons a {
             color: rgba(74, 158, 255, 0.9);
@@ -673,6 +722,20 @@
             transform: scale(1.15) translateY(-3px);
             border-color: rgba(212, 165, 116, 0.8);
             box-shadow: 0 6px 16px rgba(212, 165, 116, 0.3);
+        }
+
+        .social-group {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .social-caption {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(160, 196, 255, 0.7);
         }
         .person-title {
             margin-bottom: 15px;
@@ -820,53 +883,55 @@
 
                 <!-- Main Content Section -->
                 <div class="card-content">
-                    <!-- Partner Badges - Top Right -->
-                    <div class="front-partners">
-                        <span class="front-partner-badge">AI Partner</span>
-                        <span class="front-partner-badge">Certified</span>
-                        <span class="front-partner-badge">Automation</span>
-                        <span class="front-partner-badge">Global</span>
-                    </div>
-                    
-                    <!-- Tagline -->
-                    <div class="tagline">Navigate.Innovate.Transform</div>
-                    
-                    <!-- Person Details Section -->
-                    <div class="person-section">
-                        <div class="person-name" id="person-name">RENBRAN ANTHONY MADELO</div>
-                        <div class="person-title" id="person-title">CO-FOUNDER</div>
-                    </div>
-                    
-                    <!-- Contact Information -->
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span id="person-email">john.anderson@scholarix.com</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span id="person-mobile">+1 234 567 8900</span>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-globe"></i>
-                            <span id="person-website">www.scholarix.com</span>
-                        </div>
-                    </div>
-                </div>
+                    <div class="card-left">
+                        <div class="tagline">Navigate.Innovate.Transform</div>
 
-                <!-- Footer Section -->
-                <div class="card-footer">
-                    <div class="social-icons">
-                        <a href="#" id="linkedin-link" target="_blank" title="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" id="twitter-link" target="_blank" title="Twitter Profile"><i class="fab fa-twitter"></i></a>
-                        <a href="#" id="facebook-link" target="_blank" title="Facebook Profile"><i class="fab fa-facebook"></i></a>
-                        <a href="#" id="instagram-link" target="_blank" title="Instagram Profile"><i class="fab fa-instagram"></i></a>
+                        <div class="person-section">
+                            <div class="person-name" id="person-name">RENBRAN ANTHONY MADELO</div>
+                            <div class="person-title" id="person-title">CO-FOUNDER</div>
+                        </div>
+
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span id="person-email">john.anderson@scholarix.com</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span id="person-mobile">+1 234 567 8900</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-globe"></i>
+                                <span id="person-website">www.scholarix.com</span>
+                            </div>
+                        </div>
+
+                        <div class="social-group">
+                            <div class="social-caption">Connect</div>
+                            <div class="social-icons">
+                                <a href="#" id="linkedin-link" target="_blank" title="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" id="twitter-link" target="_blank" title="Twitter Profile"><i class="fab fa-twitter"></i></a>
+                                <a href="#" id="facebook-link" target="_blank" title="Facebook Profile"><i class="fab fa-facebook"></i></a>
+                                <a href="#" id="instagram-link" target="_blank" title="Instagram Profile"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <!-- QR Code Section -->
-                    <div class="qr-section">
-                        <canvas id="qrcode-front"></canvas>
-                        <div class="qr-label">SCAN</div>
+
+                    <div class="card-right">
+                        <div class="badge-grid">
+                            <span class="badge-pill">AI Partner</span>
+                            <span class="badge-pill">Certified</span>
+                            <span class="badge-pill">Automation</span>
+                            <span class="badge-pill">Global</span>
+                        </div>
+
+                        <div class="qr-wrapper">
+                            <span class="qr-shape"></span>
+                            <div class="qr-card">
+                                <canvas id="qrcode-front"></canvas>
+                                <div class="qr-label">Scan to Connect</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
