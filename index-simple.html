@@ -289,8 +289,10 @@
             background-image: 
                 linear-gradient(135deg, #1a3a6b 0%, #2d5a99 40%, #1f3d72 100%),
                 radial-gradient(circle at 10% 90%, rgba(74, 158, 255, 0.1) 1px, transparent 1px),
-                radial-gradient(circle at 90% 10%, rgba(74, 158, 255, 0.1) 1px, transparent 1px);
-            background-size: auto, 40px 40px, 60px 60px;
+                radial-gradient(circle at 90% 10%, rgba(74, 158, 255, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 100% 0%, rgba(0, 212, 255, 0.08) 0%, transparent 20%),
+                radial-gradient(circle at 0% 100%, rgba(74, 158, 255, 0.08) 0%, transparent 20%);
+            background-size: auto, 40px 40px, 60px 60px, 100% 100%, 100% 100%;
         }
 
         .business-card-back {
@@ -303,8 +305,10 @@
             background-image: 
                 linear-gradient(135deg, #2d5a99 0%, #1f3d72 40%, #1a3a6b 100%),
                 repeating-linear-gradient(90deg, transparent, transparent 35px, rgba(74, 158, 255, 0.08) 35px, rgba(74, 158, 255, 0.08) 36px),
-                repeating-linear-gradient(0deg, transparent, transparent 35px, rgba(74, 158, 255, 0.08) 35px, rgba(74, 158, 255, 0.08) 36px);
-            background-size: auto, auto, auto;
+                repeating-linear-gradient(0deg, transparent, transparent 35px, rgba(74, 158, 255, 0.08) 35px, rgba(74, 158, 255, 0.08) 36px),
+                radial-gradient(ellipse at 50% 0%, rgba(0, 212, 255, 0.1) 0%, transparent 30%),
+                radial-gradient(ellipse at 50% 100%, rgba(74, 158, 255, 0.08) 0%, transparent 35%);
+            background-size: auto, auto, auto, 100% 100%, 100% 100%;
         }
         .back-tagline {
             font-size: 18px;
@@ -320,44 +324,111 @@
         }
 
         .back-card-logo {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             object-fit: contain;
-            background: rgba(74, 158, 255, 0.1);
-            border-radius: 12px;
-            padding: 10px;
-            border: 2px solid rgba(74, 158, 255, 0.2);
+            background: rgba(74, 158, 255, 0.15);
+            border-radius: 14px;
+            padding: 12px;
+            border: 2px solid rgba(212, 165, 116, 0.3);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25), 0 0 15px rgba(212, 165, 116, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .back-card-logo:hover {
+            transform: scale(1.08);
+            border-color: rgba(212, 165, 116, 0.6);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 25px rgba(212, 165, 116, 0.25);
+        }
+
+        /* Partner Logos Section */
+        .partners-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid rgba(212, 165, 116, 0.3);
+        }
+
+        .partner-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .partner-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(212, 165, 116, 0.08);
+            border: 1.5px solid rgba(212, 165, 116, 0.35);
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 11px;
+            color: rgba(212, 165, 116, 0.8);
+            margin: 0 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .partner-badge:hover {
+            background: rgba(212, 165, 116, 0.15);
+            border-color: rgba(212, 165, 116, 0.6);
+            color: rgba(212, 165, 116, 1);
         }
 
         /* Accent bar at top */
         .accent-bar-top {
-            height: 4px;
-            background: linear-gradient(90deg, #00d4ff, #4a9eff, #00d4ff);
+            height: 5px;
+            background: linear-gradient(90deg, #d4a574 0%, #e8c77f 25%, #f5e6d3 50%, #e8c77f 75%, #d4a574 100%);
             width: 100%;
+            box-shadow: 0 2px 8px rgba(212, 165, 116, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.3);
         }
 
         /* Card Header Section with Logo */
         .card-header {
             display: flex;
             align-items: center;
-            gap: 18px;
-            padding: 20px 25px;
-            background: rgba(0, 0, 0, 0.15);
+            gap: 22px;
+            padding: 22px 28px;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.05));
+            border-bottom: 2px solid rgba(212, 165, 116, 0.25);
         }
 
         .logo-container {
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .card-logo {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             object-fit: contain;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 8px;
-            border: 2px solid rgba(74, 158, 255, 0.3);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.2), rgba(0, 212, 255, 0.1));
+            border-radius: 14px;
+            padding: 12px;
+            border: 2px solid rgba(212, 165, 116, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(212, 165, 116, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .card-logo:hover {
+            transform: scale(1.05);
+            border-color: rgba(212, 165, 116, 0.6);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4), 0 0 25px rgba(212, 165, 116, 0.3);
         }
 
         .company-info {
@@ -368,42 +439,93 @@
 
         /* Divider Line */
         .card-divider {
-            height: 1px;
-            background: linear-gradient(90deg, rgba(74, 158, 255, 0.2), rgba(74, 158, 255, 0.5), rgba(74, 158, 255, 0.2));
+            height: 2px;
+            background: linear-gradient(90deg, rgba(212, 165, 116, 0.2), rgba(212, 165, 116, 0.6), rgba(212, 165, 116, 0.2));
             width: 100%;
+            box-shadow: 0 1px 3px rgba(212, 165, 116, 0.3);
         }
 
         /* Main Content Section */
         .card-content {
             flex: 1;
-            padding: 18px 25px;
+            padding: 16px 28px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
-            gap: 14px;
+            gap: 10px;
+            position: relative;
+        }
+
+        /* Front Card Partner Badges - Top Right */
+        .front-partners {
+            position: absolute;
+            top: 16px;
+            right: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        .front-partner-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: 1.5px solid rgba(212, 165, 116, 0.4);
+            border-radius: 18px;
+            padding: 5px 12px;
+            font-size: 10px;
+            color: rgba(212, 165, 116, 0.75);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .front-partner-badge:hover {
+            background: rgba(212, 165, 116, 0.12);
+            border-color: rgba(212, 165, 116, 0.6);
+            color: rgba(212, 165, 116, 0.95);
         }
 
         /* Person Section */
         .person-section {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
+            margin: 4px 0;
         }
 
         /* Footer Section */
         .card-footer {
-            padding: 15px 25px;
+            padding: 14px 28px;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 15px;
-            border-top: 1px solid rgba(74, 158, 255, 0.2);
-            background: rgba(0, 0, 0, 0.1);
+            border-top: 2px solid rgba(212, 165, 116, 0.4);
+            background: rgba(0, 0, 0, 0.08);
+            box-shadow: inset 0 1px 2px rgba(212, 165, 116, 0.2);
         }
 
-        /* QR Section */
+        /* QR Section - Now visible in footer */
         .qr-section {
             flex-shrink: 0;
-            margin-left: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .qr-section canvas {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 12px;
+            padding: 6px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 12px rgba(212, 165, 116, 0.2);
         }
 
         .company-name { 
@@ -413,7 +535,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-transform: uppercase;
             letter-spacing: 2px;
             display: flex;
@@ -423,9 +545,9 @@
         .company-subtitle {
             font-size: 14px;
             color: #a0c4ff;
-            margin-bottom: 20px;
+            margin-bottom: 0;
             font-weight: 300;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
         }
         .person-name { 
             font-size: 18px; 
@@ -446,9 +568,9 @@
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 11px;
-            font-size: 13px;
-            margin-top: 0;
+            gap: 9px;
+            font-size: 12px;
+            margin-top: 6px;
         }
         .contact-item {
             display: flex;
@@ -488,12 +610,12 @@
 
         /* Tagline Styling */
         .tagline {
-            font-size: 12px;
-            color: rgba(74, 158, 255, 0.75);
+            font-size: 13px;
+            color: rgba(74, 158, 255, 0.8);
             font-style: italic;
-            margin: 0 0 12px 0;
+            margin: 2px 0 8px 0;
             font-weight: 300;
-            letter-spacing: 0.8px;
+            letter-spacing: 0.7px;
         }
 
         .tags-section {
@@ -519,20 +641,21 @@
         }
         .qr-label {
             font-size: 11px;
-            color: rgba(74, 158, 255, 0.7);
-            margin-top: 8px;
+            color: rgba(74, 158, 255, 0.8);
+            margin-top: 2px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
         }
         .social-icons {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             margin-top: 0;
             align-items: center;
+            flex-wrap: wrap;
         }
         .social-icons a {
-            color: rgba(74, 158, 255, 0.8);
+            color: rgba(74, 158, 255, 0.9);
             font-size: 18px;
             transition: all 0.3s ease;
             display: flex;
@@ -541,14 +664,15 @@
             width: 36px;
             height: 36px;
             border-radius: 50%;
-            background: rgba(74, 158, 255, 0.15);
-            border: 1px solid rgba(74, 158, 255, 0.3);
+            background: rgba(74, 158, 255, 0.12);
+            border: 1.5px solid rgba(212, 165, 116, 0.4);
         }
         .social-icons a:hover {
             color: #ffffff;
-            background: rgba(74, 158, 255, 0.3);
-            transform: scale(1.1) translateY(-2px);
-            border-color: rgba(74, 158, 255, 0.6);
+            background: rgba(212, 165, 116, 0.25);
+            transform: scale(1.15) translateY(-3px);
+            border-color: rgba(212, 165, 116, 0.8);
+            box-shadow: 0 6px 16px rgba(212, 165, 116, 0.3);
         }
         .person-title {
             margin-bottom: 15px;
@@ -696,6 +820,14 @@
 
                 <!-- Main Content Section -->
                 <div class="card-content">
+                    <!-- Partner Badges - Top Right -->
+                    <div class="front-partners">
+                        <span class="front-partner-badge">AI Partner</span>
+                        <span class="front-partner-badge">Certified</span>
+                        <span class="front-partner-badge">Automation</span>
+                        <span class="front-partner-badge">Global</span>
+                    </div>
+                    
                     <!-- Tagline -->
                     <div class="tagline">Navigate.Innovate.Transform</div>
                     
@@ -730,20 +862,12 @@
                         <a href="#" id="facebook-link" target="_blank" title="Facebook Profile"><i class="fab fa-facebook"></i></a>
                         <a href="#" id="instagram-link" target="_blank" title="Instagram Profile"><i class="fab fa-instagram"></i></a>
                     </div>
-                </div>
-                
-                <!-- Tags Section -->
-                <div class="tags-section">
-                    <div class="tag">AI Partner</div>
-                    <div class="tag">Certified</div>
-                    <div class="tag">Automation</div>
-                    <div class="tag">Global</div>
-                </div>
-                
-                <!-- QR Code Section -->
-                <div class="qr-section">
-                    <canvas id="qrcode-front"></canvas>
-                    <div class="qr-label">SCAN TO CONNECT</div>
+                    
+                    <!-- QR Code Section -->
+                    <div class="qr-section">
+                        <canvas id="qrcode-front"></canvas>
+                        <div class="qr-label">SCAN</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -760,7 +884,20 @@
                 
                 <div class="back-company" id="back-company">SCHOLARIX</div>
                 <div class="company-subtitle">GLOBAL CONSULTANTS</div>
-                <div class="back-tagline">Transforming Business Through AI Innovation</div>
+                <div class="back-tagline">Navigate.Innovate.Transform</div>
+                
+                <!-- QR Code Section -->
+                <div class="qr-section">
+                    <canvas id="qrcode-back"></canvas>
+                    <div class="qr-label">SCAN TO CONNECT</div>
+                </div>
+                
+                <!-- Partner Badges Section -->
+                <div class="partners-section">
+                    <span class="partner-badge">AI Partner</span>
+                    <span class="partner-badge">Certified</span>
+                    <span class="partner-badge">Global</span>
+                </div>
             </div>
         </div>
     </div>
@@ -823,7 +960,8 @@
 
     <script>
         function generateQR() {
-            const canvas = document.getElementById('qrcode-front');
+            const canvasFront = document.getElementById('qrcode-front');
+            const canvasBack = document.getElementById('qrcode-back');
             const name = document.getElementById('input-name').value;
             const email = document.getElementById('input-email').value;
             const mobile = document.getElementById('input-mobile').value;
@@ -848,12 +986,25 @@ X-SOCIALPROFILE;TYPE=facebook:${facebook}
 X-SOCIALPROFILE;TYPE=instagram:${instagram}
 END:VCARD`;
             
-            QRCode.toCanvas(canvas, vCardData, {
-                width: 120,
-                height: 120,
-                color: { dark: '#1a2b4d', light: '#ffffff' },
-                margin: 2
-            });
+            // Generate QR code for front card
+            if (canvasFront) {
+                QRCode.toCanvas(canvasFront, vCardData, {
+                    width: 80,
+                    height: 80,
+                    color: { dark: '#1a2b4d', light: '#ffffff' },
+                    margin: 1
+                });
+            }
+            
+            // Generate QR code for back card
+            if (canvasBack) {
+                QRCode.toCanvas(canvasBack, vCardData, {
+                    width: 100,
+                    height: 100,
+                    color: { dark: '#1a2b4d', light: '#ffffff' },
+                    margin: 1
+                });
+            }
         }
 
         function updateCard() {
