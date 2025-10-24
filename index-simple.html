@@ -12,7 +12,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Inter', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
             min-height: 100vh;
             padding: 0;
@@ -286,6 +286,66 @@
             display: flex;
             flex-direction: column;
         }
+        
+        /* Decorative Corner Borders - All 4 Corners */
+        .business-card-front::before,
+        .business-card-front::after,
+        .business-card-back::before,
+        .business-card-back::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            z-index: 10;
+        }
+        
+        /* Top-left corner */
+        .business-card-front::before,
+        .business-card-back::before {
+            top: 15px;
+            left: 15px;
+            border-top: 4px solid #d4a574;
+            border-left: 4px solid #d4a574;
+            box-shadow: 0 0 8px rgba(212, 165, 116, 0.3);
+        }
+        
+        /* Top-right corner */
+        .business-card-front::after,
+        .business-card-back::after {
+            top: 15px;
+            right: 15px;
+            border-top: 4px solid #e8c77f;
+            border-right: 4px solid #e8c77f;
+            box-shadow: 0 0 8px rgba(232, 199, 127, 0.3);
+        }
+        
+        /* Bottom corners using card-content pseudo-elements */
+        .card-content::before,
+        .card-content::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            z-index: 10;
+        }
+        
+        /* Bottom-left corner */
+        .card-content::before {
+            bottom: 15px;
+            left: 15px;
+            border-bottom: 4px solid #d4a574;
+            border-left: 4px solid #d4a574;
+            box-shadow: 0 0 8px rgba(212, 165, 116, 0.3);
+        }
+        
+        /* Bottom-right corner */
+        .card-content::after {
+            bottom: 15px;
+            right: 15px;
+            border-bottom: 4px solid #e8c77f;
+            border-right: 4px solid #e8c77f;
+            box-shadow: 0 0 8px rgba(232, 199, 127, 0.3);
+        }
 
         .business-card-front {
             background: linear-gradient(135deg, #1a3a6b 0%, #2d5a99 40%, #1f3d72 100%);
@@ -558,7 +618,7 @@
         /* Typography Hierarchy */
         .company-name { 
             font-size: 30px; 
-            font-weight: 700; 
+            font-weight: 900;
             color: #ffffff;
             margin-bottom: 5px;
             text-transform: uppercase;
@@ -567,34 +627,38 @@
             align-items: center;
             gap: 10px;
             line-height: 1.1;
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         
         .company-subtitle {
             font-size: 14px;
             color: #a0c4ff;
             margin-bottom: 0;
-            font-weight: 400;
+            font-weight: 600;
             letter-spacing: 1.5px;
             text-transform: uppercase;
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         
         .person-name { 
             font-size: 18px; 
-            font-weight: 700; 
+            font-weight: 800;
             margin-bottom: 4px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             color: #ffffff;
             line-height: 1.2;
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         
         .person-title {
             font-size: 13px;
             color: rgba(74, 158, 255, 0.95);
             margin-bottom: 0;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 1.2px;
             text-transform: uppercase;
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         .contact-info {
             display: flex;
