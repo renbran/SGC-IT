@@ -273,290 +273,289 @@
         .business-card-front, .business-card-back {
             width: 100%;
             height: 350px;
-            border-radius: 15px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6), 0 10px 20px rgba(0,0,0,0.3);
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.35);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         .business-card-front {
-            background: #1a2744;
+            background: linear-gradient(135deg, #1a3a6b 0%, #2d5a99 40%, #1f3d72 100%);
             color: white;
-            padding: 35px;
-            display: flex;
+            padding: 0;
             justify-content: space-between;
-            align-items: flex-start;
-            position: relative;
-            box-sizing: border-box;
+            background-image: 
+                linear-gradient(135deg, #1a3a6b 0%, #2d5a99 40%, #1f3d72 100%),
+                radial-gradient(circle at 10% 90%, rgba(74, 158, 255, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 90% 10%, rgba(74, 158, 255, 0.1) 1px, transparent 1px);
+            background-size: auto, 40px 40px, 60px 60px;
         }
 
         .business-card-back {
-            background: #1a2744;
+            background: linear-gradient(135deg, #2d5a99 0%, #1f3d72 40%, #1a3a6b 100%);
             color: white;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            text-align: center;
+            background-image: 
+                linear-gradient(135deg, #2d5a99 0%, #1f3d72 40%, #1a3a6b 100%),
+                repeating-linear-gradient(90deg, transparent, transparent 35px, rgba(74, 158, 255, 0.08) 35px, rgba(74, 158, 255, 0.08) 36px),
+                repeating-linear-gradient(0deg, transparent, transparent 35px, rgba(74, 158, 255, 0.08) 35px, rgba(74, 158, 255, 0.08) 36px);
+            background-size: auto, auto, auto;
+        }
+        .back-tagline {
+            font-size: 18px;
+            font-style: italic;
+            color: #a0c4ff;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        /* Back Card Logo Section */
+        .back-logo-section {
+            margin-bottom: 15px;
+        }
+
+        .back-card-logo {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            background: rgba(74, 158, 255, 0.1);
+            border-radius: 12px;
+            padding: 10px;
+            border: 2px solid rgba(74, 158, 255, 0.2);
+        }
+
+        /* Accent bar at top */
+        .accent-bar-top {
+            height: 4px;
+            background: linear-gradient(90deg, #00d4ff, #4a9eff, #00d4ff);
+            width: 100%;
+        }
+
+        /* Card Header Section with Logo */
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 20px 25px;
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .logo-container {
+            flex-shrink: 0;
+        }
+
+        .card-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 8px;
+            border: 2px solid rgba(74, 158, 255, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .company-info {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
+        }
+
+        /* Divider Line */
+        .card-divider {
+            height: 1px;
+            background: linear-gradient(90deg, rgba(74, 158, 255, 0.2), rgba(74, 158, 255, 0.5), rgba(74, 158, 255, 0.2));
+            width: 100%;
+        }
+
+        /* Main Content Section */
+        .card-content {
+            flex: 1;
+            padding: 18px 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 14px;
+        }
+
+        /* Person Section */
+        .person-section {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        /* Footer Section */
+        .card-footer {
+            padding: 15px 25px;
+            display: flex;
             align-items: center;
-            text-align: center;
-            padding: 35px;
-            position: relative;
-            border: 1px solid rgba(74, 158, 255, 0.3);
-            box-sizing: border-box;
+            gap: 15px;
+            border-top: 1px solid rgba(74, 158, 255, 0.2);
+            background: rgba(0, 0, 0, 0.1);
         }
 
-        .business-card-back::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            border-radius: 15px;
-            background: linear-gradient(45deg, 
-                rgba(74, 158, 255, 0.4) 0%,
-                rgba(100, 180, 255, 0.5) 25%,
-                rgba(255, 255, 255, 0.3) 50%,
-                rgba(100, 180, 255, 0.5) 75%,
-                rgba(74, 158, 255, 0.4) 100%);
-            z-index: -1;
-            animation: elegant-border-glow 4s ease-in-out infinite;
-        }
-
-        .business-card-back::after {
-            content: '';
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            right: 12px;
-            bottom: 12px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            pointer-events: none;
-        }
-
-        @keyframes elegant-border-glow {
-            0% {
-                background: linear-gradient(45deg, 
-                    rgba(74, 158, 255, 0.3) 0%,
-                    rgba(100, 180, 255, 0.4) 25%,
-                    rgba(255, 255, 255, 0.2) 50%,
-                    rgba(100, 180, 255, 0.4) 75%,
-                    rgba(74, 158, 255, 0.3) 100%);
-                transform: rotate(0deg);
-            }
-            50% {
-                background: linear-gradient(45deg, 
-                    rgba(74, 158, 255, 0.5) 0%,
-                    rgba(120, 190, 255, 0.6) 25%,
-                    rgba(255, 255, 255, 0.3) 50%,
-                    rgba(120, 190, 255, 0.6) 75%,
-                    rgba(74, 158, 255, 0.6) 100%);
-                transform: rotate(2deg);
-            }
-            100% {
-                background: linear-gradient(45deg, 
-                    rgba(74, 158, 255, 0.3) 0%,
-                    rgba(100, 180, 255, 0.4) 25%,
-                    rgba(255, 255, 255, 0.2) 50%,
-                    rgba(100, 180, 255, 0.4) 75%,
-                    rgba(74, 158, 255, 0.3) 100%);
-                transform: rotate(0deg);
-            }
-        }
-        .back-company-tagline {
-            font-size: 15px;
-            color: #8bb8ff;
-            margin-bottom: 12px;
-            font-weight: 400;
-            font-style: italic;
-            letter-spacing: 0.8px;
-            line-height: 1.3;
-        }
-        
-        .back-tagline {
-            font-size: 16px;
-            font-style: italic;
-            color: #8bb8ff;
-            margin-bottom: 20px;
-            font-weight: 300;
-            line-height: 1.4;
-            opacity: 0.9;
+        /* QR Section */
+        .qr-section {
+            flex-shrink: 0;
+            margin-left: auto;
         }
 
         .company-name { 
-            font-size: 34px; 
+            font-size: 32px; 
             font-weight: 700; 
-            margin-bottom: 6px;
-            letter-spacing: 1.5px;
-            color: #ffffff;
-            line-height: 1.1;
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         .company-subtitle {
-            font-size: 13px;
-            color: #4a9eff;
-            margin-bottom: 12px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            opacity: 0.9;
-        }
-        .company-tagline {
-            font-size: 15px;
-            color: #8bb8ff;
+            font-size: 14px;
+            color: #a0c4ff;
             margin-bottom: 20px;
-            font-weight: 400;
-            font-style: italic;
-            letter-spacing: 0.8px;
-            line-height: 1.3;
+            font-weight: 300;
+            letter-spacing: 1px;
         }
         .person-name { 
-            font-size: 22px; 
+            font-size: 18px; 
             font-weight: 700; 
-            margin-bottom: 6px;
-            letter-spacing: 0.3px;
-            color: #ffffff;
-            line-height: 1.2;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, 0.95);
         }
         .person-title {
-            font-size: 14px;
-            color: #4a9eff;
-            margin-bottom: 18px;
+            font-size: 13px;
+            color: rgba(74, 158, 255, 0.9);
+            margin-bottom: 0;
             font-weight: 500;
-            letter-spacing: 0.3px;
-            opacity: 0.9;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 11px;
             font-size: 13px;
-            margin-top: 12px;
+            margin-top: 0;
         }
         .contact-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            color: #e8f2ff;
-            line-height: 1.4;
+            color: rgba(255, 255, 255, 0.85);
+            transition: all 0.2s ease;
+        }
+        .contact-item:hover {
+            color: rgba(255, 255, 255, 1);
         }
         .contact-item i {
-            width: 18px;
-            color: #4a9eff;
-            font-size: 13px;
+            width: 16px;
+            height: 16px;
+            text-align: center;
+            color: rgba(74, 158, 255, 0.8);
+            font-size: 14px;
             flex-shrink: 0;
         }
+
+        /* Logo Section Styling */
+        .logo-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .card-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            background: rgba(74, 158, 255, 0.1);
+            border-radius: 10px;
+            padding: 8px;
+        }
+
+        /* Tagline Styling */
+        .tagline {
+            font-size: 12px;
+            color: rgba(74, 158, 255, 0.75);
+            font-style: italic;
+            margin: 0 0 12px 0;
+            font-weight: 300;
+            letter-spacing: 0.8px;
+        }
+
         .tags-section {
             position: absolute;
-            top: 25px;
-            right: 25px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6px;
-            width: 130px;
-            align-items: center;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
         }
         .tag {
-            background: rgba(74, 158, 255, 0.25);
+            background: rgba(74, 158, 255, 0.2);
             border: 1px solid #4a9eff;
-            color: #ffffff;
-            padding: 5px 8px;
-            border-radius: 15px;
-            font-size: 10px;
-            font-weight: 600;
-            text-align: center;
-            white-space: nowrap;
+            color: #4a9eff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
         }
         .qr-section {
-            position: absolute;
-            bottom: 25px;
-            right: 25px;
-            text-align: center;
+            display: none;
         }
         .qr-label {
             font-size: 11px;
-            color: #8bb8ff;
-            margin-top: 6px;
-            font-weight: 500;
-            opacity: 0.9;
+            color: rgba(74, 158, 255, 0.7);
+            margin-top: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .social-icons {
             display: flex;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 12px;
+            margin-top: 0;
+            align-items: center;
         }
         .social-icons a {
-            color: #5ba8ff;
-            font-size: 16px;
+            color: rgba(74, 158, 255, 0.8);
+            font-size: 18px;
             transition: all 0.3s ease;
-            opacity: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(74, 158, 255, 0.15);
+            border: 1px solid rgba(74, 158, 255, 0.3);
         }
         .social-icons a:hover {
-            color: #5ba8ff;
-            transform: scale(1.1);
-            opacity: 1;
-        }
-
-        .back-content-top {
-            flex: 0 0 auto;
-        }
-        
-        .back-content-center {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .back-content-bottom {
-            flex: 0 0 auto;
-        }
-        
-        .back-company { 
-            font-size: 36px; 
-            font-weight: 700;
             color: #ffffff;
-            margin-bottom: 6px;
-            letter-spacing: 1.5px;
-            line-height: 1.1;
+            background: rgba(74, 158, 255, 0.3);
+            transform: scale(1.1) translateY(-2px);
+            border-color: rgba(74, 158, 255, 0.6);
         }
-        
-        .back-social-icons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin-bottom: 12px;
+        .person-title {
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: #b8d4f1;
         }
-        
-        .back-social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 44px;
-            height: 44px;
-            background: rgba(74, 158, 255, 0.2);
-            border: 2px solid #4a9eff;
-            border-radius: 50%;
-            color: #5ba8ff;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 18px;
-        }
-        
-        .back-social-link:hover {
-            background: rgba(74, 158, 255, 0.25);
-            border-color: rgba(74, 158, 255, 0.5);
-            color: #5ba8ff;
-            transform: translateY(-2px);
-        }
-        
-        .back-connect-text {
-            font-size: 12px;
-            color: #8bb8ff;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            opacity: 0.8;
-        }
+        .back-company { font-size: 38px; font-weight: 700; }
 
         .control-panel {
             background: rgba(255,255,255,0.95);
@@ -604,690 +603,6 @@
         .btn-primary {
             background: linear-gradient(135deg, #4a9eff, #00d4ff);
             color: white;
-        }
-
-        /* PDF Capture Optimization */
-        .business-card-front, .business-card-back {
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-            -webkit-filter: none;
-            filter: none;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            transform: translateZ(0);
-        }
-
-        /* Ensure animations don't interfere with capture */
-        .business-card-front.capturing, .business-card-back.capturing {
-            animation: none !important;
-            transition: none !important;
-            -webkit-transform: none !important;
-            transform: none !important;
-        }
-
-        .business-card-front.capturing::before, 
-        .business-card-front.capturing::after,
-        .business-card-back.capturing::before, 
-        .business-card-back.capturing::after {
-            animation: none !important;
-            -webkit-transform: none !important;
-            transform: none !important;
-            opacity: 0.8 !important;
-        }
-
-        /* Force solid colors for PDF capture - ensures perfect print consistency */
-        .business-card-back.capturing {
-            background: #1a2744 !important;
-        }
-
-        .business-card-front.capturing {
-            background: #1a2744 !important;
-        }
-        
-        /* Ensure all elements are optimized for PDF capture and print */
-        .business-card-back.capturing .back-social-link {
-            background: rgba(74, 158, 255, 0.3) !important;
-            border: 2px solid #4a9eff !important;
-            color: #ffffff !important;
-        }
-        
-        .business-card-front.capturing .tag {
-            background: rgba(74, 158, 255, 0.3) !important;
-            border: 1px solid #4a9eff !important;
-            color: #ffffff !important;
-        }
-        
-        .business-card-front.capturing .social-icons a {
-            color: #5ba8ff !important;
-        }
-
-        /* ============================================
-           FOOTER STYLES - MINIMALIST MODERN DESIGN
-           ============================================ */
-
-        .site-footer {
-            background: linear-gradient(135deg, #1E3A8A 0%, #1E40AF 100%);
-            color: #FFFFFF;
-            padding-top: 48px;
-            padding-bottom: 24px;
-            margin-top: 64px;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Footer Main Grid */
-        .footer-main {
-            margin-bottom: 32px;
-        }
-
-        .footer-grid {
-            display: grid;
-            gap: 32px;
-            grid-template-columns: 1fr;
-        }
-
-        /* Tablet: 2 columns */
-        @media (min-width: 768px) {
-            .footer-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 40px;
-            }
-            
-            .site-footer {
-                padding-top: 64px;
-                padding-bottom: 32px;
-            }
-        }
-
-        /* Desktop: 4 columns */
-        @media (min-width: 1024px) {
-            .footer-grid {
-                grid-template-columns: 2fr 1fr 1fr 1.5fr;
-                gap: 48px;
-            }
-        }
-
-        /* Footer Column Styles */
-        .footer-column {
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Footer Brand */
-        .footer-brand {
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #4a9eff, #00d4ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 16px;
-        }
-
-        @media (min-width: 768px) {
-            .footer-brand {
-                font-size: 28px;
-            }
-        }
-
-        /* Footer Tagline */
-        .footer-tagline {
-            font-size: 14px;
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 24px;
-        }
-
-        @media (min-width: 768px) {
-            .footer-tagline {
-                font-size: 15px;
-            }
-        }
-
-        /* Social Links */
-        .footer-social {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: #FFFFFF;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        .social-whatsapp:hover {
-            background: #25D366;
-        }
-
-        /* Footer Headings */
-        .footer-heading {
-            font-size: 16px;
-            font-weight: 700;
-            color: #FFFFFF;
-            margin-bottom: 16px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        @media (min-width: 768px) {
-            .footer-heading {
-                font-size: 18px;
-                margin-bottom: 20px;
-            }
-        }
-
-        /* Footer Menu */
-        .footer-menu {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .footer-menu li {
-            margin-bottom: 12px;
-        }
-
-        .footer-menu a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s ease, padding-left 0.3s ease;
-            display: inline-block;
-        }
-
-        .footer-menu a:hover {
-            color: #FFFFFF;
-            padding-left: 4px;
-        }
-
-        @media (min-width: 768px) {
-            .footer-menu a {
-                font-size: 15px;
-            }
-        }
-
-        /* Contact List */
-        .footer-contact-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 24px 0;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 16px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .contact-item i {
-            flex-shrink: 0;
-            margin-top: 2px;
-            width: 16px;
-        }
-
-        .contact-item a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-item a:hover {
-            color: #FFFFFF;
-        }
-
-        @media (min-width: 768px) {
-            .contact-item {
-                font-size: 15px;
-            }
-        }
-
-        /* Newsletter Section */
-        .footer-newsletter {
-            margin-top: 24px;
-        }
-
-        .newsletter-heading {
-            font-size: 14px;
-            font-weight: 600;
-            color: #FFFFFF;
-            margin-bottom: 8px;
-        }
-
-        .newsletter-text {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 12px;
-        }
-
-        .newsletter-form {
-            width: 100%;
-        }
-
-        .newsletter-input-group {
-            display: flex;
-            gap: 0;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 2px solid transparent;
-            transition: border-color 0.3s ease;
-        }
-
-        .newsletter-input-group:focus-within {
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .newsletter-input-group input {
-            flex: 1;
-            padding: 12px 16px;
-            border: none;
-            background: transparent;
-            color: #FFFFFF;
-            font-size: 14px;
-            outline: none;
-        }
-
-        .newsletter-input-group input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .newsletter-submit {
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
-            color: #FFFFFF;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .newsletter-submit:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        /* Footer Bottom */
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 24px;
-            margin-top: 32px;
-        }
-
-        .footer-bottom-content {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            align-items: center;
-            text-align: center;
-        }
-
-        @media (min-width: 768px) {
-            .footer-bottom-content {
-                flex-direction: row;
-                justify-content: space-between;
-                text-align: left;
-            }
-        }
-
-        .copyright {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-            margin: 0;
-        }
-
-        .footer-legal {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        @media (min-width: 768px) {
-            .footer-legal {
-                justify-content: flex-end;
-            }
-        }
-
-        .footer-legal li {
-            font-size: 14px;
-        }
-
-        .footer-legal a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-legal a:hover {
-            color: #FFFFFF;
-        }
-
-        /* Print Media Query for Perfect Print Output */
-        @media print {
-            .business-card-front, .business-card-back {
-                background: #1a2744 !important;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-
-            }
-            
-            .tag {
-                background: rgba(74, 158, 255, 0.4) !important;
-                border: 1px solid #4a9eff !important;
-                color: #ffffff !important;
-            }
-            
-            .back-social-link {
-                background: rgba(74, 158, 255, 0.4) !important;
-                border: 2px solid #4a9eff !important;
-                color: #ffffff !important;
-            }
-        }
-
-        /* Mobile Specific Adjustments */
-        @media (max-width: 767px) {
-            .site-footer {
-                padding-left: 16px;
-                padding-right: 16px;
-            }
-            
-            .footer-column {
-                padding-bottom: 24px;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-            
-            .footer-column:last-child {
-                border-bottom: none;
-            }
-        }
-
-        /* Progressive Form Optimization */
-        .consultation-form-wrapper {
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            padding: 40px 30px;
-            margin: 20px;
-            max-width: 100%;
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-        }
-
-        .form-step {
-            display: none;
-            animation: fadeInUp 0.4s ease;
-        }
-
-        .form-step.active {
-            display: block;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .form-progress {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        .progress-step {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: #e0f2ff;
-            color: #666;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            margin: 0 10px;
-            position: relative;
-        }
-
-        .progress-step.active {
-            background: linear-gradient(135deg, #4a9eff, #00d4ff);
-            color: white;
-        }
-
-        .progress-step.completed {
-            background: #10b981;
-            color: white;
-        }
-
-        .progress-step::after {
-            content: '';
-            position: absolute;
-            right: -20px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 2px;
-            background: #e0f2ff;
-        }
-
-        .progress-step:last-child::after {
-            display: none;
-        }
-
-        .progress-step.completed::after {
-            background: #10b981;
-        }
-
-        /* Toast Animations */
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(100%);
-                opacity: 0;
-            }
-        }
-
-        /* Enhanced Form Styles */
-        .form-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .form-header h3 {
-            font-size: 20px;
-            color: #1E3A8A;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-
-        .form-header p {
-            font-size: 14px;
-            color: #666;
-            margin: 0;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: #374151;
-            font-size: 14px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px 16px;
-            font-size: 14px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            background: #fff;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #4a9eff;
-            box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.1);
-        }
-
-        .form-group input:required {
-            border-left: 4px solid #10b981;
-        }
-
-        .quick-actions {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #e5e7eb;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .btn-success {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white;
-            border: none;
-        }
-
-        .btn-success:hover {
-            background: linear-gradient(135deg, #059669, #047857);
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: #4a9eff;
-            border: 2px solid #4a9eff;
-        }
-
-        .btn-outline:hover {
-            background: #4a9eff;
-            color: white;
-        }
-
-        .btn i {
-            margin-right: 8px;
-        }
-
-        /* Mobile WhatsApp Button */
-        .mobile-whatsapp {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        .whatsapp-float {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
-            transition: all 0.3s ease;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        .whatsapp-float:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4);
-            color: white;
-        }
-
-        .whatsapp-float i {
-            font-size: 18px;
-        }
-
-        @media (max-width: 768px) {
-            .whatsapp-float span {
-                display: none;
-            }
-
-            .whatsapp-float {
-                width: 56px;
-                height: 56px;
-                border-radius: 50%;
-                justify-content: center;
-                padding: 0;
-            }
-
-            .whatsapp-float i {
-                margin: 0;
-                font-size: 24px;
-            }
-        }
-
-        /* Button Improvements */
-        .btn-lg {
-            padding: 15px 30px;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .btn-mobile-full {
-            width: 100%;
-        }
-
-        @media (max-width: 768px) {
-            .button-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .quick-actions {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
         }
     </style>
 </head>
@@ -1359,14 +674,38 @@
         <div class="cards-wrapper">
         <div class="card-preview">
             <div class="business-card-front" id="card-front">
-                <div class="front-left">
-                    <div class="company-name" id="company-name">Scholarix</div>
-                    <div class="company-subtitle">GLOBAL CONSULTANTS</div>
-                    <div class="company-tagline" id="company-tagline">Vision. Innovation. Execution.</div>
+                <!-- Top accent bar -->
+                <div class="accent-bar-top"></div>
+                
+                <!-- Header Section with Logo -->
+                <div class="card-header">
+                    <div class="logo-container">
+                        <img src="https://scholarixglobal.com/web/image/website/1/logo/My%20Website?unique=22fd3fe" 
+                             alt="Scholarix Logo" 
+                             class="card-logo"
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%234a9eff%22/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%22middle%22 dy=%22.35em%22 font-family=%22Arial%22 font-size=%2750%22 font-weight=%22bold%22 fill=%22white%22%3ES%3C/text%3E%3C/svg%3E'">
+                    </div>
+                    <div class="company-info">
+                        <div class="company-name" id="company-name">SCHOLARIX</div>
+                        <div class="company-subtitle">GLOBAL CONSULTANTS</div>
+                    </div>
+                </div>
+
+                <!-- Divider Line -->
+                <div class="card-divider"></div>
+
+                <!-- Main Content Section -->
+                <div class="card-content">
+                    <!-- Tagline -->
+                    <div class="tagline">Navigate.Innovate.Transform</div>
                     
-                    <div class="person-name" id="person-name">John Anderson</div>
-                    <div class="person-title" id="person-title">Senior AI Consultant</div>
+                    <!-- Person Details Section -->
+                    <div class="person-section">
+                        <div class="person-name" id="person-name">RENBRAN ANTHONY MADELO</div>
+                        <div class="person-title" id="person-title">CO-FOUNDER</div>
+                    </div>
                     
+                    <!-- Contact Information -->
                     <div class="contact-info">
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
@@ -1381,7 +720,10 @@
                             <span id="person-website">www.scholarix.com</span>
                         </div>
                     </div>
-                    
+                </div>
+
+                <!-- Footer Section -->
+                <div class="card-footer">
                     <div class="social-icons">
                         <a href="#" id="linkedin-link" target="_blank" title="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
                         <a href="#" id="twitter-link" target="_blank" title="Twitter Profile"><i class="fab fa-twitter"></i></a>
@@ -1408,146 +750,74 @@
 
         <div class="card-preview">
             <div class="business-card-back" id="card-back">
-                <div class="back-content-top">
-                    <div class="back-company" id="back-company">Scholarix</div>
-                    <div class="company-subtitle">GLOBAL CONSULTANTS</div>
-                    <div class="back-company-tagline" id="back-company-tagline">Vision. Innovation. Execution.</div>
+                <!-- Logo on Back -->
+                <div class="back-logo-section">
+                    <img src="https://scholarixglobal.com/web/image/website/1/logo/My%20Website?unique=22fd3fe" 
+                         alt="Scholarix Logo" 
+                         class="back-card-logo"
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ccircle cx=%2750%27 cy=%2750%27 r=%2745%27 fill=%22%234a9eff%22/%3E%3Ctext x=%2750%25%27 y=%2750%25%27 text-anchor=%22middle%22 dy=%22.35em%22 font-family=%22Arial%22 font-size=%2750%22 font-weight=%22bold%22 fill=%22white%22%3ES%3C/text%3E%3C/svg%3E'">
                 </div>
                 
-                <div class="back-content-center">
-                    <div class="back-tagline">Transforming Business Through AI Innovation</div>
-                </div>
-                
-                <div class="back-content-bottom">
-                    <div class="back-social-icons">
-                        <a href="#" id="back-linkedin-link" target="_blank" title="LinkedIn Profile" class="back-social-link">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="#" id="back-twitter-link" target="_blank" title="Twitter Profile" class="back-social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" id="back-facebook-link" target="_blank" title="Facebook Profile" class="back-social-link">
-                            <i class="fab fa-facebook"></i>
-                        </a>
-                        <a href="#" id="back-instagram-link" target="_blank" title="Instagram Profile" class="back-social-link">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                    <div class="back-connect-text">Connect with us</div>
-                </div>
+                <div class="back-company" id="back-company">SCHOLARIX</div>
+                <div class="company-subtitle">GLOBAL CONSULTANTS</div>
+                <div class="back-tagline">Transforming Business Through AI Innovation</div>
             </div>
         </div>
     </div>
 
     <div class="control-panel">
-        <!-- Form Progress Indicator -->
-        <div class="form-progress">
-            <div class="progress-step active" data-step="1">1</div>
-            <div class="progress-step" data-step="2">2</div>
-        </div>
-
         <h2>Business Card Controls</h2>
         
-        <!-- Step 1: Essential Information -->
-        <div class="form-step active" id="essentialStep">
-            <div class="form-header">
-                <h3>Essential Information</h3>
-                <p>Start with the basics - you can add more details later</p>
+        <div class="customization-form">
+            <div class="form-group">
+                <label for="input-name">Name</label>
+                <input type="text" id="input-name" value="RENBRAN ANTHONY MADELO">
             </div>
-            
-            <div class="customization-form">
-                <div class="form-group">
-                    <label for="input-name">Full Name *</label>
-                    <input type="text" id="input-name" value="John Anderson" required>
-                </div>
-                <div class="form-group">
-                    <label for="input-title">Job Title *</label>
-                    <input type="text" id="input-title" value="Senior AI Consultant" required>
-                </div>
-                <div class="form-group">
-                    <label for="input-email">Email Address *</label>
-                    <input type="email" id="input-email" value="john.anderson@scholarix.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="input-mobile">Mobile Number *</label>
-                    <input type="tel" id="input-mobile" value="+1 (555) 123-4567" required>
-                </div>
-                <div class="form-group">
-                    <label for="input-company">Company Name *</label>
-                    <input type="text" id="input-company" value="Scholarix" required>
-                </div>
+            <div class="form-group">
+                <label for="input-title">Title</label>
+                <input type="text" id="input-title" value="CO-FOUNDER">
             </div>
-
-            <div class="button-grid">
-                <button class="btn btn-primary" onclick="updateCard()">
-                    <i class=\"fas fa-sync\"></i> Update Preview
-                </button>
-                <button class="btn btn-secondary" onclick="showAdvancedForm()">
-                    <i class=\"fas fa-plus\"></i> Add More Details
-                </button>
+            <div class="form-group">
+                <label for="input-email">Email</label>
+                <input type="email" id="input-email" value="renbran@scholarix.com">
             </div>
-        </div>
-
-        <!-- Step 2: Advanced Details -->
-        <div class="form-step" id="advancedStep">
-            <div class="form-header">
-                <h3>Additional Details</h3>
-                <p>Add website and social media information</p>
+            <div class="form-group">
+                <label for="input-mobile">Mobile Number</label>
+                <input type="tel" id="input-mobile" value="+1 234 567 8900">
             </div>
-            
-            <div class="customization-form">
-                <div class="form-group">
-                    <label for="input-website">Website</label>
-                    <input type="url" id="input-website" value="www.scholarix.com" placeholder="https://example.com">
-                </div>
-                <div class="form-group">
-                    <label for="input-linkedin">LinkedIn Profile</label>
-                    <input type="url" id="input-linkedin" value="https://linkedin.com/in/johnanderson" placeholder="https://linkedin.com/in/username">
-                </div>
-                <div class="form-group">
-                    <label for="input-twitter">Twitter Profile</label>
-                    <input type="url" id="input-twitter" value="https://twitter.com/johnanderson" placeholder="https://twitter.com/username">
-                </div>
-                <div class="form-group">
-                    <label for="input-facebook">Facebook Profile</label>
-                    <input type="url" id="input-facebook" value="https://facebook.com/johnanderson" placeholder="https://facebook.com/username">
-                </div>
-                <div class="form-group">
-                    <label for="input-instagram">Instagram Profile</label>
-                    <input type="url" id="input-instagram" value="https://instagram.com/johnanderson" placeholder="https://instagram.com/username">
-                </div>
+            <div class="form-group">
+                <label for="input-website">Website</label>
+                <input type="text" id="input-website" value="www.scholarix.com">
             </div>
-
-            <div class="button-grid">
-                <button class="btn btn-secondary" onclick="showEssentialForm()">
-                    <i class=\"fas fa-arrow-left\"></i> Back to Basics
-                </button>
-                <button class="btn btn-primary" onclick="updateCard()">
-                    <i class=\"fas fa-sync\"></i> Update Preview
-                </button>
+            <div class="form-group">
+                <label for="input-company">Company</label>
+                <input type="text" id="input-company" value="SCHOLARIX">
+            </div>
+            <div class="form-group">
+                <label for="input-tagline">Tagline</label>
+                <input type="text" id="input-tagline" value="Navigate.Innovate.Transform">
+            </div>
+            <div class="form-group">
+                <label for="input-linkedin">LinkedIn URL</label>
+                <input type="text" id="input-linkedin" value="https://linkedin.com/in/johnanderson">
+            </div>
+            <div class="form-group">
+                <label for="input-twitter">Twitter URL</label>
+                <input type="text" id="input-twitter" value="https://twitter.com/johnanderson">
+            </div>
+            <div class="form-group">
+                <label for="input-facebook">Facebook URL</label>
+                <input type="text" id="input-facebook" value="https://facebook.com/johnanderson">
+            </div>
+            <div class="form-group">
+                <label for="input-instagram">Instagram URL</label>
+                <input type="text" id="input-instagram" value="https://instagram.com/johnanderson">
             </div>
         </div>
 
-        <!-- Quick Actions -->
-        <div class="quick-actions">
-            <button class="btn btn-success btn-lg" onclick="downloadPDF()">
-                <i class=\"fas fa-download\"></i> Download PDF
-            </button>
-            <button class="btn btn-outline btn-lg" onclick="resetForm()">
-                <i class=\"fas fa-refresh\"></i> Reset Form
-            </button>
-        </div>
-        
-        <!-- Mobile WhatsApp Button -->
-        <div class="mobile-whatsapp\">
-            <a href="https://wa.me/971525438784?text=Hi! I need help with my business card design." 
-               target="_blank" 
-               rel="noopener noreferrer"
-               aria-label="Get help via WhatsApp"
-               class="whatsapp-float\">
-                <i class=\"fab fa-whatsapp\"></i>
-                <span>Need Help?</span>
-            </a>
+        <div class="button-grid">
+            <button class="btn btn-primary" onclick="updateCard()">Update Card</button>
+            <button class="btn btn-primary" onclick="downloadPDF()">Download PDF</button>
         </div>
     </div>
 
@@ -1587,152 +857,36 @@ END:VCARD`;
         }
 
         function updateCard() {
-            // Validate essential fields if on essential step
-            const essentialStep = document.getElementById('essentialStep');
-            if (essentialStep && essentialStep.classList.contains('active')) {
-                if (!validateEssentialFields()) {
-                    return;
-                }
-            }
-            
-            // Update card content
             document.getElementById('person-name').textContent = document.getElementById('input-name').value;
             document.getElementById('person-title').textContent = document.getElementById('input-title').value;
             document.getElementById('person-email').textContent = document.getElementById('input-email').value;
             document.getElementById('person-mobile').textContent = document.getElementById('input-mobile').value;
-            document.getElementById('person-website').textContent = document.getElementById('input-website').value || 'www.scholarix.com';
+            document.getElementById('person-website').textContent = document.getElementById('input-website').value;
             document.getElementById('company-name').textContent = document.getElementById('input-company').value;
             document.getElementById('back-company').textContent = document.getElementById('input-company').value;
             
-            // Update social media links (front and back)
-            const linkedinUrl = document.getElementById('input-linkedin').value || '#';
-            const twitterUrl = document.getElementById('input-twitter').value || '#';
-            const facebookUrl = document.getElementById('input-facebook').value || '#';
-            const instagramUrl = document.getElementById('input-instagram').value || '#';
-            
-            document.getElementById('linkedin-link').href = linkedinUrl;
-            document.getElementById('twitter-link').href = twitterUrl;
-            document.getElementById('facebook-link').href = facebookUrl;
-            document.getElementById('instagram-link').href = instagramUrl;
-            
-            // Update back card social links
-            document.getElementById('back-linkedin-link').href = linkedinUrl;
-            document.getElementById('back-twitter-link').href = twitterUrl;
-            document.getElementById('back-facebook-link').href = facebookUrl;
-            document.getElementById('back-instagram-link').href = instagramUrl;
-            
-            // Generate QR code
-            generateQR();
-            
-            // Show success message
-            showToast('Business card updated successfully!', 'success');
-            
-            // Smooth scroll to preview
-            document.querySelector('.cards-wrapper').scrollIntoView({
-                behavior: 'smooth',
-                block: 'center'
+            // Update tagline
+            const taglines = document.querySelectorAll('.tagline, .back-tagline');
+            taglines.forEach(tagline => {
+                if (tagline.classList.contains('tagline')) {
+                    tagline.textContent = document.getElementById('input-tagline').value;
+                }
             });
+            
+            // Update social media links
+            document.getElementById('linkedin-link').href = document.getElementById('input-linkedin').value;
+            document.getElementById('twitter-link').href = document.getElementById('input-twitter').value;
+            document.getElementById('facebook-link').href = document.getElementById('input-facebook').value;
+            document.getElementById('instagram-link').href = document.getElementById('input-instagram').value;
+            
+            generateQR();
         }
 
         function downloadPDF() {
-            try {
-                const { jsPDF } = window.jspdf;
-                const cardFront = document.getElementById('card-front');
-                const cardBack = document.getElementById('card-back');
-                
-                if (!cardFront || !cardBack) {
-                    alert('Business card elements not found. Please try again.');
-                    return;
-                }
-
-                // Create PDF in business card size (3.5" x 2" = 89mm x 51mm)
-                const pdf = new jsPDF('l', 'mm', [89, 51]); // landscape orientation
-                
-                // Show loading message
-                const downloadButton = document.querySelector('button[onclick="downloadPDF()"]');
-                const originalText = downloadButton.textContent;
-                downloadButton.textContent = 'Generating PDF...';
-                downloadButton.disabled = true;
-
-                // Add capturing class to disable animations
-                cardFront.classList.add('capturing');
-                cardBack.classList.add('capturing');
-
-                // Reset function for cleanup
-                const resetButton = () => {
-                    cardFront.classList.remove('capturing');
-                    cardBack.classList.remove('capturing');
-                    downloadButton.textContent = originalText;
-                    downloadButton.disabled = false;
-                };
-
-                // Wait longer for animations to stop and CSS to stabilize
-                setTimeout(() => {
-                    // Capture front of card
-                    html2canvas(cardFront, {
-                        scale: 4, // Higher quality for better gradient rendering
-                        useCORS: true,
-                        allowTaint: true,
-                        backgroundColor: null,
-                        width: cardFront.offsetWidth,
-                        height: cardFront.offsetHeight,
-                        logging: false,
-                        letterRendering: true,
-                        foreignObjectRendering: true
-                    }).then(frontCanvas => {
-                        // Add front side to PDF
-                        const frontImgData = frontCanvas.toDataURL('image/png');
-                        pdf.addImage(frontImgData, 'PNG', 0, 0, 89, 51);
-                        
-                        // Add new page for back side
-                        pdf.addPage([89, 51], 'l');
-                        
-                        // Capture back of card
-                        html2canvas(cardBack, {
-                            scale: 4, // Higher quality for better gradient rendering
-                            useCORS: true,
-                            allowTaint: true,
-                            backgroundColor: null,
-                            width: cardBack.offsetWidth,
-                            height: cardBack.offsetHeight,
-                            logging: false,
-                            letterRendering: true,
-                            foreignObjectRendering: true
-                        }).then(backCanvas => {
-                            // Add back side to PDF
-                            const backImgData = backCanvas.toDataURL('image/png');
-                            pdf.addImage(backImgData, 'PNG', 0, 0, 89, 51);
-                            
-                            // Save the PDF
-                            pdf.save('scholarix-business-card.pdf');
-                            
-                            // Reset button and cleanup
-                            resetButton();
-                            
-                            // Show success message
-                            alert('Business card PDF downloaded successfully!');
-                        }).catch(error => {
-                            console.error('Error capturing back card:', error);
-                            alert('Error generating PDF. Please try again.');
-                            resetButton();
-                        });
-                    }).catch(error => {
-                        console.error('Error capturing front card:', error);
-                        alert('Error generating PDF. Please try again.');
-                        resetButton();
-                    });
-                }, 300); // Longer delay to let CSS gradients stabilize
-                
-            } catch (error) {
-                console.error('PDF generation error:', error);
-                alert('Error generating PDF. Please ensure all libraries are loaded and try again.');
-                // Reset button if there's an error
-                const downloadButton = document.querySelector('button[onclick="downloadPDF()"]');
-                if (downloadButton) {
-                    downloadButton.textContent = 'Download PDF';
-                    downloadButton.disabled = false;
-                }
-            }
+            const { jsPDF } = window.jspdf;
+            const pdf = new jsPDF();
+            pdf.text('Scholarix Business Card', 10, 10);
+            pdf.save('scholarix-business-card.pdf');
         }
 
         function toggleMenu() {
@@ -1760,352 +914,9 @@ END:VCARD`;
             }, 2500); // 2.5 seconds total loading time
         }
 
-        // Enhanced Form Management Functions
-        function showAdvancedForm() {
-            document.getElementById('essentialStep').classList.remove('active');
-            document.getElementById('advancedStep').classList.add('active');
-            
-            // Update progress indicator
-            const step1 = document.querySelector('.progress-step[data-step="1"]');
-            const step2 = document.querySelector('.progress-step[data-step="2"]');
-            if (step1 && step2) {
-                step1.classList.add('completed');
-                step1.classList.remove('active');
-                step2.classList.add('active');
-            }
-            
-            // Update card first
-            updateCard();
-            
-            // Smooth scroll to form
-            document.querySelector('.control-panel').scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-
-        function showEssentialForm() {
-            document.getElementById('advancedStep').classList.remove('active');
-            document.getElementById('essentialStep').classList.add('active');
-            
-            // Update progress indicator
-            const step1 = document.querySelector('.progress-step[data-step="1"]');
-            const step2 = document.querySelector('.progress-step[data-step="2"]');
-            if (step1 && step2) {
-                step2.classList.remove('active');
-                step1.classList.add('active');
-                step1.classList.remove('completed');
-            }
-        }
-
-        function resetForm() {
-            if (confirm('Are you sure you want to reset all fields to default values?')) {
-                // Reset to default values
-                document.getElementById('input-name').value = 'John Anderson';
-                document.getElementById('input-title').value = 'Senior AI Consultant';
-                document.getElementById('input-email').value = 'john.anderson@scholarix.com';
-                document.getElementById('input-mobile').value = '+1 (555) 123-4567';
-                document.getElementById('input-company').value = 'Scholarix';
-                document.getElementById('input-website').value = 'www.scholarix.com';
-                document.getElementById('input-linkedin').value = 'https://linkedin.com/in/johnanderson';
-                document.getElementById('input-twitter').value = 'https://twitter.com/johnanderson';
-                document.getElementById('input-facebook').value = 'https://facebook.com/johnanderson';
-                document.getElementById('input-instagram').value = 'https://instagram.com/johnanderson';
-                
-                // Show essential form
-                showEssentialForm();
-                
-                // Update card
-                updateCard();
-                
-                // Show success message
-                showToastMessage('Form reset to default values', 'success');
-            }
-        }
-
-        // Enhanced form validation
-        function validateEssentialFields() {
-            const requiredFields = ['input-name', 'input-title', 'input-email', 'input-mobile', 'input-company'];
-            let isValid = true;
-            
-            requiredFields.forEach(fieldId => {
-                const field = document.getElementById(fieldId);
-                if (!field.value.trim()) {
-                    field.style.borderColor = '#ef4444';
-                    isValid = false;
-                } else {
-                    field.style.borderColor = '#10b981';
-                }
-            });
-            
-            if (!isValid) {
-                showToastMessage('Please fill in all required fields', 'error');
-            }
-            
-            return isValid;
-        }
-
-        // Show toast message function
-        function showToastMessage(message, type) {
-            const existingToast = document.querySelector('.toast');
-            if (existingToast) {
-                existingToast.remove();
-            }
-            
-            const toast = document.createElement('div');
-            toast.className = `toast toast-${type}`;
-            toast.textContent = message;
-            toast.style.cssText = `
-                position: fixed;
-                bottom: 100px;
-                right: 24px;
-                background: ${type === 'success' ? '#10B981' : '#EF4444'};
-                color: white;
-                padding: 16px 24px;
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                z-index: 10000;
-                animation: slideIn 0.3s ease;
-                font-size: 14px;
-                font-weight: 500;
-                max-width: 300px;
-            `;
-            
-            document.body.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.style.animation = 'slideOut 0.3s ease';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
         // Initialize when page loads
         window.onload = initializeApp;
-
-        // Add real-time validation for required fields
-        document.addEventListener('DOMContentLoaded', function() {
-            const requiredFields = document.querySelectorAll('input[required]');
-            
-            requiredFields.forEach(field => {
-                field.addEventListener('input', function() {
-                    if (this.value.trim()) {
-                        this.style.borderColor = '#10b981';
-                        this.style.borderLeftColor = '#10b981';
-                    } else {
-                        this.style.borderColor = '#ef4444';
-                        this.style.borderLeftColor = '#ef4444';
-                    }
-                });
-                
-                // Initial validation on page load
-                if (field.value.trim()) {
-                    field.style.borderColor = '#10b981';
-                    field.style.borderLeftColor = '#10b981';
-                }
-            });
-        });
-
-        // Newsletter Form Functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const newsletterForm = document.getElementById('footerNewsletterForm');
-            
-            if (newsletterForm) {
-                newsletterForm.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-                    
-                    const emailInput = this.querySelector('input[type="email"]');
-                    const submitButton = this.querySelector('.newsletter-submit');
-                    const email = emailInput.value.trim();
-                    
-                    // Validate email
-                    if (!email || !isValidEmail(email)) {
-                        showToast('Please enter a valid email address', 'error');
-                        return;
-                    }
-                    
-                    // Disable button during submission
-                    submitButton.disabled = true;
-                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-                    
-                    try {
-                        // Simulate API call (replace with actual endpoint)
-                        await new Promise(resolve => setTimeout(resolve, 1000));
-                        
-                        showToast('Thank you for subscribing!', 'success');
-                        emailInput.value = '';
-                        
-                        // Track conversion
-                        if (typeof gtag !== 'undefined') {
-                            gtag('event', 'newsletter_signup', {
-                                'event_category': 'Footer',
-                                'event_label': 'Newsletter'
-                            });
-                        }
-                    } catch (error) {
-                        console.error('Newsletter subscription error:', error);
-                        showToast('Something went wrong. Please try again.', 'error');
-                    } finally {
-                        // Re-enable button
-                        submitButton.disabled = false;
-                        submitButton.innerHTML = '<i class="fas fa-arrow-right"></i>';
-                    }
-                });
-            }
-            
-            function isValidEmail(email) {
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return emailRegex.test(email);
-            }
-            
-            function showToast(message, type) {
-                // Create toast notification
-                const toast = document.createElement('div');
-                toast.className = `toast toast-${type}`;
-                toast.textContent = message;
-                toast.style.cssText = `
-                    position: fixed;
-                    bottom: 24px;
-                    right: 24px;
-                    background: ${type === 'success' ? '#10B981' : '#EF4444'};
-                    color: white;
-                    padding: 16px 24px;
-                    border-radius: 8px;
-                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-                    z-index: 10000;
-                    animation: slideIn 0.3s ease;
-                    font-size: 14px;
-                    font-weight: 500;
-                    max-width: 300px;
-                `;
-                
-                document.body.appendChild(toast);
-                
-                setTimeout(() => {
-                    toast.style.animation = 'slideOut 0.3s ease';
-                    setTimeout(() => toast.remove(), 300);
-                }, 3000);
-            }
-        });
     </script>
     </div>
-
-    <!-- Minimalist Footer -->
-    <footer class="site-footer">
-        <div class="container">
-            <!-- Footer Main Content -->
-            <div class="footer-main">
-                <div class="footer-grid">
-                    
-                    <!-- Column 1: About & Logo -->
-                    <div class="footer-column footer-about">
-                        <div class="footer-logo-container">
-                            <div class="footer-brand">SCHOLARIX IT</div>
-                        </div>
-                        <p class="footer-tagline">
-                            Your trusted partner for professional business solutions. 
-                            Creating innovative digital experiences since 2020.
-                        </p>
-                        <div class="footer-social">
-                            <a href="https://linkedin.com/company/scholarixstudy" 
-                               target="_blank" 
-                               rel="noopener noreferrer" 
-                               aria-label="Follow us on LinkedIn"
-                               class="social-link">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="https://instagram.com/scholarixstudy" 
-                               target="_blank" 
-                               rel="noopener noreferrer" 
-                               aria-label="Follow us on Instagram"
-                               class="social-link">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="https://wa.me/971525438784" 
-                               target="_blank" 
-                               rel="noopener noreferrer" 
-                               aria-label="Chat with us on WhatsApp"
-                               class="social-link social-whatsapp">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <!-- Column 2: Quick Links -->
-                    <div class="footer-column footer-links">
-                        <h4 class="footer-heading">Quick Links</h4>
-                        <ul class="footer-menu">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="index-simple.html">Business Card</a></li>
-                            <li><a href="editable-document.html">Documents</a></li>
-                            <li><a href="test.html">Test Page</a></li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Column 3: Services -->
-                    <div class="footer-column footer-services">
-                        <h4 class="footer-heading">Services</h4>
-                        <ul class="footer-menu">
-                            <li><a href="#">Business Cards</a></li>
-                            <li><a href="#">Document Templates</a></li>
-                            <li><a href="#">SLA Templates</a></li>
-                            <li><a href="#">Custom Solutions</a></li>
-                        </ul>
-                    </div>
-                    
-                    <!-- Column 4: Contact & Newsletter -->
-                    <div class="footer-column footer-contact">
-                        <h4 class="footer-heading">Get In Touch</h4>
-                        <ul class="footer-contact-list">
-                            <li class="contact-item">
-                                <i class="fas fa-phone"></i>
-                                <a href="tel:+971525438784">+971 52 543 8784</a>
-                            </li>
-                            <li class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <a href="mailto:info@scholarixstudy.com">info@scholarixstudy.com</a>
-                            </li>
-                            <li class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Business Bay, Dubai, UAE</span>
-                            </li>
-                        </ul>
-                        
-                        <!-- Simplified Newsletter -->
-                        <div class="footer-newsletter">
-                            <h5 class="newsletter-heading">Stay Updated</h5>
-                            <p class="newsletter-text">Get the latest updates & tips</p>
-                            <form class="newsletter-form" id="footerNewsletterForm">
-                                <div class="newsletter-input-group">
-                                    <input type="email" 
-                                           name="email" 
-                                           placeholder="Your email address" 
-                                           required 
-                                           aria-label="Email address for newsletter">
-                                    <button type="submit" class="newsletter-submit" aria-label="Subscribe to newsletter">
-                                        <i class="fas fa-arrow-right"></i>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <!-- Footer Bottom -->
-            <div class="footer-bottom">
-                <div class="footer-bottom-content">
-                    <p class="copyright">
-                        © 2025 SCHOLARIX IT. All rights reserved.
-                    </p>
-                    <ul class="footer-legal">
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
-
 </body>
 </html>
