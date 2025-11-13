@@ -1,0 +1,19 @@
+{
+    "project": "scholarix-business-card",
+    "domain": "business-card.scholarixstudy.com",
+    "repository": "https://github.com/renbran/SGC-IT.git",
+    "branch": "main",
+    "framework": "static",
+    "buildCommand": "",
+    "buildOutput": "./",
+    "deploymentDate": "2025-10-13T13:07:10Z",
+    "version": "2372391",
+    "features": [
+        "Business Card Designer",
+        "PDF Generation",
+        "QR Code Generation",
+        "Responsive Design",
+        "Progressive Forms",
+        "Social Media Integration"
+    ]
+}
