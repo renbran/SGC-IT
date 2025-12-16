@@ -1482,6 +1482,18 @@
           font-size: 0.85rem;
         }
       }
+
+      /* Hide print button when printing */
+      @media print {
+        .print-button-container {
+          display: none !important;
+          visibility: hidden !important;
+        }
+
+        .print-btn {
+          display: none !important;
+        }
+      }
     </style>
   </head>
   <body style="">
