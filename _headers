@@ -1,52 +1,94 @@
-# Cloudflare Pages Configuration
-# This file configures build settings for Cloudflare Pages deployment
+# Cloudflare Pages Security & Performance Headers
+# Configuration for doc.sgctech.ai deployment
 
-# Build settings
-[build]
-  # Since this is a static site, no build command is needed
-  command = ""
-  publish = "."
+# ===== SECURITY HEADERS (All pages) =====
+/*
+  # Prevent clickjacking attacks
+  X-Frame-Options: DENY
   
-[build.environment]
-  # Node.js version (if needed for any build tools)
-  NODE_VERSION = "18"
+  # Prevent MIME type sniffing
+  X-Content-Type-Options: nosniff
+  
+  # Enable XSS protection
+  X-XSS-Protection: 1; mode=block
+  
+  # Control referrer information
+  Referrer-Policy: strict-origin-when-cross-origin
+  
+  # Restrict browser features
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
+  
+  # Content Security Policy
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' data: https:; connect-src 'self' https://api.qrserver.com; frame-ancestors 'none'
+  
+  # Enforce HTTPS
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
 
-# Headers configuration for security and performance
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    X-XSS-Protection = "1; mode=block"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com; img-src 'self' data:; connect-src 'self'"
+# ===== HTML PAGES (Short cache for updates) =====
+/index.html
+/business-card-v2.html
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+  Content-Type: text/html; charset=utf-8
 
-# Cache headers for static assets
-[[headers]]
-  for = "*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+# ===== MARKDOWN DOCUMENTATION (Moderate cache) =====
+/*.md
+  Cache-Control: public, max-age=7200
+  Content-Type: text/markdown; charset=utf-8
 
-[[headers]]
-  for = "*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+# ===== JAVASCRIPT (Long cache - immutable) =====
+/*.js
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: application/javascript
+  Access-Control-Allow-Origin: *
 
-[[headers]]
-  for = "*.png"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+# ===== STYLESHEETS (Long cache - immutable) =====
+/*.css
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: text/css
+  Access-Control-Allow-Origin: *
 
-[[headers]]
-  for = "*.jpg"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+# ===== FONTS (Long cache - immutable) =====
+/*.woff
+/*.woff2
+/*.ttf
+/*.eot
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
 
-[[headers]]
-  for = "*.svg"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+# ===== IMAGES (Long cache - immutable) =====
+/*.png
+/*.jpg
+/*.jpeg
+/*.gif
+/*.svg
+/*.webp
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: image/png
+  Content-Type: image/jpeg
+  Content-Type: image/gif
+  Content-Type: image/svg+xml
+  Content-Type: image/webp
+
+# ===== ICONS (Very long cache) =====
+/favicon.ico
+/apple-touch-icon.png
+  Cache-Control: public, max-age=31536000
+
+# ===== API RESPONSES (No cache) =====
+/api/*
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache
+  Expires: 0
+
+# ===== CLOUDFLARE ANALYTICS =====
+/cdn-cgi/*
+  Cache-Control: public, max-age=3600
+
 
 # Redirects (if needed)
 [[redirects]]
