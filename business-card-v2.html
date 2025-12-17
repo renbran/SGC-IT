@@ -69,6 +69,49 @@
         .btn:active {
             transform: translateY(0);
         }
+
+        /* Simple editor panel */
+        .editor {
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            border: 1px solid #ccd6dd;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            padding: 16px;
+            margin: 10px 0 24px;
+        }
+        .editor h2 {
+            font-size: 16px;
+            color: #0a1628;
+            margin-bottom: 12px;
+        }
+        .editor-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(220px, 1fr));
+            gap: 12px;
+        }
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .field label {
+            font-size: 12px;
+            color: #333;
+            font-weight: 600;
+        }
+        .field input {
+            padding: 8px 10px;
+            border: 1px solid #d5dee6;
+            border-radius: 4px;
+            font-size: 13px;
+            outline: none;
+        }
+        .field input:focus {
+            border-color: #00bcd4;
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.15);
+        }
         
         .card-container {
             display: flex;
@@ -348,7 +391,8 @@
             }
 
             .header,
-            .controls {
+            .controls,
+            .editor {
                 display: none;
             }
             
@@ -400,8 +444,55 @@
     </div>
 
     <div class="controls">
-        <button class="btn" onclick="window.print()">🖨️ Print / PDF</button>
+        <button class="btn" onclick="printCard()">🖨️ Print / PDF</button>
         <button class="btn" onclick="location.href='index.html'">← Back to Hub</button>
+    </div>
+
+    <!-- Editor: Populate V2 Signature Information -->
+    <div class="editor" aria-label="Business Card Settings">
+        <h2>Signature Details</h2>
+        <div class="editor-grid">
+            <div class="field">
+                <label for="nameInput">Full Name</label>
+                <input id="nameInput" type="text" placeholder="e.g., Michael Rodriguez Guido">
+            </div>
+            <div class="field">
+                <label for="titleInput">Title / Role</label>
+                <input id="titleInput" type="text" placeholder="e.g., Business Development Executive">
+            </div>
+            <div class="field">
+                <label for="emailInput">Email</label>
+                <input id="emailInput" type="email" placeholder="e.g., name@company.com">
+            </div>
+            <div class="field">
+                <label for="phoneInput">Phone</label>
+                <input id="phoneInput" type="text" placeholder="e.g., +971 54 3423 029">
+            </div>
+            <div class="field" style="grid-column: span 2;">
+                <label for="addressInput">Address</label>
+                <input id="addressInput" type="text" placeholder="e.g., 201 Al Maseed Building, Deira - Dubai, UAE">
+            </div>
+            <div class="field">
+                <label for="linkedinInput">LinkedIn URL</label>
+                <input id="linkedinInput" type="url" placeholder="https://linkedin.com/in/username">
+            </div>
+            <div class="field">
+                <label for="twitterInput">Twitter URL</label>
+                <input id="twitterInput" type="url" placeholder="https://twitter.com/username">
+            </div>
+            <div class="field">
+                <label for="facebookInput">Facebook URL</label>
+                <input id="facebookInput" type="url" placeholder="https://facebook.com/username">
+            </div>
+            <div class="field">
+                <label for="instagramInput">Instagram URL</label>
+                <input id="instagramInput" type="url" placeholder="https://instagram.com/username">
+            </div>
+            <div class="field" style="grid-column: span 3;">
+                <label for="qrInput">QR Content (URL or text)</label>
+                <input id="qrInput" type="text" placeholder="https://your-landing-page.example">
+            </div>
+        </div>
     </div>
     
     <div class="card-container">
@@ -446,37 +537,37 @@
                 
                 <div class="content-front">
                     <!-- EDITABLE: Name -->
-                    <h1 class="name">MICHAEL<br>RODRIGUEZ GUIDO</h1>
+                    <h1 id="nameText" class="name">MICHAEL<br>RODRIGUEZ GUIDO</h1>
                     
                     <!-- EDITABLE: Job Title -->
-                    <p class="title">Business Development Executive</p>
+                    <p id="titleText" class="title">Business Development Executive</p>
                     
                     <div class="contact-info">
                         <!-- EDITABLE: Email -->
                         <div class="contact-item">
                             <span class="icon"><i class="fas fa-envelope"></i></span>
-                            <span>m.guido@scholarixglobal.com</span>
+                            <span id="emailText">m.guido@scholarixglobal.com</span>
                         </div>
                         
                         <!-- EDITABLE: Phone -->
                         <div class="contact-item">
                             <span class="icon"><i class="fas fa-phone"></i></span>
-                            <span>+971 54 3423 029</span>
+                            <span id="phoneText">+971 54 3423 029</span>
                         </div>
                         
                         <!-- EDITABLE: Address -->
                         <div class="contact-item">
                             <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
-                            <span>201 Al Maseed Building, Deira - Dubai, UAE</span>
+                            <span id="addressText">201 Al Maseed Building, Deira - Dubai, UAE</span>
                         </div>
                     </div>
                     
                     <!-- EDITABLE: Social Media Links -->
                     <div class="social-icons">
-                        <a href="#" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a id="linkedinLink" href="#" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a id="twitterLink" href="#" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a id="facebookLink" href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a id="instagramLink" href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
@@ -520,8 +611,8 @@
                 <!-- QR Code Container -->
                 <div class="qr-container">
                     <div class="qr-code">
-                        <!-- QR Code - Replace data with your URL -->
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://scholarixglobal.com" alt="QR Code">
+                        <!-- QR Code - Source will be generated on Print -->
+                        <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://scholarixglobal.com" alt="QR Code">
                     </div>
                 </div>
             </div>
@@ -530,8 +621,167 @@
     </div>
 
     <script>
-        // Optional: Add more functionality here
-        console.log('Business Card V2 Loaded');
+        // Business Card V2 - Editor + Live Binding + QR on Print
+        (function(){
+            const els = {
+                nameText: document.getElementById('nameText'),
+                titleText: document.getElementById('titleText'),
+                emailText: document.getElementById('emailText'),
+                phoneText: document.getElementById('phoneText'),
+                addressText: document.getElementById('addressText'),
+                linkedinLink: document.getElementById('linkedinLink'),
+                twitterLink: document.getElementById('twitterLink'),
+                facebookLink: document.getElementById('facebookLink'),
+                instagramLink: document.getElementById('instagramLink'),
+                qrImage: document.getElementById('qrImage'),
+            };
+
+            const inputs = {
+                name: document.getElementById('nameInput'),
+                title: document.getElementById('titleInput'),
+                email: document.getElementById('emailInput'),
+                phone: document.getElementById('phoneInput'),
+                address: document.getElementById('addressInput'),
+                linkedin: document.getElementById('linkedinInput'),
+                twitter: document.getElementById('twitterInput'),
+                facebook: document.getElementById('facebookInput'),
+                instagram: document.getElementById('instagramInput'),
+                qr: document.getElementById('qrInput'),
+            };
+
+            const storageKey = 'sgc-it-card-v2';
+
+            function defaultState(){
+                return {
+                    name: els.nameText.innerText.replace(/\n/g, ' '),
+                    title: els.titleText.innerText,
+                    email: els.emailText.innerText,
+                    phone: els.phoneText.innerText,
+                    address: els.addressText.innerText,
+                    linkedin: els.linkedinLink.getAttribute('href') || '',
+                    twitter: els.twitterLink.getAttribute('href') || '',
+                    facebook: els.facebookLink.getAttribute('href') || '',
+                    instagram: els.instagramLink.getAttribute('href') || '',
+                    qr: 'https://scholarixglobal.com',
+                };
+            }
+
+            function loadState(){
+                try {
+                    const raw = localStorage.getItem(storageKey);
+                    if (!raw) return defaultState();
+                    const obj = JSON.parse(raw);
+                    return Object.assign(defaultState(), obj);
+                } catch(e){
+                    return defaultState();
+                }
+            }
+
+            function saveState(state){
+                try { localStorage.setItem(storageKey, JSON.stringify(state)); } catch(e) {}
+            }
+
+            function applyState(state){
+                // Inputs
+                inputs.name.value = state.name;
+                inputs.title.value = state.title;
+                inputs.email.value = state.email;
+                inputs.phone.value = state.phone;
+                inputs.address.value = state.address;
+                inputs.linkedin.value = state.linkedin;
+                inputs.twitter.value = state.twitter;
+                inputs.facebook.value = state.facebook;
+                inputs.instagram.value = state.instagram;
+                inputs.qr.value = state.qr;
+
+                // Card text
+                els.nameText.innerHTML = formatName(state.name);
+                els.titleText.textContent = state.title;
+                els.emailText.textContent = state.email;
+                els.phoneText.textContent = state.phone;
+                els.addressText.textContent = state.address;
+
+                // Social URLs
+                setHref(els.linkedinLink, state.linkedin);
+                setHref(els.twitterLink, state.twitter);
+                setHref(els.facebookLink, state.facebook);
+                setHref(els.instagramLink, state.instagram);
+            }
+
+            function formatName(name){
+                // If user includes a line break marker, respect it
+                if (name.includes('\n')) {
+                    const parts = name.split(/\n+/);
+                    return parts.map(p => escapeHtml(p)).join('<br>');
+                }
+                // Otherwise split first space into two lines
+                const idx = name.indexOf(' ');
+                if (idx > 0) {
+                    const first = escapeHtml(name.slice(0, idx));
+                    const rest = escapeHtml(name.slice(idx + 1));
+                    return first + '<br>' + rest;
+                }
+                return escapeHtml(name);
+            }
+
+            function escapeHtml(str){
+                return String(str).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+            }
+
+            function setHref(el, url){
+                if (!url || url === '#') { el.setAttribute('href', '#'); return; }
+                el.setAttribute('href', url);
+            }
+
+            function stateFromInputs(){
+                return {
+                    name: inputs.name.value.trim(),
+                    title: inputs.title.value.trim(),
+                    email: inputs.email.value.trim(),
+                    phone: inputs.phone.value.trim(),
+                    address: inputs.address.value.trim(),
+                    linkedin: inputs.linkedin.value.trim(),
+                    twitter: inputs.twitter.value.trim(),
+                    facebook: inputs.facebook.value.trim(),
+                    instagram: inputs.instagram.value.trim(),
+                    qr: inputs.qr.value.trim(),
+                };
+            }
+
+            function bindChanges(){
+                Object.values(inputs).forEach(inp => {
+                    const handler = () => { const s = stateFromInputs(); applyState(s); saveState(s); };
+                    inp.addEventListener('input', handler);
+                    inp.addEventListener('change', handler);
+                });
+            }
+
+            function buildQrSrc(content){
+                const base = 'https://api.qrserver.com/v1/create-qr-code/';
+                const params = new URLSearchParams({ size: '150x150', data: content || '' });
+                return `${base}?${params.toString()}`;
+            }
+
+            function updateQrImage(content){
+                const src = buildQrSrc(content);
+                els.qrImage.setAttribute('src', src);
+            }
+
+            // Expose printCard globally
+            window.printCard = function(){
+                const current = stateFromInputs();
+                // Update QR image source before printing
+                updateQrImage(current.qr || '');
+                // Wait a tick to allow image load, then print
+                setTimeout(() => { window.print(); }, 250);
+            };
+
+            // Initialize
+            const s = loadState();
+            applyState(s);
+            bindChanges();
+            console.log('Business Card V2 Editor Ready');
+        })();
     </script>
 </body>
 </html>
