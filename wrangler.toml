@@ -12,13 +12,6 @@ routes = [
 ]
 build = { command = "", cwd = "", watch_paths = ["**/*.html", "**/*.css", "**/*.js"] }
 
-# Staging environment
-[env.staging]
-name = "sgc-it-docs-staging"
-routes = [
-  { pattern = "docs-staging.sgctech.ai/*", zone_name = "sgctech.ai" }
-]
-
 # Environment variables for production
 [env.production.vars]
 ENVIRONMENT = "production"
@@ -26,6 +19,13 @@ DOMAIN = "doc.sgctech.ai"
 API_URL = "https://doc.sgctech.ai"
 SITE_NAME = "SGC-IT Documentation"
 SITE_DESCRIPTION = "Professional documentation hub for SGC TECH AI services"
+
+# Staging environment
+[env.staging]
+name = "sgc-it-docs-staging"
+routes = [
+  { pattern = "docs-staging.sgctech.ai/*", zone_name = "sgctech.ai" }
+]
 
 # Environment variables for staging
 [env.staging.vars]
@@ -45,26 +45,6 @@ enabled = true
 # Performance limits
 [limits]
 cpu_ms = 50
-
-# Triggers for automatic deployments
-[triggers.schedules]
-deploy_on_commit = true
-
-# Custom error pages
-[env.production.routes]
-[[routes]]
-pattern = "doc.sgctech.ai/*"
-zone_name = "sgctech.ai"
-custom_domain = true
-
-# Legacy Scholarix compatibility (kept for backward compatibility)
-[[legacy_env.production.routes]]
-pattern = "scholarixstudy.com/business-card/*"
-custom_domain = false
-
-[[legacy_env.staging.routes]]
-pattern = "staging.scholarixstudy.com/business-card/*"
-custom_domain = false
 
 # Caching configuration
 [caches]
