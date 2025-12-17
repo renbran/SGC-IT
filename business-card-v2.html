@@ -136,6 +136,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+            position: relative;
         }
         
         .card-front::before {
@@ -147,8 +148,94 @@
             bottom: 0;
             background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 25 L75 37.5 L75 62.5 L50 75 L25 62.5 L25 37.5 Z' stroke='%2300bcd4' stroke-width='0.5' fill='none' opacity='0.15'/%3E%3C/svg%3E");
             background-size: 60px 60px;
-            opacity: 0.4;
+            opacity: 0.3;
             pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Layered pattern overlays for front card */
+        .front-pattern-1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    60deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(0, 229, 255, 0.03) 20px,
+                    rgba(0, 229, 255, 0.03) 40px
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .front-pattern-2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    -60deg,
+                    transparent,
+                    transparent 30px,
+                    rgba(0, 188, 212, 0.02) 30px,
+                    rgba(0, 188, 212, 0.02) 60px
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Hexagon grid pattern overlay */
+        .hexagon-grid {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='104' viewBox='0 0 60 104' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0 L60 17.32 L60 51.96 L30 69.28 L0 51.96 L0 17.32 Z' stroke='%2300e5ff' stroke-width='0.6' fill='none' opacity='0.08'/%3E%3Cpath d='M30 52 L60 69.32 L60 104 L30 121.28 L0 104 L0 69.32 Z' stroke='%2300bcd4' stroke-width='0.5' fill='none' opacity='0.06'/%3E%3C/svg%3E");
+            background-size: 60px 104px;
+            background-repeat: repeat;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* AI tech accent lines - top */
+        .ai-accent-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: 
+                linear-gradient(90deg, 
+                    rgba(0, 229, 255, 0.1) 0%, 
+                    rgba(0, 229, 255, 0.05) 50%, 
+                    transparent 100%
+                );
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .ai-accent-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 35px;
+            background: 
+                linear-gradient(90deg, 
+                    transparent 0%, 
+                    rgba(0, 188, 212, 0.05) 50%, 
+                    rgba(0, 188, 212, 0.08) 100%
+                );
+            pointer-events: none;
+            z-index: 0;
         }
         
         /* Neural network / brain decoration */
@@ -158,12 +245,14 @@
             left: 15px;
             width: 80px;
             height: 60px;
-            opacity: 0.6;
+            opacity: 0.7;
+            z-index: 1;
         }
         
         .neural-decoration svg {
             width: 100%;
             height: 100%;
+            filter: drop-shadow(0 0 3px rgba(0, 229, 255, 0.3));
         }
         
         /* Circuit lines */
@@ -173,17 +262,19 @@
             right: 0;
             width: 120px;
             height: 80px;
-            opacity: 0.4;
+            opacity: 0.5;
+            z-index: 1;
         }
         
         .circuit-lines svg {
             width: 100%;
             height: 100%;
+            filter: drop-shadow(0 0 2px rgba(0, 188, 212, 0.3));
         }
         
         .content-front {
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
         
         .name {
@@ -560,6 +651,13 @@
         <!-- FRONT SIDE -->
         <div class="card-wrapper">
             <div class="business-card card-front">
+                <!-- Layered neuro-geometric patterns -->
+                <div class="front-pattern-1"></div>
+                <div class="front-pattern-2"></div>
+                <div class="hexagon-grid"></div>
+                <div class="ai-accent-top"></div>
+                <div class="ai-accent-bottom"></div>
+                
                 <!-- Hexagon pattern is in CSS ::before -->
                 
                 <!-- Neural brain decoration -->
