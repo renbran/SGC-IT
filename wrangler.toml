@@ -1,19 +1,7 @@
-name = "sgc-it-documentation"
-compatibility_date = "2024-12-16"
-type = "javascript"
-main = "index.html"
 pages_build_output_dir = "."
 
-# Production environment - doc.sgctech.ai
-[env.production]
-name = "sgc-it-docs-production"
-routes = [
-  { pattern = "doc.sgctech.ai/*", zone_name = "sgctech.ai" },
-  { pattern = "documentation.sgctech.ai/*", zone_name = "sgctech.ai" }
-]
-build = { command = "", cwd = "", watch_paths = ["**/*.html", "**/*.css", "**/*.js"] }
+# Cloudflare Pages configuration
 
-# Environment variables for production
 [env.production.vars]
 ENVIRONMENT = "production"
 DOMAIN = "doc.sgctech.ai"
@@ -21,33 +9,5 @@ API_URL = "https://doc.sgctech.ai"
 SITE_NAME = "SGC-IT Documentation"
 SITE_DESCRIPTION = "Professional documentation hub for SGC TECH AI services"
 
-# Staging environment
-[env.staging]
-name = "sgc-it-docs-staging"
-routes = [
-  { pattern = "docs-staging.sgctech.ai/*", zone_name = "sgctech.ai" }
-]
-
-# Environment variables for staging
-[env.staging.vars]
-ENVIRONMENT = "staging"
-DOMAIN = "docs-staging.sgctech.ai"
-API_URL = "https://docs-staging.sgctech.ai"
-
-# Build configuration
-[build]
-command = ""
-cwd = ""
-
-# Observability - Analytics Engine
-[analytics]
-enabled = true
-
-# Performance limits
-[limits]
-cpu_ms = 50
-
-# Caching configuration
-[caches]
-default_ttl = 3600
-max_age = 31536000
+[env.preview.vars]
+ENVIRONMENT = "preview"
