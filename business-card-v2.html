@@ -395,6 +395,10 @@
             .editor {
                 display: none;
             }
+
+            .print-label {
+                display: none;
+            }
             
             .card-container {
                 gap: 20px;
@@ -784,8 +788,19 @@
                 current.qr = deriveQrFallback(current);
                 // Update QR image source before printing
                 updateQrImage(current.qr || '');
-                // Wait a tick to allow image load, then print
-                setTimeout(() => { window.print(); }, 250);
+
+                // Print only after QR loads (with timeout fallback)
+                let printed = false;
+                const doPrint = () => { if (!printed) { printed = true; window.print(); } };
+
+                if (els.qrImage.complete) {
+                    // If the image is already cached/loaded
+                    setTimeout(doPrint, 100);
+                } else {
+                    els.qrImage.onload = () => setTimeout(doPrint, 50);
+                    // Fallback in case onload doesn't fire
+                    setTimeout(doPrint, 1500);
+                }
             };
 
             // Utility: apply defaults
