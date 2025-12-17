@@ -445,6 +445,8 @@
 
     <div class="controls">
         <button class="btn" onclick="printCard()">🖨️ Print / PDF</button>
+        <button class="btn" onclick="applyDefaults()">↺ Apply Defaults</button>
+        <button class="btn" onclick="clearAll()">✖ Clear All</button>
         <button class="btn" onclick="location.href='index.html'">← Back to Hub</button>
     </div>
 
@@ -767,13 +769,40 @@
                 els.qrImage.setAttribute('src', src);
             }
 
+            function deriveQrFallback(s){
+                // If user didn't set QR, derive from best available contact
+                if (s.qr) return s.qr;
+                if (s.linkedin) return s.linkedin;
+                if (s.email) return `mailto:${s.email}`;
+                if (s.phone) return `tel:${s.phone.replace(/\s+/g,'')}`;
+                return 'https://sgctech.ai';
+            }
+
             // Expose printCard globally
             window.printCard = function(){
                 const current = stateFromInputs();
+                current.qr = deriveQrFallback(current);
                 // Update QR image source before printing
                 updateQrImage(current.qr || '');
                 // Wait a tick to allow image load, then print
                 setTimeout(() => { window.print(); }, 250);
+            };
+
+            // Utility: apply defaults
+            window.applyDefaults = function(){
+                const s = defaultState();
+                applyState(s);
+                saveState(s);
+            };
+
+            // Utility: clear all inputs
+            window.clearAll = function(){
+                const empty = {
+                    name: '', title: '', email: '', phone: '', address: '',
+                    linkedin: '', twitter: '', facebook: '', instagram: '', qr: ''
+                };
+                applyState(empty);
+                saveState(empty);
             };
 
             // Initialize
