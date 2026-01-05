@@ -460,27 +460,170 @@
             color: #00d4ff;
         }
 
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2em;
-            }
+        /* Sticky Side Navigation */
+        .side-nav {
+            position: fixed;
+            right: 20px;
+            top: 100px;
+            width: 280px;
+            background: rgba(15, 40, 71, 0.95);
+            border: 2px solid rgba(74, 158, 255, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 999;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
 
-            .container {
-                padding: 10px;
-            }
+        .side-nav h3 {
+            color: #4a9eff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-            .section {
-                padding: 20px;
-            }
+        .side-nav-search {
+            width: 100%;
+            padding: 10px;
+            background: rgba(74, 158, 255, 0.1);
+            border: 1px solid rgba(74, 158, 255, 0.3);
+            border-radius: 6px;
+            color: white;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
 
-            table {
-                font-size: 0.9em;
-            }
+        .side-nav-search::placeholder {
+            color: rgba(160, 196, 255, 0.5);
+        }
 
-            table th, table td {
-                padding: 8px 10px;
+        .side-nav-section {
+            margin-bottom: 15px;
+        }
+
+        .side-nav-section-title {
+            color: #00d4ff;
+            font-size: 0.9em;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(74, 158, 255, 0.2);
+        }
+
+        .side-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            color: #a0c4ff;
+            text-decoration: none;
+            font-size: 0.85em;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .side-nav-item:hover {
+            background: rgba(74, 158, 255, 0.2);
+            color: #00d4ff;
+            padding-left: 15px;
+        }
+
+        .side-nav-item.active {
+            background: rgba(74, 158, 255, 0.3);
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .side-nav-item i {
+            min-width: 16px;
+            text-align: center;
+        }
+
+        .side-nav-toggle {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #4a9eff, #00d4ff);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(74, 158, 255, 0.4);
+        }
+
+        /* Scrollbar styling for side-nav */
+        .side-nav::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .side-nav::-webkit-scrollbar-track {
+            background: rgba(74, 158, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .side-nav::-webkit-scrollbar-thumb {
+            background: rgba(74, 158, 255, 0.4);
+            border-radius: 3px;
+        }
+
+        .side-nav::-webkit-scrollbar-thumb:hover {
+            background: rgba(74, 158, 255, 0.6);
+        }
+
+        @media (max-width: 1400px) {
+            .side-nav {
+                right: 10px;
+                width: 250px;
             }
         }
+
+        @media (max-width: 1024px) {
+            .side-nav {
+                display: none;
+            }
+
+            .side-nav-toggle {
+                display: block;
+            }
+
+            .side-nav.mobile-open {
+                display: block;
+                position: fixed;
+                right: 0;
+                left: auto;
+                top: 0;
+                height: 100vh;
+                max-height: 100vh;
+                width: 280px;
+                border-radius: 0;
+                border-left: 2px solid rgba(74, 158, 255, 0.3);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .side-nav.mobile-open {
+                width: 250px;
+            }
+        }
+
+        @media print {
+            .side-nav,
+            .side-nav-toggle {
+                display: none;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -933,6 +1076,68 @@ Here are two times that work on my end—which is better for you?
         </div>
     </div>
 
+    <!-- Side Navigation Menu -->
+    <aside class="side-nav" id="sideNav">
+        <h3>
+            <i class="fas fa-map"></i>
+            Quick Navigation
+        </h3>
+        <input type="text" class="side-nav-search" id="searchNav" placeholder="Search topics...">
+        
+        <div class="side-nav-section">
+            <div class="side-nav-section-title">Main Sections</div>
+            <a href="#psychology" class="side-nav-item" data-section="psychology">
+                <i class="fas fa-brain"></i>
+                <span>Psychology</span>
+            </a>
+            <a href="#outreach" class="side-nav-item" data-section="outreach">
+                <i class="fas fa-paper-plane"></i>
+                <span>Outreach Messages</span>
+            </a>
+            <a href="#objections" class="side-nav-item" data-section="objections">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>Objection Handling</span>
+            </a>
+            <a href="#daily" class="side-nav-item" data-section="daily">
+                <i class="fas fa-calendar"></i>
+                <span>Daily Operations</span>
+            </a>
+            <a href="#roles" class="side-nav-item" data-section="roles">
+                <i class="fas fa-user-tie"></i>
+                <span>Role Instructions</span>
+            </a>
+            <a href="#scenarios" class="side-nav-item" data-section="scenarios">
+                <i class="fas fa-tasks"></i>
+                <span>Real Scenarios</span>
+            </a>
+            <a href="#closing" class="side-nav-item" data-section="closing">
+                <i class="fas fa-handshake"></i>
+                <span>Closing Strategies</span>
+            </a>
+            <a href="#tracking" class="side-nav-item" data-section="tracking">
+                <i class="fas fa-chart-bar"></i>
+                <span>Tracking & Optimization</span>
+            </a>
+        </div>
+
+        <div class="side-nav-section">
+            <div class="side-nav-section-title">Quick Links</div>
+            <a href="#" class="side-nav-item" onclick="scrollToTop(); return false;">
+                <i class="fas fa-arrow-up"></i>
+                <span>Back to Top</span>
+            </a>
+            <a href="index.html" class="side-nav-item">
+                <i class="fas fa-home"></i>
+                <span>Homepage</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Mobile Navigation Toggle -->
+    <button class="side-nav-toggle" id="navToggle" onclick="toggleSideNav()">
+        <i class="fas fa-bars"></i>
+    </button>
+
     <script>
         // Load navbar
         fetch('navbar.html')
@@ -951,6 +1156,81 @@ Here are two times that work on my end—which is better for you?
                     });
                 }
             });
+
+        // Side Navigation Functions
+        function toggleSideNav() {
+            const sideNav = document.getElementById('sideNav');
+            sideNav.classList.toggle('mobile-open');
+        }
+
+        function closeSideNav() {
+            const sideNav = document.getElementById('sideNav');
+            sideNav.classList.remove('mobile-open');
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            closeSideNav();
+        }
+
+        // Search functionality in side navigation
+        const searchNav = document.getElementById('searchNav');
+        searchNav.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const navItems = document.querySelectorAll('.side-nav-item');
+            
+            navItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Highlight active section on scroll
+        function updateActiveSection() {
+            const sections = document.querySelectorAll('[id]');
+            const navItems = document.querySelectorAll('.side-nav-item[data-section]');
+            
+            let current = null;
+            sections.forEach(section => {
+                if (window.pageYOffset >= section.offsetTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('data-section') === current) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // Update active section on scroll
+        window.addEventListener('scroll', updateActiveSection);
+        window.addEventListener('load', updateActiveSection);
+
+        // Close side nav when clicking on a link
+        document.querySelectorAll('.side-nav-item[data-section]').forEach(link => {
+            link.addEventListener('click', () => {
+                closeSideNav();
+            });
+        });
+
+        // Close side nav when clicking outside on mobile
+        document.addEventListener('click', function(e) {
+            const sideNav = document.getElementById('sideNav');
+            const navToggle = document.getElementById('navToggle');
+            
+            if (window.innerWidth <= 1024) {
+                if (!sideNav.contains(e.target) && !navToggle.contains(e.target)) {
+                    closeSideNav();
+                }
+            }
+        });
     </script>
 </body>
 </html>
