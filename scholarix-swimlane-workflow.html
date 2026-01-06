@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCHOLARIX GLOBAL - AI CONSULTANCY WORKFLOW</title>
+    <style>
+        /* ============================================
+           CSS VARIABLES & THEME CONFIGURATION
+           ============================================ */
+        :root {
+            /* Light Mode Colors */
+            --bg-primary: #e8f4fd;
+            --bg-secondary: #ffffff;
+            --text-primary: #0c1e34;
+            --text-secondary: #1e3a8a;
+            --border-color: #4fc3f7;
+            --shadow-color: rgba(12, 30, 52, 0.1);
+            
+            /* Scholarix Deep Ocean Swim-lane Colors */
+            --lead-sources: #4fc3f7;
+            --lead-sources-bg: rgba(79, 195, 247, 0.1);
+            --sales: #1e3a8a;
+            --sales-bg: rgba(30, 58, 138, 0.1);
+            --technical: #0c1e34;
+            --technical-bg: rgba(12, 30, 52, 0.1);
+            --admin: #FFD700;
+            --admin-bg: rgba(255, 215, 0, 0.15);
+            --finance: #4169E1;
+            --finance-bg: rgba(65, 105, 225, 0.1);
+            --support: #228B22;
+            --support-bg: rgba(34, 139, 34, 0.1);
+            
+            /* Shape Colors */
+            --decision-diamond: #FF8C00;
+            --process-box: #ffffff;
+            --connector-line: #1e3a8a;
+            
+            /* Interactive */
+            --hover-glow: rgba(79, 195, 247, 0.6);
+            --tooltip-bg: #0c1e34;
+            --tooltip-text: #e8f4fd;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0c1e34;
+            --bg-secondary: #1e3a8a;
+            --text-primary: #e8f4fd;
+            --text-secondary: #4fc3f7;
+            --border-color: #4fc3f7;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --process-box: #1e3a8a;
+            --connector-line: #4fc3f7;
+            --tooltip-bg: #e8f4fd;
+            --tooltip-text: #0c1e34;
+            
+            --lead-sources-bg: rgba(79, 195, 247, 0.2);
+            --sales-bg: rgba(30, 58, 138, 0.2);
+            --technical-bg: rgba(12, 30, 52, 0.2);
+            --admin-bg: rgba(255, 215, 0, 0.2);
+            --finance-bg: rgba(65, 105, 225, 0.2);
+            --support-bg: rgba(34, 139, 34, 0.2);
+        }
+
+        /* ============================================
+           BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Poppins', 'Segoe UI', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: all 0.3s ease;
+        }
+
+        /* ============================================
+           HEADER & CONTROLS
+           ============================================ */
+        .header {
+            background: linear-gradient(135deg, #0c1e34 0%, #1e3a8a 100%);
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(79, 195, 247, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            color: #4fc3f7;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(79, 195, 247, 0.4);
+        }
+
+        .header-subtitle {
+            font-size: 0.95rem;
+            color: #e8f4fd;
+            font-weight: 300;
+            letter-spacing: 1.5px;
+            margin-top: 5px;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4fc3f7, #1e3a8a);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--hover-glow);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e8f4fd;
+            border: 2px solid #4fc3f7;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(79, 195, 247, 0.2);
+            border-color: #e8f4fd;
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            width: 60px;
+            height: 30px;
+            background: var(--border-color);
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle::before {
+            content: '☀️';
+            position: absolute;
+            left: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+        }
+
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            top: 3px;
+            left: 3px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        [data-theme="dark"] .theme-toggle {
+            background: #4fc3f7;
+        }
+
+        [data-theme="dark"] .theme-toggle::before {
+            content: '🌙';
+            left: auto;
+            right: 5px;
+        }
+
+        [data-theme="dark"] .theme-toggle::after {
+            left: 33px;
+        }
+
+        /* ============================================
+           JSON CONFIG PANEL
+           ============================================ */
+        .config-panel {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            margin: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .config-header {
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #1e3a8a, #4fc3f7);
+            color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .config-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .config-toggle-icon {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .config-panel.collapsed .config-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .config-content {
+            max-height: 500px;
+            overflow-y: auto;
+            transition: max-height 0.3s ease;
+        }
+
+        .config-panel.collapsed .config-content {
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        .config-textarea {
+            width: 100%;
+            min-height: 400px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: none;
+            resize: vertical;
+        }
+
+        .config-actions {
+            padding: 15px;
+            background: var(--bg-primary);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* ============================================
+           FLOWCHART CONTAINER
+           ============================================ */
+        .flowchart-wrapper {
+            padding: 30px 20px;
+            overflow-x: auto;
+            overflow-y: visible;
+        }
+
+        .flowchart-container {
+            min-width: 1600px;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px var(--shadow-color);
+            border: 2px solid var(--border-color);
+        }
+
+        /* ============================================
+           SWIM LANES
+           ============================================ */
+        .swim-lanes {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .swim-lane {
+            display: flex;
+            min-height: 180px;
+            border-bottom: 2px solid var(--border-color);
+            position: relative;
+        }
+
+        .swim-lane:last-child {
+            border-bottom: none;
+        }
+
+        .lane-header {
+            min-width: 180px;
+            max-width: 180px;
+            padding: 20px;
+            font-weight: 700;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-right: 2px solid var(--border-color);
+            position: sticky;
+            left: 0;
+            z-index: 10;
+            background: var(--bg-secondary);
+        }
+
+        .lane-header.lead-sources { 
+            background: var(--lead-sources-bg); 
+            color: var(--lead-sources); 
+        }
+        .lane-header.sales { 
+            background: var(--sales-bg); 
+            color: var(--sales); 
+        }
+        .lane-header.technical { 
+            background: var(--technical-bg); 
+            color: var(--technical); 
+        }
+        .lane-header.admin { 
+            background: var(--admin-bg); 
+            color: var(--admin); 
+        }
+        .lane-header.finance { 
+            background: var(--finance-bg); 
+            color: var(--finance); 
+        }
+        .lane-header.support { 
+            background: var(--support-bg); 
+            color: var(--support); 
+        }
+
+        .lane-content {
+            flex: 1;
+            padding: 30px 20px;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            position: relative;
+        }
+
+        /* ============================================
+           FLOW SHAPES
+           ============================================ */
+        .flow-item {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .flow-item:hover {
+            transform: translateY(-3px);
+            filter: drop-shadow(0 6px 20px var(--hover-glow));
+        }
+
+        /* Process Box */
+        .process-box {
+            min-width: 160px;
+            max-width: 200px;
+            min-height: 100px;
+            padding: 15px;
+            background: var(--process-box);
+            border: 3px solid var(--border-color);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .process-box .icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .process-box .label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .process-box .duration {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        /* Decision Diamond */
+        .decision-diamond {
+            width: 140px;
+            height: 140px;
+            position: relative;
+            transform: rotate(45deg);
+            background: var(--decision-diamond);
+            border: 3px solid var(--border-color);
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .decision-diamond .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            text-align: center;
+            width: 120px;
+        }
+
+        .decision-diamond .label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1.2;
+        }
+
+        /* Start/End Oval */
+        .oval {
+            min-width: 140px;
+            max-width: 180px;
+            padding: 20px 30px;
+            background: linear-gradient(135deg, var(--lead-sources), var(--sales));
+            border: 3px solid var(--border-color);
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .oval .icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .oval .label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        /* Lead Source Boxes */
+        .lead-source-box {
+            min-width: 120px;
+            max-width: 140px;
+            padding: 12px;
+            background: linear-gradient(135deg, #4fc3f7, #1e3a8a);
+            border: 2px solid #4fc3f7;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px var(--shadow-color);
+        }
+
+        .lead-source-box .icon {
+            font-size: 1.8rem;
+            margin-bottom: 6px;
+        }
+
+        .lead-source-box .label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .lead-source-box .meta {
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 4px;
+        }
+
+        /* Connectors */
+        .connector {
+            position: absolute;
+            pointer-events: none;
+        }
+
+        .connector-line {
+            stroke: var(--connector-line);
+            stroke-width: 3;
+            fill: none;
+        }
+
+        .connector-arrow {
+            fill: var(--connector-line);
+        }
+
+        /* Tooltips */
+        .tooltip {
+            position: absolute;
+            bottom: 110%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--tooltip-bg);
+            color: var(--tooltip-text);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 8px solid transparent;
+            border-top-color: var(--tooltip-bg);
+        }
+
+        .flow-item:hover .tooltip {
+            opacity: 1;
+        }
+
+        /* ============================================
+           LEGEND
+           ============================================ */
+        .legend {
+            margin-top: 30px;
+            padding: 20px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+        }
+
+        .legend h3 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            border: 2px solid var(--border-color);
+        }
+
+        .legend-shape {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .legend-diamond {
+            width: 20px;
+            height: 20px;
+            background: var(--decision-diamond);
+            transform: rotate(45deg);
+            border: 2px solid var(--border-color);
+        }
+
+        .legend-oval {
+            width: 30px;
+            height: 18px;
+            background: var(--lead-sources);
+            border-radius: 15px;
+            border: 2px solid var(--border-color);
+        }
+
+        .legend-box {
+            width: 25px;
+            height: 20px;
+            background: var(--process-box);
+            border: 2px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        /* ============================================
+           README SECTION
+           ============================================ */
+        .readme-section {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .readme-section details {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .readme-section summary {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .readme-content {
+            margin-top: 20px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .readme-content h4 {
+            color: var(--text-primary);
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .readme-content pre {
+            background: var(--bg-primary);
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .readme-content code {
+            background: var(--bg-primary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* ============================================
+           MOBILE RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.3rem;
+            }
+            
+            .flowchart-container {
+                min-width: 1200px;
+            }
+            
+            .lane-header {
+                min-width: 120px;
+                max-width: 120px;
+                font-size: 0.85rem;
+            }
+            
+            .process-box {
+                min-width: 120px;
+                max-width: 140px;
+            }
+        }
+
+        /* ============================================
+           PRINT STYLES
+           ============================================ */
+        @media print {
+            .header-controls,
+            .config-panel,
+            .readme-section,
+            .btn {
+                display: none !important;
+            }
+            
+            .flowchart-wrapper {
+                overflow: visible;
+            }
+            
+            body {
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         HEADER
+         ============================================ -->
+    <div class="header">
+        <div class="header-content">
+            <div>
+                <h1>🎯 SCHOLARIX GLOBAL - AI CONSULTANCY WORKFLOW</h1>
+                <div class="header-subtitle">Navigate. Innovate. Transform. | Lead to Deployment in 14-60 Days</div>
+            </div>
+            <div class="header-controls">
+                <button class="btn btn-primary" onclick="window.print()">🖨️ Print PDF</button>
+                <button class="btn btn-secondary" onclick="downloadConfig()">💾 Download JSON</button>
+                <button class="btn btn-secondary" onclick="toggleConfig()">⚙️ Configure</button>
+                <div class="theme-toggle" onclick="toggleTheme()"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         JSON CONFIGURATION PANEL
+         ============================================ -->
+    <div class="config-panel collapsed" id="configPanel">
+        <div class="config-header" onclick="toggleConfig()">
+            <h3>📝 JSON Configuration Editor</h3>
+            <span class="config-toggle-icon">▼</span>
+        </div>
+        <div class="config-content">
+            <textarea id="configTextarea" class="config-textarea">{
+    "metadata": {
+        "company": "Scholarix Global",
+        "tagline": "Navigate. Innovate. Transform.",
+        "version": "2.0"
+    },
+    
+    "colors": {
+        "leadSources": "#4fc3f7",
+        "sales": "#1e3a8a",
+        "technical": "#0c1e34",
+        "admin": "#FFD700",
+        "finance": "#4169E1",
+        "support": "#228B22",
+        "decisionDiamond": "#FF8C00"
+    },
+    
+    "leadSources": [
+        {"id": "linkedin", "label": "LinkedIn Ads", "icon": "💼", "budget": "AED 2K/mo"},
+        {"id": "website", "label": "Website", "icon": "🌐", "traffic": "Direct"},
+        {"id": "email", "label": "Email Campaigns", "icon": "📧", "targeting": "Enterprise"},
+        {"id": "referral", "label": "Referrals", "icon": "🤝", "program": "Active"},
+        {"id": "video", "label": "HeyGen Videos", "icon": "🎬", "platform": "Social"},
+        {"id": "bd", "label": "BD Outreach", "icon": "📞", "team": "Telesales"}
+    ]
+}</textarea>
+            <div class="config-actions">
+                <button class="btn btn-primary" onclick="applyConfig()">✅ Apply Configuration</button>
+                <button class="btn btn-secondary" onclick="resetConfig()">🔄 Reset to Default</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         FLOWCHART
+         ============================================ -->
+    <div class="flowchart-wrapper">
+        <div class="flowchart-container" id="flowchartContainer">
+            <div class="swim-lanes">
+                
+                <!-- LEAD SOURCES LANE -->
+                <div class="swim-lane">
+                    <div class="lane-header lead-sources">
+                        📥 LEAD SOURCES
+                    </div>
+                    <div class="lane-content">
+                        <div class="flow-item">
+                            <div class="oval">
+                                <span class="icon">🚀</span>
+                                <span class="label">START</span>
+                            </div>
+                            <div class="tooltip">All leads enter the workflow here</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="lead-source-box">
+                                <div class="icon">💼</div>
+                                <div class="label">LinkedIn Ads</div>
+                                <div class="meta">AED 2K/mo</div>
+                            </div>
+                            <div class="tooltip">Targeting: CFOs & Decision-Makers</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="lead-source-box">
+                                <div class="icon">🌐</div>
+                                <div class="label">Website Direct</div>
+                                <div class="meta">scholarixglobal.com</div>
+                            </div>
+                            <div class="tooltip">Contact forms & demo requests</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="lead-source-box">
+                                <div class="icon">📧</div>
+                                <div class="label">Email Campaigns</div>
+                                <div class="meta">Enterprise targeting</div>
+                            </div>
+                            <div class="tooltip">Mailchimp/SendGrid/HubSpot</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="lead-source-box">
+                                <div class="icon">🤝</div>
+                                <div class="label">Client Referrals</div>
+                                <div class="meta">Referral program</div>
+                            </div>
+                            <div class="tooltip">High-quality warm leads</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="lead-source-box">
+                                <div class="icon">🎬</div>
+                                <div class="label">HeyGen Videos</div>
+                                <div class="meta">AI Avatar</div>
+                            </div>
+                            <div class="tooltip">Video ads on social platforms</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="lead-source-box">
+                                <div class="icon">📞</div>
+                                <div class="label">BD Outreach</div>
+                                <div class="meta">Telesales</div>
+                            </div>
+                            <div class="tooltip">Business Development team calls</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AUTOMATION LANE -->
+                <div class="swim-lane">
+                    <div class="lane-header lead-sources">
+                        🤖 AUTOMATION
+                    </div>
+                    <div class="lane-content">
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">📥</div>
+                                <div class="label">Lead Capture</div>
+                                <div class="duration">Instant</div>
+                            </div>
+                            <div class="tooltip">Auto-capture in Odoo CRM • Source tracking</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">🎯</div>
+                                <div class="label">AI Lead Scoring</div>
+                                <div class="duration">60 seconds</div>
+                            </div>
+                            <div class="tooltip">100-point system: Authority 25 | Budget 30 | Speed 20 | Pain 15 | Process 10</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="decision-diamond">
+                                <div class="content">
+                                    <div class="label">Score ≥ 70?</div>
+                                </div>
+                            </div>
+                            <div class="tooltip">Qualified decision-maker check</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">📨</div>
+                                <div class="label">Nurture Campaign</div>
+                                <div class="duration">21-day cycle</div>
+                            </div>
+                            <div class="tooltip">Low-score leads • Email sequence • Re-scoring after engagement</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SALES LANE -->
+                <div class="swim-lane">
+                    <div class="lane-header sales">
+                        💼 SALES
+                    </div>
+                    <div class="lane-content">
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">📅</div>
+                                <div class="label">Book Discovery Call</div>
+                                <div class="duration">Self-service</div>
+                            </div>
+                            <div class="tooltip">Calendly integration • Qualified leads (Score ≥70)</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">🎧</div>
+                                <div class="label">Discovery Call</div>
+                                <div class="duration">30-45 min</div>
+                            </div>
+                            <div class="tooltip">Needs assessment • Pain points • Budget confirmation</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="decision-diamond">
+                                <div class="content">
+                                    <div class="label">F2F or Virtual?</div>
+                                </div>
+                            </div>
+                            <div class="tooltip">F2F: Deal >AED 15K • Complex setup • C-level</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">🏢</div>
+                                <div class="label">F2F Meeting</div>
+                                <div class="duration">1-2 hours</div>
+                            </div>
+                            <div class="tooltip">On-site presentation • Live demo • ROI calculator</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">💻</div>
+                                <div class="label">Virtual Demo</div>
+                                <div class="duration">45-60 min</div>
+                            </div>
+                            <div class="tooltip">Screen-share • Odoo AI showcase • Pricing proposals</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="decision-diamond">
+                                <div class="content">
+                                    <div class="label">Proposal Accepted?</div>
+                                </div>
+                            </div>
+                            <div class="tooltip">Client commits to Bronze/Silver/Gold tier</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">🛡️</div>
+                                <div class="label">Objection Handling</div>
+                                <div class="duration">1-3 days</div>
+                            </div>
+                            <div class="tooltip">Price • Timeline • Features • Competitor comparison</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ADMIN LANE -->
+                <div class="swim-lane">
+                    <div class="lane-header admin">
+                        📋 ADMIN
+                    </div>
+                    <div class="lane-content">
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">📝</div>
+                                <div class="label">Contract Prep</div>
+                                <div class="duration">1-2 days</div>
+                            </div>
+                            <div class="tooltip">SOW • T&C • SLA • Payment schedule</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">✍️</div>
+                                <div class="label">Contract Signing</div>
+                                <div class="duration">2-3 days</div>
+                            </div>
+                            <div class="tooltip">E-signature • KYC • Trade license • Emirates ID</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FINANCE LANE -->
+                <div class="swim-lane">
+                    <div class="lane-header finance">
+                        💰 FINANCE
+                    </div>
+                    <div class="lane-content">
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">💳</div>
+                                <div class="label">Invoice (50%)</div>
+                                <div class="duration">1 day</div>
+                            </div>
+                            <div class="tooltip">AED 4,999 implementation + Month 1 subscription</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">📊</div>
+                                <div class="label">Payment Collection</div>
+                                <div class="duration">1-5 days</div>
+                            </div>
+                            <div class="tooltip">Auto-reminders: Day 0, 3, 5, 7 • Bank/Card/Cheque</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="decision-diamond">
+                                <div class="content">
+                                    <div class="label">50% Paid?</div>
+                                </div>
+                            </div>
+                            <div class="tooltip">Confirm upfront payment before kickoff</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TECHNICAL LANE (IMPLEMENTATION) -->
+                <div class="swim-lane">
+                    <div class="lane-header technical">
+                        ⚙️ TECHNICAL
+                    </div>
+                    <div class="lane-content">
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">🚀</div>
+                                <div class="label">Project Kickoff</div>
+                                <div class="duration">1-2 hours</div>
+                            </div>
+                            <div class="tooltip">Team intro • Timeline • Access credentials</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">📋</div>
+                                <div class="label">Requirements</div>
+                                <div class="duration">2-3 days</div>
+                            </div>
+                            <div class="tooltip">Process mapping • User roles • Customizations</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">⚙️</div>
+                                <div class="label">Configuration</div>
+                                <div class="duration">3-7 days</div>
+                            </div>
+                            <div class="tooltip">Odoo setup • AI modules • Custom workflows</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">🔄</div>
+                                <div class="label">Data Migration</div>
+                                <div class="duration">2-4 days</div>
+                            </div>
+                            <div class="tooltip">Transfer existing data • Validation • Integrity checks</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">🤖</div>
+                                <div class="label">AI Training</div>
+                                <div class="duration">1-3 days</div>
+                            </div>
+                            <div class="tooltip">Model training • Predictive analytics • Fine-tuning</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">🎓</div>
+                                <div class="label">User Training</div>
+                                <div class="duration">2-3 days</div>
+                            </div>
+                            <div class="tooltip">Live sessions • Recorded videos • User manuals</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">✅</div>
+                                <div class="label">UAT Testing</div>
+                                <div class="duration">3-5 days</div>
+                            </div>
+                            <div class="tooltip">Client tests real scenarios • Sign-off required</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="decision-diamond">
+                                <div class="content">
+                                    <div class="label">UAT Pass?</div>
+                                </div>
+                            </div>
+                            <div class="tooltip">Client satisfied with functionality</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">🐛</div>
+                                <div class="label">Bug Fixes</div>
+                                <div class="duration">1-3 days</div>
+                            </div>
+                            <div class="tooltip">Address UAT feedback • Critical: 24h • Minor: 48h</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DEPLOYMENT & SUPPORT LANE -->
+                <div class="swim-lane">
+                    <div class="lane-header support">
+                        🚀 DEPLOYMENT
+                    </div>
+                    <div class="lane-content">
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">🎯</div>
+                                <div class="label">Go-Live</div>
+                                <div class="duration">1 day</div>
+                            </div>
+                            <div class="tooltip">Production deployment • DNS config • User activation</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">🛟</div>
+                                <div class="label">Hypercare</div>
+                                <div class="duration">14 days</div>
+                            </div>
+                            <div class="tooltip">24/7 support • Daily check-ins • Rapid issue resolution</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">💰</div>
+                                <div class="label">Final Payment</div>
+                                <div class="duration">1-3 days</div>
+                            </div>
+                            <div class="tooltip">Remaining 50% collection • Post go-live satisfaction</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">🤝</div>
+                                <div class="label">Handover</div>
+                                <div class="duration">1 day</div>
+                            </div>
+                            <div class="tooltip">Knowledge transfer • As-built docs • Support transition</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="process-box">
+                                <div class="icon">🔧</div>
+                                <div class="label">Ongoing Support</div>
+                                <div class="duration">Monthly</div>
+                            </div>
+                            <div class="tooltip">Bronze AED 799 • Silver AED 1,499 • Gold AED 2,499</div>
+                        </div>
+                        
+                        <div class="flow-item">
+                            <div class="oval">
+                                <span class="icon">🎉</span>
+                                <span class="label">SUCCESS</span>
+                            </div>
+                            <div class="tooltip">Active subscriber • ROI 150-200% achieved</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- LEGEND -->
+            <div class="legend">
+                <h3>📊 Legend</h3>
+                <div class="legend-grid">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: var(--lead-sources);"></div>
+                        <span>Lead Sources / Automation</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: var(--sales);"></div>
+                        <span>Sales Team</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: var(--technical);"></div>
+                        <span>Technical Team</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: var(--admin);"></div>
+                        <span>Admin Team</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: var(--finance);"></div>
+                        <span>Finance Team</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: var(--support);"></div>
+                        <span>Deployment & Support</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-shape"><div class="legend-diamond"></div></div>
+                        <span>Decision Point</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-shape"><div class="legend-oval"></div></div>
+                        <span>Start/End</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-shape"><div class="legend-box"></div></div>
+                        <span>Process Step</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ============================================
+         README SECTION
+         ============================================ -->
+    <section class="readme-section">
+        <details>
+            <summary>📖 README - How to Customize This Flowchart</summary>
+            <div class="readme-content">
+                <h4>🎯 Quick Start</h4>
+                <p>This flowchart represents the complete Scholarix Global AI consultancy workflow from lead acquisition through deployment. Fully customizable via JSON configuration.</p>
+
+                <h4>🎨 Deep Ocean Color Palette</h4>
+                <p>Official Scholarix Global brand colors:</p>
+                <pre>Deep Navy: #0c1e34 (60% - primary backgrounds, authority)
+Ocean Blue: #1e3a8a (30% - secondary elements, headers)
+Sky Blue: #4fc3f7 (10% - accents, CTAs, highlights)
+Ice White: #e8f4fd (backgrounds, clean space)</pre>
+
+                <h4>📊 100-Point Lead Scoring System</h4>
+                <p>Integrated authority qualification:</p>
+                <pre>Job Title Authority: 25 points (C-Level: 25 | Director: 20 | Manager: 10)
+Budget Approval: 30 points (Full: 30 | Shared: 20 | Recommender: 10)
+Decision Speed: 20 points (Immediate: 20 | Weeks: 15 | Months: 5)
+Pain Ownership: 15 points (Direct: 15 | Team: 10 | Observer: 5)
+Approval Process: 10 points (Solo: 10 | Committee: 7 | Complex: 3)
+
+Threshold: Score ≥ 70 = Qualified (proceed to discovery)</pre>
+
+                <h4>⏱️ Timeline Overview</h4>
+                <p><strong>Total deployment: 14-60 days</strong> (vs industry standard 180-365 days = 10x faster)</p>
+                <ul>
+                    <li>Phase 1 - Qualification: 60 seconds - 21 days</li>
+                    <li>Phase 2 - Discovery: 1-3 days</li>
+                    <li>Phase 3 - Contract: 5-10 days</li>
+                    <li>Phase 4 - Implementation: 14-30 days</li>
+                    <li>Phase 5 - Deployment: 14+ days (hypercare + ongoing)</li>
+                </ul>
+
+                <h4>💰 Pricing Structure</h4>
+                <pre>Implementation: AED 4,999 (50% upfront, 50% at go-live)
+
+Ongoing Support (Monthly):
+- Bronze: AED 799/mo (Email 48h, 5 hours/mo)
+- Silver: AED 1,499/mo (Email+Phone 24h, 10 hours/mo)
+- Gold: AED 2,499/mo (24/7 Premium 4h, 20 hours/mo + Dedicated AM)</pre>
+
+                <h4>🌙 Dark Mode</h4>
+                <p>Click the toggle in the header to switch between light and dark themes. Your preference is saved automatically.</p>
+
+                <h4>🖨️ Printing</h4>
+                <p>Click "Print PDF" button. The layout is optimized for printing with controls hidden automatically.</p>
+
+                <h4>⚙️ Customization</h4>
+                <p>Click "Configure" to edit the JSON. Modify colors, labels, timings, or add new stages. Click "Apply Configuration" to see changes immediately.</p>
+
+                <h4>📱 Mobile Usage</h4>
+                <p>Fully responsive. On mobile devices, use pinch-to-zoom and swipe to pan through the workflow.</p>
+
+                <h4>🚀 Key Differentiators</h4>
+                <ul>
+                    <li>⚡ 10x faster deployment (14-60 days vs 180-365 industry standard)</li>
+                    <li>💰 40% cost savings vs competitors</li>
+                    <li>🎯 150-200% guaranteed ROI for clients</li>
+                    <li>🤖 AI-powered Odoo implementations</li>
+                    <li>🌍 UAE market cultural intelligence</li>
+                </ul>
+            </div>
+        </details>
+    </section>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.setAttribute('data-theme', savedTheme);
+        });
+
+        // Config Panel Toggle
+        function toggleConfig() {
+            const panel = document.getElementById('configPanel');
+            panel.classList.toggle('collapsed');
+        }
+
+        // Apply Configuration
+        function applyConfig() {
+            try {
+                const textarea = document.getElementById('configTextarea');
+                const config = JSON.parse(textarea.value);
+                
+                // Apply colors
+                if (config.colors) {
+                    const root = document.documentElement;
+                    if (config.colors.leadSources) root.style.setProperty('--lead-sources', config.colors.leadSources);
+                    if (config.colors.sales) root.style.setProperty('--sales', config.colors.sales);
+                    if (config.colors.technical) root.style.setProperty('--technical', config.colors.technical);
+                    if (config.colors.admin) root.style.setProperty('--admin', config.colors.admin);
+                    if (config.colors.finance) root.style.setProperty('--finance', config.colors.finance);
+                    if (config.colors.support) root.style.setProperty('--support', config.colors.support);
+                    if (config.colors.decisionDiamond) root.style.setProperty('--decision-diamond', config.colors.decisionDiamond);
+                }
+
+                alert('✅ Configuration applied successfully!\n\nScholarix Global workflow updated with your changes.');
+            } catch (error) {
+                alert('❌ Invalid JSON format. Please check your configuration.\n\nError: ' + error.message);
+            }
+        }
+
+        // Reset Configuration
+        function resetConfig() {
+            if (confirm('Reset configuration to default Scholarix Global settings? This will reload the page.')) {
+                localStorage.removeItem('scholarixConfig');
+                location.reload();
+            }
+        }
+
+        // Download Configuration
+        function downloadConfig() {
+            const textarea = document.getElementById('configTextarea');
+            const blob = new Blob([textarea.value], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'scholarix-global-workflow-config.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('📥 Configuration downloaded!\n\nFile: scholarix-global-workflow-config.json');
+        }
+
+        // Touch/Pinch Zoom Support for Mobile
+        let scale = 1;
+        let lastScale = 1;
+
+        const flowchartWrapper = document.querySelector('.flowchart-wrapper');
+        const flowchartContainer = document.getElementById('flowchartContainer');
+
+        flowchartWrapper.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                lastScale = scale;
+            }
+        });
+
+        flowchartWrapper.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 2) {
+                e.preventDefault();
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const distance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
+                
+                if (!flowchartWrapper.lastDistance) {
+                    flowchartWrapper.lastDistance = distance;
+                }
+                
+                scale = lastScale * (distance / flowchartWrapper.lastDistance);
+                scale = Math.min(Math.max(0.5, scale), 3);
+                flowchartContainer.style.transform = `scale(${scale})`;
+                flowchartContainer.style.transformOrigin = 'top left';
+            }
+        });
+
+        flowchartWrapper.addEventListener('touchend', () => {
+            flowchartWrapper.lastDistance = null;
+        });
+
+        // Keyboard accessibility
+        document.querySelectorAll('.flow-item').forEach(item => {
+            item.setAttribute('tabindex', '0');
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    item.classList.toggle('focused');
+                }
+            });
+        });
+
+        // Print optimization
+        window.addEventListener('beforeprint', () => {
+            document.body.classList.add('printing');
+        });
+
+        window.addEventListener('afterprint', () => {
+            document.body.classList.remove('printing');
+        });
+    </script>
+
+</body>
+</html>

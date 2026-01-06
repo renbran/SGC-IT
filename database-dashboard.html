@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGC TECH AI | Database Command Center</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           GLOBAL RESET & BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Deep Ocean Evolution Color Palette */
+            --deep-navy: #0c1e34;
+            --ocean-blue: #1e3a8a;
+            --sky-blue: #4fc3f7;
+            --electric-cyan: #00FFF0;
+            --neon-green: #00FF88;
+            --carbon-black: #0A0A0A;
+            
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, var(--deep-navy) 0%, var(--ocean-blue) 100%);
+            --gradient-accent: linear-gradient(135deg, var(--electric-cyan) 0%, var(--sky-blue) 100%);
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 8px rgba(0, 255, 240, 0.1);
+            --shadow-md: 0 4px 16px rgba(0, 255, 240, 0.15);
+            --shadow-lg: 0 8px 32px rgba(0, 255, 240, 0.2);
+            --shadow-glow: 0 0 20px rgba(0, 255, 240, 0.3);
+            
+            /* Transitions */
+            --transition-fast: 200ms ease-in-out;
+            --transition-medium: 300ms ease-in-out;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--carbon-black);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ============================================
+           ANIMATED BACKGROUND
+           ============================================ */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: var(--gradient-primary);
+            overflow: hidden;
+        }
+
+        .hexagon-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.08;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 50px, var(--electric-cyan) 50px, var(--electric-cyan) 51px),
+                repeating-linear-gradient(90deg, transparent, transparent 50px, var(--electric-cyan) 50px, var(--electric-cyan) 51px);
+        }
+
+        .neural-network {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 255, 240, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(79, 195, 247, 0.05) 0%, transparent 50%);
+        }
+
+        /* ============================================
+           MAIN CONTAINER
+           ============================================ */
+        .main-container {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* ============================================
+           HEADER
+           ============================================ */
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0, 255, 240, 0.3);
+            display: inline-block;
+        }
+
+        .tagline {
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--sky-blue);
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-top: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+
+        /* ============================================
+           SECTION CARDS
+           ============================================ */
+        .section {
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(0, 255, 240, 0.2);
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-accent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--electric-cyan);
+            letter-spacing: 1px;
+        }
+
+        /* ============================================
+           DATABASE GRID
+           ============================================ */
+        .database-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .database-card {
+            background: rgba(12, 30, 52, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 240, 0.2);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all var(--transition-medium);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .database-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition-medium);
+        }
+
+        .database-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--electric-cyan);
+        }
+
+        .database-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .db-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .db-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .db-version {
+            background: var(--gradient-accent);
+            color: var(--deep-navy);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .db-purpose {
+            color: var(--sky-blue);
+            font-size: 14px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .db-info-grid {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .db-info-item {
+            display: flex;
+            gap: 10px;
+            font-size: 13px;
+        }
+
+        .db-info-label {
+            color: rgba(255, 255, 255, 0.6);
+            min-width: 80px;
+            font-weight: 600;
+        }
+
+        .db-info-value {
+            color: #ffffff;
+            word-break: break-all;
+        }
+
+        .db-credentials {
+            background: rgba(0, 255, 240, 0.05);
+            border: 1px solid rgba(0, 255, 240, 0.15);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .credential-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .credential-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .credential-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 600;
+        }
+
+        .credential-value {
+            font-size: 13px;
+            color: var(--electric-cyan);
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+        }
+
+        .db-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--gradient-accent);
+            color: var(--deep-navy);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--electric-cyan);
+        }
+
+        /* ============================================
+           WEBPAGE LINKS SECTION
+           ============================================ */
+        .webpage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .webpage-card {
+            background: rgba(12, 30, 52, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 240, 0.2);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all var(--transition-medium);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+        }
+
+        .webpage-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition-medium);
+        }
+
+        .webpage-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--electric-cyan);
+        }
+
+        .webpage-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .webpage-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .webpage-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .webpage-purpose {
+            color: var(--sky-blue);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .webpage-url {
+            color: var(--electric-cyan);
+            font-size: 13px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .webpage-url:hover {
+            text-decoration: underline;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(0, 255, 240, 0.2);
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .footer-tagline {
+            color: var(--sky-blue);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .footer-info {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 36px;
+            }
+
+            .page-title {
+                font-size: 24px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+
+            .database-grid,
+            .webpage-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .db-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* ============================================
+           UTILITY CLASSES
+           ============================================ */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-cloud {
+            background: rgba(0, 255, 240, 0.2);
+            color: var(--electric-cyan);
+        }
+
+        .status-local {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--neon-green);
+        }
+
+        .icon {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-container">
+        <div class="hexagon-pattern"></div>
+        <div class="neural-network"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <h1 class="logo">SGC TECH AI</h1>
+                <p class="tagline">Intelligent Infrastructure. Instant Impact.</p>
+            </div>
+            <h2 class="page-title">Database Command Center</h2>
+        </header>
+
+        <!-- Database Instances Section -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🗄️</div>
+                <h2 class="section-title">Database Instances</h2>
+            </div>
+
+            <div class="database-grid">
+                
+                <!-- Database 1: Scholarix V2 -->
+                <div class="database-card">
+                    <div class="db-header">
+                        <div>
+                            <h3 class="db-name">scholarixv2</h3>
+                            <p class="db-purpose">REAL ESTATE TRIAL DATABASE</p>
+                        </div>
+                        <span class="db-version">v17</span>
+                    </div>
+
+                    <div class="db-info-grid">
+                        <div class="db-info-item">
+                            <span class="db-info-label">Location:</span>
+                            <span class="db-info-value">
+                                <span class="status-badge status-cloud">☁️ CLOUD</span>
+                            </span>
+                        </div>
+                        <div class="db-info-item">
+                            <span class="db-info-label">Server IP:</span>
+                            <span class="db-info-value">139.84.163.11</span>
+                        </div>
+                        <div class="db-info-item">
+                            <span class="db-info-label">Provider:</span>
+                            <span class="db-info-value">CloudPepper</span>
+                        </div>
+                    </div>
+
+                    <div class="db-credentials">
+                        <div class="credential-row">
+                            <span class="credential-label">Username:</span>
+                            <span class="credential-value">info@scholarixglobal.com</span>
+                        </div>
+                        <div class="credential-row">
+                            <span class="credential-label">Password:</span>
+                            <span class="credential-value">Admin@123</span>
+                        </div>
+                    </div>
+
+                    <div class="db-actions">
+                        <a href="https://erp.sgctech.ai" target="_blank" class="btn btn-primary">
+                            <span class="icon">🚀</span> Access Database
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Database 2: OSUS Properties -->
+                <div class="database-card">
+                    <div class="db-header">
+                        <div>
+                            <h3 class="db-name">osusproperties</h3>
+                            <p class="db-purpose">OSUSPROPERTIES CLIENT</p>
+                        </div>
+                        <span class="db-version">v17</span>
+                    </div>
+
+                    <div class="db-info-grid">
+                        <div class="db-info-item">
+                            <span class="db-info-label">Location:</span>
+                            <span class="db-info-value">
+                                <span class="status-badge status-cloud">☁️ CLOUD</span>
+                            </span>
+                        </div>
+                        <div class="db-info-item">
+                            <span class="db-info-label">Server IP:</span>
+                            <span class="db-info-value">139.84.163.11</span>
+                        </div>
+                        <div class="db-info-item">
+                            <span class="db-info-label">Provider:</span>
+                            <span class="db-info-value">CloudPepper</span>
+                        </div>
+                    </div>
+
+                    <div class="db-credentials">
+                        <div class="credential-row">
+                            <span class="credential-label">Username:</span>
+                            <span class="credential-value">salescompliance@osusproperties.com</span>
+                        </div>
+                        <div class="credential-row">
+                            <span class="credential-label">Password:</span>
+                            <span class="credential-value">8586583</span>
+                        </div>
+                    </div>
+
+                    <div class="db-actions">
+                        <a href="https://erposus.com" target="_blank" class="btn btn-primary">
+                            <span class="icon">🚀</span> Access Database
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Database 3: Eiger Marvel HR -->
+                <div class="database-card">
+                    <div class="db-header">
+                        <div>
+                            <h3 class="db-name">eigermarvelhr.com</h3>
+                            <p class="db-purpose">EM DATABASE</p>
+                        </div>
+                        <span class="db-version">v18</span>
+                    </div>
+
+                    <div class="db-info-grid">
+                        <div class="db-info-item">
+                            <span class="db-info-label">Location:</span>
+                            <span class="db-info-value">
+                                <span class="status-badge status-cloud">☁️ CLOUD</span>
+                            </span>
+                        </div>
+                        <div class="db-info-item">
+                            <span class="db-info-label">Server IP:</span>
+                            <span class="db-info-value">65.20.72.53</span>
+                        </div>
+                        <div class="db-info-item">
+                            <span class="db-info-label">Provider:</span>
+                            <span class="db-info-value">CloudPepper</span>
+                        </div>
+                    </div>
+
+                    <div class="db-credentials">
+                        <div class="credential-row">
+                            <span class="credential-label">Username:</span>
+                            <span class="credential-value">admin</span>
+                        </div>
+                        <div class="credential-row">
+                            <span class="credential-label">Password:</span>
+                            <span class="credential-value">8586583</span>
+                        </div>
+                    </div>
+
+                    <div class="db-actions">
+                        <a href="https://eigermarvelhr.com" target="_blank" class="btn btn-primary">
+                            <span class="icon">🚀</span> Access Database
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Database 4: Restaurant Trial -->
+                <div class="database-card">
+                    <div class="db-header">
+                        <div>
+                            <h3 class="db-name">scholarix.cloudpepper.site</h3>
+                            <p class="db-purpose">RESTAURANT TRIAL DATABASE</p>
+                        </div>
+                        <span class="db-version">v18</span>
+                    </div>
+
+                    <div class="db-info-grid">
+                        <div class="db-info-item">
+                            <span class="db-info-label">Location:</span>
+                            <span class="db-info-value">
+                                <span class="status-badge status-cloud">☁️ CLOUD</span>
+                            </span>
+                        </div>
+                        <div class="db-info-item">
+                            <span class="db-info-label">Server IP:</span>
+                            <span class="db-info-value">65.20.72.53</span>
+                        </div>
+                        <div class="db-info-item">
+                            <span class="db-info-label">Provider:</span>
+                            <span class="db-info-value">CloudPepper</span>
+                        </div>
+                    </div>
+
+                    <div class="db-credentials">
+                        <div class="credential-row">
+                            <span class="credential-label">Username:</span>
+                            <span class="credential-value">admin</span>
+                        </div>
+                        <div class="credential-row">
+                            <span class="credential-label">Password:</span>
+                            <span class="credential-value">8586583</span>
+                        </div>
+                    </div>
+
+                    <div class="db-actions">
+                        <a href="https://scholarix.cloudpepper.site" target="_blank" class="btn btn-primary">
+                            <span class="icon">🚀</span> Access Database
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Database 5: Hospital Trial -->
+                <div class="database-card">
+                    <div class="db-header">
+                        <div>
+                            <h3 class="db-name">testserver.cloudpepper.site</h3>
+                            <p class="db-purpose">HOSPITAL TRIAL DATABASE</p>
+                        </div>
+                        <span class="db-version">v18</span>
+                    </div>
+
+                    <div class="db-info-grid">
+                        <div class="db-info-item">
+                            <span class="db-info-label">Location:</span>
+                            <span class="db-info-value">
+                                <span class="status-badge status-cloud">☁️ CLOUD</span>
+                            </span>
+                        </div>
+                        <div class="db-info-item">
+                            <span class="db-info-label">Server IP:</span>
+                            <span class="db-info-value">65.20.72.53</span>
+                        </div>
+                        <div class="db-info-item">
+                            <span class="db-info-label">Provider:</span>
+                            <span class="db-info-value">CloudPepper</span>
+                        </div>
+                    </div>
+
+                    <div class="db-credentials">
+                        <div class="credential-row">
+                            <span class="credential-label">Username:</span>
+                            <span class="credential-value">admin</span>
+                        </div>
+                        <div class="credential-row">
+                            <span class="credential-label">Password:</span>
+                            <span class="credential-value">8586583@Bran</span>
+                        </div>
+                    </div>
+
+                    <div class="db-actions">
+                        <a href="https://testserver.cloudpepper.site" target="_blank" class="btn btn-primary">
+                            <span class="icon">🚀</span> Access Database
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Database 6: SGC TECH AI -->
+                <div class="database-card">
+                    <div class="db-header">
+                        <div>
+                            <h3 class="db-name">SGCTECHAI</h3>
+                            <p class="db-purpose">SGC TECH AI PRODUCTION</p>
+                        </div>
+                        <span class="db-version">v19</span>
+                    </div>
+
+                    <div class="db-info-grid">
+                        <div class="db-info-item">
+                            <span class="db-info-label">Location:</span>
+                            <span class="db-info-value">
+                                <span class="status-badge status-local">💻 LOCAL</span>
+                            </span>
+                        </div>
+                        <div class="db-info-item">
+                            <span class="db-info-label">Server IP:</span>
+                            <span class="db-info-value">N/A (Local)</span>
+                        </div>
+                        <div class="db-info-item">
+                            <span class="db-info-label">Environment:</span>
+                            <span class="db-info-value">On-Premise</span>
+                        </div>
+                    </div>
+
+                    <div class="db-credentials">
+                        <div class="credential-row">
+                            <span class="credential-label">Username:</span>
+                            <span class="credential-value">info@sgctech.ai</span>
+                        </div>
+                        <div class="credential-row">
+                            <span class="credential-label">Password:</span>
+                            <span class="credential-value">8586583</span>
+                        </div>
+                    </div>
+
+                    <div class="db-actions">
+                        <a href="https://odoo.scholarixglobal.com" target="_blank" class="btn btn-primary">
+                            <span class="icon">🚀</span> Access Database
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Webpages & Resources Section -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🌐</div>
+                <h2 class="section-title">Business Resources & Portals</h2>
+            </div>
+
+            <div class="webpage-grid">
+                
+                <!-- Webpage 1: Main Website -->
+                <a href="https://sgctech.ai" target="_blank" class="webpage-card">
+                    <div class="webpage-icon">🏢</div>
+                    <h3 class="webpage-title">SGC TECH AI Website</h3>
+                    <p class="webpage-purpose">BUSINESS WEBSITE</p>
+                    <span class="webpage-url">
+                        sgctech.ai
+                        <span class="icon">→</span>
+                    </span>
+                </a>
+
+                <!-- Webpage 2: Documentation -->
+                <a href="https://doc.sgctech.ai" target="_blank" class="webpage-card">
+                    <div class="webpage-icon">📚</div>
+                    <h3 class="webpage-title">Documentation Portal</h3>
+                    <p class="webpage-purpose">BUSINESS DOCUMENTS</p>
+                    <span class="webpage-url">
+                        doc.sgctech.ai
+                        <span class="icon">→</span>
+                    </span>
+                </a>
+
+                <!-- Webpage 3: Sales Portal -->
+                <a href="https://sales.sgctech.ai" target="_blank" class="webpage-card">
+                    <div class="webpage-icon">📞</div>
+                    <h3 class="webpage-title">Sales Training Portal</h3>
+                    <p class="webpage-purpose">CALL PRACTICE AND RECORDINGS</p>
+                    <span class="webpage-url">
+                        sales.sgctech.ai
+                        <span class="icon">→</span>
+                    </span>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <h2 class="footer-logo">SGC TECH AI</h2>
+            <p class="footer-tagline">Intelligent Infrastructure. Instant Impact.</p>
+            <p class="footer-info">
+                Database Command Center | A Scholarix Global Consultants Brand<br>
+                © 2025 SGC TECH AI. All rights reserved.
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
+
+<!-- Add this script before closing </body> tag -->
+<script>
+    // Simple password protection (use proper authentication in production)
+    const correctPassword = "SGC2025!";
+    
+    window.onload = function() {
+        const enteredPassword = prompt("Enter access password:");
+        if (enteredPassword !== correctPassword) {
+            alert("Access Denied");
+            window.location.href = "https://sgctech.ai";
+        }
+    };
+</script>
