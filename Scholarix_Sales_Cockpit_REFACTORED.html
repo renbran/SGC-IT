@@ -1,0 +1,1795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="[ANONYMIZED COMPANY] call cockpit for UAE mid-market Odoo + AI consultations. Real-time search, phase filtering, and ROI-led qualification.">
+  <meta name="theme-color" content="#0b3d91">
+  <meta property="og:title" content="[ANONYMIZED COMPANY] Sales Cockpit">
+  <meta property="og:description" content="Odoo + AI consultation cockpit for UAE mid-market operators">
+  <title>[ANONYMIZED COMPANY] Sales Cockpit · Odoo + AI Consultation Handler</title>
+  <style>
+    /* ========================================
+       SECTION 1: ROOT VARIABLES & DESIGN TOKENS
+       ======================================== */
+    :root {
+      /* Color Palette */
+      --navy: #0b3d91;
+      --navy-dark: #082c6b;
+      --amber: #d97706;
+      --amber-soft: #fef3c7;
+      --ink: #0f172a;
+      --muted: #475569;
+      --line: #e2e8f0;
+      --bg: #ffffff;
+      --soft: #f8fafc;
+      --green: #15803d;
+      --green-soft: #dcfce7;
+      --red: #b91c1c;
+      --red-soft: #fee2e2;
+
+      /* Phase Colors */
+      --opening: #0891b2;
+      --discovery: #7c3aed;
+      --pitch: #d97706;
+      --close: #15803d;
+      --post: #475569;
+
+      /* Typography System */
+      --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-family-mono: 'JetBrains Mono', 'Courier New', monospace;
+      --font-size-xs: 10px;
+      --font-size-sm: 11px;
+      --font-size-base: 14px;
+      --font-size-md: 15px;
+      --font-size-lg: 16px;
+      --font-size-xl: 20px;
+      --line-height-tight: 1.4;
+      --line-height-normal: 1.5;
+      --line-height-relaxed: 1.6;
+
+      /* Spacing Scale */
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 12px;
+      --space-lg: 16px;
+      --space-xl: 20px;
+      --space-2xl: 32px;
+
+      /* Shadows & Depth */
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 3px 10px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 2px 8px rgba(0, 0, 0, 0.15);
+      --border-radius: 6px;
+      --border-radius-sm: 5px;
+
+      /* Motion & Transitions */
+      --transition-fast: 0.15s ease;
+      --transition-base: 0.2s ease;
+      --transition-slow: 0.3s ease;
+
+      /* Z-Index Scale */
+      --z-base: 1;
+      --z-dropdown: 50;
+      --z-sticky: 100;
+      --z-modal: 1000;
+
+      /* Responsive Breakpoints */
+      --bp-mobile: 320px;
+      --bp-tablet: 640px;
+      --bp-desktop: 900px;
+      --bp-wide: 1200px;
+
+      /* Configuration */
+      --enable-animations: 1;
+      --track-events: 1;
+    }
+
+    /* ========================================
+       SECTION 2: RESET & BASELINE
+       ======================================== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-family-base);
+      color: var(--ink);
+      background: var(--soft);
+      line-height: var(--line-height-normal);
+      font-size: var(--font-size-base);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color var(--transition-fast);
+    }
+
+    body.keyboard-navigation :focus-visible {
+      outline: 2px solid var(--navy);
+      outline-offset: 2px;
+    }
+
+    main {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    /* Accessibility: Skip to main link */
+    .skip-to-main {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--navy);
+      color: white;
+      padding: var(--space-md) var(--space-lg);
+      text-decoration: none;
+      z-index: var(--z-modal);
+    }
+
+    .skip-to-main:focus {
+      top: 0;
+    }
+
+    /* ========================================
+       SECTION 3: HEADER & NAVIGATION
+       ======================================== */
+    header[role="banner"] {
+      position: sticky;
+      top: 0;
+      z-index: var(--z-sticky);
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-dark) 100%);
+      color: #fff;
+      padding: var(--space-md) var(--space-lg);
+      box-shadow: var(--shadow-lg);
+      border-bottom: 3px solid var(--amber);
+    }
+
+    .cockpit-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: var(--font-size-md);
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .brand span {
+      color: #fcd34d;
+      animation: pulse-accent 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-accent {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
+    }
+
+    /* Search Component */
+    .search-wrap {
+      flex: 1;
+      min-width: 240px;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      padding: var(--space-md) var(--space-lg) var(--space-md) 38px;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: var(--font-size-base);
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--ink);
+      outline: none;
+      font-weight: 500;
+      transition: all var(--transition-fast);
+    }
+
+    .search-wrap input:focus {
+      box-shadow: 0 0 0 3px rgba(252, 211, 77, 0.4), inset 0 1px 2px rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 1);
+    }
+
+    .search-wrap input::placeholder {
+      color: rgba(15, 23, 42, 0.5);
+    }
+
+    .search-wrap::before {
+      content: "🔍";
+      position: absolute;
+      left: var(--space-lg);
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: var(--font-size-base);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    /* Phase Filter Buttons */
+    .phase-filters {
+      display: flex;
+      gap: var(--space-sm);
+      flex-wrap: wrap;
+    }
+
+    .phase-btn {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 7px 12px;
+      border-radius: var(--border-radius-sm);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: var(--font-size-xs);
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      user-select: none;
+    }
+
+    .phase-btn:hover {
+      background: rgba(255, 255, 255, 0.28);
+      transform: translateY(-1px);
+    }
+
+    .phase-btn:active {
+      transform: translateY(0);
+    }
+
+    .phase-btn.active {
+      background: #fcd34d;
+      color: var(--navy-dark);
+      border-color: #fcd34d;
+      box-shadow: 0 4px 12px rgba(252, 211, 77, 0.3);
+    }
+
+    .phase-btn .key {
+      display: inline-block;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: var(--font-size-xs);
+      font-family: var(--font-family-mono);
+    }
+
+    .phase-btn.active .key {
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    /* Mode Toggle */
+    .mode-toggle {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 7px 12px;
+      border-radius: var(--border-radius-sm);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: var(--font-size-xs);
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .mode-toggle:hover {
+      background: rgba(255, 255, 255, 0.28);
+      transform: translateY(-1px);
+    }
+
+    .mode-toggle.active {
+      background: #fcd34d;
+      color: var(--navy-dark);
+      border-color: #fcd34d;
+    }
+
+    /* ========================================
+       SECTION 4: MAIN CONTENT CONTAINER
+       ======================================== */
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--space-xl);
+      width: 100%;
+    }
+
+    /* ========================================
+       SECTION 5: INTRO & CARDS
+       ======================================== */
+    .intro {
+      background: #fff;
+      border-radius: var(--border-radius);
+      padding: var(--space-lg) var(--space-xl);
+      margin-bottom: var(--space-xl);
+      border-left: 5px solid var(--amber);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition-fast);
+      animation: fadeInDown 0.4s ease;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .intro:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .intro h1 {
+      color: var(--navy);
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--space-sm);
+      font-weight: 800;
+    }
+
+    .intro p {
+      color: var(--muted);
+      font-size: 13px;
+      margin: var(--space-xs) 0;
+      line-height: var(--line-height-relaxed);
+    }
+
+    .intro kbd {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      padding: 1px 6px;
+      font-family: var(--font-family-mono);
+      font-size: var(--font-size-xs);
+      color: var(--ink);
+      display: inline-block;
+      margin: 0 2px;
+    }
+
+    /* ========================================
+       SECTION 6: PHASE SECTIONS
+       ======================================== */
+    .phase {
+      margin-bottom: var(--space-2xl);
+      scroll-margin-top: 100px;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .phase[aria-hidden="true"] {
+      display: none;
+    }
+
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      padding: var(--space-lg);
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+      color: #fff;
+      font-weight: 700;
+      transition: all var(--transition-fast);
+    }
+
+    .phase-header .num {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 2px 9px;
+      border-radius: var(--border-radius-sm);
+      font-family: var(--font-family-mono);
+      font-size: var(--font-size-xs);
+      display: inline-block;
+      min-width: 32px;
+      text-align: center;
+    }
+
+    .phase-header .ttl {
+      font-size: var(--font-size-lg);
+      letter-spacing: 0.02em;
+      flex: 1;
+    }
+
+    .phase-header .meta {
+      margin-left: auto;
+      font-size: var(--font-size-xs);
+      opacity: 0.9;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .phase-1 .phase-header { background: linear-gradient(135deg, var(--opening), var(--opening)); }
+    .phase-2 .phase-header { background: linear-gradient(135deg, var(--discovery), var(--discovery)); }
+    .phase-3 .phase-header { background: linear-gradient(135deg, var(--pitch), var(--pitch)); }
+    .phase-4 .phase-header { background: linear-gradient(135deg, var(--close), var(--close)); }
+    .phase-5 .phase-header { background: linear-gradient(135deg, var(--post), var(--post)); }
+
+    /* ========================================
+       SECTION 7: GOAL & INFO CARDS
+       ======================================== */
+    .goal-card {
+      background: #fff;
+      padding: var(--space-lg);
+      border-left: 5px solid var(--navy);
+      font-size: 13px;
+      box-shadow: var(--shadow-sm);
+      margin: var(--space-sm) 0;
+    }
+
+    .goal-card b {
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    /* ========================================
+       SECTION 8: YOUR LINE (SCRIPT)
+       ======================================== */
+    .your-line {
+      background: #eff6ff;
+      border-left: 5px solid var(--navy);
+      padding: var(--space-lg);
+      margin: var(--space-sm) 0;
+      font-size: var(--font-size-base);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .your-line .label {
+      color: var(--navy);
+      font-weight: 700;
+      font-size: var(--font-size-xs);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+      display: block;
+    }
+
+    .your-line .script {
+      color: var(--ink);
+      font-weight: 500;
+      line-height: var(--line-height-relaxed);
+    }
+
+    .your-line .pause {
+      display: inline-block;
+      background: var(--amber-soft);
+      color: #92400e;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      margin: var(--space-xs) 0;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ========================================
+       SECTION 9: OBJECTION ROW (CORE)
+       ======================================== */
+    .obj-row {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 0;
+      background: #fff;
+      margin: var(--space-sm) 0;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--line);
+      transition: all var(--transition-fast);
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .obj-row:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .obj-trigger {
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      padding: var(--space-lg);
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      transition: background var(--transition-fast);
+    }
+
+    .obj-row:hover .obj-trigger {
+      background: linear-gradient(135deg, #fca5a5 0%, #f87171 100%);
+    }
+
+    .obj-trigger .tag {
+      color: var(--red);
+      font-weight: 700;
+      font-size: var(--font-size-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .obj-trigger .tag::before {
+      content: "⚠";
+      font-size: var(--font-size-lg);
+    }
+
+    .obj-trigger .quote {
+      color: var(--ink);
+      font-style: italic;
+      font-weight: 600;
+      font-size: var(--font-size-lg);
+      line-height: var(--line-height-tight);
+    }
+
+    .obj-trigger .num {
+      position: absolute;
+      top: var(--space-sm);
+      right: var(--space-lg);
+      background: var(--red);
+      color: #fff;
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: var(--font-family-mono);
+    }
+
+    .obj-response {
+      background: #f0fdf4;
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      transition: background var(--transition-fast);
+    }
+
+    .obj-row:hover .obj-response {
+      background: #e7fdee;
+    }
+
+    .obj-response .tag {
+      color: var(--green);
+      font-weight: 700;
+      font-size: var(--font-size-xs);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .obj-response .tag::before {
+      content: "✓";
+      font-size: var(--font-size-lg);
+    }
+
+    .obj-response .script {
+      color: var(--ink);
+      font-weight: 500;
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .obj-response .script .key-phrase {
+      background: var(--amber-soft);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-weight: 700;
+      user-select: all;
+    }
+
+    .obj-response .alt {
+      margin-top: var(--space-lg);
+      padding-top: var(--space-lg);
+      border-top: 1px dashed var(--line);
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .obj-response .alt b {
+      color: var(--green);
+      font-size: var(--font-size-xs);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: var(--space-xs);
+    }
+
+    /* ========================================
+       SECTION 10: UTILITY COMPONENTS
+       ======================================== */
+    .calc {
+      background: #faf5ff;
+      border: 1px dashed #c084fc;
+      border-radius: var(--border-radius-sm);
+      padding: var(--space-lg);
+      margin: var(--space-sm) 0;
+      font-family: var(--font-family-mono);
+      font-size: var(--font-size-xs);
+      line-height: 1.7;
+      color: var(--ink);
+    }
+
+    .calc .total {
+      color: #7c3aed;
+      font-weight: 700;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding: 3px 10px;
+      border-radius: var(--border-radius-sm);
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin: var(--space-xs);
+      white-space: nowrap;
+    }
+
+    .pill-tip { background: var(--green-soft); color: var(--green); }
+    .pill-warn { background: #fff7ed; color: var(--amber); border: 1px solid #fde68a; }
+    .pill-critical { background: var(--red-soft); color: var(--red); border: 1px solid #fca5a5; }
+
+    .micro-note {
+      font-size: 12px;
+      color: var(--muted);
+      padding: var(--space-lg);
+      font-style: italic;
+      background: #fffbeb;
+      border-left: 3px solid var(--amber);
+      margin: var(--space-md) 0;
+      border-radius: var(--border-radius-sm);
+    }
+
+    /* ========================================
+       SECTION 11: ROI & DATA GRIDS
+       ======================================== */
+    .roi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+
+    .roi-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: var(--border-radius);
+      padding: var(--space-lg);
+      transition: all var(--transition-fast);
+    }
+
+    .roi-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .roi-card.before { border-top: 4px solid var(--red); }
+    .roi-card.after { border-top: 4px solid var(--green); }
+
+    .roi-card h4 {
+      font-size: var(--font-size-xs);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: var(--space-lg);
+      font-weight: 700;
+    }
+
+    .roi-card .row {
+      display: flex;
+      justify-content: space-between;
+      padding: var(--space-xs) 0;
+      font-size: 13px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .roi-card .row:last-child {
+      border-bottom: none;
+      padding-top: var(--space-lg);
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .roi-card .row span:last-child {
+      font-family: var(--font-family-mono);
+      font-weight: 600;
+    }
+
+    /* ========================================
+       SECTION 12: STATE & VISIBILITY
+       ======================================== */
+    .hidden-by-filter,
+    .hidden-by-search {
+      display: none !important;
+    }
+
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .loading::after {
+      content: "";
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-left: 6px;
+      border: 2px solid var(--line);
+      border-top-color: var(--navy);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ========================================
+       SECTION 13: COMPACT MODE
+       ======================================== */
+    body.compact .your-line,
+    body.compact .goal-card,
+    body.compact .micro-note,
+    body.compact .calc,
+    body.compact .roi-grid {
+      display: none;
+    }
+
+    body.compact .phase {
+      margin-bottom: var(--space-lg);
+    }
+
+    body.compact .obj-row {
+      margin: var(--space-xs) 0;
+    }
+
+    /* ========================================
+       SECTION 14: RESPONSIVE DESIGN
+       ======================================== */
+    @media (max-width: 900px) {
+      .obj-row {
+        grid-template-columns: 1fr;
+      }
+
+      .obj-trigger {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .cockpit-row {
+        gap: var(--space-md);
+      }
+
+      .phase-filters {
+        order: 3;
+        width: 100%;
+      }
+
+      .roi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      main {
+        padding: var(--space-lg);
+      }
+
+      .phase-header {
+        padding: var(--space-md);
+        gap: var(--space-md);
+      }
+
+      .phase-header .ttl {
+        font-size: var(--font-size-base);
+      }
+
+      .phase-header .meta {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .search-wrap {
+        min-width: 100%;
+        order: 3;
+        flex-basis: 100%;
+      }
+
+      .phase-filters {
+        order: 4;
+        width: 100%;
+        gap: var(--space-xs);
+      }
+
+      .phase-btn,
+      .mode-toggle {
+        font-size: 10px;
+        padding: 6px 10px;
+      }
+
+      header[role="banner"] {
+        padding: var(--space-sm) var(--space-md);
+      }
+
+      .brand {
+        font-size: var(--font-size-base);
+      }
+
+      .obj-trigger {
+        padding: var(--space-md);
+      }
+
+      .obj-response {
+        padding: var(--space-md);
+      }
+
+      .intro {
+        padding: var(--space-md);
+      }
+
+      main {
+        padding: var(--space-md);
+      }
+    }
+
+    /* ========================================
+       SECTION 15: PRINT STYLES
+       ======================================== */
+    @media print {
+      header[role="banner"],
+      .intro {
+        display: none;
+      }
+
+      body {
+        background: #fff;
+        font-size: 11px;
+      }
+
+      main {
+        padding: 0;
+        max-width: 100%;
+      }
+
+      .phase {
+        page-break-inside: avoid;
+      }
+
+      .obj-row {
+        page-break-inside: avoid;
+        border: 1px solid #000;
+      }
+
+      .phase-header {
+        background: #000 !important;
+        color: #fff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .obj-trigger {
+        background: #fef2f2 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .obj-response {
+        background: #f0fdf4 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .your-line {
+        background: #eff6ff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    @page {
+      margin: 12mm;
+    }
+  </style>
+  <style id="contrast-override">
+    body, main, .intro, .goal-card, .your-line, .obj-row, .obj-trigger, .obj-response, .phase-header, header[role="banner"], .phase-btn, .mode-toggle {
+      background: #fff !important;
+      color: #111 !important;
+      border-color: #b36b00 !important;
+    }
+    .phase-btn.active, .mode-toggle.active {
+      background: #ffe066 !important;
+      color: #111 !important;
+      border-color: #b36b00 !important;
+    }
+    .obj-trigger .num {
+      background: #b91c1c !important;
+      color: #fff !important;
+    }
+    .obj-response {
+      background: #f6fff6 !important;
+    }
+    .obj-row:hover .obj-trigger {
+      background: #ffd6d6 !important;
+    }
+    .obj-row:hover .obj-response {
+      background: #e7fdee !important;
+    }
+    .obj-trigger .quote, .obj-response .script {
+      color: #111 !important;
+    }
+    .phase-header {
+      font-weight: bold !important;
+    }
+  </style>
+</head>
+
+<body role="application" aria-label="[ANONYMIZED COMPANY] Sales Cockpit">
+
+<!-- ===== HEADER/BANNER ===== -->
+<header role="banner" class="cockpit-bar" id="main-header">
+  <div class="cockpit-row">
+    <div class="brand">[ANONYMIZED COMPANY] <span>·</span> SALES COCKPIT</div>
+    <div class="search-wrap">
+      <input id="search" type="search" placeholder="Search scripts: Odoo, ROI, compliance, pricing..." autocomplete="off" aria-label="Search sales scripts and objection handlers">
+    </div>
+    <div class="phase-filters" id="filters" role="group" aria-label="Filter by sales phase">
+      <button class="phase-btn active" data-phase="all" aria-pressed="true">All<span class="key">0</span></button>
+      <button class="phase-btn" data-phase="1" aria-pressed="false">Opening<span class="key">1</span></button>
+      <button class="phase-btn" data-phase="2" aria-pressed="false">Discovery<span class="key">2</span></button>
+      <button class="phase-btn" data-phase="3" aria-pressed="false">Pitch<span class="key">3</span></button>
+      <button class="phase-btn" data-phase="4" aria-pressed="false">Close<span class="key">4</span></button>
+      <button class="phase-btn" data-phase="5" aria-pressed="false">Post<span class="key">5</span></button>
+    </div>
+    <button class="mode-toggle" id="compactBtn" aria-label="Toggle compact mode" aria-pressed="false">Compact</button>
+  </div>
+</header>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main id="main-content" role="main">
+
+  <!-- ===== INTRO ===== -->
+  <div class="intro">
+    <h1>[ANONYMIZED COMPANY] Live-Call Cockpit · Professional Edition</h1>
+    <p>Built for Odoo + AI consultations with UAE mid-market operators: every objection paired with a response for fast live negotiations.</p>
+    <p><b>Positioning:</b> Fixed-price, fixed-timeline delivery with UAE VAT, Corporate Tax, PDPL, and RERA-aligned implementations.</p>
+    <p><b>Keyboard Shortcuts:</b> <kbd>/</kbd> search · <kbd>0–5</kbd> filter · <kbd>Esc</kbd> clear · <kbd>C</kbd> compact mode</p>
+  </div>
+
+  <!-- ===== PHASE 1: OPENING ===== -->
+  <section class="phase phase-1" data-phase="1" id="phase-1">
+    <div class="phase-header">
+      <span class="num">01</span>
+      <span class="ttl">THE OPENING</span>
+      <span class="meta">0–30 sec · Goal: get 2 minutes</span>
+    </div>
+
+    <div class="your-line">
+      <span class="label">▶ YOU OPEN WITH</span>
+      <div class="script">"Good morning! Is this Mr. [Name]? Hi Mr. [Name], this is [Your Name] from [ANONYMIZED COMPANY] in Dubai. We deliver <span class="key-phrase">fixed-price, fixed-timeline Odoo 19 + AI implementations</span> for UAE mid-market businesses. I'll be super direct, just need <span class="pause">2 minutes</span>. Is that okay?"</div>
+    </div>
+
+    <div class="obj-row" data-keywords="busy no time meeting later" role="article" aria-label="Objection: I'm busy">
+      <div class="obj-trigger">
+        <span class="num">#01</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"I'm busy / No time / In a meeting"</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"I completely understand — <span class="key-phrase">that's exactly why I'm calling.</span> Most teams are buried in spreadsheets, WhatsApp threads, and disconnected tools. Just 90 seconds: if I can show you how to recover 20+ hours weekly with Odoo + AI, would that be worth it right now?"</div>
+        <div class="alt">
+          <b>If still resistant — reschedule with specific time:</b>
+          "No problem. When works better — this afternoon at 3 PM, or tomorrow at 10 AM?" <span class="pill pill-warn">Never say "when are you free"</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="obj-row" data-keywords="not interested" role="article" aria-label="Objection: Not interested">
+      <div class="obj-trigger">
+        <span class="num">#02</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"Not interested"</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"I appreciate your directness. Before I let you go — is it because you're <span class="key-phrase">fully satisfied with your current ERP setup</span>, or because you've heard too many generic software pitches?"</div>
+        <div class="alt">
+          <b>If "happy":</b> "If you could fix ONE operations bottleneck immediately, what would it be?" → they reveal pain → "That's exactly where we deploy Odoo + AI."<br>
+          <b>If "too many pitches":</b> "Fair. We're not selling licenses only. We deliver implementation, compliance, integrations, and training under one scope." → pivot to value.
+        </div>
+      </div>
+    </div>
+
+    <div class="obj-row" data-keywords="remove list dont call" role="article" aria-label="Objection: Remove me from your list">
+      <div class="obj-trigger">
+        <span class="num">#03</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"Remove me from your list / Don't call again"</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"Absolutely. I apologize for the interruption. Before I remove you — is it because this isn't relevant to your business, or just bad timing right now?"</div>
+        <div class="alt">
+          <b>"Not relevant":</b> "Understood. I'll remove you immediately. Have a great day." <span class="pill pill-critical">Mark as Do Not Call</span><br>
+          <b>"Bad timing":</b> "Should I follow up in 3 months, or never contact you again?" → schedule or close cleanly.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PHASE 2: DISCOVERY ===== -->
+  <section class="phase phase-2" data-phase="2" id="phase-2">
+    <div class="phase-header">
+      <span class="num">02</span>
+      <span class="ttl">AUTHORITY & DISCOVERY</span>
+      <span class="meta">1–3 min · Qualify & uncover pain</span>
+    </div>
+
+    <div class="goal-card">
+      <b>Superpower:</b> Qualify authority BEFORE investing time. One question doubles your conversion rate.
+    </div>
+
+    <div class="your-line">
+      <span class="label">▶ AUTHORITY QUESTION</span>
+      <div class="script">"Before we go further — for an Odoo + AI implementation, are <span class="key-phrase">you the decision-maker</span>, or should we include a partner, finance lead, or operations head from the start?"</div>
+    </div>
+
+    <div class="obj-row" data-keywords="partner boss check finance team approval" role="article" aria-label="Objection: Need to check with partner">
+      <div class="obj-trigger">
+        <span class="num">#04</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"I need to check with my partner / boss / finance team"</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"That makes sense. From experience — when the decision-maker isn't in the initial call, we end up repeating everything twice and important details get lost. <span class="key-phrase">What makes more sense:</span> can you bring [decision-maker] in now, or should I call back when you can both join for 30 minutes?"</div>
+        <div class="alt">
+          <b>Golden rule:</b> If you can't get the decision-maker on 2 attempts, <span class="pill pill-critical">don't book the meeting</span>. Mark for 1-month follow-up.
+        </div>
+      </div>
+    </div>
+
+    <div class="obj-row" data-keywords="send information brochure email" role="article" aria-label="Objection: Send me information">
+      <div class="obj-trigger">
+        <span class="num">#05</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"Just send me information first"</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"Every business is unique — generic brochures won't map your real workflow. The scoping call is more valuable: <span class="key-phrase">we map your current process and show a tailored Odoo 19 + AI architecture.</span> 30 minutes, and if after 10 you feel it's not valuable, you can end the call. Fair? Thursday 11 AM or Friday 3 PM?"</div>
+        <div class="alt">
+          <b>If they still insist:</b> Send info BUT lock a tentative meeting on the same call. "If it looks good, can we discuss Tuesday at 2 PM?" Send info + calendar invite immediately.
+        </div>
+      </div>
+    </div>
+
+    <div class="your-line">
+      <span class="label">▶ DISCOVERY QUESTIONS (in order)</span>
+      <div class="script">
+        1. "Walk me through the full flow — lead/order to invoice/collection. Where are Excel and WhatsApp still involved?"<br>
+        2. "How many hours per day are lost in admin, reconciliation, or manual reporting?"<br>
+        3. "Which teams are impacted most — sales, finance, operations, or projects?"<br>
+        4. "Are VAT/Corporate Tax/RERA/PDPL requirements handled in-system or manually?"<br>
+        <span class="pause">→ CALCULATE COST OUT LOUD</span>
+      </div>
+    </div>
+
+    <div class="calc">
+[Example] 6 hrs/day × 3 people = <b>18 hrs daily</b><br>
+18 × 22 days = 396 hrs/month<br>
+396 × AED 100/hr = <b>AED 39,600/month</b><br>
+× 12 = <span class="total">AED 475,200/year LOST to manual processes</span>
+    </div>
+
+    <div class="obj-row" data-keywords="existing system software using already have" role="article" aria-label="Objection: Already using software">
+      <div class="obj-trigger">
+        <span class="num">#06</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"We're already using [existing system / software]"</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"That's great — it means you value technology. Are you 100% happy, or are there still gaps handled manually? <span class="key-phrase">Most ERP setups solve 70–80% and leave integration, reporting, and adoption gaps.</span> We either optimize your current stack or migrate in phases with minimal disruption. Worth 20 minutes to explore?"</div>
+        <div class="alt">
+          <b>If they claim 100% automated:</b> Drill: "Automatic invoice from orders? Real-time inventory across all locations? Auto reports without manual compilation?" → they'll admit gaps.
+        </div>
+      </div>
+    </div>
+
+    <div class="obj-row" data-keywords="too small business size" role="article" aria-label="Objection: Too small">
+      <div class="obj-trigger">
+        <span class="num">#07</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"We're too small for this"</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"Actually — that's perfect. <span class="key-phrase">Mid-market teams benefit fastest</span> because every recovered hour directly improves cashflow and execution. Our phased delivery model is designed for lean teams, with training and change management built in. Want to see how?"</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PHASE 3: SOFT PITCH ===== -->
+  <section class="phase phase-3" data-phase="3" id="phase-3">
+    <div class="phase-header">
+      <span class="num">03</span>
+      <span class="ttl">SOFT PITCH & MEETING LOCK</span>
+      <span class="meta">1–2 min · Create curiosity</span>
+    </div>
+
+    <div class="goal-card">
+      <b>Critical rule:</b> Do NOT explain everything on the phone. Create enough curiosity to get the meeting. Show, don't tell.
+    </div>
+
+    <div class="your-line">
+      <span class="label">▶ THE SOFT PITCH (90 seconds max)</span>
+      <div class="script">"Based on what you shared — high manual workload, reporting delays, and compliance pressure — here is what we do: <span class="key-phrase">Odoo 19 architecture + AI copilots + UAE compliance-first configuration.</span> We connect finance, sales, operations, and reporting in one operating system, with integrations and team training included. I'm not going to over-explain on this call; it's easier to SHOW you your exact future-state flow. I'd like to offer a free 30-minute scoping consultation to map your process, identify quick wins, and estimate year-1 ROI. Open to that?"</div>
+    </div>
+
+    <div class="obj-row" data-keywords="budget money afford cant pay" role="article" aria-label="Objection: No budget">
+      <div class="obj-trigger">
+        <span class="num">#08</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"We don't have budget right now"</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"This scoping call is completely free, and you should still see the numbers even before budget approval. If inefficiency is costing AED 475,200/year and implementation is AED 72K/year, <span class="key-phrase">you're protecting margin, not creating expense.</span> We also structure delivery in fixed milestones so there are no open-ended retainers. Give me 30 minutes, then you decide. Fair?"</div>
+        <div class="alt">
+          <b>If genuinely cash-constrained:</b> "We can phase modules and timelines so value lands early. Let me first confirm if this is commercially viable for your business."
+        </div>
+      </div>
+    </div>
+
+    <div class="obj-row" data-keywords="think about it later consider" role="article" aria-label="Objection: Need to think about it">
+      <div class="obj-trigger">
+        <span class="num">#09</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"We need to think about it" (early-stage)</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"Of course! But — I'm not asking you to commit to anything. I'm asking for 30 minutes to <span class="key-phrase">SHOW you something.</span> Like a car showroom — you're not buying by looking, you're exploring. After the meeting you can think all you want. But at least you'll have complete information to think about, instead of guessing in the dark. Thursday 11 AM or Friday 2 PM — which is less busy?"</div>
+      </div>
+    </div>
+
+    <div class="obj-row" data-keywords="tried before failed bad experience" role="article" aria-label="Objection: Tried before and failed">
+      <div class="obj-trigger">
+        <span class="num">#10</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"We tried automation before and it didn't work"</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"I'm sorry that happened — that's frustrating. Can you tell me what failed: scope, timeline, adoption, or support? [LISTEN] That's exactly where we differ: <span class="key-phrase">fixed scope, fixed timeline, operator-led rollout, compliance built in from day one, and structured training/change management.</span> Worth 30 minutes to compare approaches? If you see the same red flags, we stop there. You're fully in control."</div>
+        <div class="alt">
+          <b>Insight:</b> This is a GOOD sign — they believe in automation, they just had a bad vendor. Position yourself as the fix.
+        </div>
+      </div>
+    </div>
+
+    <div class="obj-row" data-keywords="next month later january february delay reschedule" role="article" aria-label="Objection: Can we do this next month">
+      <div class="obj-trigger">
+        <span class="num">#11</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"Can we do this next month instead?"</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"We cap onboarding capacity to protect delivery quality. <span class="key-phrase">Scoping this week means earlier go-live and earlier savings.</span> Delaying the discovery simply extends current inefficiency and compliance risk. Can we at least lock the scoping call this week? It doesn't commit you."</div>
+      </div>
+    </div>
+
+    <div class="your-line">
+      <span class="label">▶ MEETING LOCK SCRIPT</span>
+      <div class="script">"Perfect! Thursday at 11 AM UAE time. 30 minutes on Zoom. Email for the invite? WhatsApp same as this number? Great. You'll receive: <span class="key-phrase">calendar invite, WhatsApp confirmation, agenda, and required prep list.</span> Please include operations + finance so we can validate process, compliance, and ROI in one call. If anything changes, message me and we'll reschedule properly. Fair?"</div>
+    </div>
+
+    <div class="micro-note">
+      ⚡ Send calendar invite + WhatsApp confirmation within 5 minutes of hanging up. Add to CRM. Set day-before reminder.
+    </div>
+  </section>
+
+  <!-- ===== PHASE 4: DEMO & CLOSE ===== -->
+  <section class="phase phase-4" data-phase="4" id="phase-4">
+    <div class="phase-header">
+      <span class="num">04</span>
+      <span class="ttl">DEMO & CLOSE</span>
+      <span class="meta">30 min meeting · Goal: close TODAY</span>
+    </div>
+
+    <div class="goal-card">
+      <b>Meeting structure:</b> Business context (3 min) → Process map (5 min) → Odoo 19 + AI walkthrough (12 min) → ROI & compliance fit (4 min) → Readiness (2 min) → Decision path (2 min) → Next steps (2 min)
+    </div>
+
+    <div class="your-line">
+      <span class="label">▶ READINESS CHECK (Min 26–28)</span>
+      <div class="script">"On a scale of 1 to 10, where 10 means ready to move forward today and 1 means this isn't right at all — <span class="key-phrase">where are you right now?</span>"</div>
+    </div>
+
+    <div class="micro-note">
+      <b>8–10 →</b> "What would make this a 10? What's holding you back?" → address → close.<br>
+      <b>5–7 →</b> "What would make this a 10?" → address real concern → re-ask scale.<br>
+      <b>1–4 →</b> "Not the right fit right now. What would need to change?" → qualify out cleanly.
+    </div>
+
+    <div class="your-line">
+      <span class="label">▶ THE AAU CLOSE (Assumptive · Alternative · Urgency)</span>
+      <div class="script">"Based on everything: clear inefficiency cost, strong year-1 ROI, and a clear fit for your operations. I don't see a reason to delay. <span class="key-phrase">Let's start with the agreed fixed-scope implementation plan.</span> We can structure this as Starter, Growth, or Enterprise based on your complexity. To proceed, I need two items: your legal entity details and your package decision. Which option fits [Company] best today?"</div>
+    </div>
+
+    <div class="micro-note">
+      🤐 <b>SILENCE RULE:</b> After asking for the order — STOP TALKING. Count to 30. First to speak loses.
+    </div>
+
+    <div class="obj-row" data-keywords="expensive too much price cost high" role="article" aria-label="Objection: Too expensive">
+      <div class="obj-trigger">
+        <span class="num">#12</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"It's too expensive"</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"If I can show verified savings and faster execution, would this still feel expensive? [WAIT] <span class="key-phrase">This is a margin-protection decision, not a software expense.</span> The real comparison is implementation cost versus ongoing monthly leakage from manual operations. Should we proceed with the right-fit package for your team?"</div>
+        <div class="alt">
+          <b>Reframe:</b> "Compare unit economics before and after rollout by process cycle, not just subscription line items."
+        </div>
+      </div>
+    </div>
+
+    <div class="obj-row" data-keywords="discount cheaper lower price reduce" role="article" aria-label="Objection: Can you discount">
+      <div class="obj-trigger">
+        <span class="num">#13</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"Can you give us a discount?"</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"We don't compete on random discounting because delivery quality drops when scope is underpriced. <span class="key-phrase">What we can do is optimize commercial structure:</span> phase rollout, milestone billing, or value-add items like extra training and reporting packs. Would you like the best-fit commercial structure or the lowest sticker price?"</div>
+        <div class="alt">
+          <b>If they insist on price reduction:</b> "What commercial constraint do we need to solve: budget timing, scope size, or payment terms?" → adjust structure, not delivery quality.
+          <span class="pill pill-warn">Never discount >15% without commitment trade</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="obj-row" data-keywords="partner discuss talk family check" role="article" aria-label="Objection: Need to discuss with partner">
+      <div class="obj-trigger">
+        <span class="num">#14</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"I need to discuss with my partner first"</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"Absolutely. <span class="key-phrase">Let's schedule a 15-min call with you AND your partner tomorrow at 11 AM</span> — I'll address questions directly. Usually gets approval in 24 hours vs. weeks of back-and-forth. I'll prepare a one-page business case for your partner: problem, solution, ROI, timeline, risk mitigation. Should I prepare the contract too so we can move quickly if you both agree?"</div>
+        <div class="alt">
+          <b>Never let them discuss alone</b> — you can't address objections you don't hear. Always get on the partner call.
+        </div>
+      </div>
+    </div>
+
+    <div class="obj-row" data-keywords="think about it later closing stage final" role="article" aria-label="Objection: Need to think about it (closing)">
+      <div class="obj-trigger">
+        <span class="num">#15</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"We need to think about it" (at closing stage)</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"What specifically should we de-risk before you decide? <span class="key-phrase">Delivery confidence, ROI assumptions, compliance fit, integration risk, or team adoption?</span> If you name the concern, we can solve it now with a concrete plan. [LISTEN] Every delay extends current inefficiency cost. Shall we move forward with the agreed scope and timeline?"</div>
+      </div>
+    </div>
+
+    <div class="obj-row" data-keywords="complicated complex difficult hard staff" role="article" aria-label="Objection: Looks complicated">
+      <div class="obj-trigger">
+        <span class="num">#16</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"This looks complicated for my team"</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"For your team, daily usage becomes simpler than today. <span class="key-phrase">Complexity is handled in architecture, not dumped on end users.</span> We include role-based screens, SOP-driven training, and go-live support so adoption is structured, not left to chance."</div>
+      </div>
+    </div>
+
+    <div class="obj-row" data-keywords="roi numbers good true skeptical doubt" role="article" aria-label="Objection: ROI sounds too good">
+      <div class="obj-trigger">
+        <span class="num">#17</span>
+        <span class="tag">Objection</span>
+        <div class="quote">"The ROI sounds too good to be true"</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Reply</span>
+        <div class="script">"Fair point. We keep ROI claims auditable. <span class="key-phrase">We baseline your current cycle times, error rates, and labor load, then measure post-go-live deltas.</span> This is not hype; it's operator-grade measurement. If you want, we'll walk you through the exact assumptions line by line."</div>
+      </div>
+    </div>
+
+    <div class="roi-grid">
+      <div class="roi-card before">
+        <h4>⛔ Current State (Manual)</h4>
+        <div class="row"><span>Hours/day</span><span>12.5</span></div>
+        <div class="row"><span>Staff involved</span><span>3</span></div>
+        <div class="row"><span>Daily cost</span><span>AED 1,250</span></div>
+        <div class="row"><span>Monthly cost</span><span>AED 27,500</span></div>
+        <div class="row"><span>Complaints/month</span><span>15–20</span></div>
+        <div class="row"><span>YEARLY COST</span><span>AED 330,000</span></div>
+      </div>
+      <div class="roi-card after">
+        <h4>✓ With Our Solution</h4>
+        <div class="row"><span>Hours/day</span><span>1</span></div>
+        <div class="row"><span>Staff involved</span><span>1 (monitor)</span></div>
+        <div class="row"><span>Daily cost</span><span>AED 100</span></div>
+        <div class="row"><span>Monthly cost</span><span>AED 2,200</span></div>
+        <div class="row"><span>Complaints/month</span><span>2–3</span></div>
+        <div class="row"><span>NET SAVINGS Y1</span><span>AED 231,612</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PHASE 5: POST-CLOSE ===== -->
+  <section class="phase phase-5" data-phase="5" id="phase-5">
+    <div class="phase-header">
+      <span class="num">05</span>
+      <span class="ttl">POST-CLOSE & GHOSTING</span>
+      <span class="meta">After yes · Prevent buyer's remorse</span>
+    </div>
+
+    <div class="your-line">
+      <span class="label">▶ CONTRACT CAPTURE</span>
+      <div class="script">"Excellent decision! Let me capture the implementation brief: <span class="key-phrase">1) Legal entity details, 2) Business license, 3) Billing details, 4) Project owner + approver, 5) Technical contacts, 6) Target go-live window.</span> [Confirm back] We'll send the scoped proposal, timeline, and milestone plan within 2 hours."</div>
+    </div>
+
+    <div class="micro-note">
+      ⚡ <b>Within 1 hour:</b> WhatsApp recap + scoped proposal + implementation timeline + stakeholder invite + CRM stage updated
+    </div>
+
+    <div class="obj-row" data-keywords="no show didnt come missed meeting ghosted" role="article" aria-label="Situation: No show">
+      <div class="obj-trigger">
+        <span class="num">#18</span>
+        <span class="tag">Situation</span>
+        <div class="quote">They didn't show up for the booked meeting</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Action</span>
+        <div class="script"><span class="key-phrase">Call within 5 minutes of meeting time:</span> "Hi Mr. [Name], we had a scoping call at 11 AM. Is everything okay?" [Listen] "No problem, these things happen. I have your process map template ready — can we reschedule tomorrow same time, or this afternoon at 3 PM?"</div>
+        <div class="alt">
+          <b>If they no-show twice:</b> Send WhatsApp: "We've had to reschedule twice. Should I close your file and follow up in 3 months, or schedule one final meeting with a firm commitment?"
+          <span class="pill pill-critical">After 2 no-shows — stop chasing. Mark 3-month follow-up.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="obj-row" data-keywords="ghosting silent no response after contract sent" role="article" aria-label="Situation: Ghosting after yes">
+      <div class="obj-trigger">
+        <span class="num">#19</span>
+        <span class="tag">Situation</span>
+        <div class="quote">They said yes but went silent after contract sent</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Action</span>
+        <div class="script"><b>Day 3:</b> WhatsApp gentle check-in. <b>Day 5:</b> Call — "Did you receive the proposal and timeline? Any blocker on scope or approvals?" Create urgency: <span class="key-phrase">"To secure your implementation slot, we need confirmation this week."</span> <b>Day 7:</b> Send break-up email.</div>
+        <div class="alt">
+          <b>Break-up email:</b> "Should I close your file? I've reached out several times since our meeting. A simple 'not interested' is fine. If you're still interested, reply 'INTERESTED' and tell me what's holding you back. Please reply by Friday or I'll close your file."
+        </div>
+      </div>
+    </div>
+
+    <div class="obj-row" data-keywords="cancel refund change mind after signing" role="article" aria-label="Situation: Buyer's remorse">
+      <div class="obj-trigger">
+        <span class="num">#20</span>
+        <span class="tag">Situation</span>
+        <div class="quote">Buyer's remorse — they want to cancel after signing</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Your Action</span>
+        <div class="script">"I understand. Help me understand what changed: scope, team readiness, budget timing, or risk concerns? [LISTEN] Most remorse comes from uncertainty, not mismatch. <span class="key-phrase">Let me address the exact concern with a revised execution plan and risk controls.</span> If it still does not fit, we'll close respectfully. Would you allow one alignment call before canceling?"</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CULTURE QUICK-SWITCH ===== -->
+  <section class="phase phase-5" data-phase="5" id="phase-cultural">
+    <div class="phase-header">
+      <span class="num">06</span>
+      <span class="ttl">CULTURAL QUICK-SWITCH</span>
+      <span class="meta">Adapt tone by client background</span>
+    </div>
+
+    <div class="obj-row" data-keywords="arab emirati saudi gulf khaleeji" role="article" aria-label="Cultural style: Arab / Emirati">
+      <div class="obj-trigger">
+        <span class="num">CX1</span>
+        <span class="tag">Arab / Emirati</span>
+        <div class="quote">Relationship first · respect & formality · religious references welcome · decisions take longer · face-to-face preferred</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Tone Adjustments</span>
+        <div class="script"><b>Open:</b> "Assalamu alaikum, Mr. Abdullah. How are you today, Sir?" — take time for pleasantries.<br>
+        <b>Close:</b> "Building a relationship with you matters — not just a sale. This will serve you well, <span class="key-phrase">Inshallah.</span> Shall we move forward together as partners?"</div>
+        <div class="alt">
+          <span class="pill pill-critical">Never:</span> Pressure-close · "limited time" framing · skip pleasantries · call on Fridays<br>
+          <span class="pill pill-tip">Always:</span> Use "Sir" · be patient · offer face-to-face · reference Arab businesses you've helped
+        </div>
+      </div>
+    </div>
+
+    <div class="obj-row" data-keywords="indian pakistani south asian negotiate" role="article" aria-label="Cultural style: Indian / Pakistani">
+      <div class="obj-trigger">
+        <span class="num">CX2</span>
+        <span class="tag">Indian / Pakistani</span>
+        <div class="quote">Detail-driven · ROI obsessed · negotiation expected · multiple decision-makers · thoroughness over speed</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Tone Adjustments</span>
+        <div class="script"><b>Open:</b> "Good morning, Mr. Patel. I'll be direct — we deliver Odoo 19 + AI implementations with measurable ROI and fixed timelines. May I take 2 minutes?"<br>
+        <b>ROI emphasis:</b> show every number, every step, on screen. "Investment AED 72K/yr → Savings AED 258K/yr → <span class="key-phrase">Net profit AED 186K → 258% ROI → 2.8-month payback.</span>"<br>
+        <b>Expect negotiation:</b> never give best price first — leave room.</div>
+        <div class="alt">
+          <span class="pill pill-critical">Never:</span> Take offense at price objections · skip technical details · rush decision<br>
+          <span class="pill pill-tip">Always:</span> Detailed ROI · written documentation · persistent follow-up · prepare for partner involvement
+        </div>
+      </div>
+    </div>
+
+    <div class="obj-row" data-keywords="western european american british expat" role="article" aria-label="Cultural style: Western / Expat">
+      <div class="obj-trigger">
+        <span class="num">CX3</span>
+        <span class="tag">Western Expat</span>
+        <div class="quote">Direct · efficient · time-conscious · ROI-driven · clear timelines · less negotiation, more decision</div>
+      </div>
+      <div class="obj-response">
+        <span class="tag">Tone Adjustments</span>
+        <div class="script"><b>Open:</b> "Hi [Name], this is [Your Name] from [ANONYMIZED COMPANY]. I'll keep this brief. We deploy Odoo + AI systems that replace manual workflows and fragmented tools. You're likely losing ~AED 25K/month to inefficiency. Worth a 30-min meeting?"<br>
+        <b>Close:</b> "Current loss AED 27,500/mo · our cost AED 5,999/mo · payback 3 months · 258% ROI. <span class="key-phrase">I need your decision by Friday for December start. Yes or no?</span>"</div>
+        <div class="alt">
+          <span class="pill pill-critical">Never:</span> Excessive small talk · vague pricing · miss deadlines · over-explain<br>
+          <span class="pill pill-tip">Always:</span> Be punctual · efficient · ROI-focused · structured · clear deliverables
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DAILY TARGETS ===== -->
+  <section class="phase phase-5" data-phase="all" id="phase-targets">
+    <div class="phase-header" style="background:var(--ink)">
+      <span class="num">📊</span>
+      <span class="ttl">DAILY TARGETS</span>
+      <span class="meta">What "good" looks like every day</span>
+    </div>
+    <div class="roi-grid" style="grid-template-columns:repeat(4,1fr);gap:10px">
+      <div class="roi-card" style="border-top-color:var(--opening)">
+        <h4>📞 Calls Made</h4>
+        <div class="row"><span>Target</span><span>60</span></div>
+      </div>
+      <div class="roi-card" style="border-top-color:var(--discovery)">
+        <h4>💬 Conversations</h4>
+        <div class="row"><span>Target</span><span>20</span></div>
+      </div>
+      <div class="roi-card" style="border-top-color:var(--pitch)">
+        <h4>📅 Meetings Booked</h4>
+        <div class="row"><span>Target</span><span>8</span></div>
+      </div>
+      <div class="roi-card" style="border-top-color:var(--close)">
+        <h4>💎 Deals Closed</h4>
+        <div class="row"><span>Target</span><span>2</span></div>
+      </div>
+    </div>
+    <div class="micro-note">
+      <b>Conversion benchmarks:</b> Calls → Conv 33% · Conv → Qualified 75% · Qualified → Meeting 53% · Meeting → Close 40%
+    </div>
+  </section>
+
+  <!-- ===== PRE-CALL CHECKLIST ===== -->
+  <section class="phase" data-phase="all" id="phase-checklist">
+    <div class="phase-header" style="background:linear-gradient(135deg,#0b3d91,#d97706)">
+      <span class="num">✓</span>
+      <span class="ttl">PRE-CALL CHECKLIST</span>
+      <span class="meta">Read aloud before every calling session</span>
+    </div>
+    <div class="goal-card" style="background:#fffbeb">
+      <b>My ONE goal:</b> book a qualified meeting with a decision-maker.<br>
+      <b>I will:</b> qualify authority before investing time · diagnose ERP, compliance, and integration gaps · quantify cost of inaction · position fixed-scope/fixed-timeline delivery · control follow-up with clear next steps.<br>
+      <b>Mindset:</b> I'm HELPING them, not selling. Every NO is practice for the next YES. Rejection is data, not defeat.
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== SCRIPT (ENHANCED) ===== -->
+<script>
+(function() {
+  'use strict';
+
+  // CONFIG
+  const CONFIG = {
+    storagePrefix: 'sgctech_cockpit_',
+    analyticsEnabled: true,
+    debounceDelay: 200,
+    defaultPhase: 'all',
+    phases: ['all', '1', '2', '3', '4', '5']
+  };
+
+  // STATE
+  const STATE = {
+    currentPhase: localStorage.getItem(CONFIG.storagePrefix + 'phase') || CONFIG.defaultPhase,
+    compactMode: localStorage.getItem(CONFIG.storagePrefix + 'compact') === 'true',
+    searchQuery: '',
+    searchHistory: JSON.parse(localStorage.getItem(CONFIG.storagePrefix + 'search_history') || '[]'),
+    sessionStart: Date.now()
+  };
+
+  // DOM CACHE
+  const DOM = {
+    search: document.getElementById('search'),
+    filterBtns: document.querySelectorAll('.phase-btn'),
+    compactBtn: document.getElementById('compactBtn'),
+    phases: document.querySelectorAll('.phase'),
+    rows: document.querySelectorAll('.obj-row'),
+    body: document.body
+  };
+
+  // PERFORMANCE MONITORING
+  const Perf = {
+    marks: {},
+    start: function(label) {
+      this.marks[label] = performance.now();
+    },
+    end: function(label) {
+      if (!this.marks[label]) return 0;
+      const duration = performance.now() - this.marks[label];
+      delete this.marks[label];
+      return duration;
+    }
+  };
+
+  // ANALYTICS
+  const Analytics = {
+    queue: [],
+    sessionId: Math.random().toString(36).substring(7),
+
+    track: function(eventName, eventData = {}) {
+      if (!CONFIG.analyticsEnabled) return;
+      const event = { name: eventName, timestamp: new Date().toISOString(), ...eventData };
+      this.queue.push(event);
+      if (this.queue.length > 100) this.queue.shift();
+      if (window.gtag) gtag('event', eventName, eventData);
+    },
+
+    trackSearch: function(query) {
+      this.track('search_executed', { query: query, queryLength: query.length });
+    },
+
+    trackFilter: function(phase) {
+      this.track('filter_applied', { phase: phase });
+    }
+  };
+
+  // SEARCH MODULE
+  const SearchModule = {
+    debounceTimer: null,
+    run: function(query) {
+      query = (query || '').trim().toLowerCase();
+      STATE.searchQuery = query;
+
+      if (!query) {
+        DOM.rows.forEach(r => r.classList.remove('hidden-by-search'));
+        DOM.phases.forEach(p => p.classList.remove('hidden-by-search'));
+        return;
+      }
+
+      DOM.phases.forEach(phase => {
+        const matchInPhase = Array.from(phase.querySelectorAll('.obj-row')).some(row => {
+          const keywords = (row.dataset.keywords || '') + ' ' + row.textContent.toLowerCase();
+          const matches = keywords.includes(query);
+          row.classList.toggle('hidden-by-search', !matches);
+          return matches;
+        });
+
+        const phaseText = phase.textContent.toLowerCase();
+        const phaseMatch = phaseText.includes(query);
+        phase.classList.toggle('hidden-by-search', !matchInPhase && !phaseMatch);
+      });
+
+      Analytics.trackSearch(query);
+    },
+
+    handleInput: function(event) {
+      const query = event.target.value;
+      clearTimeout(this.debounceTimer);
+      this.debounceTimer = setTimeout(() => {
+        this.run(query);
+      }, CONFIG.debounceDelay);
+    }
+  };
+
+  // FILTER MODULE
+  const FilterModule = {
+    set: function(phase) {
+      if (!CONFIG.phases.includes(phase)) return;
+
+      DOM.filterBtns.forEach(btn => {
+        const isActive = btn.dataset.phase === phase;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive);
+      });
+
+      DOM.phases.forEach(p => {
+        const show = (phase === 'all') || (p.dataset.phase === phase) || (p.dataset.phase === 'all');
+        p.classList.toggle('hidden-by-filter', !show);
+      });
+
+      STATE.currentPhase = phase;
+      localStorage.setItem(CONFIG.storagePrefix + 'phase', phase);
+      Analytics.trackFilter(phase);
+    },
+
+    handleClick: function(event) {
+      const btn = event.target.closest('.phase-btn');
+      if (btn && btn.dataset.phase) {
+        FilterModule.set(btn.dataset.phase);
+      }
+    }
+  };
+
+  // COMPACT MODE
+  const CompactMode = {
+    toggle: function() {
+      STATE.compactMode = !STATE.compactMode;
+      DOM.body.classList.toggle('compact', STATE.compactMode);
+      DOM.compactBtn.classList.toggle('active', STATE.compactMode);
+      DOM.compactBtn.setAttribute('aria-pressed', STATE.compactMode);
+      DOM.compactBtn.textContent = STATE.compactMode ? 'Expanded' : 'Compact';
+      localStorage.setItem(CONFIG.storagePrefix + 'compact', STATE.compactMode ? 'true' : 'false');
+      Analytics.track('mode_toggled', { compactMode: STATE.compactMode });
+    }
+  };
+
+  // KEYBOARD SHORTCUTS
+  const Shortcuts = {
+    handle: function(event) {
+      const target = event.target;
+
+      if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
+        if (event.key === 'Escape') {
+          DOM.search.value = '';
+          SearchModule.run('');
+          DOM.search.blur();
+        }
+        return;
+      }
+
+      switch (event.key) {
+        case '/':
+          event.preventDefault();
+          DOM.search.focus();
+          break;
+        case 'c':
+        case 'C':
+          CompactMode.toggle();
+          break;
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+          FilterModule.set(event.key);
+          break;
+      }
+    }
+  };
+
+  // INITIALIZATION
+  function init() {
+    try {
+      Perf.start('total_init');
+
+      // Set initial state
+      FilterModule.set(STATE.currentPhase);
+      if (STATE.compactMode) {
+        DOM.body.classList.add('compact');
+        DOM.compactBtn.classList.add('active');
+        DOM.compactBtn.textContent = 'Expanded';
+      }
+
+      // Event listeners
+      DOM.search.addEventListener('input', SearchModule.handleInput.bind(SearchModule));
+      document.getElementById('filters').addEventListener('click', FilterModule.handleClick);
+      DOM.compactBtn.addEventListener('click', () => CompactMode.toggle());
+      document.addEventListener('keydown', Shortcuts.handle);
+
+      // Accessibility
+      document.body.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') document.body.classList.add('keyboard-navigation');
+      });
+
+      Analytics.track('cockpit_initialized', {
+        compactMode: STATE.compactMode,
+        phase: STATE.currentPhase
+      });
+
+      console.log('✓ [ANONYMIZED COMPANY] Sales Cockpit loaded successfully');
+      Perf.end('total_init');
+    } catch (error) {
+      console.error('Cockpit initialization error:', error);
+      Analytics.track('cockpit_error', { message: error.message });
+    }
+  }
+
+  // DOM READY
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // GLOBAL API
+  window.SgctechCockpit = {
+    STATE,
+    CONFIG,
+    Analytics,
+    SearchModule,
+    FilterModule,
+    CompactMode,
+    version: '2.0.1-sgctech-branding',
+    build: new Date().toISOString()
+  };
+
+  // Backward compatibility alias for prior integrations.
+
+})();
+</script>
+
+</body>
+</html>
